@@ -1,0 +1,73 @@
+<%= simple_form_for @bib do |form| %>
+
+  <% if @bib.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@bib.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @bib.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.input :reference_type, priority: [ "book" ], collection: ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper','multimedia'], input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  
+  <%= form.input :year_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :title, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :title_secondary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :place_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :publisher, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :volume, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :number_of_volumes, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :pages, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :section, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :title_tertiary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :type_of_work, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :reprint_edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :abstract, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :title_translated, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :language, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <h4>Comments</h4>
+  <div class="comments">
+    <ol>
+    <%= form.simple_fields_for :comments do |c| %>
+      <li>
+      <%= c.input :body, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      <%= c.input :commenter, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      <%= c.input :type, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      <%= c.input :make_public, input_html: { class: '' }, wrapper_html: { class: 'form-group' } %>
+      </li>
+    <% end %>
+    </ol>
+
+    <%= form.add_nested_fields_link :comments do %>
+        <button class="btn btn-default">Add additional Comment</button>
+    <% end %>
+  </div>
+
+  <br/>
+  <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
+<% end %>

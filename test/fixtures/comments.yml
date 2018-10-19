@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commenter: MyString
+  body: MyText
+  type: 
+  make_public: false
+  bibliography: one
+
+two:
+  commenter: MyString
+  body: MyText
+  type: 
+  make_public: false
+  bibliography: two

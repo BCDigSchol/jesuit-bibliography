@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_162740) do
+ActiveRecord::Schema.define(version: 2018_10_18_184222) do
+
+  create_table "bibliographies", force: :cascade do |t|
+    t.text "reference_type"
+    t.text "year_published"
+    t.text "title"
+    t.text "title_secondary"
+    t.text "place_published"
+    t.text "publisher"
+    t.text "volume"
+    t.text "number_of_volumes"
+    t.text "pages"
+    t.text "section"
+    t.text "title_tertiary"
+    t.text "edition"
+    t.text "date"
+    t.text "type_of_work"
+    t.text "reprint_edition"
+    t.text "abstract"
+    t.text "title_translated"
+    t.text "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -22,6 +45,17 @@ ActiveRecord::Schema.define(version: 2018_09_20_162740) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "commenter"
+    t.text "body"
+    t.text "type"
+    t.boolean "make_public"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_comments_on_bibliography_id"
   end
 
   create_table "searches", force: :cascade do |t|

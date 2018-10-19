@@ -17,5 +17,6 @@
 // Required by Blacklight
 //= require jquery
 //= require blacklight/blacklight
+//= require nested_form_fields
 
 //= require_tree .

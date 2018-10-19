@@ -1,0 +1,90 @@
+<% if @bib.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', bibliography_path %>
+<% else %>
+    <h1>Here is Bibliography #<%= @bib.id %></h1>
+
+    <div class="record-view">
+        <label>Reference Type</label>
+        <div class="field-value"><%= @bib.reference_type %></div>
+
+        <label>Year Published</label>
+        <div class="field-value"><%= @bib.year_published %></div>
+
+        <label>Title</label>
+        <div class="field-value"><%= @bib.title %></div>
+
+        <label>Secondary Title</label>
+        <div class="field-value"><%= @bib.title_secondary %></div>
+
+        <label>Place Published</label>
+        <div class="field-value"><%= @bib.place_published %></div>
+
+        <label>Publisher</label>
+        <div class="field-value"><%= @bib.publisher %></div>
+
+        <label>Volume</label>
+        <div class="field-value"><%= @bib.volume %></div>
+
+        <label>Number of Volumes</label>
+        <div class="field-value"><%= @bib.number_of_volumes %></div>
+
+        <label>Pages</label>
+        <div class="field-value"><%= @bib.pages %></div>
+
+        <label>Section</label>
+        <div class="field-value"><%= @bib.section %></div>
+
+        <label>Tertiary Title</label>
+        <div class="field-value"><%= @bib.title_tertiary %></div>
+
+        <label>Edition</label>
+        <div class="field-value"><%= @bib.edition %></div>
+
+        <label>Date</label>
+        <div class="field-value"><%= @bib.date %></div>
+
+        <label>Type of Work</label>
+        <div class="field-value"><%= @bib.type_of_work %></div>
+        
+        <label>Reprint Edition</label>
+        <div class="field-value"><%= @bib.reprint_edition %></div>
+
+        <label>Abstract</label>
+        <div class="field-value"><%= @bib.abstract %></div>
+
+        <label>Title Translated</label>
+        <div class="field-value"><%= @bib.title_translated %></div>
+
+        <label>Language</label>
+        <div class="field-value"><%= @bib.language %></div>
+
+        <h4>Comments</h4>
+        <ol>
+        <% @bib.comments.each do |comment| %>
+            <li>
+            <div class="comment-section">
+                <label>Commenter:</label>
+                <div class="field-value"><%= comment.commenter %></div>
+
+                <label>Comment:</label>
+                <div class="field-value"><%= comment.body %></div>
+
+                <label>Type:</label>
+                <div class="field-value"><%= comment.type %></div>
+
+                <label>Make Public?:</label>
+                <div class="field-value"><%= comment.make_public %></div>
+            </div>
+            </li>
+        <% end %>
+        </ol>
+
+        <label>Created At</label>
+        <div class="field-value"><%= @bib.created_at %></div>
+
+        <label>Updated At</label>
+        <div class="field-value"><%= @bib.updated_at %></div>
+    </div>
+    <%= link_to 'Edit', edit_bibliography_path(@bib) %> | <%= link_to 'Back', bibliographies_path %>
+<% end %>
