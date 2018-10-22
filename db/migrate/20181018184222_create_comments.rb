@@ -3,7 +3,7 @@ class CreateComments < ActiveRecord::Migration[5.2]
     create_table :comments do |t|
       t.text :commenter
       t.text :body
-      t.text :type
+      t.text :comment_type
       t.boolean :make_public
       t.references :bibliography, foreign_key: true
 
