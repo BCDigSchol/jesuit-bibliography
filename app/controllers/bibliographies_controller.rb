@@ -54,7 +54,7 @@ class BibliographiesController < ApplicationController
     def destroy
         @bib.destroy
         respond_to do |format|
-            format.html { redirect_to bibliography_path, notice: 'Bibliography was successfully destroyed.' }
+            format.html { redirect_to bibliographies_path, notice: 'Bibliography was successfully destroyed.' }
             format.json { head :no_content }
         end
     end
