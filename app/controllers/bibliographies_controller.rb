@@ -73,7 +73,7 @@ class BibliographiesController < ApplicationController
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :pages, :section, :title_tertiary, :edition, :date, :type_of_work,
                 :reprint_edition, :abstract, :title_translated, :language,
-                comments_attributes: [:id, :commenter, :body, :type, :make_public]
+                comments_attributes: [:id, :commenter, :body, :comment_type, :make_public]
             )
         end
 end
