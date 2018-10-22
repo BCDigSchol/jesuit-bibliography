@@ -75,3 +75,4 @@ gem 'blacklight-marc', '~> 6.1'
 # Jesuit Bibliography Staff gems
 gem 'simple_form'
 gem 'nested_form_fields'
+gem 'cocoon'

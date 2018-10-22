@@ -1,0 +1,10 @@
+<% if @subject.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', subject_path %>
+<% else %>
+    <h1>Editing Subject #<%= @subject.id %></h1>
+
+    <%= render 'form' %>
+
+    <%= link_to 'Back', subject_path %>
+<% end %>

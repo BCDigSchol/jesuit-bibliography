@@ -1,0 +1,21 @@
+<% if @subject.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', subjects_path %>
+<% else %>
+    <h1>Here is Subject #<%= @subject.id %></h1>
+
+    <div class="record-view">
+        <label>Term Type</label>
+        <div class="field-value"><%= @subject.term_type %></div>
+
+        <label>Term name</label>
+        <div class="field-value"><%= @subject.name %></div>
+
+        <label>Created At</label>
+        <div class="field-value"><%= @subject.created_at %></div>
+
+        <label>Updated At</label>
+        <div class="field-value"><%= @subject.updated_at %></div>
+    </div>
+    <%= link_to 'Edit', edit_subject_path(@subject) %> | <%= link_to 'Back', subjects_path %>
+<% end %>

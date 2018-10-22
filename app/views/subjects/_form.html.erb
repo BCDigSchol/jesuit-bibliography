@@ -1,0 +1,23 @@
+<%= simple_form_for @subject do |form| %>
+
+  <% if @subject.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@subject.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @subject.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.input :term_type, priority: [ "When" ], collection: ['When', 'What', 'Where', 'Who'], input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  
+  <%= form.input :name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <br/>
+  <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
+<% end %>

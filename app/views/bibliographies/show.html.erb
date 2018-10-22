@@ -59,6 +59,13 @@
         <label>Language</label>
         <div class="field-value"><%= @bib.language %></div>
 
+        <label>Subjects</label>
+        <ul>
+        <% @bib.subjects.each do |subject| %>
+            <li><%= subject.name %></li>
+        <% end %>
+        </ul>
+
         <h4>Comments</h4>
         <ol>
         <% @bib.comments.each do |comment| %>

@@ -50,6 +50,17 @@
 
   <%= form.input :language, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
+  <h4>Subjects</h4>
+  <div id='bibliography_subjects'>
+    <%= form.simple_fields_for :bibliography_subjects do |subject| %>
+      <%= render 'bibliography_subject_fields', :form => subject %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add subject', form, :bibliography_subjects, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_subjects', 'association-insertion-method' => 'append'} %>
+  </div>
+
+
   <h4>Comments</h4>
   <div class="comments">
     <ol>

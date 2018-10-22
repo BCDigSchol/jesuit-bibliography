@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_184222) do
+ActiveRecord::Schema.define(version: 2018_10_22_170412) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2018_10_18_184222) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bibliography_subjects", force: :cascade do |t|
+    t.integer "subject_id"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_subjects_on_bibliography_id"
+    t.index ["subject_id"], name: "index_bibliography_subjects_on_subject_id"
+  end
+
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
@@ -50,7 +59,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_184222) do
   create_table "comments", force: :cascade do |t|
     t.text "commenter"
     t.text "body"
-    t.text "type"
+    t.text "comment_type"
     t.boolean "make_public"
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
@@ -65,6 +74,13 @@ ActiveRecord::Schema.define(version: 2018_10_18_184222) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.text "term_type"
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
