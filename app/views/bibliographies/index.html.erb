@@ -1,28 +1,35 @@
-<h1>Listing all Bibliographies</h1>
- 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Reference Type</th>
-      <th>Title</th>
-      <th>Year Published</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bibs.each do |bib| %>
-      <tr>
-        <td><%= bib.reference_type %></td>
-        <td><%= bib.title %></td>
-        <td><%= bib.year_published %></td>
-        <td><%= link_to 'Show', bibliography_path(bib) %></td>
-        <td><%= link_to 'Edit', edit_bibliography_path(bib) %></td>
-        <td><%= link_to 'Destroy', bibliography_path(bib),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Jesuit Bibliography</h1>
 
-<p><%= link_to 'Add New Bibliography', new_bibliography_path %></p>
+<% if current_user.nil? %>
+  <p>Sign in to access this portal</p>
+  <%= link_to new_user_session_path, class: 'login-button btn btn-primary' do %>Sign in<% end %>
+  <%= link_to new_user_registration_path , class: 'login-button btn btn-primary' do %>Register<% end %>
+<% else %>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Reference Type</th>
+        <th>Title</th>
+        <th>Year Published</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bibs.each do |bib| %>
+        <tr>
+          <td><%= bib.reference_type %></td>
+          <td><%= bib.title %></td>
+          <td><%= bib.year_published %></td>
+          <td><%= link_to 'Show', bibliography_path(bib) %></td>
+          <td><%= link_to 'Edit', edit_bibliography_path(bib) %></td>
+          <td><%= link_to 'Destroy', bibliography_path(bib),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><%= link_to 'Add New Bibliography', new_bibliography_path %></p>
+<% end %>

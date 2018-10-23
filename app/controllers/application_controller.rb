@@ -3,4 +3,7 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   layout 'blacklight'
 
+  def after_sign_in_path_for(resource)
+    bibliographies_path
+  end
 end

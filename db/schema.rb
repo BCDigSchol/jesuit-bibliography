@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_170412) do
+ActiveRecord::Schema.define(version: 2018_10_23_200000) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -92,6 +92,10 @@ ActiveRecord::Schema.define(version: 2018_10_22_170412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "guest", default: false
+    t.boolean "admin_role", default: false
+    t.boolean "collaborator_role", default: false
+    t.boolean "editor_role", default: false
+    t.boolean "user_role", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

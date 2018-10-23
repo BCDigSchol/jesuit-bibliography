@@ -1,4 +1,7 @@
 class SubjectsController < ApplicationController
+    protect_from_forgery with: :exception
+
+    before_action :authenticate_user!
     before_action :set_subject, only: [:show, :edit, :update, :destroy]
 
     layout 'bibliography'
