@@ -25,3 +25,23 @@ body {
 .footer > .container .text-muted {
     margin: 20px 0;
 }
+
+.footer ul.footer-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.footer ul.footer-links li {
+    display: inline-block;
+    padding-right: 2rem;
+    margin-right: 2rem;
+    border-right: 1px solid #ccc;
+}
+
+.footer ul.footer-links li:last-child {
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
+}
