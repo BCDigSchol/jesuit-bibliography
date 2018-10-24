@@ -10,6 +10,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -30,7 +31,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/bibliographies">Bibliographies <span class="sr-only">(current)</span></a></li>
+                    <li><%= link_to 'Bibliographies', bibliographies_path %></li>
                     <li><%= link_to 'Subjects', subjects_path %></li>
                 </ul>
                 <% if user_signed_in? %>
@@ -39,7 +40,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <% if current_user.admin_role? %>
-                            <li><%= link_to 'Admin panel', rails_admin_path %></li>
+                            <li>
+                                <%= link_to rails_admin_path, target: :_blank do %>
+                                    Admin Panel <i class="fas fa-sm fa-external-link-alt"></i>
+                                <% end %>
+                            </li>
                             <li role="separator" class="divider"></li>
                         <% end %>
                         <li><a href="#">Action</a></li>
