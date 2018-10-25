@@ -5,7 +5,8 @@ lock "~> 3.11.0"
 #set :repo_url, "git@example.com:me/my_repo.git"
 
 set :application, "jesuit-bibliography"
-set :repo_url, "git@github.com:BCDigSchol/jesuit-bibliography.git"
+# set :repo_url, "git@github.com:BCDigSchol/jesuit-bibliography.git"
+set :repo_url, "https://github.com/BCDigSchol/jesuit-bibliography.git"
 
 set :deploy_to, '/home/blacklight/projects/jesuit-bibliography'
 
