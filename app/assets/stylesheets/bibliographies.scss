@@ -5,11 +5,10 @@
 #bibliography {
     html {
         position: relative;
-        min-height: 100%;
     }
 
     body {
-        margin-bottom: 120px!important;
+        /*margin-bottom: 120px!important;*/
     }
 
     nav.navbar {
@@ -17,6 +16,10 @@
             padding-left:15px;
             background-color: transparent;
         }
+    }
+
+    main {
+        min-height: 600px;
     }
 
     .footer {
