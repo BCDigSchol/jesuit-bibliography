@@ -3,68 +3,68 @@
 ==================================================================================*/
 @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-bold.ttf), url(../fonts/OpenSans-Bold.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-bold.ttf), url(/assets/OpenSans-Bold.eot?#iefix) format('embedded-opentype');
     font-weight: bold;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-bolditalic.ttf), url(../fonts/OpenSans-BoldItalic.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-bolditalic.ttf), url(/assets/OpenSans-BoldItalic.eot?#iefix) format('embedded-opentype');
     font-style: italic;
     font-weight: bold;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-extrabold.ttf), url(../fonts/OpenSans-Extrabold.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-extrabold.ttf), url(/assets/OpenSans-Extrabold.eot?#iefix) format('embedded-opentype');
     font-weight: 800;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-extrabolditalic.ttf), url(../fonts/OpenSans-ExtraboldItalic.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-extrabolditalic.ttf), url(/assets/OpenSans-ExtraboldItalic.eot?#iefix) format('embedded-opentype');
     font-style: italic;
     font-weight: 800;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-italic.ttf), url(../fonts/OpenSans-Italic.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-italic.ttf), url(/assets/OpenSans-Italic.eot?#iefix) format('embedded-opentype');
     font-style: italic;
     font-weight: normal;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-light.ttf), url(../fonts/OpenSans-Light.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-light.ttf), url(/assets/OpenSans-Light.eot?#iefix) format('embedded-opentype');
     font-weight: 300;
     font-style: normal;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-lightitalic.ttf), url(../fonts/OpenSansLight-Italic.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-lightitalic.ttf), url(/assets/OpenSansLight-Italic.eot?#iefix) format('embedded-opentype');
     font-style: italic;
     font-weight: 300;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-regular.ttf), url(../fonts/OpenSans.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-regular.ttf), url(/assets/OpenSans.eot?#iefix) format('embedded-opentype');
     font-style: normal;
     font-weight: normal;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-semibold.ttf), url(../fonts/OpenSans-Semibold.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-semibold.ttf), url(/assets/OpenSans-Semibold.eot?#iefix) format('embedded-opentype');
     font-weight: 600;
     font-style: normal;
   }
   
   @font-face {
     font-family: OpenSans;
-    src: url(../fonts/opensans-semibolditalic.ttf), url(../fonts/OpenSans-SemiboldItalic.eot?#iefix) format('embedded-opentype');
+    src: url(/assets/opensans-semibolditalic.ttf), url(/assets/OpenSans-SemiboldItalic.eot?#iefix) format('embedded-opentype');
     font-weight: 600;
     font-style: italic;
   }
