@@ -78,6 +78,7 @@ gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
 
 # Jesuit Bibliography Staff gems
+gem 'pg'
 gem 'rails_admin', '~> 1.3'
 gem 'simple_form'
 gem 'nested_form_fields'
