@@ -196,7 +196,7 @@
   ==================================================================================*/
   
   .navigation {
-    background-color: rgb(204, 197, 194); 
+    background-color: rgb(140, 138, 137); 
     font-size: 14px;
   }
   
@@ -211,7 +211,7 @@
   }
   
   .nav-bcjs a {
-    color: #333;
+    color: #eee;
   }
   
   .nav-bcjs>li>a:hover,
