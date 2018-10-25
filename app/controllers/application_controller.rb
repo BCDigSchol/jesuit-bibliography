@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   layout 'blacklight'
 
   def after_sign_in_path_for(resource)
-    bibliographies_path
+    dashboard_path
   end
+
+  def require_login
+    unless current_user
+        redirect_to dashboard_path
+    end
+end
 end

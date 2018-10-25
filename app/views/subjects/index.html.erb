@@ -1,5 +1,7 @@
-<h1>Listing all Subjects</h1>
- 
+<h1>Jesuit Bibliography</h1>
+
+<% if current_user.admin_role? || current_user.editor_role? %>
+<h2>Subject listings</h2>
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -23,4 +25,5 @@
   </tbody>
 </table>
 
-<p><%= link_to 'Add New Subject', new_subject_path %></p>
+<p><%= link_to 'Add New Subject', new_subject_path, class: 'btn btn-primary' %></p>
+<% end %>

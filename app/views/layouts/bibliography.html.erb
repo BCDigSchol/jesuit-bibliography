@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
             </button>
             
-            <%= link_to 'Jesuit Bibliography', blacklight_path, class: 'navbar-brand' %>
+            <%= link_to 'Jesuit Bibliography', dashboard_path, class: 'navbar-brand' %>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,9 +48,16 @@
                             </li>
                             <li role="separator" class="divider"></li>
                         <% end %>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li>
+                        <%= link_to dashboard_path do %>
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <% end %>
+                        </li>
+                        <li>
+                        <%= link_to blacklight_path do %>
+                            <i class="fas fa-home"></i> Blacklight
+                        <% end %>
+                        </li>
                         <li role="separator" class="divider"></li>
                         <li><%= link_to 'Logout', destroy_user_session_path %></li>
                     </ul>

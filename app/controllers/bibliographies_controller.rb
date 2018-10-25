@@ -2,7 +2,8 @@ class BibliographiesController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
-    before_action :authenticate_user!, except: [:index]
+    before_action :require_login
+    before_action :authenticate_user!
     before_action :set_bib, only: [:show, :edit, :update, :destroy]
 
     layout 'bibliography'

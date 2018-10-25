@@ -1,0 +1,30 @@
+<div id="dashboard">
+<% if current_user.nil? %>
+  <p>Sign in to access this portal</p>
+  <%= link_to new_user_session_path, class: 'login-button btn btn-primary' do %>Sign in<% end %>
+  <%= link_to new_user_registration_path , class: 'login-button btn btn-primary' do %>Register<% end %>
+<% else %>
+    <h1>Dashboard</h1>
+
+    <div class="contaniner">
+        <p>You are signed in, <strong><%= current_user.email %></strong>!</p>
+    </div>
+
+    <div class="contaniner">
+        <div class="">
+            <p>Here are some actions for you:</p>
+            <ul class="tasks">
+                <li><%= link_to 'Add new Bibliography', new_bibliography_path %></li>
+                <% if current_user.admin_role? || current_user.editor_role? %>
+                <li><%= link_to 'Review recent Bibliographies', bibliographies_path %></li>
+                <li><%= link_to 'Add new Subject', new_subject_path %></li>
+                <li><%= link_to 'Review recent Subjects', subjects_path %></li>
+                <% end %>
+                <% if current_user.admin_role? %>
+                <li><%= link_to 'Update User accounts', rails_admin_path %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+<% end %>
+</div>
