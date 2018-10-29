@@ -1,0 +1,27 @@
+<h1>Jesuit Bibliography</h1>
+
+<% if current_user.admin_role? || current_user.editor_role? %>
+<h2>Periods listings</h2>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Period name</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @periods.each do |period| %>
+      <tr>
+        <td><%= period.name %></td>
+        <td><%= link_to 'Show', period_path(period) %></td>
+        <td><%= link_to 'Edit', edit_period_path(period) %></td>
+        <td><%= link_to 'Destroy', period_path(period),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<p><%= link_to 'Add New Period', new_period_path, class: 'btn btn-primary' %></p>

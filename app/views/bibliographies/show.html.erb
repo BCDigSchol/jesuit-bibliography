@@ -66,6 +66,13 @@
         <% end %>
         </ul>
 
+        <label>Periods</label>
+        <ul>
+        <% @bib.periods.each do |period| %>
+            <li><%= period.name %></li>
+        <% end %>
+        </ul>
+
         <h4>Comments</h4>
         <ol>
         <% @bib.comments.each do |comment| %>

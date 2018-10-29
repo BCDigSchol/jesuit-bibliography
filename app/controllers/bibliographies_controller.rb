@@ -79,6 +79,7 @@ class BibliographiesController < ApplicationController
                 :reprint_edition, :abstract, :title_translated, :language,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
+                bibliography_periods_attributes: [:id, :period_id, :_destroy],
             )
         end
 end

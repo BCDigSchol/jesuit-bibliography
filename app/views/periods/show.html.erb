@@ -1,0 +1,21 @@
+<% if @period.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', period_path %>
+<% else %>
+    <h1>Here is Period #<%= @period.id %></h1>
+
+    <div class="record-view">
+        <label>Period Name</label>
+        <div class="field-value"><%= @period.name %></div>
+
+        <label>Period Sort Name</label>
+        <div class="field-value"><%= @period.sort_name %></div>
+
+        <label>Created At</label>
+        <div class="field-value"><%= @period.created_at %></div>
+
+        <label>Updated At</label>
+        <div class="field-value"><%= @period.updated_at %></div>
+    </div>
+    <%= link_to 'Edit', edit_period_path(@period) %> | <%= link_to 'Back', periods_path %>
+<% end %>

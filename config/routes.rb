@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :subjects
 
+  resources :periods
+
   mount Blacklight::Engine => '/'
   Blacklight::Marc.add_routes(self)
   root to: "catalog#index"

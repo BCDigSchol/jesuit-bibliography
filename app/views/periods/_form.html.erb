@@ -1,0 +1,22 @@
+<%= simple_form_for @period do |form| %>
+
+  <% if @period.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@period.errors.count, "error") %> prohibited
+        this period from being saved:
+      </h2>
+      <ul>
+        <% @period.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.input :name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <br/>
+  <%= form.button :submit, "Save Period", class: "btn btn-primary" %>
+<% end %>

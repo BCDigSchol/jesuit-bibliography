@@ -60,6 +60,16 @@
     <%= link_to_add_association 'add subject', form, :bibliography_subjects, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_subjects', 'association-insertion-method' => 'append'} %>
   </div>
 
+  <h4>Periods</h4>
+  <div id='bibliography_periods'>
+    <%= form.simple_fields_for :bibliography_periods do |period| %>
+      <%= render 'bibliography_period_fields', :form => period %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add period', form, :bibliography_periods, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_periods', 'association-insertion-method' => 'append'} %>
+  </div>
+
 
   <h4>Comments</h4>
   <div class="comments">
