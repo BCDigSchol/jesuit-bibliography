@@ -18,10 +18,24 @@ class BibliographiesController < ApplicationController
     def new
         @bib = Bibliography.new
         @bib.comments.build
+        @bib.isbns.build
+        @bib.issns.build
+        @bib.dois.build
     end
 
     def edit
         @bib.comments.build
+
+        # hack to only show one associated field at a time
+        if @bib.isbns.count <= 0
+            @bib.isbns.build
+        end
+        if @bib.issns.count <= 0
+            @bib.issns.build
+        end
+        if @bib.dois.count <= 0
+            @bib.dois.build
+        end
     end
 
     def create
@@ -80,6 +94,9 @@ class BibliographiesController < ApplicationController
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
+                isbns_attributes: [:id, :id_type, :value, :_destroy],
+                issns_attributes: [:id, :id_type, :value, :_destroy],
+                dois_attributes: [:id, :id_type, :value, :_destroy],
             )
         end
 end
