@@ -91,25 +91,16 @@
     <%= link_to_add_association 'add period', form, :bibliography_periods, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_periods', 'association-insertion-method' => 'append'} %>
   </div>
 
-  
-
-
   <h4>Comments</h4>
-  <div class="comments">
-    <ol>
-    <%= form.simple_fields_for :comments do |c| %>
-      <li>
-      <%= c.input :body, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-      <%= c.input :commenter, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-      <%= c.input :comment_type, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-      <%= c.input :make_public, input_html: { class: '' }, wrapper_html: { class: 'form-group' } %>
-      </li>
+  <div id="bibliography_comments">
+    <ol id="bibliography_comments_ol">
+    <%= form.simple_fields_for :comments do |comment| %>
+      <%= render 'comment_fields', :form => comment %></li>
     <% end %>
     </ol>
-
-    <%= form.add_nested_fields_link :comments do %>
-        <button class="btn btn-default">Add additional Comment</button>
-    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add comment', form, :comments, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_comments_ol', 'association-insertion-method' => 'append'} %>
   </div>
 
   <br/>

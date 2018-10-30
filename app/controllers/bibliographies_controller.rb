@@ -26,7 +26,7 @@ class BibliographiesController < ApplicationController
     def edit
         @bib.comments.build
 
-        # hack to only show one associated field at a time
+        # hack! only show one associated field/group at a time
         if @bib.isbns.count <= 0
             @bib.isbns.build
         end
@@ -40,6 +40,22 @@ class BibliographiesController < ApplicationController
 
     def create
         @bib = Bibliography.new(bib_params)
+
+        # loop through each associated comment object and check if it has changed
+        # if it has changed, be sure to update the comment.commenter value
+        @bib.comments.each do |comment|
+            if comment.changed?
+                '''
+                puts "###### found a new comment ######"
+                puts comment.body
+                puts comment.comment_type
+                puts comment.make_public
+                puts comment.commenter
+                puts "#################################"
+                '''
+                comment.commenter = current_user
+            end
+        end
 
         if @bib.save
             respond_to do |format|
@@ -55,8 +71,28 @@ class BibliographiesController < ApplicationController
     end
 
     def update
-        if @bib.update!(bib_params)
-            #@comments = @bib.comments
+        # copy over bib_params into @bib object so we can alter it
+        @bib.attributes = bib_params
+
+        # loop through each associated comment object and check if it has changed
+        # if it has changed, be sure to update the comment.commenter value
+        @bib.comments.each do |comment|
+            if comment.changed?
+                '''
+                puts "###### found a new comment ######"
+                puts comment.body
+                puts comment.comment_type
+                puts comment.make_public
+                puts comment.commenter
+                puts "#################################"
+                '''
+                if comment.commenter.nil?
+                    comment.commenter = current_user
+                end
+            end
+        end
+
+        if @bib.save!(bib_params)
             respond_to do |format|
                 format.html { redirect_to @bib, notice: 'Bibliography was successfully updated.' }
                 format.json { render :show, status: :ok, location: @bib }
@@ -91,7 +127,7 @@ class BibliographiesController < ApplicationController
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :pages, :section, :title_tertiary, :edition, :date, :type_of_work,
                 :reprint_edition, :abstract, :title_translated, :language,
-                comments_attributes: [:id, :commenter, :body, :comment_type, :make_public],
+                comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 isbns_attributes: [:id, :id_type, :value, :_destroy],

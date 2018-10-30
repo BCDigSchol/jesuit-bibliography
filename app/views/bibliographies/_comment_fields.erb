@@ -1,0 +1,9 @@
+<li class="bibliography-subject-fields nested-fields">
+    
+    <%= form.input :body, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :comment_type, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :commenter, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' }, disabled: true %>
+    <%= form.input :make_public, input_html: { class: '' }, wrapper_html: { class: 'form-group' } %>
+    
+    <%= link_to_remove_association "x", form, {:class => 'remove-link'}, form_name: 'form' %>
+</li>
