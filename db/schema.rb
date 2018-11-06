@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_174533) do
+ActiveRecord::Schema.define(version: 2018_10_30_160000) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
