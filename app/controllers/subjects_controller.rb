@@ -70,6 +70,6 @@ class SubjectsController < ApplicationController
         end
 
         def subject_params
-            params.require(:subject).permit(:term_type, :name)
+            params.require(:subject).permit(:name, :sort_name)
         end
 end

@@ -3,6 +3,6 @@ class Subject < ApplicationRecord
     has_many :bibliography_subjects
     has_many :bibliographies, through: :bibliography_subjects
 
-    validates :term_type, presence: true
     validates :name, presence: true
+    validates :sort_name, presence: true
 end

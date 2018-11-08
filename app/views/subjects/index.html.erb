@@ -5,7 +5,6 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Reference Type</th>
       <th>Name</th>
       <th colspan="3">Actions</th>
     </tr>
@@ -13,7 +12,6 @@
   <tbody>
     <% @subjects.each do |sub| %>
       <tr>
-        <td><%= sub.term_type %></td>
         <td><%= sub.name %></td>
         <td><%= link_to 'Show', subject_path(sub) %></td>
         <td><%= link_to 'Edit', edit_subject_path(sub) %></td>

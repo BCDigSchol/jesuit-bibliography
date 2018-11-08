@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_210000) do
+ActiveRecord::Schema.define(version: 2018_11_08_230000) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 2018_11_08_210000) do
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.text "term_type"
     t.text "name"
+    t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
