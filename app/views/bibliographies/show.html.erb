@@ -61,23 +61,26 @@
 
         <label>ISBN</label>
         <div class="field-value">
-        <% @bib.isbns.each do |isbn| %>
+            <%= @bib.isbn %>
+        <!--<% @bib.isbns.each do |isbn| %>
             <%= isbn.value %>
-        <% end %>
+        <% end %>-->
         </div>
 
         <label>ISSN</label>
         <div class="field-value">
-        <% @bib.issns.each do |issn| %>
+            <%= @bib.issn %>
+        <!--<% @bib.issns.each do |issn| %>
             <%= issn.value %>
-        <% end %>
+        <% end %>-->
         </div>
 
         <label>DOI</label>
         <div class="field-value">
-        <% @bib.dois.each do |doi| %>
+            <%= @bib.doi %>
+        <!--<% @bib.dois.each do |doi| %>
             <%= doi.value %>
-        <% end %>
+        <% end %>-->
         </div>
         
         <label>Subjects</label>

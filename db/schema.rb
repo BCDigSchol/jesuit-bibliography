@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_160000) do
+ActiveRecord::Schema.define(version: 2018_11_08_172936) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(version: 2018_10_30_160000) do
     t.text "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "isbn"
+    t.string "issn"
+    t.string "doi"
   end
 
   create_table "bibliography_periods", force: :cascade do |t|
