@@ -77,6 +77,10 @@ gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
 
+# make sure we're using most recent version of loofah
+# see CVE-2018-16468
+gem "loofah", ">= 2.2.3"
+
 # Jesuit Bibliography Staff gems
 gem 'pg'
 gem 'rails_admin', '~> 1.3'
