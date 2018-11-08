@@ -1,0 +1,10 @@
+<% if @location.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', location_path %>
+<% else %>
+    <h1>Editing Location #<%= @location.id %></h1>
+
+    <%= render 'form' %>
+
+    <%= link_to 'Back', location_path %>
+<% end %>

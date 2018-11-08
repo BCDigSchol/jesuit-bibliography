@@ -9,9 +9,14 @@ class Bibliography < ApplicationRecord
     has_many :bibliography_periods, inverse_of: :bibliography, dependent: :destroy
     has_many :periods, through: :bibliography_periods
 
+    # many-to-many relationship through bibliography_locations
+    has_many :bibliography_locations, inverse_of: :bibliography, dependent: :destroy
+    has_many :locations, through: :bibliography_locations
+
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
     accepts_nested_attributes_for :bibliography_subjects, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true
 
     validates :reference_type, presence: true
     validates :title, presence: true

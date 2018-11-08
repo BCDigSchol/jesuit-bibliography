@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :subjects
 
   resources :periods
+  resources :locations
 
   mount Blacklight::Engine => '/'
   Blacklight::Marc.add_routes(self)

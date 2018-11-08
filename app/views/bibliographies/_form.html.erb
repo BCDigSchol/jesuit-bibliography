@@ -76,6 +76,16 @@
     <%= link_to_add_association 'add period', form, :bibliography_periods, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_periods', 'association-insertion-method' => 'append'} %>
   </div>
 
+  <h4>Locations</h4>
+  <div id='bibliography_locations'>
+    <%= form.simple_fields_for :bibliography_locations do |location| %>
+      <%= render 'bibliography_location_fields', :form => location %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add location', form, :bibliography_locations, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_locations', 'association-insertion-method' => 'append'} %>
+  </div>
+
   <h4>Comments</h4>
   <div id="bibliography_comments">
     <ol id="bibliography_comments_ol">

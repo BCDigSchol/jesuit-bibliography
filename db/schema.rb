@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_172936) do
+ActiveRecord::Schema.define(version: 2018_11_08_210000) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2018_11_08_172936) do
     t.string "isbn"
     t.string "issn"
     t.string "doi"
+  end
+
+  create_table "bibliography_locations", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_locations_on_bibliography_id"
+    t.index ["location_id"], name: "index_bibliography_locations_on_location_id"
   end
 
   create_table "bibliography_periods", force: :cascade do |t|
@@ -77,6 +86,13 @@ ActiveRecord::Schema.define(version: 2018_11_08_172936) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_comments_on_bibliography_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.text "name"
+    t.text "sort_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "periods", force: :cascade do |t|

@@ -1,0 +1,5 @@
+<div class='bibliography-location-fields nested-fields'>
+    <%= form.association :location, collection: Location.order(:sort_name), prompt: 'Choose a Location', form_name: 'form' %>
+    
+    <%= link_to_remove_association "x", form, {:class => 'remove-link'}, form_name: 'form' %>
+</div>
