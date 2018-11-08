@@ -95,19 +95,6 @@ ActiveRecord::Schema.define(version: 2018_11_08_172936) do
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
-  create_table "standard_identifiers", force: :cascade do |t|
-    t.text "id_type"
-    t.text "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "isbn_id"
-    t.integer "issn_id"
-    t.integer "doi_id"
-    t.index ["doi_id"], name: "index_standard_identifiers_on_doi_id"
-    t.index ["isbn_id"], name: "index_standard_identifiers_on_isbn_id"
-    t.index ["issn_id"], name: "index_standard_identifiers_on_issn_id"
-  end
-
   create_table "subjects", force: :cascade do |t|
     t.text "term_type"
     t.text "name"

@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   get "/dashboard/" => "dashboard#index"
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
+
   resources :bibliographies do
     resources :comments
-    resources :standard_identifiers
   end
 
   resources :subjects
