@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :subjects
-
+  resources :entities
   resources :periods
   resources :locations
 

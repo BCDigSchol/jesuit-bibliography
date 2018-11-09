@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_230000) do
+ActiveRecord::Schema.define(version: 2018_11_09_020000) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2018_11_08_230000) do
     t.string "isbn"
     t.string "issn"
     t.string "doi"
+  end
+
+  create_table "bibliography_entities", force: :cascade do |t|
+    t.integer "entity_id"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_entities_on_bibliography_id"
+    t.index ["entity_id"], name: "index_bibliography_entities_on_entity_id"
   end
 
   create_table "bibliography_locations", force: :cascade do |t|
@@ -86,6 +95,16 @@ ActiveRecord::Schema.define(version: 2018_11_08_230000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_comments_on_bibliography_id"
+  end
+
+  create_table "entities", force: :cascade do |t|
+    t.text "name"
+    t.text "sort_name"
+    t.text "display_name"
+    t.text "birth_date"
+    t.text "death_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", force: :cascade do |t|

@@ -1,0 +1,10 @@
+<% if @entity.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Back', entity_path %>
+<% else %>
+    <h1>Editing Entity #<%= @entity.id %></h1>
+
+    <%= render 'form' %>
+
+    <%= link_to 'Back', entity_path %>
+<% end %>

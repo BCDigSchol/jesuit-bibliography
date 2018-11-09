@@ -117,6 +117,7 @@ class BibliographiesController < ApplicationController
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],
+                bibliography_entities_attributes: [:id, :entity_id, :_destroy],
             )
         end
 end

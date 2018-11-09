@@ -95,6 +95,13 @@
         <% end %>
         </ul>
 
+        <label>Entities</label>
+        <ul>
+        <% @bib.entities.each do |entity| %>
+            <li><%= entity.display_name %></li>
+        <% end %>
+        </ul>
+
         <h4>Comments</h4>
         <ol>
         <% @bib.comments.each do |comment| %>

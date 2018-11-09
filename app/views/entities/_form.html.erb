@@ -1,0 +1,28 @@
+<%= simple_form_for @entity do |form| %>
+
+  <% if @entity.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@entity.errors.count, "error") %> prohibited
+        this entity from being saved:
+      </h2>
+      <ul>
+        <% @entity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.input :name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :birth_date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :death_date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <br/>
+  <%= form.button :submit, "Save Entity", class: "btn btn-primary" %>
+<% end %>
