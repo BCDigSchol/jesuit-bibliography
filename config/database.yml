@@ -35,7 +35,7 @@ production:
   #<<: *default
   #database: db/production.sqlite3
   adapter: postgresql
-  database: jesuit-bibliography
+  database: blacklight
   username: blacklight
   password: <%= ENV['BIBLIOGRAPHY_DATABASE_PASSWORD'] %>
   encoding: unicode
