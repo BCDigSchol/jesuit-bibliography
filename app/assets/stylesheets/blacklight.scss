@@ -12,3 +12,43 @@ h2.page-heading{
 .navbar-static-top {
     z-index:1;
 }
+
+footer.bcfooter {
+    .footer {
+        background-color: white;
+        .inner {
+            border-top: 5px solid red;
+            font-size: 16px;
+            .logo {
+                padding-left: 0px;
+            }
+            .footer-text {
+                padding-top: 20px;
+                .address {
+                    padding-top:20px;
+                }
+            }
+            .site-links {
+                list-style-type: none;
+                margin: 20px 0;
+                padding: 0px;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    padding: 0 20px;
+                    line-height: 1;
+                    border-right: 1px solid;
+                    text-transform: uppercase;
+                    &:last-child {
+                        border-right: 0px;
+                    }
+                }
+            }
+            .copyright {
+                text-align: center;
+                font-color: #ccc;
+                font-size: 14px;
+            }
+        }
+    }
+}
