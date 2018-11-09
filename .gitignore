@@ -29,7 +29,3 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .DS_Store
-
-# Ignore secrets
-config/database.yml
-config/secrets.yml
