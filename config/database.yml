@@ -35,7 +35,6 @@ production:
   #<<: *default
   #database: db/production.sqlite3
   adapter: postgresql
-  host: 165.227.97.159
   database: jesuit-bibliography
   username: blacklight
   password: <%= ENV['BIBLIOGRAPHY_DATABASE_PASSWORD'] %>
