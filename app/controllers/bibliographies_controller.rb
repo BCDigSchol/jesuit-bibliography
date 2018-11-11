@@ -21,6 +21,13 @@ class BibliographiesController < ApplicationController
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
+        @bib.authors.build
+        @bib.editors.build
+        @bib.author_of_reviews.build
+        @bib.reviewed_authors.build
+        @bib.translators.build
+        @bib.performers.build
+        @bib.translated_authors.build
     end
 
     def edit
@@ -28,6 +35,13 @@ class BibliographiesController < ApplicationController
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
+        @bib.authors.build
+        @bib.editors.build
+        @bib.author_of_reviews.build
+        @bib.reviewed_authors.build
+        @bib.translators.build
+        @bib.performers.build
+        @bib.translated_authors.build
     end
 
     def create
@@ -127,6 +141,13 @@ class BibliographiesController < ApplicationController
                 isbns_attributes: [:id, :value, :_destroy],
                 issns_attributes: [:id, :value, :_destroy],
                 dois_attributes: [:id, :value, :_destroy],
+                authors_attributes: [:id, :display_name, :_destroy],
+                editors_attributes: [:id, :display_name, :_destroy],
+                author_of_reviews_attributes: [:id, :display_name, :_destroy],
+                reviewed_authors_attributes: [:id, :display_name, :_destroy],
+                translators_attributes: [:id, :display_name, :_destroy],
+                performers_attributes: [:id, :display_name, :_destroy],
+                translated_authors_attributes: [:id, :display_name, :_destroy],
             )
         end
 end

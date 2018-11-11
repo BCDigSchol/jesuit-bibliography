@@ -15,6 +15,36 @@
   <% end %>
 
   <%= form.input :reference_type, priority: [ "book" ], collection: ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper','multimedia'], input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <h4>Author</h4>
+  <div id='bibliography_author'>
+    <%= form.simple_fields_for :authors do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Author', form, :authors, association: 'authors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_author', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
+
+  <h4>Editor</h4>
+  <div id='bibliography_editor'>
+    <%= form.simple_fields_for :editors do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Editor', form, :editors, association: 'editors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_editor', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
+
+  <h4>Author of Review</h4>
+  <div id='bibliography_author_of_review'>
+    <%= form.simple_fields_for :author_of_reviews do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Author of Review', form, :author_of_reviews, association: 'author_of_reviews', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_author_of_review', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
   
   <%= form.input :year_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
@@ -34,6 +64,16 @@
 
   <%= form.input :section, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
+  <h4>Reviewed Author</h4>
+  <div id='bibliography_reviewed_author'>
+    <%= form.simple_fields_for :reviewed_authors do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Reviewed Authors', form, :reviewed_authors, association: 'reviewed_authors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_reviewed_author', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
+
   <%= form.input :title_tertiary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <%= form.input :edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
@@ -42,9 +82,39 @@
 
   <%= form.input :type_of_work, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
+  <h4>Translator</h4>
+  <div id='bibliography_translator'>
+    <%= form.simple_fields_for :translators do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Translator', form, :translators, association: 'translators', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_translator', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
+
+  <h4>Performer</h4>
+  <div id='bibliography_performer'>
+    <%= form.simple_fields_for :performers do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Performer', form, :performers, association: 'performers', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_performer', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
+
   <%= form.input :reprint_edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <%= form.input :abstract, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <h4>Translated Author</h4>
+  <div id='bibliography_translated_author'>
+    <%= form.simple_fields_for :translated_authors do |c| %>
+      <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'Add Translated Author', form, :translated_authors, association: 'translated_authors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_translated_author', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+  </div>
 
   <%= form.input :title_translated, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 

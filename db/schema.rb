@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_014449) do
+ActiveRecord::Schema.define(version: 2018_11_11_032047) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -84,6 +84,30 @@ ActiveRecord::Schema.define(version: 2018_11_11_014449) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "citations", force: :cascade do |t|
+    t.text "display_name"
+    t.text "surname"
+    t.text "middlename"
+    t.text "forename"
+    t.text "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "author_id"
+    t.integer "editor_id"
+    t.integer "author_of_review_id"
+    t.integer "reviewed_author_id"
+    t.integer "translator_id"
+    t.integer "performer_id"
+    t.integer "translated_author_id"
+    t.index ["author_id"], name: "index_citations_on_author_id"
+    t.index ["author_of_review_id"], name: "index_citations_on_author_of_review_id"
+    t.index ["editor_id"], name: "index_citations_on_editor_id"
+    t.index ["performer_id"], name: "index_citations_on_performer_id"
+    t.index ["reviewed_author_id"], name: "index_citations_on_reviewed_author_id"
+    t.index ["translated_author_id"], name: "index_citations_on_translated_author_id"
+    t.index ["translator_id"], name: "index_citations_on_translator_id"
   end
 
   create_table "comments", force: :cascade do |t|

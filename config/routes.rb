@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :bibliographies do
     resources :comments
     resources :standard_identifiers
+    resources :citations
   end
 
   resources :subjects
