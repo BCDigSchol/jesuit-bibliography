@@ -50,11 +50,35 @@
 
   <%= form.input :language, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
-  <%= form.input :isbn, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <h4>ISBN</h4>
+  <div id='bibliography_isbn'>
+    <%= form.simple_fields_for :isbns do |c| %>
+      <%= c.input :value, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add isbn', form, :isbns, association: 'isbns', class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_isbn', 'association-insertion-method' => 'append'}, partial: 'bibliography_isbn_fields' %>
+  </div>
 
-  <%= form.input :issn, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <h4>ISSN</h4>
+  <div id='bibliography_issn'>
+    <%= form.simple_fields_for :issns do |c| %>
+      <%= c.input :value, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add issn', form, :issns, association: 'issns', class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_issn', 'association-insertion-method' => 'append'}, partial: 'bibliography_issn_fields' %>
+  </div>
 
-  <%= form.input :doi, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <h4>DOI</h4>
+  <div id='bibliography_doi'>
+    <%= form.simple_fields_for :dois do |c| %>
+      <%= c.input :value, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <% end %>
+  </div>
+  <div class='links'>
+    <%= link_to_add_association 'add doi', form, :dois, association: 'dois', class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_doi', 'association-insertion-method' => 'append'}, partial: 'bibliography_doi_fields' %>
+  </div>
 
   <h4>Subjects</h4>
   <div id='bibliography_subjects'>

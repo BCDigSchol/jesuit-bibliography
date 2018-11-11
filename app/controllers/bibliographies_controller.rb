@@ -18,10 +18,16 @@ class BibliographiesController < ApplicationController
     def new
         @bib = Bibliography.new
         @bib.comments.build
+        @bib.isbns.build
+        @bib.issns.build
+        @bib.dois.build
     end
 
     def edit
         @bib.comments.build
+        @bib.isbns.build
+        @bib.issns.build
+        @bib.dois.build
     end
 
     def create
@@ -112,12 +118,15 @@ class BibliographiesController < ApplicationController
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :pages, :section, :title_tertiary, :edition, :date, :type_of_work,
-                :reprint_edition, :abstract, :title_translated, :language, :isbn, :issn, :doi,
+                :reprint_edition, :abstract, :title_translated, :language,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],
                 bibliography_entities_attributes: [:id, :entity_id, :_destroy],
+                isbns_attributes: [:id, :value, :_destroy],
+                issns_attributes: [:id, :value, :_destroy],
+                dois_attributes: [:id, :value, :_destroy],
             )
         end
 end

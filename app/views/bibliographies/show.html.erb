@@ -60,19 +60,25 @@
         <div class="field-value"><%= @bib.language %></div>
 
         <label>ISBN</label>
-        <div class="field-value">
-            <%= @bib.isbn %>
-        </div>
+        <ul>
+        <% @bib.isbns.each do |isbn| %>
+            <li><%= isbn.value %></li>
+        <% end %>
+        </ul>
 
         <label>ISSN</label>
-        <div class="field-value">
-            <%= @bib.issn %>
-        </div>
+        <ul>
+        <% @bib.issns.each do |issn| %>
+            <li><%= issn.value %></li>
+        <% end %>
+        </ul>
 
         <label>DOI</label>
-        <div class="field-value">
-            <%= @bib.doi %>
-        </div>
+        <ul>
+        <% @bib.dois.each do |doi| %>
+            <li><%= doi.value %></li>
+        <% end %>
+        </ul>
         
         <label>Subjects</label>
         <ul>
