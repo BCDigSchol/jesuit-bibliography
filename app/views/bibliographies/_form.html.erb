@@ -127,7 +127,7 @@
     <% end %>
   </div>
   <div class='links'>
-    <%= link_to_add_association 'Add ISBN', form, :isbns, association: 'isbns', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_isbn', 'association-insertion-method' => 'append'}, partial: 'bibliography_isbn_fields' %>
+    <%= link_to_add_association 'Add ISBN', form, :isbns, association: 'isbns', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_isbn', 'association-insertion-method' => 'append'}, partial: 'bibliography_standard_identifier_fields' %>
   </div>
 
   <h4>ISSN</h4>
@@ -137,7 +137,7 @@
     <% end %>
   </div>
   <div class='links'>
-    <%= link_to_add_association 'Add ISSN', form, :issns, association: 'issns', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_issn', 'association-insertion-method' => 'append'}, partial: 'bibliography_issn_fields' %>
+    <%= link_to_add_association 'Add ISSN', form, :issns, association: 'issns', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_issn', 'association-insertion-method' => 'append'}, partial: 'bibliography_standard_identifier_fields' %>
   </div>
 
   <h4>DOI</h4>
@@ -147,7 +147,7 @@
     <% end %>
   </div>
   <div class='links'>
-    <%= link_to_add_association 'Add DOI', form, :dois, association: 'dois', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_doi', 'association-insertion-method' => 'append'}, partial: 'bibliography_doi_fields' %>
+    <%= link_to_add_association 'Add DOI', form, :dois, association: 'dois', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#bibliography_doi', 'association-insertion-method' => 'append'}, partial: 'bibliography_standard_identifier_fields' %>
   </div>
 
   <h4>Subjects</h4>
