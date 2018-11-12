@@ -75,7 +75,7 @@ gem 'rsolr', '>= 1.0', '< 3'
 gem 'jquery-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
-gem 'blacklight-marc', '~> 6.1'
+gem 'blacklight-marc', :git => 'https://github.com/BCDigSchol/blacklight-marc.git', :tag => 'backport-traject'
 
 # make sure we're using most recent version of loofah
 # see CVE-2018-16468
