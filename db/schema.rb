@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_032047) do
+ActiveRecord::Schema.define(version: 2018_11_12_000913) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -36,6 +36,11 @@ ActiveRecord::Schema.define(version: 2018_11_11_032047) do
     t.string "isbn"
     t.string "issn"
     t.string "doi"
+    t.text "volume_number"
+    t.text "worldcat_url"
+    t.text "secondary_url"
+    t.text "leuven_url"
+    t.text "multimedia_dimensions"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

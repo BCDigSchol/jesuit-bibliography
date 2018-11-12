@@ -60,6 +60,8 @@
 
   <%= form.input :number_of_volumes, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
+  <%= form.input :volume_number, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
   <%= form.input :pages, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <%= form.input :section, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
@@ -103,6 +105,14 @@
   </div>
 
   <%= form.input :reprint_edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :worldcat_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :secondary_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :leuven_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+
+  <%= form.input :multimedia_dimensions, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <%= form.input :abstract, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
