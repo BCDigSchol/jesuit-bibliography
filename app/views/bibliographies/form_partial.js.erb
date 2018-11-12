@@ -1,0 +1,15 @@
+<% if @form_partial == "book_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/book_form") %>');
+<% elsif @form_partial == "book_chapter_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/book_chapter_form") %>');
+<% elsif @form_partial == "book_review_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/book_review_form") %>');
+<% elsif @form_partial == "journal_article_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/journal_article_form") %>');
+<% elsif @form_partial == "dissertation_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/dissertation_form") %>');
+<% elsif @form_partial == "conference_paper_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/conference_paper_form") %>');
+<% elsif @form_partial == "multimedia_form" %>
+  $('#bib_form_container').html('<%= escape_javascript render("bibliographies/edit_forms/multimedia_form") %>');
+<% end %>

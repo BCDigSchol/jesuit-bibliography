@@ -21,3 +21,4 @@
 //= require cocoon
 
 //= require_tree .
+//= require bibliography.js

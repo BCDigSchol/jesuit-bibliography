@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :citations
   end
 
+  get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'
+
   resources :subjects
   resources :entities
   resources :periods

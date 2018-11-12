@@ -28,6 +28,8 @@ class BibliographiesController < ApplicationController
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
+
+        @reference_type = nil
     end
 
     def edit
@@ -42,6 +44,8 @@ class BibliographiesController < ApplicationController
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
+
+        @reference_type = @bib.reference_type
     end
 
     def create
@@ -116,6 +120,20 @@ class BibliographiesController < ApplicationController
         respond_to do |format|
             format.html { redirect_to bibliographies_path, notice: 'Bibliography was successfully destroyed.' }
             format.json { head :no_content }
+        end
+    end
+
+    def form_partial
+        if params[:id] == "new"
+            new
+        else
+            set_bib
+            edit
+        end
+
+        @form_partial = params[:reference_type]
+        respond_to do |format|
+            format.js
         end
     end
 
