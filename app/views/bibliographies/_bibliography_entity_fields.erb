@@ -1,4 +1,13 @@
 <div class='bibliography-entity-fields nested-fields'>
-    <%= form.association :entity, collection: Entity.all.order(:display_name), prompt: 'Choose an entity', form_name: 'form' %>
-    <%= link_to_remove_association "x", form, {:class => 'remove-link'}, form_name: 'form' %>
+    <%= form.association :entity, 
+        label: 'Entity',
+        collection: Entity.all.order(:display_name), 
+        prompt: 'Choose an entity', 
+        form_name: 'form' 
+    %>
+    <%= link_to_remove_association "x", 
+        form, 
+        class: 'remove-link', 
+        form_name: 'form' 
+    %>
 </div>

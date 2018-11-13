@@ -1,5 +1,14 @@
 <div class='bibliography-period-fields nested-fields'>
-    <%= form.association :period, collection: Period.order(:sort_name), prompt: 'Choose a period', form_name: 'form' %>
+    <%= form.association :period, 
+        label: 'Period',
+        collection: Period.order(:sort_name), 
+        prompt: 'Choose a period', 
+        form_name: 'form' 
+    %>
     
-    <%= link_to_remove_association "x", form, {:class => 'remove-link'}, form_name: 'form' %>
+    <%= link_to_remove_association "x", 
+        form, 
+        class: 'remove-link', 
+        form_name: 'form' 
+    %>
 </div>
