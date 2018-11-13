@@ -17,8 +17,6 @@
                 <li><%= link_to 'Add new Bibliography', new_bibliography_path %></li>
                 <% if current_user.admin_role? || current_user.editor_role? %>
                 <li><%= link_to 'Review recent Bibliographies', bibliographies_path %></li>
-                <li><%= link_to 'Add new Subject', new_subject_path %></li>
-                <li><%= link_to 'Review recent Subjects', subjects_path %></li>
                 <% end %>
                 <% if current_user.admin_role? %>
                 <li><%= link_to 'Update User accounts', rails_admin_path %></li>
