@@ -8,6 +8,27 @@
         <label>Reference Type</label>
         <div class="field-value"><%= @bib.reference_type %></div>
 
+        <label>Author</label>
+        <ul>
+        <% @bib.authors.each do |author| %>
+            <li><%= author.display_name %></li>
+        <% end %>
+        </ul>
+
+        <label>Editor</label>
+        <ul>
+        <% @bib.editors.each do |editor| %>
+            <li><%= editor.display_name %></li>
+        <% end %>
+        </ul>
+
+        <label>Author of Review</label>
+        <ul>
+        <% @bib.author_of_reviews.each do |aor| %>
+            <li><%= aor.display_name %></li>
+        <% end %>
+        </ul>
+
         <label>Year Published</label>
         <div class="field-value"><%= @bib.year_published %></div>
 
@@ -29,11 +50,21 @@
         <label>Number of Volumes</label>
         <div class="field-value"><%= @bib.number_of_volumes %></div>
 
+        <label>Volumes Number</label>
+        <div class="field-value"><%= @bib.volume_number %></div>
+
         <label>Pages</label>
         <div class="field-value"><%= @bib.pages %></div>
 
         <label>Section</label>
         <div class="field-value"><%= @bib.section %></div>
+
+        <label>Reviewed Author</label>
+        <ul>
+        <% @bib.reviewed_authors.each do |ra| %>
+            <li><%= ra.display_name %></li>
+        <% end %>
+        </ul>
 
         <label>Tertiary Title</label>
         <div class="field-value"><%= @bib.title_tertiary %></div>
@@ -46,12 +77,45 @@
 
         <label>Type of Work</label>
         <div class="field-value"><%= @bib.type_of_work %></div>
+
+        <label>Translator</label>
+        <ul>
+        <% @bib.translators.each do |translator| %>
+            <li><%= translator.display_name %></li>
+        <% end %>
+        </ul>
+
+        <label>Performer</label>
+        <ul>
+        <% @bib.performers.each do |performer| %>
+            <li><%= performer.display_name %></li>
+        <% end %>
+        </ul>
         
         <label>Reprint Edition</label>
         <div class="field-value"><%= @bib.reprint_edition %></div>
 
+        <label>Worldcat URL</label>
+        <div class="field-value"><%= @bib.worldcat_url %></div>
+
+        <label>Secondary URL</label>
+        <div class="field-value"><%= @bib.secondary_url %></div>
+
+        <label>Leuven URL</label>
+        <div class="field-value"><%= @bib.leuven_url %></div>
+
+        <label>Multimedia Dimensions</label>
+        <div class="field-value"><%= @bib.multimedia_dimensions %></div>
+
         <label>Abstract</label>
         <div class="field-value"><%= @bib.abstract %></div>
+
+        <label>Translated Author</label>
+        <ul>
+        <% @bib.translated_authors.each do |ta| %>
+            <li><%= ta.display_name %></li>
+        <% end %>
+        </ul>
 
         <label>Title Translated</label>
         <div class="field-value"><%= @bib.title_translated %></div>
@@ -60,19 +124,25 @@
         <div class="field-value"><%= @bib.language %></div>
 
         <label>ISBN</label>
-        <div class="field-value">
-            <%= @bib.isbn %>
-        </div>
+        <ul>
+        <% @bib.isbns.each do |isbn| %>
+            <li><%= isbn.value %></li>
+        <% end %>
+        </ul>
 
         <label>ISSN</label>
-        <div class="field-value">
-            <%= @bib.issn %>
-        </div>
+        <ul>
+        <% @bib.issns.each do |issn| %>
+            <li><%= issn.value %></li>
+        <% end %>
+        </ul>
 
         <label>DOI</label>
-        <div class="field-value">
-            <%= @bib.doi %>
-        </div>
+        <ul>
+        <% @bib.dois.each do |doi| %>
+            <li><%= doi.value %></li>
+        <% end %>
+        </ul>
         
         <label>Subjects</label>
         <ul>

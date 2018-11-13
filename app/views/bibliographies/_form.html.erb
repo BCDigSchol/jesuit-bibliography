@@ -1,113 +1,57 @@
-<%= simple_form_for @bib do |form| %>
+<div id="select_form" class="dropdown">
+    <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_text">Select a document type</span> <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#" data="book_form">Book</a></li>
+      <li><a href="#" data="book_chapter_form">Book chapter</a></li>
+      <li><a href="#" data="book_review_form">Book review</a></li>
+      <li><a href="#" data="journal_article_form">Journal article</a></li>
+      <li><a href="#" data="dissertation_form">Dissertation</a></li>
+      <li><a href="#" data="conference_paper_form">Conference paper</a></li>
+      <li><a href="#" data="multimedia_form">Multimedia</a></li>
+    </ul>
+</div>
 
-  <% if @bib.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@bib.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @bib.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div id="bib_form_container"></div>
 
-  <%= form.input :reference_type, priority: [ "book" ], collection: ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper','multimedia'], input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-  
-  <%= form.input :year_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+<script>
+  $(document).ready(function() {
+    // get bib ID
+    var bib_id = "<%= @bib.id %>";
+    if (bib_id === "") {
+      bib_id = "new";
+    }
 
-  <%= form.input :title, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    function get_partial(bib_id, bib_type) {
+      $.ajax({ url: '/form_partial/' + bib_id + '/' + bib_type});
+    }
 
-  <%= form.input :title_secondary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    // check if this record has a reference type
+    // and display the proper form partial
+    var bib_name = "<%= @reference_type %>";
+    if (bib_name && bib_name.length) {
+      // remove dropdown
+      $("#select_form").remove();
 
-  <%= form.input :place_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      // convert reference_type to bib_type format
+      // e.g. "Book review" => "book_review_form"
+      var bib_type = bib_name.replace(/\s+/g, '_').toLowerCase() +  "_form";
 
-  <%= form.input :publisher, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      // fetch partial
+      get_partial(bib_id, bib_type)
+    }
 
-  <%= form.input :volume, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    // update partial on dropdown click
+    $('#select_form ul.dropdown-menu li > a').click(function(event){
+      event.preventDefault();
+      var $this = $(this);
+      var bib_type = $this.attr('data');
+      var bib_name = $this.text();
 
-  <%= form.input :number_of_volumes, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+      // fetch partial
+      get_partial(bib_id, bib_type);
 
-  <%= form.input :pages, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :section, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :title_tertiary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :type_of_work, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :reprint_edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :abstract, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :title_translated, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :language, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :isbn, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :issn, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <%= form.input :doi, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-
-  <h4>Subjects</h4>
-  <div id='bibliography_subjects'>
-    <%= form.simple_fields_for :bibliography_subjects do |subject| %>
-      <%= render 'bibliography_subject_fields', :form => subject %>
-    <% end %>
-  </div>
-  <div class='links'>
-    <%= link_to_add_association 'add subject', form, :bibliography_subjects, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_subjects', 'association-insertion-method' => 'append'} %>
-  </div>
-
-  <h4>Periods</h4>
-  <div id='bibliography_periods'>
-    <%= form.simple_fields_for :bibliography_periods do |period| %>
-      <%= render 'bibliography_period_fields', :form => period %>
-    <% end %>
-  </div>
-  <div class='links'>
-    <%= link_to_add_association 'add period', form, :bibliography_periods, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_periods', 'association-insertion-method' => 'append'} %>
-  </div>
-
-  <h4>Locations</h4>
-  <div id='bibliography_locations'>
-    <%= form.simple_fields_for :bibliography_locations do |location| %>
-      <%= render 'bibliography_location_fields', :form => location %>
-    <% end %>
-  </div>
-  <div class='links'>
-    <%= link_to_add_association 'add location', form, :bibliography_locations, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_locations', 'association-insertion-method' => 'append'} %>
-  </div>
-
-  <h4>Entities</h4>
-  <div id='bibliography_entities'>
-    <%= form.simple_fields_for :bibliography_entities do |entity| %>
-      <%= render 'bibliography_entity_fields', :form => entity %>
-    <% end %>
-  </div>
-  <div class='links'>
-    <%= link_to_add_association 'add entity', form, :bibliography_entities, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_entities', 'association-insertion-method' => 'append'} %>
-  </div>
-
-  <h4>Comments</h4>
-  <div id="bibliography_comments">
-    <ol id="bibliography_comments_ol">
-    <%= form.simple_fields_for :comments do |comment| %>
-      <%= render 'comment_fields', :form => comment %></li>
-    <% end %>
-    </ol>
-  </div>
-  <div class='links'>
-    <%= link_to_add_association 'add comment', form, :comments, class: 'row', form_name: 'form', data: {'association-insertion-node' => '#bibliography_comments_ol', 'association-insertion-method' => 'append'} %>
-  </div>
-
-  <br/>
-  <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
-<% end %>
+      // update dropdown text
+      $("#select_form .button_text").html("Selected: <strong>" + bib_name + "</strong>");
+    });
+  });
+ </script>

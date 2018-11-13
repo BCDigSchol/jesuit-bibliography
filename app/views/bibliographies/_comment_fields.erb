@@ -1,9 +1,22 @@
 <li class="bibliography-subject-fields nested-fields">
     
-    <%= form.input :body, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-    <%= form.input :comment_type, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
-    <%= form.input :commenter, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' }, disabled: true %>
-    <%= form.input :make_public, input_html: { class: '' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :body,
+        label: 'Comment text' 
+    %>
+    <%= form.input :comment_type, 
+        collection: ['Note', 'Research note', 'Note to editor'], 
+        selected: 'Note'
+    %>
+    <%= form.input :commenter, 
+        label: 'Commenter',
+        as: :string, 
+        disabled: true 
+    %>
+    <%= form.input :make_public %>
     
-    <%= link_to_remove_association "x", form, {:class => 'remove-link'}, form_name: 'form' %>
+    <%= link_to_remove_association "x", 
+        form, 
+        class: 'remove-link', 
+        form_name: 'form' 
+    %>
 </li>

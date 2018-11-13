@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_020000) do
+ActiveRecord::Schema.define(version: 2018_11_12_000913) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -36,6 +36,11 @@ ActiveRecord::Schema.define(version: 2018_11_09_020000) do
     t.string "isbn"
     t.string "issn"
     t.string "doi"
+    t.text "volume_number"
+    t.text "worldcat_url"
+    t.text "secondary_url"
+    t.text "leuven_url"
+    t.text "multimedia_dimensions"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
@@ -86,6 +91,30 @@ ActiveRecord::Schema.define(version: 2018_11_09_020000) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
+  create_table "citations", force: :cascade do |t|
+    t.text "display_name"
+    t.text "surname"
+    t.text "middlename"
+    t.text "forename"
+    t.text "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "author_id"
+    t.integer "editor_id"
+    t.integer "author_of_review_id"
+    t.integer "reviewed_author_id"
+    t.integer "translator_id"
+    t.integer "performer_id"
+    t.integer "translated_author_id"
+    t.index ["author_id"], name: "index_citations_on_author_id"
+    t.index ["author_of_review_id"], name: "index_citations_on_author_of_review_id"
+    t.index ["editor_id"], name: "index_citations_on_editor_id"
+    t.index ["performer_id"], name: "index_citations_on_performer_id"
+    t.index ["reviewed_author_id"], name: "index_citations_on_reviewed_author_id"
+    t.index ["translated_author_id"], name: "index_citations_on_translated_author_id"
+    t.index ["translator_id"], name: "index_citations_on_translator_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "commenter"
     t.text "body"
@@ -128,6 +157,18 @@ ActiveRecord::Schema.define(version: 2018_11_09_020000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "standard_identifiers", force: :cascade do |t|
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "isbn_id"
+    t.integer "issn_id"
+    t.integer "doi_id"
+    t.index ["doi_id"], name: "index_standard_identifiers_on_doi_id"
+    t.index ["isbn_id"], name: "index_standard_identifiers_on_isbn_id"
+    t.index ["issn_id"], name: "index_standard_identifiers_on_issn_id"
   end
 
   create_table "subjects", force: :cascade do |t|
