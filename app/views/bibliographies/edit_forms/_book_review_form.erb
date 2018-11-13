@@ -26,9 +26,7 @@
         <%= form.simple_fields_for :author_of_reviews do |c| %>
             <%= c.input :display_name, 
                 label: 'Author of review',
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -49,52 +47,39 @@
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :title, 
         label: 'Title', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
-    <%= form.input :title_secondary, 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+    <%= form.input :title_secondary,
+        label: 'Title secondary', 
+        as: :string
     %>
 
     <%= form.input :volume, 
         label: 'Volume',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :number_of_volumes, 
         label: 'Number of Volumes',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :pages, 
         label: 'Pages',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string 
     %>
 
     <div id='bibliography_reviewed_author'>
         <%= form.simple_fields_for :reviewed_authors do |c| %>
             <%= c.input :display_name, 
                 label: 'Reviewed author',
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -115,23 +100,17 @@
 
     <%= form.input :title_tertiary, 
         label: 'Title teriary',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :edition, 
         label: 'Edition',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :date,
         label: 'Date', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <h4>ISSN</h4>
@@ -139,9 +118,7 @@
         <%= form.simple_fields_for :issns do |c| %>
             <%= c.input :value, 
                 label: 'ISSN', 
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -164,9 +141,7 @@
         <%= form.simple_fields_for :dois do |c| %>
             <%= c.input :value, 
                 label: 'DOI', 
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -187,23 +162,17 @@
 
     <%= form.input :worldcat_url, 
         label: 'Worldcat URL',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :secondary_url, 
         label: 'Publisher URL',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :leuven_url, 
         label: 'Leuven URL',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <h4>Subjects</h4>
@@ -283,18 +252,14 @@
     </div>
 
     <%= form.input :abstract, 
-        label: 'Abstract',
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        label: 'Abstract'
     %>
 
     <div id='bibliography_translated_author'>
         <%= form.simple_fields_for :translated_authors do |c| %>
             <%= c.input :display_name, 
                 label: 'Translated author',
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -315,16 +280,12 @@
 
     <%= form.input :title_translated, 
         label: 'Title translated',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :language, 
         label: 'Language',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string 
     %>
 
     <h4>Comments</h4>

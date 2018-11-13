@@ -26,9 +26,7 @@
         <%= form.simple_fields_for :authors do |c| %>
             <%= c.input :display_name, 
                 label: 'Author',
-                as: :string, 
-                input_html: { class: 'form-control' }, 
-                wrapper_html: { class: 'form-group' } 
+                as: :string
             %>
         <% end %>
     </div>
@@ -49,64 +47,47 @@
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :title, 
         label: 'Title', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :title_secondary, 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        label: 'Title secondary', 
+        as: :string
     %>
 
     <%= form.input :place_published, 
         label: 'Place published', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
     
     <%= form.input :publisher, 
         label: 'Publisher',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :volume_number, 
         label: 'Volume number',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :pages, 
         label: 'Pages',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :title_tertiary, 
         label: 'Title tertiary',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :secondary_url, 
         label: 'Publisher URL',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <h4>Subjects</h4>
@@ -186,16 +167,12 @@
     </div>
 
     <%= form.input :abstract, 
-        label: 'Abstract',
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        label: 'Abstract'
     %>
 
     <%= form.input :language, 
         label: 'Language',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <h4>Comments</h4>
