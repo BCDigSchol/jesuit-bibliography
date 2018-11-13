@@ -17,100 +17,250 @@
         </div>
     <% end %>
 
-    <%= form.input :reference_type, :as => :hidden, :input_html => { :value => "Book Review" }  %>
+    <%= form.input :reference_type, 
+        :as => :hidden, 
+        :input_html => { :value => "Book Review" } 
+    %>
 
-    <h4>Author of Review</h4>
     <div id='bibliography_author_of_review'>
         <%= form.simple_fields_for :author_of_reviews do |c| %>
-        <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+            <%= c.input :display_name, 
+                label: 'Author of review',
+                as: :string, 
+                input_html: { class: 'form-control' }, 
+                wrapper_html: { class: 'form-group' } 
+            %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Author of Review', form, :author_of_reviews, association: 'author_of_reviews', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_author_of_review', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+        <%= link_to_add_association 'Add Author of Review', 
+            form, 
+            :author_of_reviews, 
+            association: 'author_of_reviews', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_author_of_review', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_citation_fields' 
+        %>
     </div>
     
-    <%= form.input :year_published, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :year_published, 
+        label: 'Year', 
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :title, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :title, 
+        label: 'Title', 
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :title_secondary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :title_secondary, 
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :volume, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :volume, 
+        label: 'Volume',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :volume_number, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :number_of_volumes, 
+        label: 'Number of Volumes',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :pages, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :pages, 
+        label: 'Pages',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <h4>Reviewed Author</h4>
     <div id='bibliography_reviewed_author'>
         <%= form.simple_fields_for :reviewed_authors do |c| %>
-        <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+            <%= c.input :display_name, 
+                label: 'Reviewed author',
+                as: :string, 
+                input_html: { class: 'form-control' }, 
+                wrapper_html: { class: 'form-group' } 
+            %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Reviewed Authors', form, :reviewed_authors, association: 'reviewed_authors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_reviewed_author', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+        <%= link_to_add_association 'Add Reviewed Authors', 
+            form, 
+            :reviewed_authors, 
+            association: 'reviewed_authors', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_reviewed_author', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_citation_fields' 
+        %>
     </div>
 
-    <%= form.input :title_tertiary, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :title_tertiary, 
+        label: 'Title teriary',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :edition, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :edition, 
+        label: 'Edition',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :date,
+        label: 'Date', 
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
     <h4>ISSN</h4>
     <div id='bibliography_issn'>
         <%= form.simple_fields_for :issns do |c| %>
-        <%= c.input :value, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+            <%= c.input :value, 
+                label: 'ISSN', 
+                as: :string, 
+                input_html: { class: 'form-control' }, 
+                wrapper_html: { class: 'form-group' } 
+            %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add ISSN', form, :issns, association: 'issns', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_issn', 'association-insertion-method' => 'append'}, partial: 'bibliography_standard_identifier_fields' %>
+        <%= link_to_add_association 'Add ISSN', 
+            form, 
+            :issns, 
+            association: 'issns', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_issn', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_standard_identifier_fields' 
+        %>
     </div>
 
-    <h4>DOI</h4>
     <div id='bibliography_doi'>
         <%= form.simple_fields_for :dois do |c| %>
-        <%= c.input :value, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+            <%= c.input :value, 
+                label: 'DOI', 
+                as: :string, 
+                input_html: { class: 'form-control' }, 
+                wrapper_html: { class: 'form-group' } 
+            %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add DOI', form, :dois, association: 'dois', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_doi', 'association-insertion-method' => 'append'}, partial: 'bibliography_standard_identifier_fields' %>
+        <%= link_to_add_association 'Add DOI', 
+            form, 
+            :dois, 
+            association: 'dois', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_doi', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_standard_identifier_fields' 
+        %>
     </div>
 
-    <%= form.input :worldcat_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :worldcat_url, 
+        label: 'Worldcat URL',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :secondary_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :secondary_url, 
+        label: 'Publisher URL',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :leuven_url, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :leuven_url, 
+        label: 'Leuven URL',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
     <h4>Subjects</h4>
     <div id='bibliography_subjects'>
         <%= form.simple_fields_for :bibliography_subjects do |subject| %>
-        <%= render 'bibliography_subject_fields', :form => subject %>
+            <%= render 'bibliography_subject_fields', :form => subject %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Subject', form, :bibliography_subjects, class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_subjects', 'association-insertion-method' => 'append'} %>
+        <%= link_to_add_association 'Add Subject', 
+            form, 
+            :bibliography_subjects, 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_subjects', 
+                'association-insertion-method' => 'append'
+            } 
+        %>
     </div>
 
     <h4>Periods</h4>
     <div id='bibliography_periods'>
         <%= form.simple_fields_for :bibliography_periods do |period| %>
-        <%= render 'bibliography_period_fields', :form => period %>
+            <%= render 'bibliography_period_fields', :form => period %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Period', form, :bibliography_periods, class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_periods', 'association-insertion-method' => 'append'} %>
+        <%= link_to_add_association 'Add Period', 
+            form, 
+            :bibliography_periods, 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_periods', 
+                'association-insertion-method' => 'append'
+            } 
+        %>
     </div>
 
     <h4>Locations</h4>
     <div id='bibliography_locations'>
         <%= form.simple_fields_for :bibliography_locations do |location| %>
-        <%= render 'bibliography_location_fields', :form => location %>
+            <%= render 'bibliography_location_fields', :form => location %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Location', form, :bibliography_locations, class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_locations', 'association-insertion-method' => 'append'} %>
+        <%= link_to_add_association 'Add Location', 
+            form, 
+            :bibliography_locations, 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_locations', 
+                'association-insertion-method' => 'append'
+            } 
+        %>
     </div>
 
     <h4>Entities</h4>
@@ -120,35 +270,82 @@
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Entity', form, :bibliography_entities, class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_entities', 'association-insertion-method' => 'append'} %>
+        <%= link_to_add_association 'Add Entity', 
+            form, 
+            :bibliography_entities, 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_entities', 
+                'association-insertion-method' => 'append'
+            } 
+        %>
     </div>
 
-    <%= form.input :abstract, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :abstract, 
+        label: 'Abstract',
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <h4>Translated Author</h4>
     <div id='bibliography_translated_author'>
         <%= form.simple_fields_for :translated_authors do |c| %>
-        <%= c.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+            <%= c.input :display_name, 
+                label: 'Translated author',
+                as: :string, 
+                input_html: { class: 'form-control' }, 
+                wrapper_html: { class: 'form-group' } 
+            %>
         <% end %>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Translated Author', form, :translated_authors, association: 'translated_authors', class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_translated_author', 'association-insertion-method' => 'append'}, partial: 'bibliography_citation_fields' %>
+        <%= link_to_add_association 'Add Translated Author', 
+            form, 
+            :translated_authors, 
+            association: 'translated_authors', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_translated_author', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_citation_fields' 
+        %>
     </div>
 
-    <%= form.input :title_translated, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :title_translated, 
+        label: 'Title translated',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
-    <%= form.input :language, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+    <%= form.input :language, 
+        label: 'Language',
+        as: :string, 
+        input_html: { class: 'form-control' }, 
+        wrapper_html: { class: 'form-group' } 
+    %>
 
     <h4>Comments</h4>
     <div id="bibliography_comments">
         <ol id="bibliography_comments_ol">
         <%= form.simple_fields_for :comments do |comment| %>
-        <%= render 'comment_fields', :form => comment %></li>
+            <%= render 'comment_fields', :form => comment %></li>
         <% end %>
         </ol>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Comment', form, :comments, class: 'btn btn-warning', form_name: 'form', data: {'association-insertion-node' => '#book_review_form #bibliography_comments_ol', 'association-insertion-method' => 'append'} %>
+        <%= link_to_add_association 'Add Comment', 
+            form, 
+            :comments, 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_comments_ol', 
+                'association-insertion-method' => 'append'
+            } 
+        %>
     </div>
 
     <br/>
