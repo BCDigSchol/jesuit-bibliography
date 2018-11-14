@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_185541) do
+ActiveRecord::Schema.define(version: 2018_11_14_190842) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 2018_11_14_185541) do
     t.text "multimedia_series"
     t.text "multimedia_type"
     t.text "multimedia_url"
+    t.text "event_title"
+    t.text "event_location"
+    t.text "event_institution"
+    t.text "event_date"
+    t.text "event_panel_title"
+    t.text "event_url"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
