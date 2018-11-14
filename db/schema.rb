@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_000913) do
+ActiveRecord::Schema.define(version: 2018_11_14_185541) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2018_11_12_000913) do
     t.text "secondary_url"
     t.text "leuven_url"
     t.text "multimedia_dimensions"
+    t.text "multimedia_series"
+    t.text "multimedia_type"
+    t.text "multimedia_url"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

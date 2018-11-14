@@ -61,7 +61,8 @@
         wrapper_html: { class: 'form-group' } 
     %>
 
-    <%= form.input :title_secondary, 
+    <%= form.input :multimedia_series, 
+        label: 'Series', 
         as: :string, 
         input_html: { class: 'form-control' }, 
         wrapper_html: { class: 'form-group' } 
@@ -81,8 +82,8 @@
         wrapper_html: { class: 'form-group' } 
     %>
 
-    <%= form.input :type_of_work, 
-        label: 'Type of work',
+    <%= form.input :multimedia_type, 
+        label: 'Type of media',
         as: :string, 
         input_html: { class: 'form-control' }, 
         wrapper_html: { class: 'form-group' } 
@@ -131,8 +132,8 @@
         wrapper_html: { class: 'form-group' } 
     %>
 
-    <%= form.input :secondary_url, 
-        label: 'Publisher URL',
+    <%= form.input :multimedia_url, 
+        label: 'Multimedia URL',
         as: :string, 
         input_html: { class: 'form-control' }, 
         wrapper_html: { class: 'form-group' } 
