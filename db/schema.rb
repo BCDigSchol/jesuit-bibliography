@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(version: 2018_11_12_000913) do
     t.text "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "isbn"
-    t.string "issn"
-    t.string "doi"
     t.text "volume_number"
     t.text "worldcat_url"
     t.text "secondary_url"

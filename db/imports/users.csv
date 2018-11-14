@@ -1,0 +1,5 @@
+email,password,admin_role,editor_role,collaborator_role
+admin@test.com,password,true,,
+editor@test.com',password,,true,
+collaborator@test.com,password,,,true
+user@test.com,password,,,
