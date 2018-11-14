@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_190842) do
+ActiveRecord::Schema.define(version: 2018_11_14_193127) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -47,6 +47,10 @@ ActiveRecord::Schema.define(version: 2018_11_14_190842) do
     t.text "event_date"
     t.text "event_panel_title"
     t.text "event_url"
+    t.text "dissertation_university"
+    t.text "dissertation_thesis_type"
+    t.text "dissertation_university_url"
+    t.text "number_of_pages"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

@@ -63,6 +63,9 @@
         <label>Event Institution</label>
         <div class="field-value"><%= @bib.event_institution %></div>
 
+        <label>University</label>
+        <div class="field-value"><%= @bib.dissertation_university %></div>
+
         <label>Volume</label>
         <div class="field-value"><%= @bib.volume %></div>
 
@@ -77,6 +80,9 @@
 
         <label>Pages</label>
         <div class="field-value"><%= @bib.pages %></div>
+
+        <label>Number of pages</label>
+        <div class="field-value"><%= @bib.number_of_pages %></div>
 
         <label>Section</label>
         <div class="field-value"><%= @bib.section %></div>
@@ -106,6 +112,9 @@
         <label>Multimedia Type</label>
         <div class="field-value"><%= @bib.multimedia_type %></div>
 
+        <label>Thesis type</label>
+        <div class="field-value"><%= @bib.dissertation_thesis_type %></div>
+
         <label>Translator</label>
         <ul>
         <% @bib.translators.each do |translator| %>
@@ -134,6 +143,9 @@
 
         <label>Event URL</label>
         <div class="field-value"><%= @bib.event_url %></div>
+
+        <label>University URL</label>
+        <div class="field-value"><%= @bib.dissertation_university_url %></div>
 
         <label>Leuven URL</label>
         <div class="field-value"><%= @bib.leuven_url %></div>

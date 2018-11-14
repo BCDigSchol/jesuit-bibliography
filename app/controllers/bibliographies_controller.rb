@@ -151,8 +151,9 @@ class BibliographiesController < ApplicationController
 
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
-                :volume, :number_of_volumes, :volume_number, :pages, :section, :title_tertiary, :edition, :date, :type_of_work,
+                :volume, :number_of_volumes, :volume_number, :pages, :number_of_pages, :section, :title_tertiary, :edition, :date, :type_of_work,
                 :reprint_edition, :worldcat_url, :secondary_url, :leuven_url, :multimedia_dimensions, :abstract, :title_translated, :language,
+                :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
                 :multimedia_series, :multimedia_type, :multimedia_url,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
