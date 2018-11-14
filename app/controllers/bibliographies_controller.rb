@@ -153,6 +153,7 @@ class BibliographiesController < ApplicationController
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :volume_number, :pages, :number_of_pages, :section, :title_tertiary, :edition, :date, :type_of_work,
                 :reprint_edition, :worldcat_url, :secondary_url, :leuven_url, :multimedia_dimensions, :abstract, :title_translated, :language,
+                :journal_title, :issue, :page_range, :epub_date,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
                 :multimedia_series, :multimedia_type, :multimedia_url,
