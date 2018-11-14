@@ -22,6 +22,13 @@
         <% end %>
         </ul>
 
+        <label>Book Editor</label>
+        <ul>
+        <% @bib.book_editors.each do |beditor| %>
+            <li><%= beditor.display_name %></li>
+        <% end %>
+        </ul>
+
         <label>Author of Review</label>
         <ul>
         <% @bib.author_of_reviews.each do |aor| %>

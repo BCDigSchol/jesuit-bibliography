@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_000913) do
     t.datetime "updated_at", null: false
     t.integer "author_id"
     t.integer "editor_id"
+    t.integer "book_editor_id"
     t.integer "author_of_review_id"
     t.integer "reviewed_author_id"
     t.integer "translator_id"
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_000913) do
     t.integer "translated_author_id"
     t.index ["author_id"], name: "index_citations_on_author_id"
     t.index ["author_of_review_id"], name: "index_citations_on_author_of_review_id"
+    t.index ["book_editor_id"], name: "index_citations_on_book_editor_id"
     t.index ["editor_id"], name: "index_citations_on_editor_id"
     t.index ["performer_id"], name: "index_citations_on_performer_id"
     t.index ["reviewed_author_id"], name: "index_citations_on_reviewed_author_id"

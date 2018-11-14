@@ -23,6 +23,7 @@ class BibliographiesController < ApplicationController
         @bib.dois.build
         @bib.authors.build
         @bib.editors.build
+        @bib.book_editors.build
         @bib.author_of_reviews.build
         @bib.reviewed_authors.build
         @bib.translators.build
@@ -39,6 +40,7 @@ class BibliographiesController < ApplicationController
         @bib.dois.build
         @bib.authors.build
         @bib.editors.build
+        @bib.book_editors.build
         @bib.author_of_reviews.build
         @bib.reviewed_authors.build
         @bib.translators.build
@@ -161,6 +163,7 @@ class BibliographiesController < ApplicationController
                 dois_attributes: [:id, :value, :_destroy],
                 authors_attributes: [:id, :display_name, :_destroy],
                 editors_attributes: [:id, :display_name, :_destroy],
+                book_editors_attributes: [:id, :display_name, :_destroy],
                 author_of_reviews_attributes: [:id, :display_name, :_destroy],
                 reviewed_authors_attributes: [:id, :display_name, :_destroy],
                 translators_attributes: [:id, :display_name, :_destroy],

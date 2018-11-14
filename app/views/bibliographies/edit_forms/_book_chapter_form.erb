@@ -78,6 +78,29 @@
         %>
     </div>
 
+    <div id='bibliography_book_editor'>
+        <%= form.simple_fields_for :book_editors do |c| %>
+            <%= c.input :display_name, 
+                label: 'Book editor',
+                as: :string 
+            %>
+        <% end %>
+    </div>
+    <div class='links'>
+        <%= link_to_add_association 'Add Book editor', 
+            form, 
+            :authors, 
+            association: 'book_editors', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_book_editor', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'bibliography_citation_fields' 
+        %>
+    </div>
+
     <%= form.input :title_secondary, 
         label: 'Title secondary', 
         as: :string 

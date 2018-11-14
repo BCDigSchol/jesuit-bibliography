@@ -3,6 +3,7 @@ class AddCitationsToBibliographies < ActiveRecord::Migration[5.2]
     change_table :citations do |t|
       t.references :author
       t.references :editor
+      t.references :book_editor
       t.references :author_of_review
       t.references :reviewed_author
       t.references :translator

@@ -25,6 +25,7 @@ class Bibliography < ApplicationRecord
     # relationship using class_name and foreign_key atributes
     has_many :authors, class_name: 'Citation', foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
     has_many :editors, class_name: 'Citation', foreign_key: 'editor_id', inverse_of: 'editor', dependent: :destroy
+    has_many :book_editors, class_name: 'Citation', foreign_key: 'book_editor_id', inverse_of: 'book_editor', dependent: :destroy
     has_many :author_of_reviews, class_name: 'Citation', foreign_key: 'author_of_review_id', inverse_of: 'author_of_review', dependent: :destroy
     has_many :reviewed_authors, class_name: 'Citation', foreign_key: 'reviewed_author_id', inverse_of: 'reviewed_author', dependent: :destroy
     has_many :translators, class_name: 'Citation', foreign_key: 'translator_id',  inverse_of: 'translator', dependent: :destroy
@@ -41,6 +42,7 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :dois, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :authors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :editors, reject_if: :citations_rejectable?, allow_destroy: true
+    accepts_nested_attributes_for :book_editors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :author_of_reviews, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :reviewed_authors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :translators, reject_if: :citations_rejectable?, allow_destroy: true
