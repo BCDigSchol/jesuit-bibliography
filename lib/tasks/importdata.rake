@@ -1,14 +1,14 @@
 require 'csv'
 
+def import_logger
+    @import_logger ||= Logger.new("#{Rails.root}/log/import_books.log")
+end
+
 namespace :importdata do
-    #desc "Run all importdata tasks"
-    #task :all => [:users, :periods, :locations, :subjects, :entities]
 
-    desc "Import test books"
-    task books: :environment do
-        puts "Starting Books import..."
-
-        puts "First, remove all previous records\n\n"
+    desc "Destroy all Bibliography records"
+    task destroy_all_bibs: :environment do
+        import_logger.info("Destroying all previous Bibliography records")
         Bibliography.destroy_all
         StandardIdentifier.destroy_all
         Comment.destroy_all
@@ -17,6 +17,16 @@ namespace :importdata do
         Subject.destroy_all
         Entity.destroy_all
         Citation.destroy_all
+    end
+
+    desc "Import test books"
+    task books: :environment do
+
+        puts "Starting Books import"
+        import_logger.info("Starting Books import")
+
+        # invoke destroy_all_bibs task to remove existing Bibliography records
+        Rake::Task["importdata:destroy_all_bibs"].invoke
 
         item_count = 0
         start = Time.now
@@ -70,104 +80,116 @@ namespace :importdata do
 
             @bib.save!
 
-            puts "Saved bib with ID# #{@bib.id}"
-
+            import_logger.info("Saved bib with ID# #{@bib.id}")
+            import_logger.info("  title: #{@bib.title}")
+            import_logger.info("  year: #{@bib.year_published}")
+            
+            # Authors
             if row[1]
                 values = row[1].split("|")
                 values.each do |v|
-                    puts "\tadding Author: #{v}"
+                    import_logger.info("  adding Author: #{v}")
                     @bib.authors << Citation.new(display_name: v)
                 end
-                
             end
 
+            # Editors
             if row[9]
                 values = row[9].split("|")
                 values.each do |v|
-                    puts "\tadding Editor: #{v}"
+                    import_logger.info("  adding Editor: #{v}")
                     @bib.editors << Citation.new(display_name: v)
                 end
             end
 
+            # Translators
             if row[11]
                 values = row[11].split("|")
                 values.each do |v|
-                    puts "\tadding Translator: #{v}"
+                    import_logger.info("  adding Translator: #{v}")
                     @bib.translators << Citation.new(display_name: v)
                 end
             end
 
+            # ISBNs
             if row[12]
                 values = row[12].split("|")
                 values.each do |v|
-                    puts "\tadding ISBN: #{v}"
+                    import_logger.info("  adding ISBN: #{v}")
                     @bib.isbns << StandardIdentifier.new(value: v)
                 end
             end
 
+            # DOIs
             if row[13]
                 values = row[13].split("|")
                 values.each do |v|
-                    puts "\tadding DOI: #{v}"
+                    import_logger.info("  adding DOI: #{v}")
                     @bib.dois << StandardIdentifier.new(value: v)
                 end
             end
 
+            # Periods
             if row[18]
                 values = row[18].split("|")
                 values.each do |v|
-                    puts "\tadding Period term: #{v}"
+                    import_logger.info("  adding Period: #{v}")
                     @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
                 end
             end
 
+            # Subjects
             if row[19]
                 values = row[19].split("|")
                 values.each do |v|
-                    puts "\tadding Subject term: #{v}"
+                    import_logger.info("  adding Subject: #{v}")
                     @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
                 end
             end
 
+            # Locations
             if row[20]
                 values = row[20].split("|")
                 values.each do |v|
-                    puts "\tadding Location term: #{v}"
+                    import_logger.info("  adding Location: #{v}")
                     @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
                 end
             end
 
+            # Entities
             if row[21]
                 values = row[21].split("|")
                 values.each do |v|
-                    puts "\tadding Entity term: #{v}"
+                    import_logger.info("  adding Entity: #{v}")
                     @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
                 end
             end
 
+            # Notes -- Note
             if row[23]
-                puts "\tadding Note: #{row[23]}"
+                import_logger.info("  adding Note: #{row[23]}")
                 @bib.comments << Comment.new(body: row[23], comment_type: 'Note', commenter: 'importer', make_public: false)
             end
 
+            # Notes -- Note to editor
             if row[24]
-                puts "\tadding Note to editor: #{row[24]}"
+                import_logger.info("  adding Note: #{row[24]}")
                 @bib.comments << Comment.new(body: row[24], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
             end
 
+            # Translated Authors
             if row[25]
                 values = row[25].split("|")
                 values.each do |v|
-                    puts "\tadding Translated author: #{v}"
+                    import_logger.info("  adding Translated author: #{v}")
                     @bib.translated_authors << Citation.new(display_name: v)
                 end
             end
-
-            puts
-
         end
+
         finish = Time.now
         diff = finish - start
         puts "Created #{item_count} Books records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} Books records in #{diff} seconds")
     end
 end
