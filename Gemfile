@@ -53,6 +53,7 @@ group :development do
   gem 'capistrano-passenger', '~> 0.2.0'
   gem 'capistrano-rvm'
   gem 'capistrano-rbenv', '~> 2.1'
+  gem 'sunspot_solr'
 end
 
 group :test do
@@ -89,3 +90,5 @@ gem 'nested_form_fields'
 gem 'cocoon'
 gem 'cancancan'
 gem 'csv'
+gem 'sunspot_rails'
+gem 'progress_bar'
