@@ -29,13 +29,13 @@ class CatalogController < ApplicationController
     ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SearchHelper#solr_doc_params) or
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
-    #config.default_document_solr_params = {
-    #  qt: 'document',
-    #  ## These are hard-coded in the blacklight 'document' requestHandler
-    #  # fl: '*',
-    #  # rows: 1,
-    #  # q: '{!term f=id v=$id}'
-    #}
+    config.default_document_solr_params = {
+      qt: 'document',
+      ## These are hard-coded in the blacklight 'document' requestHandler
+      # fl: '*',
+      # rows: 1,
+      q: '{!term f=id_i v=$id}'
+    }
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_text'
@@ -43,9 +43,9 @@ class CatalogController < ApplicationController
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
-    #config.show.title_field = 'title_display'
-    #config.show.display_type_field = 'format'
-    #config.show.thumbnail_field = 'thumbnail_path_ss'
+    config.show.title_field = 'title_text'
+    config.show.display_type_field = 'reference_type_text'
+    config.show.thumbnail_field = 'thumbnail_path_ss'
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -159,15 +159,61 @@ class CatalogController < ApplicationController
     #config.add_show_field 'published_display', label: 'Published'
     #config.add_show_field 'published_vern_display', label: 'Published'
     #config.add_show_field 'lc_callnum_display', label: 'Call number'
-    config.add_show_field 'title_text', label: 'Title'
+    #config.add_show_field 'title_text', label: 'Title'
     config.add_show_field 'year_published_text', label: 'Year Published'
     config.add_show_field 'reference_type_text', label: 'Format'
     config.add_show_field 'place_published_text', label: 'Place published'
     config.add_show_field 'language_text', label: 'Language'
     config.add_show_field 'authors_text', label: 'Authors'
+    config.add_show_field 'editors_text', label: 'Editors'
+    config.add_show_field 'book_editors_text', label: 'Book Editors'
+    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews'
+    config.add_show_field 'reviewed_authors_text', label: 'Reviewed Authors'
+    config.add_show_field 'translators_text', label: 'Translators'
+    config.add_show_field 'translated_authors_text', label: 'Translated Authors'
+    
     config.add_show_field 'isbns_text', label: 'ISBN'
     config.add_show_field 'issns_text', label: 'ISSN'
     config.add_show_field 'dois_text', label: 'DOI'
+
+    config.add_show_field 'publisher_text', label: 'Publisher'
+    config.add_show_field 'volume_text', label: 'Volume'
+    config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
+    config.add_show_field 'pages_text', label: 'Pages'
+    config.add_show_field 'section_text', label: 'Section'
+    config.add_show_field 'edition_text', label: 'Edition'
+    config.add_show_field 'date_text', label: 'Date'
+    config.add_show_field 'type_of_work_text', label: 'Type of work'
+    config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
+    config.add_show_field 'abstract_text', label: 'Abstract'
+    config.add_show_field 'title_translated_text', label: 'Title Translated'
+    config.add_show_field 'volume_number_text', label: 'Volume n=Number'
+    config.add_show_field 'worldcat_url_text', label: 'Worldcat URL'
+    config.add_show_field 'secondary_url_text', label: 'Secondary URL'
+    config.add_show_field 'leuven_url_text', label: 'Leuven URL'
+    config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
+    config.add_show_field 'multimedia_series_text', label: 'Multimedia Series'
+    config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
+    config.add_show_field 'multimedia_url_text', label: 'Multimedia URL'
+    config.add_show_field 'event_title_text', label: 'Event Title'
+    config.add_show_field 'event_location_text', label: 'Event Location'
+    config.add_show_field 'event_institution_text', label: 'Event Institution'
+    config.add_show_field 'event_date_text', label: 'Event Date'
+    config.add_show_field 'event_panel_title_text', label: 'Event Panel Title'
+    config.add_show_field 'event_url_text', label: 'Event URL'
+    config.add_show_field 'dissertation_university_text', label: 'Dissertation University'
+    config.add_show_field 'dissertation_university_url_text', label: 'Dissertation University URL'
+    config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
+    config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
+    config.add_show_field 'journal_title_text', label: 'Journal Title'
+    config.add_show_field 'issue_text', label: 'Issue'
+    config.add_show_field 'page_range_text', label: 'Page Range'
+    config.add_show_field 'epub_date_text', label: 'Epub Date'
+    config.add_show_field 'reviewed_title_text', label: 'Reviewed Title'
+    config.add_show_field 'chapter_number_text', label: 'Chapter Number'
+    config.add_show_field 'book_title_text', label: 'Book Title'
+
+    config.add_show_field 'comments_text', label: 'Comments'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
