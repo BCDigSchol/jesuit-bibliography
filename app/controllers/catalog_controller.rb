@@ -2,7 +2,7 @@
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
-  include Blacklight::Marc::Catalog
+  #include Blacklight::Marc::Catalog
 
 
   configure_blacklight do |config|
@@ -38,9 +38,9 @@ class CatalogController < ApplicationController
     #}
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_display'
-    config.index.display_type_field = 'format'
-    #config.index.thumbnail_field = 'thumbnail_path_ss'
+    config.index.title_field = 'title_text'
+    config.index.display_type_field = 'reference_type_text'
+    config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
     #config.show.title_field = 'title_display'
@@ -80,10 +80,16 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
     config.add_facet_field 'reference_type_text', label: 'Format'
-    config.add_facet_field 'year_published_text', label: 'Publication Year', single: true
+    config.add_facet_field 'year_published_text', label: 'Publication Year'
+    config.add_facet_field 'place_published_text', label: 'Place Published'
+    config.add_facet_field 'language_text', label: 'Language'
+    config.add_facet_field 'subjects_text', label: 'Subjects'
+    config.add_facet_field 'periods_text', label: 'Periods'
+    config.add_facet_field 'locations_text', label: 'Locations'
+    config.add_facet_field 'entities_text', label: 'Entities'
     
 
-    #config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_facet']
+    config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
 
     #config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
     #   :years_5 => { label: 'within 5 Years', fq: "pub_date:[#{Time.zone.now.year - 5 } TO *]" },
@@ -91,11 +97,13 @@ class CatalogController < ApplicationController
     #   :years_25 => { label: 'within 25 Years', fq: "pub_date:[#{Time.zone.now.year - 25 } TO *]" }
     #}
 
-    #config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
-    #     :years_5 => { label: 'within 5 Years', fq: "year_published_text:[#{Time.zone.now.year - 5 } TO *]" },
-    #     :years_10 => { label: 'within 10 Years', fq: "year_published_text:[#{Time.zone.now.year - 10 } TO *]" },
-    #     :years_25 => { label: 'within 25 Years', fq: "year_published_text:[#{Time.zone.now.year - 25 } TO *]" }
-    #}
+    config.add_facet_field 'example_query_facet_field', label: 'Publication Year range', :query => {
+         :years_5 => { label: 'within 5 Years', fq: "year_published_text:[#{Time.zone.now.year - 5 } TO *]" },
+         :years_10 => { label: 'within 10 Years', fq: "year_published_text:[#{Time.zone.now.year - 10 } TO *]" },
+         :years_25 => { label: 'within 25 Years', fq: "year_published_text:[#{Time.zone.now.year - 25 } TO *]" },
+         :years_50 => { label: 'within 50 Years', fq: "year_published_text:[#{Time.zone.now.year - 50 } TO *]" },
+         :years_100 => { label: 'within 100 Years', fq: "year_published_text:[#{Time.zone.now.year - 100 } TO *]" },
+    }
 
 
     # Have BL send all facet field names to Solr, which has been the default
@@ -115,10 +123,19 @@ class CatalogController < ApplicationController
     #config.add_index_field 'published_vern_display', label: 'Published'
     #config.add_index_field 'lc_callnum_display', label: 'Call number'
 
-    config.add_index_field 'title_text', label: 'Title'
+    #config.add_index_field 'title_text', label: 'Title'
+    config.add_index_field 'id_i', label: 'Bib ID'
+    config.add_index_field 'authors_text', label: 'Author'
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
-    config.add_index_field 'authors_text', label: 'Author'
+    config.add_index_field 'place_published_text', label: 'Place published'
+    config.add_index_field 'language_text', label: 'Language'
+    config.add_index_field 'subjects_text', label: 'Subjects'
+    config.add_index_field 'periods_text', label: 'Periods'
+    config.add_index_field 'locations_text', label: 'Locations'
+    config.add_index_field 'entities_text', label: 'Entities'
+    
+
     #config.add_index_field 'author_display', label: 'Author'
     #config.add_index_field 'author_vern_display', label: 'Author'
     #config.add_index_field 'format', label: 'Format'
@@ -145,8 +162,12 @@ class CatalogController < ApplicationController
     config.add_show_field 'title_text', label: 'Title'
     config.add_show_field 'year_published_text', label: 'Year Published'
     config.add_show_field 'reference_type_text', label: 'Format'
+    config.add_show_field 'place_published_text', label: 'Place published'
+    config.add_show_field 'language_text', label: 'Language'
     config.add_show_field 'authors_text', label: 'Authors'
     config.add_show_field 'isbns_text', label: 'ISBN'
+    config.add_show_field 'issns_text', label: 'ISSN'
+    config.add_show_field 'dois_text', label: 'DOI'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
