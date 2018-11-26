@@ -9,15 +9,15 @@ class SolrDocument
   end
   
   field_semantics.merge!(    
-                         :title => "title_display",
-                         :author => "author_display",
-                         :language => "language_facet",
-                         :format => "format"
+                         :title => "title_text",
+                         :author => "authors_text",
+                         :language => "language_text",
+                         :format => "reference_type_text"
                          )
 
 
 
-  # self.unique_key = 'id'
+  self.unique_key = 'id_i'
 
   # Email uses the semantic field mappings below to generate the body of an email.
   SolrDocument.use_extension(Blacklight::Document::Email)
