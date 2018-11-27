@@ -55,6 +55,7 @@ class Bibliography < ApplicationRecord
     searchable do
         integer :id
         text :reference_type
+        text :reference_type_faceting, :as => 'reference_type_facet'
         text :title, :default_boost => 2
         string :title
         string :sort_title do  # for sorting by title, ignoring leading A/An/The
@@ -62,6 +63,7 @@ class Bibliography < ApplicationRecord
         end
         text :year_published
         text :place_published
+        text :place_published_faceting, :as => 'place_published_facet'
         text :publisher
         text :volume
         # be sure 'number_of_volumes_text' is defined as a 'text_general' field type in solr's managed-schema file
@@ -75,6 +77,7 @@ class Bibliography < ApplicationRecord
         text :abstract
         text :title_translated
         text :language
+        text :language_faceting, :as => 'language_facet'
         text :volume_number
         text :worldcat_url
         text :secondary_url
@@ -130,6 +133,7 @@ class Bibliography < ApplicationRecord
             comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
         end
         text :comments_json
+        
         text :isbns do     # for associations
             isbns.map { |isbn| isbn.value }
         end
@@ -142,15 +146,23 @@ class Bibliography < ApplicationRecord
         text :subjects do     # for associations
             subjects.map { |subject| subject.name }
         end
+        text :subjects_faceting, :as => 'subjects_facet'
+
         text :locations do     # for associations
             locations.map { |location| location.name }
         end
+        text :locations_faceting, :as => 'locations_facet'
+
         text :entities do     # for associations
             entities.map { |entity| entity.name }
         end
+        text :entities_faceting, :as => 'entities_facet'
+
         text :periods do     # for associations
             periods.map { |period| period.name }
         end
+        text :periods_faceting, :as => 'periods_facet'
+        
         time :created_at
         time :updated_at
     end
@@ -165,6 +177,34 @@ class Bibliography < ApplicationRecord
                 end
             end
             out.to_json
+        end
+
+        def reference_type_faceting
+            self.reference_type
+        end
+
+        def place_published_faceting
+            self.place_published
+        end
+
+        def language_faceting
+            self.language
+        end
+
+        def periods_faceting
+            self.periods.map { |period| period.name }
+        end
+
+        def subjects_faceting
+            self.subjects.map { |subject| subject.name }
+        end
+
+        def locations_faceting
+            self.locations.map { |location| location.name }
+        end
+
+        def entities_faceting
+            self.entities.map { |entity| entity.name }
         end
 
         def comments_rejectable?(comment)

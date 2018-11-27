@@ -56,8 +56,11 @@
 
     <!-- older-style solr dynamicField declarations required for sunspot -->
     <dynamicField name="*_str" type="string" docValues="true" indexed="false" stored="false" useDocValuesAsStored="false" multiValued="true"/>
+    <!-- same as *_ssim -->
     <dynamicField name="*_s" type="string" stored="true" indexed="true" multiValued="true"/>
+    <!-- same as *_isi -->
     <dynamicField name="*_i" type="int" stored="true" indexed="true" multiValued="false"/>
+    <!-- same as *_dti -->
     <dynamicField name="*_d" type="date" stored="false" indexed="true" multiValued="false"/>
 
 
@@ -235,6 +238,15 @@
     <!-- suggest and spelling -->
     <dynamicField name="*spell" type="textSpell" indexed="true" stored="false" multiValued="true" />
     <dynamicField name="*suggest" type="textSuggest" indexed="true" stored="false" multiValued="true" />
+
+    <!-- Jesuit Bibliography required dynamicFields for Blacklight -->
+    <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
+    <dynamicField name="attr_*" type="text_general" indexed="true" stored="true" multiValued="true"/>
+    <dynamicField name="random_*" type="random" />
+    <dynamicField name="*_display" type="string" indexed="false" stored="true" multiValued="true" />
+    <dynamicField name="*_facet" type="string" indexed="true" stored="false" multiValued="true" />
+    <dynamicField name="*_sort" type="alphaOnlySort" indexed="true" stored="false" multiValued="false" />
+    <dynamicField name="*_unstem_search" type="text_general" indexed="true" stored="false" multiValued="true" />
 
     <!-- you must define copyField source and dest fields explicity or schemaBrowser doesn't work -->
     <field name="all_text_timv" type="text" stored="false" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
@@ -455,6 +467,56 @@
       </analyzer>
     </fieldType>
 
+    <!-- This is an example of using the KeywordTokenizer along
+         With various TokenFilterFactories to produce a sortable field
+         that does not include some properties of the source text
+      -->
+    <fieldType name="alphaOnlySort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+      <analyzer>
+        <!-- KeywordTokenizer does no actual tokenizing, so the entire
+             input string is preserved as a single token
+          -->
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <!-- The LowerCase TokenFilter does what you expect, which can be
+             when you want your sorting to be case insensitive
+          -->
+        <filter class="solr.LowerCaseFilterFactory" />
+        <!-- The TrimFilter removes any leading or trailing whitespace -->
+        <filter class="solr.TrimFilterFactory" />
+        <!-- The PatternReplaceFilter gives you the flexibility to use
+             Java Regular expression to replace any sequence of characters
+             matching a pattern with an arbitrary replacement string,
+             which may include back references to portions of the original
+             string matched by the pattern.
+
+             See the Java Regular Expression documentation for more
+             information on pattern and replacement string syntax.
+
+             http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/package-summary.html
+          -->
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="([^a-z])" replacement="" replace="all"
+        />
+      </analyzer>
+    </fieldType>
+
+    <!-- The "RandomSortField" is not used to store or search any
+         data.  You can declare fields of this type it in your schema
+         to generate pseudo-random orderings of your docs for sorting
+         purposes.  The ordering is generated based on the field name
+         and the version of the index, As long as the index version
+         remains unchanged, and the same field name is reused,
+         the ordering of the docs will be consistent.
+         If you want different psuedo-random orderings of documents,
+         for the same version of the index, use a dynamicField and
+         change the name
+     -->
+    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+
+    <!-- since fields of this type are by default not stored or indexed,
+         any data added to them will be ignored outright.  -->
+    <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
+
     <!-- Jesuit Bibliography copyFields -->
     <copyField source="reference_type_text" dest="reference_type_text_str" maxChars="256"/>
     <copyField source="title_text" dest="title_text_str" maxChars="256"/>
@@ -480,6 +542,56 @@
     <copyField source="entities_text" dest="entities_text_str" maxChars="256"/>
     <copyField source="locations_text" dest="locations_text_str" maxChars="256"/>
     <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
+
+    <!-- these fields are also used for display, so they must be stored -->
+    <field name="reference_type_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="place_published_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="language_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="entities_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="subjects_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="periods_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="locations_facet" type="string" indexed="true" stored="true" multiValued="true" />
+
+    <!-- unstemmed fields -->
+    <copyField source="title_text" dest="title_unstem_search"/>
+    <copyField source="authors_text" dest="author_unstem_search"/>
+    <copyField source="reference_type_facet" dest="place_published_facet_unstem_search"/>
+    <copyField source="place_published_facet" dest="place_published_facet_unstem_search"/>
+    <copyField source="language_facet" dest="language_facet_unstem_search"/>
+    <copyField source="subjects_facet" dest="subject_unstem_search"/>
+    <copyField source="entities_facet" dest="subject_unstem_search"/>
+    <copyField source="periods_facet" dest="subject_unstem_search"/>
+    <copyField source="locations_facet" dest="subject_unstem_search"/>
+
+    <!-- spellcheck fields -->
+    <!-- default spell check;  should match fields for default request handler -->
+    <!-- it won't work with a copy of a copy field -->
+    <!--copyField source="*_text" dest="spell"/-->
+    <copyField source="*_facet" dest="spell"/>
+    <!-- title spell check;  should match fields for title request handler -->
+    <copyField source="title_text" dest="title_spell"/>
+    <!-- author spell check; should match fields for author request handler -->
+    <copyField source="authors_text" dest="author_spell"/>
+    <!-- subject spell check; should match fields for subject request handler -->
+    <copyField source="subjects_text" dest="subject_spell"/>
+    <copyField source="entities_text" dest="subject_spell"/>
+    <copyField source="periods_text" dest="subject_spell"/>
+    <copyField source="locations_text" dest="subject_spell"/>
+
+    <!-- OpenSearch query field should match request handler search fields -->
+    <copyField source="reference_type_facet" dest="opensearch_display"/>
+    <copyField source="title_text" dest="opensearch_display"/>
+    <copyField source="authors_text" dest="opensearch_display"/>
+    <copyField source="subjects_facet" dest="opensearch_display"/>
+    <copyField source="entities_facet" dest="opensearch_display"/>
+    <copyField source="periods_facet" dest="opensearch_display"/>
+    <copyField source="locations_facet" dest="opensearch_display"/>
+
+    <!-- for suggestions -->
+    <!--copyField source="*_text" dest="suggest"/-->
+    <copyField source="title_text" dest="suggest"/>
+    <copyField source="authors_text" dest="suggest"/>
+    <copyField source="*_facet" dest="suggest"/>
 
   </types>
 

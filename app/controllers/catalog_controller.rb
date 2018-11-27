@@ -30,22 +30,24 @@ class CatalogController < ApplicationController
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
     config.default_document_solr_params = {
-      qt: 'document',
+      # qt: 'document',
       ## These are hard-coded in the blacklight 'document' requestHandler
       # fl: '*',
       # rows: 1,
+      ## Be sure to identify our unique_key id value here: id_i
+      ## See models/solr_document.rb
       q: '{!term f=id_i v=$id}'
     }
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_text'
     config.index.display_type_field = 'reference_type_text'
-    config.index.thumbnail_field = 'thumbnail_path_ss'
+    #config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
     config.show.title_field = 'title_text'
     config.show.display_type_field = 'reference_type_text'
-    config.show.thumbnail_field = 'thumbnail_path_ss'
+    #config.show.thumbnail_field = 'thumbnail_path_ss'
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -79,16 +81,15 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_geo_facet', label: 'Region'
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
-    config.add_facet_field 'reference_type_text', label: 'Format'
-    config.add_facet_field 'year_published_text', label: 'Publication Year'
-    config.add_facet_field 'place_published_text', label: 'Place Published'
-    config.add_facet_field 'language_text', label: 'Language'
-    config.add_facet_field 'subjects_text', label: 'Subjects'
-    config.add_facet_field 'periods_text', label: 'Periods'
-    config.add_facet_field 'locations_text', label: 'Locations'
-    config.add_facet_field 'entities_text', label: 'Entities'
+    config.add_facet_field 'reference_type_facet', label: 'Format'
+    config.add_facet_field 'year_published_text', label: 'Publication Year', limit: 20
+    config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'language_facet', label: 'Language', limit: 20
+    config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'periods_facet', label: 'Periods', limit: 20
+    config.add_facet_field 'locations_facet', label: 'Locations', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'entities_facet', label: 'Entities', limit: 20, index_range: 'A'..'Z'
     
-
     config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
 
     #config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
@@ -171,6 +172,11 @@ class CatalogController < ApplicationController
     config.add_show_field 'reviewed_authors_text', label: 'Reviewed Authors'
     config.add_show_field 'translators_text', label: 'Translators'
     config.add_show_field 'translated_authors_text', label: 'Translated Authors'
+
+    config.add_show_field 'subjects_text', label: 'Subjects'
+    config.add_show_field 'periods_text', label: 'Periods'
+    config.add_show_field 'locations_text', label: 'Locations'
+    config.add_show_field 'entities_text', label: 'Entities'
     
     config.add_show_field 'isbns_text', label: 'ISBN'
     config.add_show_field 'issns_text', label: 'ISSN'
