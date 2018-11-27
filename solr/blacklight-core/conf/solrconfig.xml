@@ -57,7 +57,7 @@
           year_published_text
           authors_text
           place_published_text
-          language_text
+          languages_text
           isbns_text
           issns_text
           dois_text
