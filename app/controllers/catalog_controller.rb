@@ -84,13 +84,13 @@ class CatalogController < ApplicationController
     config.add_facet_field 'reference_type_facet', label: 'Format'
     config.add_facet_field 'year_published_text', label: 'Publication Year', limit: 20
     config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'language_facet', label: 'Language', limit: 20
+    config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'periods_facet', label: 'Periods', limit: 20
     config.add_facet_field 'locations_facet', label: 'Locations', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'entities_facet', label: 'Entities', limit: 20, index_range: 'A'..'Z'
     
-    config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
+    #config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
 
     #config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
     #   :years_5 => { label: 'within 5 Years', fq: "pub_date:[#{Time.zone.now.year - 5 } TO *]" },
@@ -130,7 +130,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
     config.add_index_field 'place_published_text', label: 'Place published'
-    config.add_index_field 'language_text', label: 'Language'
+    config.add_index_field 'languages_text', label: 'Languages'
     config.add_index_field 'subjects_text', label: 'Subjects'
     config.add_index_field 'periods_text', label: 'Periods'
     config.add_index_field 'locations_text', label: 'Locations'
@@ -164,7 +164,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'year_published_text', label: 'Year Published'
     config.add_show_field 'reference_type_text', label: 'Format'
     config.add_show_field 'place_published_text', label: 'Place published'
-    config.add_show_field 'language_text', label: 'Language'
+    config.add_show_field 'languages_text', label: 'Languages'
     config.add_show_field 'authors_text', label: 'Authors'
     config.add_show_field 'editors_text', label: 'Editors'
     config.add_show_field 'book_editors_text', label: 'Book Editors'

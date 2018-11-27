@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :standard_identifiers
     resources :citations
+    resources :languages
   end
 
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'

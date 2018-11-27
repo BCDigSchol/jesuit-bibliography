@@ -228,12 +228,28 @@
         wrapper_html: { class: 'form-group' } 
     %>
 
-    <%= form.input :language, 
-        label: 'Language',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
-    %>
+    <div id='bibliography_languages'>
+        <%= form.simple_fields_for :lanuages do |c| %>
+            <%= c.input :display_name, 
+                label: 'Language',
+                as: :string
+            %>
+        <% end %>
+    </div>
+    <div class='links'>
+        <%= link_to_add_association 'Add Language', 
+            form, 
+            :languages, 
+            association: 'languages', 
+            class: 'btn btn-warning', 
+            form_name: 'form', 
+            data: {
+                'association-insertion-node' => '#bibliography_languages', 
+                'association-insertion-method' => 'append'
+            }, 
+            partial: 'languages_fields'
+        %>
+    </div>
 
     <h4>Comments</h4>
     <div id="bibliography_comments">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_210012) do
+ActiveRecord::Schema.define(version: 2018_11_27_222417) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2018_11_14_210012) do
     t.text "reprint_edition"
     t.text "abstract"
     t.text "title_translated"
-    t.text "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "volume_number"
@@ -153,6 +152,14 @@ ActiveRecord::Schema.define(version: 2018_11_14_210012) do
     t.text "death_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.text "name"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_languages_on_bibliography_id"
   end
 
   create_table "locations", force: :cascade do |t|

@@ -18,6 +18,7 @@ class BibliographiesController < ApplicationController
     def new
         @bib = Bibliography.new
         @bib.comments.build
+        @bib.languages.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -35,6 +36,7 @@ class BibliographiesController < ApplicationController
 
     def edit
         @bib.comments.build
+        @bib.languages.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -152,12 +154,13 @@ class BibliographiesController < ApplicationController
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :volume_number, :pages, :number_of_pages, :section, :title_tertiary, :edition, :date, :type_of_work, :chapter_number, :book_title,
-                :reprint_edition, :worldcat_url, :secondary_url, :leuven_url, :multimedia_dimensions, :abstract, :title_translated, :language, :reviewed_title,
+                :reprint_edition, :worldcat_url, :secondary_url, :leuven_url, :multimedia_dimensions, :abstract, :title_translated, :reviewed_title,
                 :journal_title, :issue, :page_range, :epub_date,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
                 :multimedia_series, :multimedia_type, :multimedia_url,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
+                languages_attributes: [:id, :name, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],

@@ -1,5 +1,6 @@
 class Bibliography < ApplicationRecord
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
+    has_many :languages, inverse_of: :bibliography, dependent: :destroy
 
     # many-to-many relationship through bibliography_subjects
     has_many :bibliography_subjects, inverse_of: :bibliography, dependent: :destroy
@@ -33,6 +34,7 @@ class Bibliography < ApplicationRecord
     has_many :translated_authors, class_name: 'Citation', foreign_key: 'translated_author_id', inverse_of: 'translated_author', dependent: :destroy
 
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
+    accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :bibliography_subjects, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true
@@ -68,7 +70,7 @@ class Bibliography < ApplicationRecord
         text :volume
         # be sure 'number_of_volumes_text' is defined as a 'text_general' field type in solr's managed-schema file
         text :number_of_volumes
-        text :pages
+        #text :pages # REMOVE
         text :section
         text :edition
         text :date
@@ -76,11 +78,9 @@ class Bibliography < ApplicationRecord
         text :reprint_edition
         text :abstract
         text :title_translated
-        text :language
-        text :language_faceting, :as => 'language_facet'
         text :volume_number
         text :worldcat_url
-        text :secondary_url
+        text :secondary_url # rename to publisher_url
         text :leuven_url
         text :multimedia_dimensions
         text :multimedia_series
@@ -129,6 +129,12 @@ class Bibliography < ApplicationRecord
         text :translated_authors do     # for associations
             translated_authors.map { |translated_author| translated_author.display_name }
         end
+
+        text :languages do     # for associations
+            languages.map { |language| language.name }
+        end
+        text :languages_faceting, :as => 'languages_facet'
+
         text :comments do     # for associations
             comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
         end
@@ -187,8 +193,8 @@ class Bibliography < ApplicationRecord
             self.place_published
         end
 
-        def language_faceting
-            self.language
+        def languages_faceting
+            languages.map { |language| language.name }
         end
 
         def periods_faceting

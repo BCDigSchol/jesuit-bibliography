@@ -187,8 +187,12 @@
         <label>Title Translated</label>
         <div class="field-value"><%= @bib.title_translated %></div>
 
-        <label>Language</label>
-        <div class="field-value"><%= @bib.language %></div>
+        <label>Languages</label>
+        <ul>
+        <% @bib.languages.each do |lang| %>
+            <li><%= lang.name %></li>
+        <% end %>
+        </ul>
 
         <label>ISBN</label>
         <ul>

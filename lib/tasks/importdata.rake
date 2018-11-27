@@ -76,7 +76,7 @@ namespace :importdata do
             #@bib.notes_to_editor = row[24]
             #@bib.translated_author = row[25]
             @bib.title_translated = row[26]
-            @bib.language = row[27]
+            #@bib.language = row[27]
 
             @bib.save!
 
@@ -183,6 +183,15 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Translated author: #{v}")
                     @bib.translated_authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Languages
+            if row[27]
+                values = row[27].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Language: #{v}")
+                    @bib.languages << Language.new(name: v)
                 end
             end
         end
