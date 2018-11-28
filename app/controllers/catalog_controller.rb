@@ -127,6 +127,7 @@ class CatalogController < ApplicationController
     #config.add_index_field 'title_text', label: 'Title'
     config.add_index_field 'id_i', label: 'Bib ID'
     config.add_index_field 'authors_text', label: 'Author'
+    config.add_index_field 'author_of_reviews_text', label: 'Author of Review'
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
     config.add_index_field 'place_published_text', label: 'Place published'

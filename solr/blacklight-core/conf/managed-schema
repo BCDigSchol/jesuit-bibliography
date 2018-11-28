@@ -62,13 +62,14 @@
     <field name="journal_title_text" type="text_general"/>
     <field name="issue_text" type="text_general"/>
     <field name="page_range_text" type="text_general"/>
+    <field name="epub_date_text" type="text_general"/>
     <field name="reviewed_title_text" type="text_general"/>
     <field name="chapter_number_text" type="text_general"/>
     <field name="book_title_text" type="text_general"/>
     <field name="authors_text" type="text_general"/>
     <field name="editors_text" type="text_general"/>
     <field name="book_editors_text" type="text_general"/>
-    <field name="author_of_review_text" type="text_general"/>
+    <field name="author_of_reviews_text" type="text_general"/>
     <field name="reviewed_authors_text" type="text_general"/>
     <field name="translators_text" type="text_general"/>
     <field name="performers_text" type="text_general"/>
@@ -583,13 +584,14 @@
     <copyField source="journal_title_text" dest="journal_title_text_str" maxChars="256"/>
     <copyField source="issue_text" dest="issue_text_str" maxChars="256"/>
     <copyField source="page_range_text" dest="page_range_text_str" maxChars="256"/>
+    <copyField source="epub_date_text" dest="epub_date_text_str" maxChars="256"/>
     <copyField source="reviewed_title_text" dest="reviewed_title_text_str" maxChars="256"/>
     <copyField source="chapter_number_text" dest="chapter_number_text_str" maxChars="256"/>
     <copyField source="book_title_text" dest="book_title_text_str" maxChars="256"/>
     <copyField source="authors_text" dest="authors_text_str" maxChars="256"/>
     <copyField source="editors_text" dest="editors_text_str" maxChars="256"/>
     <copyField source="book_editors_text" dest="book_editors_text_str" maxChars="256"/>
-    <copyField source="author_of_review_text" dest="author_of_review_text_str" maxChars="256"/>
+    <copyField source="author_of_reviews_text" dest="author_of_reviews_text_str" maxChars="256"/>
     <copyField source="reviewed_authors_text" dest="reviewed_authors_text_str" maxChars="256"/>
     <copyField source="translators_text" dest="translators_text_str" maxChars="256"/>
     <copyField source="performers_text" dest="performers_text_str" maxChars="256"/>

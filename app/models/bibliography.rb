@@ -52,7 +52,8 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :translated_authors, reject_if: :citations_rejectable?, allow_destroy: true
 
     validates :reference_type, presence: true
-    validates :title, presence: true
+    # some records will not have a title
+    # validates :title, presence: true
 
     searchable do
         integer :id
@@ -61,7 +62,9 @@ class Bibliography < ApplicationRecord
         text :title, :default_boost => 2
         string :title
         string :sort_title do  # for sorting by title, ignoring leading A/An/The
-            title.downcase.gsub(/^(an?|the)/, '')
+            if self.title.present?
+                title.downcase.gsub(/^(an?|the)/, '')
+            end
         end
         text :year_published
         text :place_published
