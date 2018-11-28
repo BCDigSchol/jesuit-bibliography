@@ -40,12 +40,14 @@ class CatalogController < ApplicationController
     }
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_text'
+    # use display_title_text as the generic title_field for index views
+    config.index.title_field = 'display_title_text'
     config.index.display_type_field = 'reference_type_text'
     #config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
-    config.show.title_field = 'title_text'
+    # use display_title_text as the generic title_field for document views
+    config.show.title_field = 'display_title_text'
     config.show.display_type_field = 'reference_type_text'
     #config.show.thumbnail_field = 'thumbnail_path_ss'
 
@@ -126,6 +128,9 @@ class CatalogController < ApplicationController
 
     #config.add_index_field 'title_text', label: 'Title'
     config.add_index_field 'id_i', label: 'Bib ID'
+    config.add_index_field 'display_title_text', label: 'Display Title'
+    config.add_index_field 'chapter_title_text', label: 'Chapter Title'
+    config.add_index_field 'title_of_review_text', label: 'Title of Review'
     config.add_index_field 'authors_text', label: 'Author'
     config.add_index_field 'author_of_reviews_text', label: 'Author of Review'
     config.add_index_field 'reference_type_text', label: 'Format'

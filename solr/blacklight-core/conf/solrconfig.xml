@@ -52,6 +52,7 @@
           subject_tsim
           all_text_timv-->
           id_i
+          display_title_text
           title_text
           chapter_title_text
           title_of_review_text
@@ -86,6 +87,7 @@
           full_title_tsim
           short_title_tsim
           alternative_title_tsim-->
+          display_title_text
           title_text
           chapter_title_text
           title_of_review_text

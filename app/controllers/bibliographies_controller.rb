@@ -156,6 +156,7 @@ class BibliographiesController < ApplicationController
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :worldcat_url, :publisher_url, :leuven_url, :multimedia_dimensions, :abstract, :translated_title, :reviewed_title,
                 :journal_title, :issue, :page_range, :epub_date, :title_of_review, :chapter_title,
+                :display_title, :display_year,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
                 :multimedia_series, :multimedia_type, :multimedia_url,
