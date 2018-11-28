@@ -187,7 +187,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
     config.add_show_field 'edition_text', label: 'Edition'
     config.add_show_field 'date_text', label: 'Date'
-    config.add_show_field 'type_of_work_text', label: 'Type of work'
     config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
     config.add_show_field 'abstract_text', label: 'Abstract'
     config.add_show_field 'title_translated_text', label: 'Title Translated'

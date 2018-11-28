@@ -72,7 +72,6 @@ class Bibliography < ApplicationRecord
         text :number_of_volumes
         text :edition
         text :date
-        text :type_of_work
         text :reprint_edition
         text :abstract
         text :title_translated

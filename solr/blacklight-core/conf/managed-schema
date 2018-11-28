@@ -37,7 +37,6 @@
     <field name="number_of_volumes_text" type="text_general"/>
     <field name="edition_text" type="text_general"/>
     <field name="date_text" type="text_general"/>
-    <field name="type_of_work_text" type="text_general"/>
     <field name="reprint_edition_text" type="text_general"/>
     <field name="abstract_text" type="text_general"/>
     <field name="title_translated_text" type="text_general"/>
@@ -559,7 +558,6 @@
     <copyField source="number_of_volumes_text" dest="number_of_volumes_text_str" maxChars="256"/>
     <copyField source="edition_text" dest="edition_text_str" maxChars="256"/>
     <copyField source="date_text" dest="date_text_str" maxChars="256"/>
-    <copyField source="type_of_work_text" dest="type_of_work_text_str" maxChars="256"/>
     <copyField source="reprint_edition_text" dest="reprint_edition_text_str" maxChars="256"/>
     <copyField source="abstract_text" dest="abstract_text_str" maxChars="256"/>
     <copyField source="title_translated_text" dest="title_translated_text_str" maxChars="256"/>

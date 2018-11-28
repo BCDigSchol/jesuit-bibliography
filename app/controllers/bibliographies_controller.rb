@@ -153,7 +153,7 @@ class BibliographiesController < ApplicationController
 
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
-                :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :type_of_work, :chapter_number, :book_title,
+                :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :worldcat_url, :secondary_url, :leuven_url, :multimedia_dimensions, :abstract, :title_translated, :reviewed_title,
                 :journal_title, :issue, :page_range, :epub_date,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
