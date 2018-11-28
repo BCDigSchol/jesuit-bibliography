@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_175138) do
+ActiveRecord::Schema.define(version: 2018_11_28_180008) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 2018_11_28_175138) do
     t.text "date"
     t.text "reprint_edition"
     t.text "abstract"
-    t.text "title_translated"
+    t.text "translated_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "volume_number"
     t.text "worldcat_url"
-    t.text "secondary_url"
+    t.text "publisher_url"
     t.text "leuven_url"
     t.text "multimedia_dimensions"
     t.text "multimedia_series"

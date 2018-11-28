@@ -39,11 +39,11 @@
     <field name="date_text" type="text_general"/>
     <field name="reprint_edition_text" type="text_general"/>
     <field name="abstract_text" type="text_general"/>
-    <field name="title_translated_text" type="text_general"/>
+    <field name="translated_title_text" type="text_general"/>
     <field name="languages_text" type="text_general"/>
     <field name="volume_number_text" type="text_general"/>
     <field name="worldcat_url_text" type="text_general"/>
-    <field name="secondary_url_text" type="text_general"/>
+    <field name="publisher_url_text" type="text_general"/>
     <field name="leuven_url_text" type="text_general"/>
     <field name="multimedia_dimensions_text" type="text_general"/>
     <field name="multimedia_series_text" type="text_general"/>
@@ -560,11 +560,11 @@
     <copyField source="date_text" dest="date_text_str" maxChars="256"/>
     <copyField source="reprint_edition_text" dest="reprint_edition_text_str" maxChars="256"/>
     <copyField source="abstract_text" dest="abstract_text_str" maxChars="256"/>
-    <copyField source="title_translated_text" dest="title_translated_text_str" maxChars="256"/>
+    <copyField source="translated_title_text" dest="translated_title_text_str" maxChars="256"/>
     <copyField source="languages_text" dest="languages_text_str" maxChars="256"/>
     <copyField source="volume_number_text" dest="volume_number_text_str" maxChars="256"/>
     <copyField source="worldcat_url_text" dest="worldcat_url_text_str" maxChars="256"/>
-    <copyField source="secondary_url_text" dest="secondary_url_text_str" maxChars="256"/>
+    <copyField source="publisher_url_text" dest="publisher_url_text_str" maxChars="256"/>
     <copyField source="leuven_url_text" dest="leuven_url_text_str" maxChars="256"/>
     <copyField source="multimedia_dimensions_text" dest="multimedia_dimensions_text_str" maxChars="256"/>
     <copyField source="multimedia_series_text" dest="multimedia_series_text_str" maxChars="256"/>

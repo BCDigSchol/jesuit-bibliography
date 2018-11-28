@@ -88,7 +88,7 @@ namespace :importdata do
             #@bib.doi = row[13]
             @bib.reprint_edition = row[14]
             @bib.worldcat_url = row[15]
-            @bib.secondary_url = row[16]
+            @bib.publisher_url = row[16]
             @bib.leuven_url = row[17]
             #@bib.when_subject = row[18]
             #@bib.what_subject = row[19]
@@ -98,7 +98,7 @@ namespace :importdata do
             #@bib.notes = row[23]
             #@bib.notes_to_editor = row[24]
             #@bib.translated_author = row[25]
-            @bib.title_translated = row[26]
+            @bib.translated_title = row[26]
             #@bib.languages = row[27]
 
             @bib.save!
@@ -280,7 +280,7 @@ namespace :importdata do
             #@bib.doi = row[15]
             @bib.reprint_edition = row[16]
             @bib.worldcat_url = row[17]
-            @bib.secondary_url = row[18]
+            @bib.publisher_url = row[18]
             @bib.leuven_url = row[19]
             #@bib.when_subject = row[20]
             #@bib.what_subject = row[21]
@@ -290,7 +290,7 @@ namespace :importdata do
             #@bib.notes = row[25]
             #@bib.notes_to_editor = row[26]
             #@bib.translated_author = row[27]
-            @bib.title_translated = row[28]
+            @bib.translated_title = row[28]
             #@bib.languages = row[29]
 
             @bib.save!

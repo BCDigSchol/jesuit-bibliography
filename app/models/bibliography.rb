@@ -74,10 +74,10 @@ class Bibliography < ApplicationRecord
         text :date
         text :reprint_edition
         text :abstract
-        text :title_translated
+        text :translated_title
         text :volume_number
         text :worldcat_url
-        text :secondary_url # rename to publisher_url
+        text :publisher_url
         text :leuven_url
         text :multimedia_dimensions
         text :multimedia_series
