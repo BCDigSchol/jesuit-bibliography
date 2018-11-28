@@ -185,7 +185,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_text', label: 'Publisher'
     config.add_show_field 'volume_text', label: 'Volume'
     config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
-    config.add_show_field 'pages_text', label: 'Pages'
     config.add_show_field 'section_text', label: 'Section'
     config.add_show_field 'edition_text', label: 'Edition'
     config.add_show_field 'date_text', label: 'Date'

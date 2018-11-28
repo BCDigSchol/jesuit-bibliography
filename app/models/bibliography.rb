@@ -70,7 +70,6 @@ class Bibliography < ApplicationRecord
         text :volume
         # be sure 'number_of_volumes_text' is defined as a 'text_general' field type in solr's managed-schema file
         text :number_of_volumes
-        #text :pages # REMOVE
         text :section
         text :edition
         text :date
