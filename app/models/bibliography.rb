@@ -60,6 +60,8 @@ class Bibliography < ApplicationRecord
         text :reference_type
         text :reference_type_faceting, :as => 'reference_type_facet'
         text :title, :default_boost => 2
+        text :title_of_review
+        text :chapter_title
         string :title
         string :sort_title do  # for sorting by title, ignoring leading A/An/The
             if self.title.present?

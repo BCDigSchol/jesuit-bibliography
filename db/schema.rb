@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_180008) do
+ActiveRecord::Schema.define(version: 2018_11_28_193028) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 2018_11_28_180008) do
     t.text "reviewed_title"
     t.text "chapter_number"
     t.text "book_title"
+    t.text "title_of_review"
+    t.text "chapter_title"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

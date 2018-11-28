@@ -30,6 +30,8 @@
 
     <field name="reference_type_text" type="text_general"/>
     <field name="title_text" type="text_general"/>
+    <field name="chapter_title_text" type="text_general"/>
+    <field name="title_of_review_text" type="text_general"/>
     <field name="year_published_text" type="text_general"/>
     <field name="place_published_text" type="text_general"/>
     <field name="publisher_text" type="text_general"/>
@@ -552,6 +554,8 @@
     <copyField source="class_name" dest="class_name_str" maxChars="256"/>
     <copyField source="reference_type_text" dest="reference_type_text_str" maxChars="256"/>
     <copyField source="title_text" dest="title_text_str" maxChars="256"/>
+    <copyField source="chapter_title_text" dest="chapter_title_text_str" maxChars="256"/>
+    <copyField source="title_of_review_text" dest="title_of_review_text_str" maxChars="256"/>
     <copyField source="year_published_text" dest="_str" maxChars="256"/>
     <copyField source="place_published_text" dest="place_published_text_str" maxChars="256"/>
     <copyField source="publisher_text" dest="publisher_text_str" maxChars="256"/>

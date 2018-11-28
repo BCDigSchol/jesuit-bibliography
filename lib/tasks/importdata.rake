@@ -36,7 +36,7 @@ namespace :importdata do
     end
 
     desc "Run all importdata tasks"
-    task :all => [:clear_all, :books, :book_chapters]
+    task :all => [:clear_all, :books, :book_chapters, :book_reviews]
 
     desc "Import test books"
     task books: :environment do
@@ -265,7 +265,7 @@ namespace :importdata do
             @bib.reference_type = row[0]
             #@bib.author = row[1]
             @bib.year_published = row[2]
-            @bib.title = row[3]
+            @bib.chapter_title = row[3]
             #@bib.book_editor = row[4]
             @bib.book_title = row[5]
             @bib.place_published = row[6]
@@ -297,7 +297,7 @@ namespace :importdata do
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: Book chapter")
-            import_logger.info("  title: #{@bib.title}")
+            import_logger.info("  title: #{@bib.chapter_title}")
             import_logger.info("  year: #{@bib.year_published}")
             
             # Authors
@@ -457,7 +457,7 @@ namespace :importdata do
             @bib.reference_type = row[0]
             #@bib.author_of_review = row[1]
             @bib.year_published = row[2]
-            @bib.title = row[3]
+            @bib.title_of_review = row[3]
             @bib.journal_title = row[4]
             @bib.volume = row[5]
             @bib.issue = row[6]
@@ -486,7 +486,7 @@ namespace :importdata do
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: Book Review")
-            import_logger.info("  title: #{@bib.title}")
+            import_logger.info("  title: #{@bib.title_of_review}")
             import_logger.info("  year: #{@bib.year_published}")
             
             # Author of Reviews
