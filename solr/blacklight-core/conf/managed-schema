@@ -35,7 +35,6 @@
     <field name="publisher_text" type="text_general"/>
     <field name="volume_text" type="text_general"/>
     <field name="number_of_volumes_text" type="text_general"/>
-    <field name="section_text" type="text_general"/>
     <field name="edition_text" type="text_general"/>
     <field name="date_text" type="text_general"/>
     <field name="type_of_work_text" type="text_general"/>
@@ -558,7 +557,6 @@
     <copyField source="publisher_text" dest="publisher_text_str" maxChars="256"/>
     <copyField source="volume_text" dest="volume_text_str" maxChars="256"/>
     <copyField source="number_of_volumes_text" dest="number_of_volumes_text_str" maxChars="256"/>
-    <copyField source="section_text" dest="section_text_str" maxChars="256"/>
     <copyField source="edition_text" dest="edition_text_str" maxChars="256"/>
     <copyField source="date_text" dest="date_text_str" maxChars="256"/>
     <copyField source="type_of_work_text" dest="type_of_work_text_str" maxChars="256"/>
