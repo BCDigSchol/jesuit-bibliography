@@ -306,24 +306,21 @@
     %>
 
     <div id='bibliography_languages'>
-        <div id="bibliography_languages_ol">
         <%= form.simple_fields_for :languages do |language| %>
             <%= language.input :name, 
                 label: 'Language name',
                 as: :string
             %>
         <% end %>
-        </div>
     </div>
     <div class='links'>
         <%= link_to_add_association 'Add Language', 
             form, 
-            :languages, 
-            association: 'languages', 
+            :languages,
             class: 'btn btn-warning', 
             form_name: 'form', 
             data: {
-                'association-insertion-node' => '#bibliography_languages_ol', 
+                'association-insertion-node' => '#bibliography_languages', 
                 'association-insertion-method' => 'append'
             },
             partial: 'languages_fields'
