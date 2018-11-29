@@ -36,13 +36,15 @@ namespace :importdata do
     end
 
     desc "Run all importdata tasks"
-    task :all => [:clear_all, :books, :book_chapters, :book_reviews]
+    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles]
 
     desc "Import test books"
     task books: :environment do
 
-        puts "Starting Books import"
-        import_logger.info("Starting Books import")
+        @format = "Book"
+
+        puts "Starting #{@format}s import"
+        import_logger.info("Starting #{@format}s import")
 
         # invoke destroy_all_bibs task to remove existing Bibliography records
         # Rake::Task["importdata:clear_all"].invoke
@@ -119,7 +121,7 @@ namespace :importdata do
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
-            import_logger.info("  type: Book")
+            import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title}")
             import_logger.info("  year: #{@bib.year_published}")
             
@@ -239,15 +241,17 @@ namespace :importdata do
 
         finish = Time.now
         diff = finish - start
-        puts "Created #{item_count} Books records in #{diff} seconds\n\n"
-        import_logger.info("Created #{item_count} Books records in #{diff} seconds")
+        puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
     desc "Import test book chapters"
     task book_chapters: :environment do
 
-        puts "Starting Book chapters import"
-        import_logger.info("Starting Book chapters import")
+        @format = "Book Chapter"
+
+        puts "Starting #{@format} import"
+        import_logger.info("Starting #{@format} import")
 
         # invoke destroy_all_bibs task to remove existing Bibliography records
         # Rake::Task["importdata:clear_all"].invoke
@@ -326,7 +330,7 @@ namespace :importdata do
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
-            import_logger.info("  type: Book chapter")
+            import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.chapter_title}")
             import_logger.info("  year: #{@bib.year_published}")
             
@@ -446,15 +450,17 @@ namespace :importdata do
 
         finish = Time.now
         diff = finish - start
-        puts "Created #{item_count} Book Chapter records in #{diff} seconds\n\n"
-        import_logger.info("Created #{item_count} Book Chapter records in #{diff} seconds")
+        puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
     desc "Import test book reviews"
     task book_reviews: :environment do
 
-        puts "Starting Book Reviews import"
-        import_logger.info("Starting Book Reviews import")
+        @format = "Book Review"
+
+        puts "Starting #{@format}s import"
+        import_logger.info("Starting #{@format}s import")
 
         # invoke destroy_all_bibs task to remove existing Bibliography records
         # Rake::Task["importdata:clear_all"].invoke
@@ -530,7 +536,7 @@ namespace :importdata do
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
-            import_logger.info("  type: Book Review")
+            import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title_of_review}")
             import_logger.info("  year: #{@bib.year_published}")
             
@@ -641,7 +647,194 @@ namespace :importdata do
 
         finish = Time.now
         diff = finish - start
-        puts "Created #{item_count} Book Review records in #{diff} seconds\n\n"
-        import_logger.info("Created #{item_count} Book Review records in #{diff} seconds")
+        puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
+    end
+
+    desc "Import test journal articles"
+    task journal_articles: :environment do
+
+        @format = "Journal Article"
+
+        puts "Starting #{@format}s import"
+        import_logger.info("Starting #{@format}s import")
+
+        # invoke destroy_all_bibs task to remove existing Bibliography records
+        # Rake::Task["importdata:clear_all"].invoke
+
+        item_count = 0
+        start = Time.now
+        total_lines = CSV.read('db/imports/journal_articles.csv', headers: true, liberal_parsing: true).length
+        puts "Total rows in import file: #{total_lines}"
+        bar = ProgressBar.new(total_lines)
+
+        CSV.foreach('db/imports/journal_articles.csv', 
+            headers: true,
+            encoding: Encoding::UTF_8,
+            liberal_parsing: true
+        ) do |row|
+            item_count += 1
+            # break if item_count >= 300
+
+            # Reference Type,Author,Year,Title,Title of Journal,Volume,Issue,Page Range,Epub Date,Date,
+            # 0              1      2    3     4                5      6     7          8         9
+            #
+            # ISSN,DOI,WorldCat URL,Publisher URL,Leuven URL,When,What,Where,Who,Abstract,
+            # 10   11  12           13            14         15   16   17    18  19
+            #
+            # Notes,Notes to Editors,Translated Author,Translated Title,Language
+            # 20   21                22                23               24
+
+
+            @bib = Bibliography.new
+
+            @bib.reference_type = row[0]
+            #@bib.author = row[1]
+            #@bib.display_author = row[1]
+            @bib.year_published = row[2]
+            @bib.display_year = row[2]
+            @bib.title = row[3]
+            @bib.display_title = row[3]
+            @bib.journal_title = row[4]
+            @bib.volume = row[5]
+            @bib.issue = row[6]
+            @bib.page_range = row[7]
+            @bib.epub_date = row[8]
+            @bib.date = row[9]
+            #@bib.issn = row[10]
+            #@bib.doi = row[11]
+            @bib.worldcat_url = row[12]
+            @bib.publisher_url = row[13]
+            @bib.leuven_url = row[14]
+            #@bib.when_subject = row[15]
+            #@bib.what_subject = row[16]
+            #@bib.where_subject = row[17]
+            #@bib.who_subject = row[18]
+            @bib.abstract = row[19]
+            #@bib.notes = row[20]
+            #@bib.notes_to_editor = row[21]
+            #@bib.translated_author = row[22]
+            @bib.translated_title = row[23]
+            #@bib.languages = row[24]
+
+            # Display Authors
+            if row[1]
+                values = row[1].split("|")
+                out = []
+                values.each do |v|
+                    out << v
+                end
+                if !out.empty?
+                    @bib.display_author = out.to_sentence
+                end
+            end
+
+            @bib.save!
+
+            import_logger.info("Saved bib with ID# #{@bib.id}")
+            import_logger.info("  type: #{@format}")
+            import_logger.info("  title: #{@bib.title_of_review}")
+            import_logger.info("  year: #{@bib.year_published}")
+            
+            # Author of Reviews
+            if row[1]
+                values = row[1].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Author of Review: #{v}")
+                    @bib.author_of_reviews << Citation.new(display_name: v)
+                end
+            end
+
+            # ISBNs
+            if row[10]
+                values = row[10].split("|")
+                values.each do |v|
+                    import_logger.info("  adding ISBN: #{v}")
+                    @bib.isbns << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # DOIs
+            if row[11]
+                values = row[11].split("|")
+                values.each do |v|
+                    import_logger.info("  adding DOI: #{v}")
+                    @bib.dois << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Periods
+            if row[15]
+                values = row[15].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Period: #{v}")
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Subjects
+            if row[16]
+                values = row[16].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Subject: #{v}")
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Locations
+            if row[17]
+                values = row[17].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Location: #{v}")
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Entities
+            if row[18]
+                values = row[18].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Entity: #{v}")
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                end
+            end
+
+            # Notes -- Note
+            if row[20]
+                import_logger.info("  adding Note: #{row[22]}")
+                @bib.comments << Comment.new(body: row[22], comment_type: 'Note', commenter: 'importer', make_public: false)
+            end
+
+            # Notes -- Note to editor
+            if row[21]
+                import_logger.info("  adding Note: #{row[23]}")
+                @bib.comments << Comment.new(body: row[23], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+            end
+
+            # Translated Authors
+            if row[22]
+                values = row[22].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Translated author: #{v}")
+                    @bib.translated_authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Languages
+            if row[24]
+                values = row[24].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Language: #{v}")
+                    @bib.languages << Language.new(name: v)
+                end
+            end
+
+            bar.increment!
+        end
+
+        finish = Time.now
+        diff = finish - start
+        puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 end
