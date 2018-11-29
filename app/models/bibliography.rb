@@ -71,6 +71,7 @@ class Bibliography < ApplicationRecord
         text :year_published
         text :display_title
         text :display_year
+        text :display_author
         text :place_published
         text :place_published_faceting, :as => 'place_published_facet'
         text :publisher

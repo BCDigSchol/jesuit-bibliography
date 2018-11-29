@@ -55,6 +55,9 @@ class BibliographiesController < ApplicationController
     def create
         @bib = Bibliography.new(bib_params)
 
+        # set the display_ fields for Blacklight views
+        set_display_fields
+
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
         @bib.comments.each do |comment|
@@ -87,6 +90,9 @@ class BibliographiesController < ApplicationController
     def update
         # copy over bib_params into @bib object so we can alter it
         @bib.attributes = bib_params
+
+        # set the display_ fields for Blacklight views
+        set_display_fields
 
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
@@ -156,7 +162,7 @@ class BibliographiesController < ApplicationController
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :worldcat_url, :publisher_url, :leuven_url, :multimedia_dimensions, :abstract, :translated_title, :reviewed_title,
                 :journal_title, :issue, :page_range, :epub_date, :title_of_review, :chapter_title,
-                :display_title, :display_year,
+                :display_title, :display_year, :display_author,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
                 :multimedia_series, :multimedia_type, :multimedia_url,
@@ -178,5 +184,30 @@ class BibliographiesController < ApplicationController
                 performers_attributes: [:id, :display_name, :_destroy],
                 translated_authors_attributes: [:id, :display_name, :_destroy],
             )
+        end
+
+        def set_display_fields
+            if @bib.reference_type.downcase == "book chapter"
+                if @bib.chapter_title.present?
+                    @bib.display_title = @bib.chapter_title
+                end
+                if @bib.authors.present?
+                    @bib.display_author = @bib.authors.map { |author| author.display_name }.to_sentence
+                end
+            elsif @bib.reference_type.downcase == "book review"
+                if @bib.chapter_title.present?
+                    @bib.display_title = @bib.title_of_review
+                end
+                if @bib.authors.present?
+                    @bib.display_author = @bib.author_of_reviews.map { |author| author.display_name }.to_sentence
+                end
+            else
+                if @bib.chapter_title.present?
+                    @bib.display_title = @bib.title
+                end
+                if @bib.authors.present?
+                    @bib.display_author = @bib.authors.map { |author| author.display_name }.to_sentence
+                end
+            end
         end
 end

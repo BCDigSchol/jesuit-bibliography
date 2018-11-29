@@ -35,6 +35,7 @@
     <field name="year_published_text" type="text_general"/>
     <field name="display_title_text" type="text_general"/>
     <field name="display_year_text" type="text_general"/>
+    <field name="display_author_text" type="text_general"/>
     <field name="place_published_text" type="text_general"/>
     <field name="publisher_text" type="text_general"/>
     <field name="volume_text" type="text_general"/>
@@ -561,6 +562,7 @@
     <copyField source="year_published_text" dest="_str" maxChars="256"/>
     <copyField source="display_title_text" dest="display_title_text_str" maxChars="256"/>
     <copyField source="display_year_text" dest="display_year_text_str" maxChars="256"/>
+    <copyField source="display_author_text" dest="display_author_text_str" maxChars="256"/>
     <copyField source="place_published_text" dest="place_published_text_str" maxChars="256"/>
     <copyField source="publisher_text" dest="publisher_text_str" maxChars="256"/>
     <copyField source="volume_text" dest="volume_text_str" maxChars="256"/>

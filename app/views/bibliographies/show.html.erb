@@ -8,6 +8,12 @@
         <label>Reference Type</label>
         <div class="field-value"><%= @bib.reference_type %></div>
 
+        <label>Display Title</label>
+        <div class="field-value"><%= @bib.display_title %></div>
+
+        <label>Display Author</label>
+        <div class="field-value"><%= @bib.display_author %></div>
+
         <label>Author</label>
         <ul>
         <% @bib.authors.each do |author| %>

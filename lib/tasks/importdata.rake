@@ -74,6 +74,7 @@ namespace :importdata do
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
+            #@bib.display_author = row[1]
             @bib.year_published = row[2]
             @bib.display_year = row[2]
             @bib.title = row[3]
@@ -102,6 +103,18 @@ namespace :importdata do
             #@bib.translated_author = row[25]
             @bib.translated_title = row[26]
             #@bib.languages = row[27]
+
+            # Display Authors
+            if row[1]
+                values = row[1].split("|")
+                out = []
+                values.each do |v|
+                    out << v
+                end
+                if !out.empty?
+                    @bib.display_author = out.to_sentence
+                end
+            end
 
             @bib.save!
 
@@ -266,6 +279,7 @@ namespace :importdata do
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
+            #@bib.display_author = row[1]
             @bib.year_published = row[2]
             @bib.display_year = row[2]
             @bib.chapter_title = row[3]
@@ -296,6 +310,18 @@ namespace :importdata do
             #@bib.translated_author = row[27]
             @bib.translated_title = row[28]
             #@bib.languages = row[29]
+
+            # Display Authors
+            if row[1]
+                values = row[1].split("|")
+                out = []
+                values.each do |v|
+                    out << v
+                end
+                if !out.empty?
+                    @bib.display_author = out.to_sentence
+                end
+            end
 
             @bib.save!
 
@@ -460,6 +486,7 @@ namespace :importdata do
 
             @bib.reference_type = row[0]
             #@bib.author_of_review = row[1]
+            #@bib.display_author = row[1]
             @bib.year_published = row[2]
             @bib.display_year = row[2]
             @bib.title_of_review = row[3]
@@ -487,6 +514,18 @@ namespace :importdata do
             #@bib.translated_author = row[24]
             @bib.translated_title = row[25]
             #@bib.languages = row[26]
+
+            # Display Authors
+            if row[1]
+                values = row[1].split("|")
+                out = []
+                values.each do |v|
+                    out << v
+                end
+                if !out.empty?
+                    @bib.display_author = out.to_sentence
+                end
+            end
 
             @bib.save!
 
