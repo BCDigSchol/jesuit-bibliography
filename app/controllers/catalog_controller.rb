@@ -171,10 +171,10 @@ class CatalogController < ApplicationController
     #config.add_show_field 'display_title_text', label: 'Display Title'
     #config.add_show_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_show_field 'title_of_review_text', label: 'Title of Review'
-    config.add_show_field 'year_published_text', label: 'Year Published'
-    config.add_show_field 'reference_type_text', label: 'Format'
+    config.add_show_field 'year_published_text', label: 'Year Published', link_to_search: :year_published_text
+    config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
     config.add_show_field 'place_published_text', label: 'Place published'
-    config.add_show_field 'languages_text', label: 'Languages'
+    config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
     config.add_show_field 'authors_text', label: 'Authors'
     config.add_show_field 'editors_text', label: 'Editors'
     config.add_show_field 'book_editors_text', label: 'Book Editors'
@@ -183,10 +183,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'translators_text', label: 'Translators'
     config.add_show_field 'translated_authors_text', label: 'Translated Authors'
 
-    config.add_show_field 'subjects_text', label: 'Subjects'
-    config.add_show_field 'periods_text', label: 'Periods'
-    config.add_show_field 'locations_text', label: 'Locations'
-    config.add_show_field 'entities_text', label: 'Entities'
+    config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
+    config.add_show_field 'periods_text', label: 'Periods', link_to_search: :periods_facet
+    config.add_show_field 'locations_text', label: 'Locations', link_to_search: :locations_facet
+    config.add_show_field 'entities_text', label: 'Entities', link_to_search: :entities_facet
     
     config.add_show_field 'isbns_text', label: 'ISBN'
     config.add_show_field 'issns_text', label: 'ISSN'
