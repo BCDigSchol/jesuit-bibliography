@@ -1,6 +1,7 @@
 class Bibliography < ApplicationRecord
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     has_many :languages, inverse_of: :bibliography, dependent: :destroy
+    has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy
 
     # many-to-many relationship through bibliography_subjects
     has_many :bibliography_subjects, inverse_of: :bibliography, dependent: :destroy
@@ -28,13 +29,13 @@ class Bibliography < ApplicationRecord
     has_many :editors, class_name: 'Citation', foreign_key: 'editor_id', inverse_of: 'editor', dependent: :destroy
     has_many :book_editors, class_name: 'Citation', foreign_key: 'book_editor_id', inverse_of: 'book_editor', dependent: :destroy
     has_many :author_of_reviews, class_name: 'Citation', foreign_key: 'author_of_review_id', inverse_of: 'author_of_review', dependent: :destroy
-    has_many :reviewed_authors, class_name: 'Citation', foreign_key: 'reviewed_author_id', inverse_of: 'reviewed_author', dependent: :destroy
     has_many :translators, class_name: 'Citation', foreign_key: 'translator_id',  inverse_of: 'translator', dependent: :destroy
     has_many :performers, class_name: 'Citation', foreign_key: 'performer_id',  inverse_of: 'performer', dependent: :destroy
     has_many :translated_authors, class_name: 'Citation', foreign_key: 'translated_author_id', inverse_of: 'translated_author', dependent: :destroy
 
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
     accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :reviewed_components, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :bibliography_subjects, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true
@@ -46,7 +47,6 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :editors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :book_editors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :author_of_reviews, reject_if: :citations_rejectable?, allow_destroy: true
-    accepts_nested_attributes_for :reviewed_authors, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :translators, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :performers, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :translated_authors, reject_if: :citations_rejectable?, allow_destroy: true
@@ -106,7 +106,6 @@ class Bibliography < ApplicationRecord
         text :issue
         text :page_range
         text :epub_date
-        text :reviewed_title
         text :chapter_number
         text :book_title
         text :paper_title
@@ -122,9 +121,6 @@ class Bibliography < ApplicationRecord
         end
         text :author_of_reviews do     # for associations
             author_of_reviews.map { |author_of_review| author_of_review.display_name }
-        end
-        text :reviewed_authors do     # for associations
-            reviewed_authors.map { |reviewed_author| reviewed_author.display_name }
         end
         text :translators do     # for associations
             translators.map { |translator| translator.display_name }
@@ -145,6 +141,10 @@ class Bibliography < ApplicationRecord
             comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
         end
         text :comments_json
+
+        text :reviewed_components do     # for associations
+            reviewed_components.map { |rc| "#{rc.reviewed_author}||#{rc.reviewed_title}" }
+        end
         
         text :isbns do     # for associations
             isbns.map { |isbn| isbn.value }

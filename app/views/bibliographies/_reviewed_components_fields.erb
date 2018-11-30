@@ -1,0 +1,15 @@
+<li class="bibliography-subject-fields nested-fields">
+    
+    <%= form.input :reviewed_author,
+        label: 'Reviewed Author' 
+    %>
+    <%= form.input :reviewed_title, 
+        label: 'Reviewed Title' 
+    %>
+    
+    <%= link_to_remove_association "x", 
+        form, 
+        class: 'remove-link', 
+        form_name: 'form' 
+    %>
+</li>

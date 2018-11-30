@@ -137,7 +137,6 @@ class CatalogController < ApplicationController
     config.add_index_field 'editors_text', label: 'Editor'
     #config.add_index_field 'book_editors_text', label: 'Book Editor'
     config.add_index_field 'author_of_reviews_text', label: 'Author of Review'
-    #config.add_index_field 'reviewed_authors_text', label: 'Reviewed Author'
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
     config.add_index_field 'place_published_text', label: 'Place published'
@@ -185,9 +184,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'editors_text', label: 'Editors'
     config.add_show_field 'book_editors_text', label: 'Book Editors'
     config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews'
-    config.add_show_field 'reviewed_authors_text', label: 'Reviewed Authors'
     config.add_show_field 'translators_text', label: 'Translators'
     config.add_show_field 'translated_authors_text', label: 'Translated Authors'
+
+    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title'
 
     config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
     config.add_show_field 'periods_text', label: 'Periods', link_to_search: :periods_facet
@@ -228,7 +228,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'issue_text', label: 'Issue'
     config.add_show_field 'page_range_text', label: 'Page Range'
     config.add_show_field 'epub_date_text', label: 'Epub Date'
-    config.add_show_field 'reviewed_title_text', label: 'Reviewed Title'
     config.add_show_field 'chapter_number_text', label: 'Chapter Number'
     config.add_show_field 'book_title_text', label: 'Book Title'
 

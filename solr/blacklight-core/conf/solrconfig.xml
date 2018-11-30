@@ -62,6 +62,7 @@
           authors_text
           author_of_reviews_text
           place_published_text
+          reviewed_components_text
           languages_text
           isbns_text
           issns_text

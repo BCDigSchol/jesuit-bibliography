@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_003522) do
+ActiveRecord::Schema.define(version: 2018_11_30_163549) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2018_11_30_003522) do
     t.text "issue"
     t.text "page_range"
     t.text "epub_date"
-    t.text "reviewed_title"
     t.text "chapter_number"
     t.text "book_title"
     t.text "title_of_review"
@@ -121,7 +120,6 @@ ActiveRecord::Schema.define(version: 2018_11_30_003522) do
     t.integer "editor_id"
     t.integer "book_editor_id"
     t.integer "author_of_review_id"
-    t.integer "reviewed_author_id"
     t.integer "translator_id"
     t.integer "performer_id"
     t.integer "translated_author_id"
@@ -130,7 +128,6 @@ ActiveRecord::Schema.define(version: 2018_11_30_003522) do
     t.index ["book_editor_id"], name: "index_citations_on_book_editor_id"
     t.index ["editor_id"], name: "index_citations_on_editor_id"
     t.index ["performer_id"], name: "index_citations_on_performer_id"
-    t.index ["reviewed_author_id"], name: "index_citations_on_reviewed_author_id"
     t.index ["translated_author_id"], name: "index_citations_on_translated_author_id"
     t.index ["translator_id"], name: "index_citations_on_translator_id"
   end
@@ -176,6 +173,15 @@ ActiveRecord::Schema.define(version: 2018_11_30_003522) do
     t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviewed_components", force: :cascade do |t|
+    t.text "reviewed_author"
+    t.text "reviewed_title"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_reviewed_components_on_bibliography_id"
   end
 
   create_table "searches", force: :cascade do |t|

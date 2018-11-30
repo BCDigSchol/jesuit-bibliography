@@ -75,33 +75,28 @@
         as: :string 
     %>
 
-    <div id='bibliography_reviewed_author'>
-        <%= form.simple_fields_for :reviewed_authors do |c| %>
-            <%= c.input :display_name, 
-                label: 'Reviewed author',
-                as: :string
-            %>
-        <% end %>
+    <h4>Reviewed Author/Title</h4>
+    <div id='bibliography_reviewed_component'>
+        <ol id="bibliography_reviewed_component_ol">
+            <%= form.simple_fields_for :reviewed_components do |rc| %>
+                <%= render 'reviewed_components_fields', :form => rc %></li>
+            <% end %>
+        </ol>
     </div>
     <div class='links'>
-        <%= link_to_add_association 'Add Reviewed Authors', 
+        <%= link_to_add_association 'Add Reviewed Author/Title', 
             form, 
-            :reviewed_authors, 
-            association: 'reviewed_authors', 
+            :reviewed_components, 
+            association: 'reviewed_components', 
             class: 'btn btn-warning', 
             form_name: 'form', 
             data: {
-                'association-insertion-node' => '#bibliography_reviewed_author', 
+                'association-insertion-node' => '#bibliography_reviewed_component_ol', 
                 'association-insertion-method' => 'append'
             }, 
-            partial: 'bibliography_citation_fields' 
+            partial: 'reviewed_components_fields' 
         %>
     </div>
-
-    <%= form.input :reviewed_title, 
-        label: 'Reviewed title',
-        as: :string
-    %>
 
     <%= form.input :epub_date, 
         label: 'Epub date',

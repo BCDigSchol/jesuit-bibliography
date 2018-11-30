@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reviewed_author: MyText
+  reviewed_title: MyText
+
+two:
+  reviewed_author: MyText
+  reviewed_title: MyText

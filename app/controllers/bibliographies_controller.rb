@@ -19,6 +19,7 @@ class BibliographiesController < ApplicationController
         @bib = Bibliography.new
         @bib.comments.build
         @bib.languages.build
+        @bib.reviewed_components.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -26,7 +27,6 @@ class BibliographiesController < ApplicationController
         @bib.editors.build
         @bib.book_editors.build
         @bib.author_of_reviews.build
-        @bib.reviewed_authors.build
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
@@ -37,6 +37,7 @@ class BibliographiesController < ApplicationController
     def edit
         @bib.comments.build
         @bib.languages.build
+        @bib.reviewed_components.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -44,7 +45,6 @@ class BibliographiesController < ApplicationController
         @bib.editors.build
         @bib.book_editors.build
         @bib.author_of_reviews.build
-        @bib.reviewed_authors.build
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
@@ -160,7 +160,7 @@ class BibliographiesController < ApplicationController
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
-                :reprint_edition, :worldcat_url, :publisher_url, :leuven_url, :multimedia_dimensions, :abstract, :translated_title, :reviewed_title,
+                :reprint_edition, :worldcat_url, :publisher_url, :leuven_url, :multimedia_dimensions, :abstract, :translated_title,
                 :journal_title, :issue, :page_range, :epub_date, :title_of_review, :chapter_title, :paper_title,
                 :display_title, :display_year, :display_author,
                 :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
@@ -168,6 +168,7 @@ class BibliographiesController < ApplicationController
                 :multimedia_series, :multimedia_type, :multimedia_url,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 languages_attributes: [:id, :name, :_destroy],
+                reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],
@@ -179,7 +180,6 @@ class BibliographiesController < ApplicationController
                 editors_attributes: [:id, :display_name, :_destroy],
                 book_editors_attributes: [:id, :display_name, :_destroy],
                 author_of_reviews_attributes: [:id, :display_name, :_destroy],
-                reviewed_authors_attributes: [:id, :display_name, :_destroy],
                 translators_attributes: [:id, :display_name, :_destroy],
                 performers_attributes: [:id, :display_name, :_destroy],
                 translated_authors_attributes: [:id, :display_name, :_destroy],

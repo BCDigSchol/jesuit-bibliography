@@ -1,0 +1,2 @@
+class ReviewedComponentsController < ApplicationController
+end

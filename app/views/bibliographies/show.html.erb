@@ -108,15 +108,18 @@
         <label>Page range</label>
         <div class="field-value"><%= @bib.page_range %></div>
 
-        <label>Chapter number</label>
-        <div class="field-value"><%= @bib.chapter_number %></div>
-
-        <label>Reviewed Author</label>
+        <label>Reviewed Author/Title</label>
         <ul>
-        <% @bib.reviewed_authors.each do |ra| %>
-            <li><%= ra.display_name %></li>
+        <% @bib.reviewed_components.each do |rc| %>
+            <li>
+                <div>Author: <span><%= rc.reviewed_author %></span></div>
+                <div>Title: <span><%= rc.reviewed_title %></span></div>
+            </li>
         <% end %>
         </ul>
+
+        <label>Chapter number</label>
+        <div class="field-value"><%= @bib.chapter_number %></div>
 
         <label>Event Panel Title</label>
         <div class="field-value"><%= @bib.event_panel_title %></div>

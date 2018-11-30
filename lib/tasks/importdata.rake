@@ -502,7 +502,7 @@ namespace :importdata do
             @bib.issue = row[6]
             @bib.page_range = row[7]
             #@bib.reviewed_author = row[8]
-            @bib.reviewed_title = row[9]
+            #@bib.reviewed_title = row[9]
             @bib.epub_date = row[10]
             @bib.date = row[11]
             #@bib.issn = row[12]
@@ -549,13 +549,10 @@ namespace :importdata do
                 end
             end
 
-            # Reviewed Authors
-            if row[8]
-                values = row[8].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Reviewed Author: #{v}")
-                    @bib.reviewed_authors << Citation.new(display_name: v)
-                end
+            # Reviewed Title/Author
+            # combine both fields into Reviewed_component record object
+            if row[8] or row[9]
+                @bib.reviewed_components << ReviewedComponent.new(reviewed_author: row[8], reviewed_title: row[9])
             end
 
             # ISSNs
