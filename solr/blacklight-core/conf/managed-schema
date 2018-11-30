@@ -80,6 +80,7 @@
     <field name="translated_authors_text" type="text_general"/>
     <field name="comments_text" type="text_general"/>
     <field name="comments_json_text" type="text_general"/>
+    <field name="comments_public_text" type="text_general"/>
     <field name="reviewed_components_text" type="text_general"/>
     <field name="isbns_text" type="text_general"/>
     <field name="issns_text" type="text_general"/>
@@ -607,6 +608,7 @@
     <copyField source="translated_authors_text" dest="translated_authors_text_str" maxChars="256"/>
     <copyField source="comments_text" dest="comments_text_str" maxChars="256"/>
     <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
+    <copyField source="comments_public_text" dest="comments_public_text_str" maxChars="256"/>
     <copyField source="reviewed_components_text" dest="reviewed_components_text_str" maxChars="256"/>
     <copyField source="isbns_text" dest="isbns_text_str" maxChars="256"/>
     <copyField source="dois_text" dest="dois_text_str" maxChars="256"/>

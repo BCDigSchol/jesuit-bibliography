@@ -141,6 +141,7 @@ class Bibliography < ApplicationRecord
             comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
         end
         text :comments_json
+        text :comments_public
 
         text :reviewed_components do     # for associations
             reviewed_components.map { |rc| "#{rc.reviewed_author}||#{rc.reviewed_title}" }
@@ -181,14 +182,26 @@ class Bibliography < ApplicationRecord
 
     private
         def comments_json
-            out = []
             if self.comments.present?
+                out = []
                 #out << self.comments.map { |comment| { :body => comment.body, :comment_type => comment.comment_type, :commenter => comment.commenter} }
                 self.comments.each do |comment|
                     out << comment
                 end
+                out.to_json
             end
-            out.to_json
+        end
+
+        def comments_public
+            if self.comments.present?
+                out = []
+                self.comments.each do |comment|
+                    if comment.body.present? and comment.make_public == true
+                        out << comment.body
+                    end
+                end
+                out.join('||')
+            end
         end
 
         def reference_type_faceting

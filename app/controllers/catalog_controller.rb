@@ -231,7 +231,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'chapter_number_text', label: 'Chapter Number'
     config.add_show_field 'book_title_text', label: 'Book Title'
 
-    config.add_show_field 'comments_text', label: 'Comments'
+    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :separate_parts
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
