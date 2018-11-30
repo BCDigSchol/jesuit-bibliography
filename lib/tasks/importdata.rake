@@ -36,7 +36,7 @@ namespace :importdata do
     end
 
     desc "Run all importdata tasks"
-    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles]
+    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers]
 
     desc "Import test books"
     task books: :environment do
