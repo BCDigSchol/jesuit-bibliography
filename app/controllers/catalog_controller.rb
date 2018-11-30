@@ -131,6 +131,7 @@ class CatalogController < ApplicationController
     #config.add_index_field 'display_title_text', label: 'Display Title'
     #config.add_index_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_index_field 'title_of_review_text', label: 'Title of Review'
+    #config.add_index_field 'paper_title_text', label: 'Paper Title'
     #config.add_index_field 'display_author_text', label: 'Display Author'
     config.add_index_field 'authors_text', label: 'Author'
     config.add_index_field 'editors_text', label: 'Editor'
@@ -175,6 +176,7 @@ class CatalogController < ApplicationController
     #config.add_show_field 'display_title_text', label: 'Display Title'
     #config.add_show_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_show_field 'title_of_review_text', label: 'Title of Review'
+    #config.add_show_field 'paper_title_text', label: 'Paper Title'
     config.add_show_field 'year_published_text', label: 'Year Published', link_to_search: :year_published_text
     config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
     config.add_show_field 'place_published_text', label: 'Place published'

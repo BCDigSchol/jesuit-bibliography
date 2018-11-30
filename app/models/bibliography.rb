@@ -109,6 +109,7 @@ class Bibliography < ApplicationRecord
         text :reviewed_title
         text :chapter_number
         text :book_title
+        text :paper_title
         
         text :authors do     # for associations
             authors.map { |author| author.display_name }
