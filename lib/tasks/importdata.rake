@@ -36,7 +36,7 @@ namespace :importdata do
     end
 
     desc "Run all importdata tasks"
-    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers]
+    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers, :multimedia]
 
     desc "Import test books"
     task books: :environment do
@@ -689,7 +689,7 @@ namespace :importdata do
             @bib = Bibliography.new
 
             @bib.reference_type = row[0]
-            #@bib.author = row[1]
+            #@bib.authors = row[1]
             #@bib.display_author = row[1]
             @bib.year_published = row[2]
             @bib.display_year = row[2]
@@ -736,21 +736,21 @@ namespace :importdata do
             import_logger.info("  title: #{@bib.title_of_review}")
             import_logger.info("  year: #{@bib.year_published}")
             
-            # Author of Reviews
+            # Authors
             if row[1]
                 values = row[1].split("|")
                 values.each do |v|
-                    import_logger.info("  adding Author of Review: #{v}")
-                    @bib.author_of_reviews << Citation.new(display_name: v)
+                    import_logger.info("  adding Author: #{v}")
+                    @bib.authors << Citation.new(display_name: v)
                 end
             end
 
-            # ISBNs
+            # ISSNs
             if row[10]
                 values = row[10].split("|")
                 values.each do |v|
-                    import_logger.info("  adding ISBN: #{v}")
-                    @bib.isbns << StandardIdentifier.new(value: v)
+                    import_logger.info("  adding ISSN: #{v}")
+                    @bib.issns << StandardIdentifier.new(value: v)
                 end
             end
 
@@ -1132,6 +1132,179 @@ namespace :importdata do
             # Languages
             if row[18]
                 values = row[18].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Language: #{v}")
+                    @bib.languages << Language.new(name: v)
+                end
+            end
+
+            bar.increment!
+        end
+
+        finish = Time.now
+        diff = finish - start
+        puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
+        import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
+    end
+
+    desc "Import test multimedia"
+    task multimedia: :environment do
+
+        @format = "Multimedia"
+
+        puts "Starting #{@format}s import"
+        import_logger.info("Starting #{@format}s import")
+
+        # invoke destroy_all_bibs task to remove existing Bibliography records
+        # Rake::Task["importdata:clear_all"].invoke
+
+        item_count = 0
+        start = Time.now
+        total_lines = CSV.read('db/imports/multimedia.csv', headers: true, liberal_parsing: true).length
+        puts "Total rows in import file: #{total_lines}"
+        bar = ProgressBar.new(total_lines)
+
+        CSV.foreach('db/imports/multimedia.csv', 
+            headers: true,
+            encoding: Encoding::UTF_8,
+            liberal_parsing: true
+        ) do |row|
+            item_count += 1
+            # break if item_count >= 300
+
+            # Reference Type,Author,Year,Title,Series,Place Published,Publisher,Type of Media,Performers,ISBN,
+            # 0              1      2    3     4      5               6         7             8          9
+            #
+            # WorldCat URL,URL,Size/Length,When,What,Where,Who,Abstract,Notes,Notes to Editors,
+            # 10           11  12          13   14   15    16  17       18    19
+            #
+            # Language
+            # 20
+
+            @bib = Bibliography.new
+
+            @bib.reference_type = row[0]
+            #@bib.author = row[1]
+            #@bib.display_author = row[1]
+            @bib.year_published = row[2]
+            @bib.display_year = row[2]
+            @bib.title = row[3]
+            @bib.display_title = row[3]
+            @bib.multimedia_series = row[4]
+            @bib.place_published = row[5]
+            @bib.publisher = row[6]
+            @bib.multimedia_type = row[7]
+            #@bib.performers = row[8]
+            #@bib.isbn = row[9]
+            @bib.worldcat_url = row[10]
+            @bib.multimedia_url = row[11]
+            @bib.multimedia_dimensions = row[12]
+            #@bib.when_subject = row[13]
+            #@bib.what_subject = row[14]
+            #@bib.where_subject = row[15]
+            #@bib.who_subject = row[16]
+            @bib.abstract = row[17]
+            #@bib.notes = row[18]
+            #@bib.notes_to_editor = row[19]
+            #@bib.languages = row[20]
+
+            # Display Authors
+            if row[1]
+                values = row[1].split("|")
+                out = []
+                values.each do |v|
+                    out << v
+                end
+                if !out.empty?
+                    @bib.display_author = out.to_sentence
+                end
+            end
+
+            @bib.save!
+
+            import_logger.info("Saved bib with ID# #{@bib.id}")
+            import_logger.info("  type: #{@format}")
+            import_logger.info("  title: #{@bib.title}")
+            import_logger.info("  year: #{@bib.year_published}")
+            
+            # Authors
+            if row[1]
+                values = row[1].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Author: #{v}")
+                    @bib.authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Performers
+            if row[8]
+                values = row[8].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Performer: #{v}")
+                    @bib.performers << Citation.new(display_name: v)
+                end
+            end
+
+            # ISBNs
+            if row[9]
+                values = row[9].split("|")
+                values.each do |v|
+                    import_logger.info("  adding ISBN: #{v}")
+                    @bib.isbns << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Periods
+            if row[13]
+                values = row[13].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Period: #{v}")
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Subjects
+            if row[14]
+                values = row[14].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Subject: #{v}")
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Locations
+            if row[15]
+                values = row[15].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Location: #{v}")
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                end
+            end
+
+            # Entities
+            if row[16]
+                values = row[16].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Entity: #{v}")
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                end
+            end
+
+            # Notes -- Note
+            if row[18]
+                import_logger.info("  adding Note: #{row[18]}")
+                @bib.comments << Comment.new(body: row[18], comment_type: 'Note', commenter: 'importer', make_public: false)
+            end
+
+            # Notes -- Note to editor
+            if row[19]
+                import_logger.info("  adding Note: #{row[19]}")
+                @bib.comments << Comment.new(body: row[19], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+            end
+
+            # Languages
+            if row[20]
+                values = row[20].split("|")
                 values.each do |v|
                     import_logger.info("  adding Language: #{v}")
                     @bib.languages << Language.new(name: v)
