@@ -204,7 +204,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'edition_text', label: 'Edition'
     config.add_show_field 'date_text', label: 'Date'
     config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
-    config.add_show_field 'abstract_text', label: 'Abstract'
+    config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :separate_parts
     config.add_show_field 'translated_title_text', label: 'Translated Title'
     config.add_show_field 'volume_number_text', label: 'Volume Number'
     config.add_show_field 'worldcat_url_text', label: 'Worldcat URL', :helper_method => :make_link

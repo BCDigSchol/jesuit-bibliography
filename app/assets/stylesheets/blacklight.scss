@@ -13,6 +13,22 @@ h2.page-heading{
     z-index:1;
 }
 
+#document {
+    dl {
+        dt, dd {
+            min-height: 20px;
+        }
+    }
+    .dd-part {
+        margin-bottom: 2px;
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+}
+
+
 footer.bcfooter {
     .footer {
         background-color: white;
