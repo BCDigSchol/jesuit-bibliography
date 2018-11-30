@@ -187,7 +187,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'translators_text', label: 'Translators'
     config.add_show_field 'translated_authors_text', label: 'Translated Authors'
 
-    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title'
+    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :separate_parts
 
     config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
     config.add_show_field 'periods_text', label: 'Periods', link_to_search: :periods_facet
