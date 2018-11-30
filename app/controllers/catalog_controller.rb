@@ -206,14 +206,14 @@ class CatalogController < ApplicationController
     config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
     config.add_show_field 'abstract_text', label: 'Abstract'
     config.add_show_field 'translated_title_text', label: 'Translated Title'
-    config.add_show_field 'volume_number_text', label: 'Volume n=Number'
-    config.add_show_field 'worldcat_url_text', label: 'Worldcat URL'
-    config.add_show_field 'publisher_url_text', label: 'Publisher URL'
-    config.add_show_field 'leuven_url_text', label: 'Leuven URL'
+    config.add_show_field 'volume_number_text', label: 'Volume Number'
+    config.add_show_field 'worldcat_url_text', label: 'Worldcat URL', :helper_method => :make_link
+    config.add_show_field 'publisher_url_text', label: 'Publisher URL', :helper_method => :make_link
+    config.add_show_field 'leuven_url_text', label: 'Leuven URL', :helper_method => :make_link
     config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
     config.add_show_field 'multimedia_series_text', label: 'Multimedia Series'
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
-    config.add_show_field 'multimedia_url_text', label: 'Multimedia URL'
+    config.add_show_field 'multimedia_url_text', label: 'Multimedia URL', :helper_method => :make_link
     config.add_show_field 'event_title_text', label: 'Event Title'
     config.add_show_field 'event_location_text', label: 'Event Location'
     config.add_show_field 'event_institution_text', label: 'Event Institution'
