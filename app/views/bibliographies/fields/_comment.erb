@@ -1,0 +1,45 @@
+<div class='form-group repeatable-field'>
+    <label class="col-sm-2 col-form-label"><%= field_label + 's'%></label>
+    <div class="col-sm-10 btn-add-container">
+        <div id="bibliography_comments" class='repeatable-field'>
+            <div class="fields">
+                <%= form.simple_fields_for :comments do |comment| %>
+                    <div class="panel panel-default bibliography-subject-fields nested-fields">
+                        <div class="panel-heading"><%= field_label %></div>
+                        <div class="panel-body clearfix">
+                            <%= comment.input :body,
+                                label: 'Comment text' 
+                            %>
+                            <%= comment.input :comment_type, 
+                                collection: ['Note', 'Research note', 'Note to editor'], 
+                                selected: 'Note'
+                            %>
+                            <%= comment.input :commenter, 
+                                label: 'Commenter',
+                                as: :string, 
+                                disabled: true 
+                            %>
+                            <%= comment.input :make_public, 
+                                label: false,
+                                wrapper: :horizontal_boolean_job 
+                            %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        
+            <div class='links clearfix'>
+                <%= link_to_add_association 'Add Comment', 
+                    form, 
+                    :comments, 
+                    class: 'btn btn-warning', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_comments .fields', 
+                        'association-insertion-method' => 'append'
+                    } 
+                %>
+            </div>
+        </div>
+    </div>
+</div>
