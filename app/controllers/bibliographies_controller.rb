@@ -30,6 +30,10 @@ class BibliographiesController < ApplicationController
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
+        @bib.bibliography_subjects.build
+        @bib.bibliography_periods.build
+        @bib.bibliography_locations.build
+        @bib.bibliography_entities.build
 
         @reference_type = nil
     end
@@ -48,6 +52,10 @@ class BibliographiesController < ApplicationController
         @bib.translators.build
         @bib.performers.build
         @bib.translated_authors.build
+        @bib.bibliography_subjects.build
+        @bib.bibliography_periods.build
+        @bib.bibliography_locations.build
+        @bib.bibliography_entities.build
 
         @reference_type = @bib.reference_type
     end
@@ -55,7 +63,7 @@ class BibliographiesController < ApplicationController
     def create
         @bib = Bibliography.new(bib_params)
 
-        # set the display_ fields for Blacklight views
+        # set the display_* fields for Blacklight views
         set_display_fields
 
         # loop through each associated comment object and check if it has changed
@@ -91,7 +99,7 @@ class BibliographiesController < ApplicationController
         # copy over bib_params into @bib object so we can alter it
         @bib.attributes = bib_params
 
-        # set the display_ fields for Blacklight views
+        # set the display_* fields for Blacklight views
         set_display_fields
 
         # loop through each associated comment object and check if it has changed

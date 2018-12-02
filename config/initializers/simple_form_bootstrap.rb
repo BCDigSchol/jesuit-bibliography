@@ -136,6 +136,21 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
+  # vertical input group
+  config.wrappers :vertical_input_group, tag: 'div', class: 'form-group-wrapper', error_class: 'has-error' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label, class: 'invisible col-form-label col-sm-2'
+ 
+    b.wrapper tag: 'div', class: 'col-sm-10' do |ba|
+      ba.wrapper tag: 'div', class: 'input-group' do |append|
+        append.use :input, class: 'form-controlz'
+      end
+      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
+
 
   # horizontal forms
   #
@@ -153,6 +168,40 @@ SimpleForm.setup do |config|
       ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
       ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    end
+  end
+
+  # horizontal job wrapper
+  config.wrappers :horizontal_form_job, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: 'col-sm-2 col-form-label'
+    b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-10' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    end
+  end
+
+  # horizontal input for boolean
+  config.wrappers :horizontal_boolean_job, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper tag: 'label', class: 'col-sm-2 col-form-label' do |ba|
+      ba.use :label_text
+    end
+    b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-10' do |wr|
+      wr.wrapper :form_check_wrapper, tag: 'div', class: 'form-check' do |bb|
+        bb.use :input, class: 'form-check-input', error_class: 'is-invalid', valid_class: 'is-valid'
+        bb.use :label, class: 'form-check-label'
+        bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
+        bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+      end
     end
   end
 

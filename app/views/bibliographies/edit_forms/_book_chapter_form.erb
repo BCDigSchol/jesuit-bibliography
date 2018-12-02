@@ -1,5 +1,5 @@
 <div id="book_chapter_form" class="bib_form">
-<%= simple_form_for @bib do |form| %>
+<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
     <h3>Book chapter</h3>
 
@@ -17,32 +17,39 @@
         </div>
     <% end %>
 
+    <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
+
     <%= form.input :reference_type, 
         :as => :hidden, 
         :input_html => { :value => "Book chapter" } 
     %>
     
-    <div id='bibliography_author'>
-        <%= form.simple_fields_for :authors do |c| %>
-            <%= c.input :display_name, 
-                label: 'Author',
-                as: :string 
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Author', 
-            form, 
-            :authors, 
-            association: 'authors', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_author', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_citation_fields' 
-        %>
+    <div id='bibliography_author' class='repeatable-field'>
+        <div class="fields">
+           <%= form.simple_fields_for :authors do |c| %>
+                <%= c.input :display_name, 
+                    label: 'Author',
+                    as: :string,
+                    label_html: { class: '' }
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Author', 
+                    form, 
+                    :authors, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_author .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_citation_fields' 
+                %>
+            </div>
+        </div>
     </div>
     
     <%= form.input :year_published, 
@@ -55,27 +62,32 @@
         as: :string
     %>
 
-    <div id='bibliography_book_editor'>
-        <%= form.simple_fields_for :book_editors do |c| %>
-            <%= c.input :display_name, 
-                label: 'Book editor',
-                as: :string 
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Book editor', 
-            form, 
-            :authors, 
-            association: 'book_editors', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_book_editor', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_citation_fields' 
-        %>
+    <div id='bibliography_book_editor' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :book_editors do |c| %>
+                <%= c.input :display_name, 
+                    label: 'Book editor',
+                    as: :string 
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Book editor', 
+                    form, 
+                    :book_editors, 
+                    association: 'book_editors', 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_book_editor .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_citation_fields' 
+                %>
+            </div>
+        </div>
     </div>
 
     <%= form.input :book_title, 
@@ -118,74 +130,88 @@
         as: :string
     %>
 
-    <div id='bibliography_translator'>
-        <%= form.simple_fields_for :translators do |c| %>
-            <%= c.input :display_name, 
-                label: 'Translator', 
-                label: '',
-                as: :string
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Translator', 
-            form, 
-            :translators, 
-            association: 'translators', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_translator', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_citation_fields' 
-        %>
-    </div>
-
-    <div id='bibliography_isbn'>
-        <%= form.simple_fields_for :isbns do |c| %>
-            <%= c.input :value, 
-                label: 'ISBN', 
-                as: :string
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add ISBN', 
-            form, 
-            :isbns, 
-            association: 'isbns', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_isbn', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_standard_identifier_fields' 
-        %>
+    <div id='bibliography_translator' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :translators do |c| %>
+                <%= c.input :display_name, 
+                    label: 'Translator',
+                    as: :string
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Translator', 
+                    form, 
+                    :translators, 
+                    association: 'translators', 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_translator .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_citation_fields' 
+                %>
+            </div>
+        </div>
     </div>
 
-    <div id='bibliography_doi'>
-        <%= form.simple_fields_for :dois do |c| %>
-            <%= c.input :value, 
-                label: 'DOI', 
-                as: :string
-            %>
-        <% end %>
+    <div id='bibliography_isbn' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :isbns do |c| %>
+                <%= c.input :value, 
+                    label: 'ISBN', 
+                    as: :string
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add ISBN', 
+                    form, 
+                    :isbns, 
+                    association: 'isbns', 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_isbn .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_standard_identifier_fields' 
+                %>
+            </div>
+        </div>
     </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add DOI', 
-            form, 
-            :dois, 
-            association: 'dois', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_doi', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_standard_identifier_fields' 
-        %>
+
+    <div id='bibliography_doi' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :dois do |c| %>
+                <%= c.input :value, 
+                    label: 'DOI', 
+                    as: :string
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add DOI', 
+                    form, 
+                    :dois, 
+                    association: 'dois', 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_doi .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_standard_identifier_fields' 
+                %>
+            </div>
+        </div>
     </div>
 
    <%= form.input :reprint_edition, 
@@ -208,107 +234,151 @@
         as: :string
     %>
 
-    <h4>Subjects</h4>
-    <div id='bibliography_subjects'>
-        <%= form.simple_fields_for :bibliography_subjects do |subject| %>
-            <%= render 'bibliography_subject_fields', :form => subject %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Subject', 
-            form, 
-            :bibliography_subjects, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_subjects', 
-                'association-insertion-method' => 'append'
-            } 
-        %>
-    </div>
-
-    <h4>Periods</h4>
-    <div id='bibliography_periods'>
-        <%= form.simple_fields_for :bibliography_periods do |period| %>
-            <%= render 'bibliography_period_fields', :form => period %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Period', 
-            form, 
-            :bibliography_periods, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_periods', 
-                'association-insertion-method' => 'append'
-            } 
-        %>
+    <div id='bibliography_subjects' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :bibliography_subjects do |subject| %>
+                <%= subject.association :subject, 
+                    label: 'Subject',
+                    collection: Subject.order(:name), 
+                    prompt: 'Choose a subject', 
+                    form_name: 'subject' 
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Subject', 
+                    form, 
+                    :bibliography_subjects, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form',
+                    data: {
+                        'association-insertion-node' => '#bibliography_subjects .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_subject_fields'
+                %>
+            </div>
+        </div>
     </div>
 
-    <h4>Locations</h4>
-    <div id='bibliography_locations'>
-        <%= form.simple_fields_for :bibliography_locations do |location| %>
-            <%= render 'bibliography_location_fields', :form => location %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Location', 
-            form, 
-            :bibliography_locations, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_locations', 
-                'association-insertion-method' => 'append'
-            } 
-        %>
+    <div id='bibliography_periods' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :bibliography_periods do |period| %>
+                <%= period.association :period, 
+                    label: 'Period',
+                    collection: Period.order(:sort_name), 
+                    prompt: 'Choose a period', 
+                    form_name: 'form' 
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Period', 
+                    form, 
+                    :bibliography_periods, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_periods .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_period_fields'
+                %>
+            </div>
+        </div>
     </div>
 
-    <h4>Entities</h4>
-    <div id='bibliography_entities'>
-        <%= form.simple_fields_for :bibliography_entities do |entity| %>
-            <%= render 'bibliography_entity_fields', :form => entity %>
-        <% end %>
+    <div id='bibliography_locations' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :bibliography_locations do |location| %>
+                <%= location.association :location, 
+                    label: 'Location',
+                    collection: Location.order(:sort_name), 
+                    prompt: 'Choose a Location', 
+                    form_name: 'location' 
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Location', 
+                    form, 
+                    :bibliography_locations, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_locations .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_location_fields'
+                %>
+            </div>
+        </div>
     </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Entity', 
-            form, 
-            :bibliography_entities, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_entities', 
-                'association-insertion-method' => 'append'
-            } 
-        %>
+
+    <div id='bibliography_entities' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :bibliography_entities do |entity| %>
+                <%= entity.association :entity, 
+                    label: 'Entity',
+                    collection: Entity.all.order(:display_name), 
+                    prompt: 'Choose an entity', 
+                    form_name: 'entity' 
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Entity', 
+                    form, 
+                    :bibliography_entities, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_entities .fields', 
+                        'association-insertion-method' => 'append'
+                    } 
+                %>
+            </div>
+        </div>
     </div>
 
     <%= form.input :abstract, 
         label: 'Abstract'
     %>
 
-    <div id='bibliography_translated_author'>
-        <%= form.simple_fields_for :translated_authors do |c| %>
-            <%= c.input :display_name, 
-                label: 'Translated author',
-                as: :string
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Translated Author', 
-            form, 
-            :translated_authors, 
-            association: 'translated_authors', 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_translated_author', 
-                'association-insertion-method' => 'append'
-            }, 
-            partial: 'bibliography_citation_fields' 
-        %>
+    <div id='bibliography_translated_author' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :translated_authors do |c| %>
+                <%= c.input :display_name, 
+                    label: 'Translated author',
+                    as: :string
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Translated Author', 
+                    form, 
+                    :translated_authors, 
+                    association: 'translated_authors', 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_translated_author .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'bibliography_citation_fields' 
+                %>
+            </div>
+        </div>
     </div>
     
     <%= form.input :translated_title, 
@@ -316,47 +386,77 @@
         as: :string
     %>
 
-    <div id='bibliography_languages'>
-        <%= form.simple_fields_for :languages do |language| %>
-            <%= language.input :name, 
-                label: 'Language name',
-                as: :string
-            %>
-        <% end %>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Language', 
-            form, 
-            :languages, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_languages', 
-                'association-insertion-method' => 'append'
-            },
-            partial: 'languages_fields'
-        %>
+    <div id='bibliography_languages' class='repeatable-field'>
+        <div class="fields">
+            <%= form.simple_fields_for :languages do |language| %>
+                <%= language.input :name, 
+                    label: 'Language',
+                    as: :string
+                %>
+            <% end %>
+        </div>
+        <div class='links clearfix'>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 btn-add-container">
+                <%= link_to_add_association 'Add Language', 
+                    form, 
+                    :languages, 
+                    class: 'btn btn-warning btn-add', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_languages .fields', 
+                        'association-insertion-method' => 'append'
+                    },
+                    partial: 'languages_fields'
+                %>
+            </div>
+        </div>
     </div>
 
-    <h4>Comments</h4>
-    <div id="bibliography_comments">
-        <ol id="bibliography_comments_ol">
-        <%= form.simple_fields_for :comments do |comment| %>
-            <%= render 'comment_fields', :form => comment %></li>
-        <% end %>
-        </ol>
-    </div>
-    <div class='links'>
-        <%= link_to_add_association 'Add Comment', 
-            form, 
-            :comments, 
-            class: 'btn btn-warning', 
-            form_name: 'form', 
-            data: {
-                'association-insertion-node' => '#bibliography_comments_ol', 
-                'association-insertion-method' => 'append'
-            } 
-        %>
+    <div class='form-group repeatable-field'>
+        <label class="col-sm-2 col-form-label">Comments</label>
+        <div class="col-sm-10 btn-add-container">
+            <div id="bibliography_comments" class='repeatable-field'>
+                <div class="fields">
+                    <%= form.simple_fields_for :comments do |comment| %>
+                        <div class="panel panel-default bibliography-subject-fields nested-fields">
+                            <div class="panel-heading">Comment</div>
+                            <div class="panel-body clearfix">
+                                <%= comment.input :body,
+                                    label: 'Comment text' 
+                                %>
+                                <%= comment.input :comment_type, 
+                                    collection: ['Note', 'Research note', 'Note to editor'], 
+                                    selected: 'Note'
+                                %>
+                                <%= comment.input :commenter, 
+                                    label: 'Commenter',
+                                    as: :string, 
+                                    disabled: true 
+                                %>
+                                <%= comment.input :make_public, 
+                                    label: false,
+                                    wrapper: :horizontal_boolean_job 
+                                %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            
+                <div class='links clearfix'>
+                    <%= link_to_add_association 'Add Comment', 
+                        form, 
+                        :comments, 
+                        class: 'btn btn-warning', 
+                        form_name: 'form', 
+                        data: {
+                            'association-insertion-node' => '#bibliography_comments .fields', 
+                            'association-insertion-method' => 'append'
+                        } 
+                    %>
+                </div>
+            </div>
+        </div>
     </div>
 
     <br/>

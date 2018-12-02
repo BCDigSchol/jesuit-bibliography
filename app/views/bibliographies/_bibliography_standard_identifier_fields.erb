@@ -1,11 +1,16 @@
-<div class='bibliography-standard_identifier-fields nested-fields'>
-    <%= form.input :value, 
-        label: '',
-        as: :string
-    %>
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
+<div class='bibliography-standard_identifier-fields nested-fields form-group row'>
+    <%= form.input :value, wrapper: :vertical_input_group do %>
+        <%= form.input :value, 
+            label: false,
+            as: :string,
+            label_html: { class: 'invisible' }
+        %>
+        <span class="input-group-btn" id="basic-addon-standard_identifier">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form,
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
 </div>

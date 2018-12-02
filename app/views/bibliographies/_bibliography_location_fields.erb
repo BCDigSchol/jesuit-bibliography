@@ -1,14 +1,17 @@
-<div class='bibliography-location-fields nested-fields'>
-    <%= form.association :location, 
-        label: 'Location',
-        collection: Location.order(:sort_name), 
-        prompt: 'Choose a Location', 
-        form_name: 'form' 
-    %>
-    
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
+<div class='bibliography-location-fields nested-fields form-group row'>
+    <%= form.input :location, wrapper: :vertical_input_group do %>
+        <%= form.association :location, 
+            label: false,
+            collection: Location.order(:sort_name), 
+            prompt: 'Choose a Location', 
+            form_name: 'form' 
+        %>
+        <span class="input-group-btn" id="basic-addon-location">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form, 
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
 </div>

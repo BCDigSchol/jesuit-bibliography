@@ -1,14 +1,17 @@
-<div class='bibliography-subject-fields nested-fields'>
-    <%= form.association :subject, 
-        label: 'Subject',
-        collection: Subject.order(:name), 
-        prompt: 'Choose a subject', 
-        form_name: 'form' 
-    %>
-    
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
+<div class='bibliography-subject-fields nested-fields form-group row'>
+    <%= form.input :subject, wrapper: :vertical_input_group do %>
+        <%= form.association :subject, 
+            label: false,
+            collection: Subject.order(:name), 
+            prompt: 'Choose a subject', 
+            form_name: 'form' 
+        %>
+        <span class="input-group-btn" id="basic-addon-subject">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form, 
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
 </div>

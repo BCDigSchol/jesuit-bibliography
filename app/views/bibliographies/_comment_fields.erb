@@ -1,22 +1,27 @@
-<li class="bibliography-subject-fields nested-fields">
-    
-    <%= form.input :body,
-        label: 'Comment text' 
-    %>
-    <%= form.input :comment_type, 
-        collection: ['Note', 'Research note', 'Note to editor'], 
-        selected: 'Note'
-    %>
-    <%= form.input :commenter, 
-        label: 'Commenter',
-        as: :string, 
-        disabled: true 
-    %>
-    <%= form.input :make_public %>
-    
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
-</li>
+<div class="panel panel-default bibliography-subject-fields nested-fields">
+    <div class="panel-heading">Comment</div>
+    <div class="panel-body clearfix">
+        <%= form.input :body,
+            label: 'Comment text' 
+        %>
+        <%= form.input :comment_type, 
+            collection: ['Note', 'Research note', 'Note to editor'], 
+            selected: 'Note'
+        %>
+        <%= form.input :commenter, 
+            label: 'Commenter',
+            as: :string, 
+            disabled: true 
+        %>
+        <%= form.input :make_public, 
+            label: false,
+            wrapper: :horizontal_boolean_job 
+        %>
+        
+        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove comment</btn>".html_safe, 
+            form, 
+            class: 'remove-link', 
+            form_name: 'form' 
+        %>
+    </div>
+</div>

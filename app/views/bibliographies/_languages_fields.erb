@@ -1,12 +1,16 @@
-<div class='bibliography-language-fields nested-fields'>
-    <%= form.input :name, 
-        label: 'Language name',
-        as: :string
-    %>
-    
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
+<div class='bibliography-languages-fields nested-fields form-group row'>
+    <%= form.input :name, wrapper: :vertical_input_group do %>
+        <%= form.input :name, 
+            label: false,
+            as: :string,
+            label_html: { class: 'invisible' }
+        %>
+        <span class="input-group-btn" id="basic-addon-languages">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form,
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
 </div>
