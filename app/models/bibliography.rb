@@ -57,58 +57,183 @@ class Bibliography < ApplicationRecord
 
     searchable do
         integer :id
+
+        # reference_type is a required field
         text :reference_type
         text :reference_type_faceting, :as => 'reference_type_facet'
-        text :title, :default_boost => 2
-        text :title_of_review
-        text :chapter_title
-        string :title
-        string :sort_title do  # for sorting by title, ignoring leading A/An/The
-            if self.title.present?
-                title.downcase.gsub(/^(an?|the)/, '')
-            end
+
+        text :title do
+            title if self.title.present?
         end
-        text :year_published
-        text :display_title
-        text :display_year
-        text :display_author
-        text :place_published
+
+        text :title_of_review do
+            title_of_review if self.title_of_review.present?
+        end
+
+        text :chapter_title do
+            chapter_title if self.chapter_title.present?
+        end
+
+        string :sort_title do  # for sorting by title, ignoring leading A/An/The
+            title.downcase.gsub(/^(an?|the)/, '') if self.title.present?
+        end
+
+        text :year_published do
+            year_published if self.year_published.present?
+        end
+        
+        text :display_title do
+            display_title if self.display_title.present?
+        end
+        
+        text :display_year do
+            title if self.title.present?
+        end
+        
+        text :display_author do
+            display_author if self.display_author.present?
+        end
+        
+        text :place_published do
+            place_published if self.place_published.present?
+        end
+
         text :place_published_faceting, :as => 'place_published_facet'
-        text :publisher
-        text :volume
+        
+        text :publisher do
+            publisher if self.publisher.present?
+        end
+        
+        text :volume do
+            volume if self.volume.present?
+        end
+        
         # be sure 'number_of_volumes_text' is defined as a 'text_general' field type in solr's managed-schema file
-        text :number_of_volumes
-        text :edition
-        text :date
-        text :reprint_edition
-        text :abstract
-        text :translated_title
-        text :volume_number
-        text :worldcat_url
-        text :publisher_url
-        text :leuven_url
-        text :multimedia_dimensions
-        text :multimedia_series
-        text :multimedia_type
-        text :multimedia_url
-        text :event_title
-        text :event_location
-        text :event_institution
-        text :event_date
-        text :event_panel_title
-        text :event_url
-        text :dissertation_university
-        text :dissertation_thesis_type
-        text :dissertation_university_url
+        text :number_of_volumes do
+            number_of_volumes if self.number_of_volumes.present?
+        end
+        
+        text :edition do
+            edition if self.edition.present?
+        end
+        
+        text :date do
+            date if self.date.present?
+        end
+        
+        text :reprint_edition do
+            reprint_edition if self.reprint_edition.present?
+        end
+        
+        text :abstract do
+            abstract if self.abstract.present?
+
+        end
+        
+        text :translated_title do
+            translated_title if self.translated_title.present?
+        end
+        
+        text :volume_number do
+            volume_number if self.volume_number.present?
+        end
+        
+        text :worldcat_url do
+            worldcat_url if self.worldcat_url.present?
+        end
+        
+        text :publisher_url do
+            publisher_url if self.publisher_url.present?
+        end
+        
+        text :leuven_url do
+            leuven_url if self.leuven_url.present?
+        end
+        
+        text :multimedia_dimensions do
+            multimedia_dimensions if self.multimedia_dimensions.present?
+        end
+        
+        text :multimedia_series do
+            multimedia_series if self.multimedia_series.present?
+        end
+        
+        text :multimedia_type do
+            multimedia_type if self.multimedia_type.present?
+        end
+        
+        text :multimedia_url do
+            multimedia_url if self.multimedia_url.present?
+        end
+        
+        text :event_title do
+            event_title if self.event_title.present?
+        end
+        
+        text :event_location do
+            event_location if self.event_location.present?
+        end
+        
+        text :event_institution do
+            event_institution if self.event_institution.present?
+        end
+        
+        text :event_date do
+            event_date if self.event_date.present?
+        end
+        
+        text :event_panel_title do
+            event_panel_title if self.event_panel_title.present?
+        end
+        
+        text :event_url do
+            event_url if self.event_url.present?
+        end
+        
+        text :dissertation_university do
+            dissertation_university if self.dissertation_university.present?
+        end
+        
+        text :dissertation_thesis_type do
+            dissertation_thesis_type if self.dissertation_thesis_type.present?
+        end
+        
+        text :dissertation_university_url do
+            dissertation_university_url if self.dissertation_university_url.present?
+        end
+        
         # be sure 'number_of_pages_text' is defined as a 'text_general' field type in solr's managed-schema file
-        text :number_of_pages
-        text :journal_title
-        text :issue
-        text :page_range
-        text :epub_date
-        text :chapter_number
-        text :book_title
-        text :paper_title
+        text :number_of_pages do
+            number_of_pages if self.number_of_pages.present?
+        end
+        
+        text :journal_title do
+            journal_title if self.journal_title.present?
+        end
+        
+        text :issue do
+            issue if self.issue.present?
+        end
+        
+        text :page_range do
+            page_range if self.page_range.present?
+        end
+        
+        text :epub_date do
+            epub_date if self.epub_date.present?
+        end
+        
+        text :chapter_number do
+            chapter_number if self.chapter_number.present?
+        end
+        
+        text :book_title do
+            book_title if self.book_title.present?
+        end
+        
+        text :paper_title do
+            paper_title if self.paper_title.present?
+        end
         
         text :authors do     # for associations
             authors.map { |author| author.display_name }
@@ -194,13 +319,20 @@ class Bibliography < ApplicationRecord
 
         def comments_public
             if self.comments.present?
-                out = []
+                public_comments = []
+                out = nil
                 self.comments.each do |comment|
                     if comment.body.present? and comment.make_public == true
-                        out << comment.body
+                        public_comments << comment.body
                     end
                 end
-                out.join('||')
+
+                # check if the array contains any elements
+                if !public_comments.empty?
+                    out = public_comments.join('||')
+                end
+
+                out
             end
         end
 
