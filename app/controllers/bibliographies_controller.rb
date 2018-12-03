@@ -9,7 +9,24 @@ class BibliographiesController < ApplicationController
     layout 'bibliography'
 
     def index
-        @bibs = Bibliography.all
+        @sort_name = params[:sort]
+        if params[:sort] == "author"
+            @sorted = :display_author
+        elsif params[:sort] == "title"
+            @sorted = :display_title 
+        elsif params[:sort] == "format"
+            @sorted = :reference_type 
+        elsif params[:sort] == "earliest"
+            @sorted = 'created_at ASC' 
+            @sort_name = 'Earliest Created'
+        elsif params[:sort] == "recent"
+            @sorted = 'created_at DESC' 
+            @sort_name = 'Recently created'
+        else
+            @sorted = 'id'
+        end
+
+        @bibs = Bibliography.order(@sorted).page(params[:page])
     end
 
     def show
