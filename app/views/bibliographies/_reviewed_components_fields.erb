@@ -1,15 +1,17 @@
-<li class="bibliography-subject-fields nested-fields">
-    
-    <%= form.input :reviewed_author,
-        label: 'Reviewed Author' 
-    %>
-    <%= form.input :reviewed_title, 
-        label: 'Reviewed Title' 
-    %>
-    
-    <%= link_to_remove_association "x", 
-        form, 
-        class: 'remove-link', 
-        form_name: 'form' 
-    %>
-</li>
+<div class="panel panel-default bibliography-reviewed_components-fields nested-fields">
+    <div class="panel-heading">Reviewed Author/Title</div>
+    <div class="panel-body clearfix">
+        <%= form.input :reviewed_author,
+            label: 'Reviewed Author' 
+        %>
+        <%= form.input :reviewed_title, 
+            label: 'Reviewed Title' 
+        %>
+        
+        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove Reviewed Author/Title</btn>".html_safe, 
+            form, 
+            class: 'remove-link', 
+            form_name: 'form' 
+        %>
+    </div>
+</div>

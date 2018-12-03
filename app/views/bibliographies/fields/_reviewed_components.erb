@@ -1,0 +1,35 @@
+<div class='form-group repeatable-field'>
+    <label class="col-sm-2 col-form-label"><%= field_label + 's'%></label>
+    <div class="col-sm-10 btn-add-container">
+        <div id="bibliography_reviewed_components" class='repeatable-field'>
+            <div class="fields">
+                <%= form.simple_fields_for :reviewed_components do |rc| %>
+                    <div class="panel panel-default bibliography-subject-fields nested-fields">
+                        <div class="panel-heading"><%= field_label %></div>
+                        <div class="panel-body clearfix">
+                            <%= rc.input :reviewed_author,
+                                label: 'Reviewed Author' 
+                            %>
+                            <%= rc.input :reviewed_title, 
+                                label: 'Reviewed Title' 
+                            %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class='links clearfix'>
+                <%= link_to_add_association 'Add ' + field_label, 
+                    form, 
+                    :reviewed_components, 
+                    class: 'btn btn-warning', 
+                    form_name: 'form', 
+                    data: {
+                        'association-insertion-node' => '#bibliography_reviewed_components .fields', 
+                        'association-insertion-method' => 'append'
+                    }, 
+                    partial: 'reviewed_components_fields'
+                %>
+            </div>
+        </div>
+    </div>
+</div>

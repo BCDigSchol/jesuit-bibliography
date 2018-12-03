@@ -219,9 +219,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'event_institution_text', label: 'Event Institution'
     config.add_show_field 'event_date_text', label: 'Event Date'
     config.add_show_field 'event_panel_title_text', label: 'Event Panel Title'
-    config.add_show_field 'event_url_text', label: 'Event URL'
-    config.add_show_field 'dissertation_university_text', label: 'Dissertation University'
-    config.add_show_field 'dissertation_university_url_text', label: 'Dissertation University URL'
+    config.add_show_field 'event_url_text', label: 'Event URL', :helper_method => :make_link
+    config.add_show_field 'dissertation_university_text', label: 'University'
+    config.add_show_field 'dissertation_university_url_text', label: 'University URL', :helper_method => :make_link
     config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
     config.add_show_field 'journal_title_text', label: 'Journal Title'

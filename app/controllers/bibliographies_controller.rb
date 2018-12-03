@@ -203,14 +203,21 @@ class BibliographiesController < ApplicationController
                     @bib.display_author = @bib.authors.map { |author| author.display_name }.to_sentence
                 end
             elsif @bib.reference_type.downcase == "book review"
-                if @bib.chapter_title.present?
+                if @bib.title_of_review.present?
                     @bib.display_title = @bib.title_of_review
                 end
                 if @bib.authors.present?
                     @bib.display_author = @bib.author_of_reviews.map { |author| author.display_name }.to_sentence
                 end
-            else
-                if @bib.chapter_title.present?
+            elsif @bib.reference_type.downcase == "conference paper"
+                if @bib.paper_title.present?
+                    @bib.display_title = @bib.paper_title
+                end
+                if @bib.authors.present?
+                    @bib.display_author = @bib.author_of_reviews.map { |author| author.display_name }.to_sentence
+                end
+            else # book, dissertation, journal article, multimedia
+                if @bib.title.present?
                     @bib.display_title = @bib.title
                 end
                 if @bib.authors.present?
