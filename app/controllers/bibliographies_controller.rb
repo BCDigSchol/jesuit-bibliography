@@ -9,6 +9,11 @@ class BibliographiesController < ApplicationController
     layout 'bibliography'
 
     def index
+        @bibs_grid = initialize_grid(Bibliography, 
+            order:           'bibliographies.created_at',
+            order_direction: 'desc'
+        )
+
         @sort_name = params[:sort]
         if params[:sort] == "author"
             @sorted = :display_author

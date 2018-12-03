@@ -3,57 +3,33 @@
 <% if current_user.admin_role? || current_user.editor_role? %>
 <h2>Bibliography listings</h2>
 
-<!-- sort drop down -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort By: <%= @sort_name.present? ? @sort_name.capitalize : ' ' %> <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li class="<% if @sort_name == "title" %>active<% end %>"><%= link_to 'Title', bibliographies_path(:sort => "title") %></li>
-    <li class="<% if @sort_name == "author" %>active<% end %>"><%= link_to 'Author', bibliographies_path(:sort => "author") %></li>
-    <li class="<% if @sort_name == "format" %>active<% end %>"><%= link_to 'Format', bibliographies_path(:sort => "format") %></li>
-    <li class="<% if @sort_name == "earliest" %>active<% end %>"><%= link_to 'Earliest created', bibliographies_path(:sort => "earliest") %></li>
-    <li class="<% if @sort_name == "recent" %>active<% end %>"><%= link_to 'Recently created', bibliographies_path(:sort => "recent") %></li>
-  </ul>
-</div>
+<%= grid(@bibs_grid,
+      show_filters: :when_filtered,
+      allow_showing_all_records: false, 
+      upper_pagination_panel: true
+    ) do |g|
 
-<div class="row">
-  <div class="pagination-stuff col-md-10">
-    <%= paginate @bibs %>
-  </div>
-</div>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Format</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Year Published</th>
-      <th>Record Created</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bibs.each do |bib| %>
-      <tr>
-        <td><%= bib.id %></td>
-        <td><%= bib.reference_type %></td>
-        <td><%= link_to bib.display_title, bibliography_path(bib.id) %></td>
-        <td><%= bib.display_author %></td>
-        <td><%= bib.year_published %></td>
-        <td><%= bib.created_at.strftime "%b %e, %Y" %></td>
-        <td><%= link_to 'Show', bibliography_path(bib) %></td>
-        <td><%= link_to 'Edit', edit_bibliography_path(bib) %></td>
-        <td><%= link_to 'Destroy', bibliography_path(bib),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'ID', attribute: 'id' do |bib|
+    bib.id
+  end
+
+  g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
+
+  g.column name: 'Title', attribute: 'display_title'
+
+  g.column name: 'Author', attribute: 'display_author'
+
+  g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
+    bib.created_at.strftime "%b %e, %Y"
+  end
+
+  g.column do |bib|
+    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
+    "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', bibliography_path(bib), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+  end
+end -%>
+
 <% end %>
-
-<%= paginate @bibs %>
 
 <p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>

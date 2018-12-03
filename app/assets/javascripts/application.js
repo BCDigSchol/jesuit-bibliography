@@ -20,5 +20,7 @@
 //= require nested_form_fields
 //= require cocoon
 
-//= require_tree .
 //= require bibliography.js
+//= require wice_grid
+//= require bootstrap-datepicker/core
+//= require_tree .

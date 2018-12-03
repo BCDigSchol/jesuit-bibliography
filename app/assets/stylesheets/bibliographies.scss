@@ -76,6 +76,38 @@
         margin-left: -1px;
     }
 
+    .icon {
+        padding: 0 0 4px 2px;
+        &:after {
+            display: inline;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free";
+        }
+    }
+
+    .icon-link {
+        margin-right: 6px;
+    }
+    
+    .show-link::after {
+        content: "\f15c";
+    }
+
+    .edit-link::after {
+        content: "\f044";
+    }
+
+    .destroy-link::after {
+        content: "\f2ed";
+    }
+
+    .destroy-link {
+        color: red;
+    }
+
     .footer {
         width: 100%;
         height: 60px;

@@ -93,3 +93,6 @@ gem 'csv'
 gem 'sunspot_rails'
 gem 'progress_bar'
 gem 'kaminari'
+gem "wice_grid"
+gem 'font-awesome-sass',  '~> 4.3'
+gem 'bootstrap-datepicker-rails'
