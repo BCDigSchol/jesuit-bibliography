@@ -31,44 +31,32 @@
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :title, 
         label: 'Title', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :multimedia_series, 
         label: 'Series', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :place_published, 
         label: 'Place published', 
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :publisher, 
         label: 'Publisher',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= form.input :multimedia_type, 
         label: 'Type of media',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= render 'bibliographies/fields/performer', :form => form, field_label: 'Performer' %>
@@ -78,22 +66,18 @@
     <%= form.input :worldcat_url, 
         label: 'Worldcat URL',
         as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        hint: 'URl must start with http:// or https://'
     %>
 
     <%= form.input :multimedia_url, 
         label: 'Multimedia URL',
         as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        hint: 'URl must start with http:// or https://'
     %>
 
     <%= form.input :multimedia_dimensions, 
         label: 'Multimedia dimensions',
-        as: :string, 
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        as: :string
     %>
 
     <%= render 'bibliographies/fields/subject', :form => form, field_label: 'Subject' %>
@@ -105,9 +89,7 @@
     <%= render 'bibliographies/fields/entity', :form => form, field_label: 'Entity' %>
 
     <%= form.input :abstract, 
-        label: 'Abstract',
-        input_html: { class: 'form-control' }, 
-        wrapper_html: { class: 'form-group' } 
+        label: 'Abstract'
     %>
 
     <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>

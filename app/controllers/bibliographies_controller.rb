@@ -62,23 +62,73 @@ class BibliographiesController < ApplicationController
 
     def edit
         if !@bib.nil?
-            @bib.comments.build
-            @bib.languages.build
-            @bib.reviewed_components.build
-            @bib.isbns.build
-            @bib.issns.build
-            @bib.dois.build
-            @bib.authors.build
-            @bib.editors.build
-            @bib.book_editors.build
-            @bib.author_of_reviews.build
+            if @bib.comments.count == 0
+                @bib.comments.build
+            end
+
+            if @bib.languages.count == 0
+                @bib.languages.build
+            end
+
+            if @bib.reviewed_components.count == 0
+                @bib.reviewed_components.build
+            end
+
+            if @bib.isbns.count == 0
+                @bib.isbns.build
+            end
+
+            if @bib.issns.count == 0
+                @bib.issns.build
+            end
+
+            if @bib.dois.count == 0
+                @bib.dois.build
+            end
+
+            if @bib.authors.count == 0
+                @bib.authors.build
+            end
+
+            if @bib.editors.count == 0
+                @bib.editors.build
+            end
+
+            if @bib.book_editors.count == 0
+                @bib.book_editors.build
+            end
+
+            if @bib.author_of_reviews.count == 0
+                @bib.author_of_reviews.build
+            end
+
+            if @bib.translators.count == 0
             @bib.translators.build
-            @bib.performers.build
-            @bib.translated_authors.build
-            @bib.bibliography_subjects.build
-            @bib.bibliography_periods.build
-            @bib.bibliography_locations.build
-            @bib.bibliography_entities.build
+            end
+
+            if @bib.performers.count == 0
+                @bib.performers.build
+            end
+
+            if @bib.translated_authors.count == 0
+                @bib.translated_authors.build
+            end
+
+            if @bib.bibliography_subjects.count == 0
+                @bib.bibliography_subjects.build
+            end
+
+            if @bib.bibliography_periods.count == 0
+                @bib.bibliography_periods.build
+            end
+
+            if @bib.bibliography_locations.count == 0
+                @bib.bibliography_locations.build
+            end
+
+            if @bib.bibliography_entities.count == 0
+                @bib.bibliography_entities.build
+            end
 
             @reference_type = @bib.reference_type
         end
