@@ -69,3 +69,15 @@ Activate the new environment variables in your current shell.
 Use the Rails [sunspot](https://github.com/sunspot/sunspot) gem to index all the Bibliography records.
 
 ```rake sunspot:reindex```
+
+## Deployment
+
+Make sure you have access to the production server. To deploy master to production:
+
+```shell
+cap production deploy
+cap production deploy:solr:reindex   # if Solr needs reindexing
+cap production deploy:db:reset       # if the database needs to be rebuilt
+
+
+```
