@@ -4,8 +4,8 @@
         <div id="bibliography_comments" class='repeatable-field'>
             <div class="fields">
                 <%= form.simple_fields_for :comments do |comment| %>
-                    <div class="panel panel-default bibliography-subject-fields nested-fields">
-                        <div class="panel-heading"><%= field_label %></div>
+                    <div class="panel bibliography-subject-fields nested-fields <%= c[comment.index.to_i].make_public ? 'panel-success': 'panel-default' %>">
+                        <div class="panel-heading"><%= c[comment.index.to_i].make_public ? 'Public ': 'Private ' %> <%= field_label %></div>
                         <div class="panel-body clearfix">
                             <%= comment.input :body,
                                 label: 'Comment text' 
