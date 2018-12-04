@@ -30,6 +30,25 @@
         margin: 2rem 0 3rem 0;
     }
 
+    .record-view {
+        label {
+            font-size: 15px;
+            margin: 0;
+            padding: .5rem;
+            display: inline-block;
+            text-align: right;
+        }
+        .field-value {
+            font-size: 14px;
+            margin: 0;
+            padding: .5rem 1rem;
+            display: inline-block;
+        }
+        ul,ol {
+            list-style-type: none;
+        }
+    }
+
     form.form-horizontal {
         label.col-form-label {
             padding: 10px 0 5px 0;

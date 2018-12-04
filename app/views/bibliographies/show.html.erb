@@ -2,276 +2,523 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Record index', bibliography_path %>
 <% else %>
-    <h1>Here is Bibliography #<%= @bib.id %></h1>
+    <h1>Bibliography #<%= @bib.id %></h1>
 
     <div class="record-view">
-        <label>Reference Type</label>
-        <div class="field-value"><%= @bib.reference_type %></div>
-
-        <label>Display Title</label>
-        <div class="field-value"><%= @bib.display_title %></div>
-
-        <label>Display Author</label>
-        <div class="field-value"><%= @bib.display_author %></div>
-
-        <label>Author</label>
-        <ul>
-        <% @bib.authors.each do |author| %>
-            <li><%= author.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Editor</label>
-        <ul>
-        <% @bib.editors.each do |editor| %>
-            <li><%= editor.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Book Editor</label>
-        <ul>
-        <% @bib.book_editors.each do |beditor| %>
-            <li><%= beditor.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Author of Review</label>
-        <ul>
-        <% @bib.author_of_reviews.each do |aor| %>
-            <li><%= aor.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Year Published</label>
-        <div class="field-value"><%= @bib.year_published %></div>
-
-        <label>Title</label>
-        <div class="field-value"><%= @bib.title %></div>
-
-        <label>Chapter Title</label>
-        <div class="field-value"><%= @bib.chapter_title %></div>
-
-        <label>Title of Review</label>
-        <div class="field-value"><%= @bib.title_of_review %></div>
-
-        <label>Secondary Title</label>
-        <div class="field-value"><%= @bib.title_secondary %></div>
-
-        <label>Book title</label>
-        <div class="field-value"><%= @bib.book_title %></div>
-
-        <label>Event Title</label>
-        <div class="field-value"><%= @bib.event_title %></div>
-
-        <label>Paper Title</label>
-        <div class="field-value"><%= @bib.paper_title %></div>
-
-        <label>Multimedia Series</label>
-        <div class="field-value"><%= @bib.multimedia_series %></div>
-
-        <label>Place Published</label>
-        <div class="field-value"><%= @bib.place_published %></div>
-
-        <label>Event Location</label>
-        <div class="field-value"><%= @bib.event_location %></div>
-
-        <label>Title of Journal</label>
-        <div class="field-value"><%= @bib.journal_title %></div>
-
-        <label>Publisher</label>
-        <div class="field-value"><%= @bib.publisher %></div>
-
-        <label>Event Institution</label>
-        <div class="field-value"><%= @bib.event_institution %></div>
-
-        <label>University</label>
-        <div class="field-value"><%= @bib.dissertation_university %></div>
-
-        <label>Volume</label>
-        <div class="field-value"><%= @bib.volume %></div>
-
-        <label>Number of Volumes</label>
-        <div class="field-value"><%= @bib.number_of_volumes %></div>
-
-        <label>Issue</label>
-        <div class="field-value"><%= @bib.issue %></div>
-
-        <label>Event Date</label>
-        <div class="field-value"><%= @bib.event_date %></div>
-
-        <label>Volumes Number</label>
-        <div class="field-value"><%= @bib.volume_number %></div>
-
-        <label>Number of pages</label>
-        <div class="field-value"><%= @bib.number_of_pages %></div>
-
-        <label>Page range</label>
-        <div class="field-value"><%= @bib.page_range %></div>
-
-        <label>Reviewed Author/Title</label>
-        <ul>
-        <% @bib.reviewed_components.each do |rc| %>
-            <li>
-                <div>Author: <span><%= rc.reviewed_author %></span></div>
-                <div>Title: <span><%= rc.reviewed_title %></span></div>
-            </li>
-        <% end %>
-        </ul>
-
-        <label>Chapter number</label>
-        <div class="field-value"><%= @bib.chapter_number %></div>
-
-        <label>Event Panel Title</label>
-        <div class="field-value"><%= @bib.event_panel_title %></div>
-
-        <label>Edition</label>
-        <div class="field-value"><%= @bib.edition %></div>
-
-        <label>Epub Date</label>
-        <div class="field-value"><%= @bib.epub_date %></div>
-
-        <label>Date</label>
-        <div class="field-value"><%= @bib.date %></div>
-
-        <label>Multimedia Type</label>
-        <div class="field-value"><%= @bib.multimedia_type %></div>
-
-        <label>Thesis type</label>
-        <div class="field-value"><%= @bib.dissertation_thesis_type %></div>
-
-        <label>Translator</label>
-        <ul>
-        <% @bib.translators.each do |translator| %>
-            <li><%= translator.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Performer</label>
-        <ul>
-        <% @bib.performers.each do |performer| %>
-            <li><%= performer.display_name %></li>
-        <% end %>
-        </ul>
+        <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
         
-        <label>Reprint Edition</label>
-        <div class="field-value"><%= @bib.reprint_edition %></div>
+        <hr/>
 
-        <label>Worldcat URL</label>
-        <div class="field-value"><%= @bib.worldcat_url %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Reference Type</label>
+            <div class="field-value col-sm-10"><%= @bib.reference_type %></div>
+        </div>
 
-        <label>Publisher URL</label>
-        <div class="field-value"><%= @bib.publisher_url %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Display Title</label>
+            <div class="field-value col-sm-10"><%= @bib.display_title %></div>
+        </div>
 
-        <label>Multimedia URL</label>
-        <div class="field-value"><%= @bib.multimedia_url %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Display Author</label>
+            <div class="field-value col-sm-10"><%= @bib.display_author %></div>
+        </div>
 
-        <label>Event URL</label>
-        <div class="field-value"><%= @bib.event_url %></div>
-
-        <label>University URL</label>
-        <div class="field-value"><%= @bib.dissertation_university_url %></div>
-
-        <label>Leuven URL</label>
-        <div class="field-value"><%= @bib.leuven_url %></div>
-
-        <label>Multimedia Dimensions</label>
-        <div class="field-value"><%= @bib.multimedia_dimensions %></div>
-
-        <label>Abstract</label>
-        <div class="field-value"><%= @bib.abstract %></div>
-
-        <label>Translated Author</label>
-        <ul>
-        <% @bib.translated_authors.each do |ta| %>
-            <li><%= ta.display_name %></li>
-        <% end %>
-        </ul>
-
-        <label>Translated Title</label>
-        <div class="field-value"><%= @bib.translated_title %></div>
-
-        <label>Languages</label>
-        <ul>
-        <% @bib.languages.each do |lang| %>
-            <li><%= lang.name %></li>
-        <% end %>
-        </ul>
-
-        <label>ISBN</label>
-        <ul>
-        <% @bib.isbns.each do |isbn| %>
-            <li><%= isbn.value %></li>
-        <% end %>
-        </ul>
-
-        <label>ISSN</label>
-        <ul>
-        <% @bib.issns.each do |issn| %>
-            <li><%= issn.value %></li>
-        <% end %>
-        </ul>
-
-        <label>DOI</label>
-        <ul>
-        <% @bib.dois.each do |doi| %>
-            <li><%= doi.value %></li>
-        <% end %>
-        </ul>
-        
-        <label>Subjects</label>
-        <ul>
-        <% @bib.subjects.each do |subject| %>
-            <li><%= subject.name %></li>
-        <% end %>
-        </ul>
-
-        <label>Periods</label>
-        <ul>
-        <% @bib.periods.each do |period| %>
-            <li><%= period.name %></li>
-        <% end %>
-        </ul>
-
-        <label>Locations</label>
-        <ul>
-        <% @bib.locations.each do |location| %>
-            <li><%= location.name %></li>
-        <% end %>
-        </ul>
-
-        <label>Entities</label>
-        <ul>
-        <% @bib.entities.each do |entity| %>
-            <li><%= entity.display_name %></li>
-        <% end %>
-        </ul>
-
-        <h4>Comments</h4>
-        <ol>
-        <% @bib.comments.each do |comment| %>
-            <li>
-            <div class="comment-section">
-                <label>Comment:</label>
-                <div class="field-value"><%= comment.body %></div>
-
-                <label>Type:</label>
-                <div class="field-value"><%= comment.comment_type %></div>
-
-                <label>Commenter:</label>
-                <div class="field-value"><%= comment.commenter %></div>
-
-                <label>Make Public?:</label>
-                <div class="field-value"><%= comment.make_public %></div>
+        <% if @bib.authors.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Author</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.authors.each do |author| %>
+                    <li><%= author.display_name %></li>
+                <% end %>
+                </ul>
             </div>
-            </li>
         <% end %>
-        </ol>
 
-        <label>Created At</label>
-        <div class="field-value"><%= @bib.created_at %></div>
+        <% if @bib.editors.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Editor</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.editors.each do |editor| %>
+                    <li><%= editor.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
 
-        <label>Updated At</label>
-        <div class="field-value"><%= @bib.updated_at %></div>
+        <% if @bib.book_editors.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Book Editor</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.book_editors.each do |beditor| %>
+                    <li><%= beditor.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.author_of_reviews.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Author of Review</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.author_of_reviews.each do |aor| %>
+                    <li><%= aor.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.year_published.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Year Published</label>
+                <div class="field-value col-sm-10"><%= @bib.year_published %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Title</label>
+                <div class="field-value col-sm-10"><%= @bib.title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.chapter_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Chapter Title</label>
+                <div class="field-value col-sm-10"><%= @bib.chapter_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.title_of_review.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Title of Review</label>
+                <div class="field-value col-sm-10"><%= @bib.title_of_review %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.book_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Book title</label>
+                <div class="field-value col-sm-10"><%= @bib.book_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event Title</label>
+                <div class="field-value col-sm-10"><%= @bib.event_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.paper_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Paper Title</label>
+                <div class="field-value col-sm-10"><%= @bib.paper_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.multimedia_series.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Multimedia Series</label>
+                <div class="field-value col-sm-10"><%= @bib.multimedia_series %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.place_published.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Place Published</label>
+                <div class="field-value col-sm-10"><%= @bib.place_published %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_location.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event Location</label>
+                <div class="field-value col-sm-10"><%= @bib.event_location %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.journal_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Title of Journal</label>
+                <div class="field-value col-sm-10"><%= @bib.journal_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.publisher.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Publisher</label>
+                <div class="field-value col-sm-10"><%= @bib.publisher %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_institution.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event Institution</label>
+                <div class="field-value col-sm-10"><%= @bib.event_institution %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.dissertation_university.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">University</label>
+                <div class="field-value col-sm-10"><%= @bib.dissertation_university %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.volume.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Volume</label>
+                <div class="field-value col-sm-10"><%= @bib.volume %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.number_of_volumes.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Number of Volumes</label>
+                <div class="field-value col-sm-10"><%= @bib.number_of_volumes %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.issue.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Issue</label>
+                <div class="field-value col-sm-10"><%= @bib.issue %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_date.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event Date</label>
+                <div class="field-value col-sm-10"><%= @bib.event_date %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.volume_number.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Volumes Number</label>
+                <div class="field-value col-sm-10"><%= @bib.volume_number %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.number_of_pages.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Number of pages</label>
+                <div class="field-value col-sm-10"><%= @bib.number_of_pages %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.page_range.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Page range</label>
+                <div class="field-value col-sm-10"><%= @bib.page_range %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.reviewed_components.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Reviewed Author/Title</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.reviewed_components.each do |rc| %>
+                    <li>
+                        <div>Author: <span><%= rc.reviewed_author %></span></div>
+                        <div>Title: <span><%= rc.reviewed_title %></span></div>
+                    </li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.chapter_number.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Chapter number</label>
+                <div class="field-value col-sm-10"><%= @bib.chapter_number %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_panel_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event Panel Title</label>
+                <div class="field-value col-sm-10"><%= @bib.event_panel_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.edition.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Edition</label>
+                <div class="field-value col-sm-10"><%= @bib.edition %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.epub_date.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Epub Date</label>
+                <div class="field-value col-sm-10"><%= @bib.epub_date %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.date.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Date</label>
+                <div class="field-value col-sm-10"><%= @bib.date %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.multimedia_type.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Multimedia Type</label>
+                <div class="field-value col-sm-10"><%= @bib.multimedia_type %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.dissertation_thesis_type.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Thesis type</label>
+                <div class="field-value col-sm-10"><%= @bib.dissertation_thesis_type %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.translators.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Translator</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.translators.each do |translator| %>
+                    <li><%= translator.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.performers.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Performer</label>
+                <ul>
+                <% @bib.performers.each do |performer| %>
+                    <li><%= performer.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.reprint_edition.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Reprint Edition</label>
+                <div class="field-value col-sm-10"><%= @bib.reprint_edition %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.worldcat_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Worldcat URL</label>
+                <div class="field-value col-sm-10"><%= @bib.worldcat_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.publisher_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Publisher URL</label>
+                <div class="field-value col-sm-10"><%= @bib.publisher_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.multimedia_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Multimedia URL</label>
+                <div class="field-value col-sm-10"><%= @bib.multimedia_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.event_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Event URL</label>
+                <div class="field-value col-sm-10"><%= @bib.event_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.dissertation_university_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">University URL</label>
+                <div class="field-value col-sm-10"><%= @bib.dissertation_university_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.leuven_url.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Leuven URL</label>
+                <div class="field-value col-sm-10"><%= @bib.leuven_url %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.multimedia_dimensions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Multimedia Dimensions</label>
+                <div class="field-value col-sm-10"><%= @bib.multimedia_dimensions %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.abstract.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Abstract</label>
+                <div class="field-value col-sm-10"><%= @bib.abstract %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.translated_authors.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Translated Author</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.translated_authors.each do |ta| %>
+                    <li><%= ta.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.translated_title.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Translated Title</label>
+                <div class="field-value col-sm-10"><%= @bib.translated_title %></div>
+            </div>
+        <% end %>
+
+        <% if @bib.languages.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Languages</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.languages.each do |lang| %>
+                    <li><%= lang.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.isbns.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">ISBN</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.isbns.each do |isbn| %>
+                    <li><%= isbn.value %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.issns.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">ISSN</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.issns.each do |issn| %>
+                    <li><%= issn.value %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.dois.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">DOI</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.dois.each do |doi| %>
+                    <li><%= doi.value %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.subjects.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Subjects</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.subjects.each do |subject| %>
+                    <li><%= subject.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.periods.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Periods</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.periods.each do |period| %>
+                    <li><%= period.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.locations.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Locations</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.locations.each do |location| %>
+                    <li><%= location.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.entities.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Entities</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.entities.each do |entity| %>
+                    <li><%= entity.display_name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.comments.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Comments</label>
+                <ol class="field-value col-sm-10">
+                    <% @bib.comments.each do |comment| %>
+                        <li>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Comment</div>
+                                <div class="panel-body clearfix">
+                                    <div class="row">
+                                        <label class="col-sm-2">Comment:</label>
+                                        <div class="field-value col-sm-10"><%= comment.body %></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2">Type:</label>
+                                        <div class="field-value col-sm-10"><%= comment.comment_type %></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2">Commenter:</label>
+                                        <div class="field-value col-sm-10"><%= comment.commenter %></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2">Make Public?:</label>
+                                        <div class="field-value col-sm-10"><%= comment.make_public %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% end %>
+                </ol>
+            </div>
+        <% end %>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Created At</label>
+            <div class="field-value col-sm-10"><%= @bib.created_at %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Updated At</label>
+            <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
+        </div>
     </div>
-    <%= link_to 'Edit', edit_bibliography_path(@bib) %> | <%= link_to 'Back', bibliographies_path %>
+
+    <hr/>
+
+    <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+    <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
 <% end %>
