@@ -196,7 +196,7 @@ class CatalogController < ApplicationController
     
     config.add_show_field 'isbns_text', label: 'ISBN'
     config.add_show_field 'issns_text', label: 'ISSN'
-    config.add_show_field 'dois_text', label: 'DOI'
+    config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
 
     config.add_show_field 'publisher_text', label: 'Publisher'
     config.add_show_field 'volume_text', label: 'Volume'
