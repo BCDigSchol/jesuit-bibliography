@@ -4,7 +4,8 @@
             label: false,
             collection: Period.order(:sort_name), 
             prompt: 'Choose a period', 
-            form_name: 'form' 
+            form_name: 'form',
+            input_html: {class: 'periods'}
         %>
         <span class="input-group-btn" id="basic-addon-period">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

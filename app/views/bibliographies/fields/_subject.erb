@@ -5,7 +5,8 @@
                 label: field_label,
                 collection: Subject.order(:name), 
                 prompt: 'Choose a ' + field_label, 
-                form_name: 'subject' 
+                form_name: 'subject',
+                input_html: {class: 'subjects'}
             %>
         <% end %>
     </div>
@@ -26,3 +27,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.subjects').select2();
+    $("#bibliography_subjects").on('cocoon:after-insert', function(e, insertedItem){
+        $('.subjects').last().select2();
+    });
+});
+</script>

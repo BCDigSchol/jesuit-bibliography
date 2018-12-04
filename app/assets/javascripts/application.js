@@ -23,4 +23,5 @@
 //= require bibliography.js
 //= require wice_grid
 //= require bootstrap-datepicker/core
+//= require select2
 //= require_tree .

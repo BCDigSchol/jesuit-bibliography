@@ -4,7 +4,8 @@
             label: false,
             collection: Subject.order(:name), 
             prompt: 'Choose a subject', 
-            form_name: 'form' 
+            form_name: 'form',
+            input_html: {class: 'subjects'}
         %>
         <span class="input-group-btn" id="basic-addon-subject">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

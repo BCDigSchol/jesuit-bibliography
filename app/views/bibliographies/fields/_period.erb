@@ -5,7 +5,8 @@
                 label: field_label,
                 collection: Period.order(:sort_name), 
                 prompt: 'Choose a ' + field_label, 
-                form_name: 'form' 
+                form_name: 'form',
+                input_html: {class: 'periods'}
             %>
         <% end %>
     </div>
@@ -26,3 +27,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.periods').select2();
+    $("#bibliography_periods").on('cocoon:after-insert', function(e, insertedItem){
+        $('.periods').last().select2();
+    });
+});
+</script>

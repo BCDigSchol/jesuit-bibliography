@@ -5,7 +5,8 @@
                 label: field_label,
                 collection: Location.order(:sort_name), 
                 prompt: 'Choose a ' + field_label, 
-                form_name: 'location' 
+                form_name: 'location',
+                input_html: {class: 'locations'}
             %>
         <% end %>
     </div>
@@ -26,3 +27,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.locations').select2();
+    $("#bibliography_locations").on('cocoon:after-insert', function(e, insertedItem){
+        $('.locations').last().select2();
+    });
+});
+</script>

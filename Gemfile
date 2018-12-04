@@ -96,3 +96,4 @@ gem 'kaminari'
 gem "wice_grid"
 gem 'font-awesome-sass',  '~> 4.3'
 gem 'bootstrap-datepicker-rails'
+gem 'select2-rails'

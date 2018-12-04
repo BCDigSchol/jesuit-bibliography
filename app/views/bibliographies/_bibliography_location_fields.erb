@@ -4,7 +4,8 @@
             label: false,
             collection: Location.order(:sort_name), 
             prompt: 'Choose a Location', 
-            form_name: 'form' 
+            form_name: 'form',
+            input_html: {class: 'locations'}
         %>
         <span class="input-group-btn" id="basic-addon-location">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

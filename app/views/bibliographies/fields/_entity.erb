@@ -5,7 +5,8 @@
                 label: field_label,
                 collection: Entity.all.order(:display_name), 
                 prompt: 'Choose an ' + field_label, 
-                form_name: 'entity' 
+                form_name: 'entity',
+                input_html: {class: 'entities'}
             %>
         <% end %>
     </div>
@@ -26,3 +27,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.entities').select2();
+    $("#bibliography_entities").on('cocoon:after-insert', function(e, insertedItem){
+        $('.entities').last().select2();
+    });
+});
+</script>
