@@ -1,5 +1,5 @@
 namespace :deploy do
-    rake_cmd = "RAILS_ENV=#{rails_env} /usr/blacklight/.rbenv/bin/rbenv exec bundle exec rake"
+    rake_cmd = "RAILS_ENV=production /usr/blacklight/.rbenv/bin/rbenv exec bundle exec rake"
 
     desc 'update and reimport database'
     task :reimport do
