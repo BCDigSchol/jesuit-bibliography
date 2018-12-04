@@ -5,9 +5,13 @@ namespace :deploy do
     task :reimport do
         on roles(:all) do
             within "#{current_path}" do
-                execute "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 #{rake_cmd} db:reset"
-                execute "#{rake_cmd} import:all"
-                execute "#{rake_cmd} importdata:books"
+                execute 'ls'
+                execute :rake, 'db:reset'
+=begin
+
+                execute :rake, 'import:all'
+                execute :rake, 'importdata:books'
+=end
             end
         end
     end
