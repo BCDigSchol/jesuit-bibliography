@@ -94,7 +94,7 @@
 
     <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
 
-    <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment' %>
+    <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 
     <hr/>
     
