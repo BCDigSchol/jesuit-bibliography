@@ -1,10 +1,8 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Back', bibliography_path %>
+    <%= link_to 'Go Back to Records index', bibliography_path %>
 <% else %>
     <h1>Editing Bibliography #<%= @bib.id %></h1>
 
     <%= render 'form' %>
-
-    <%= link_to 'Back', bibliography_path %>
 <% end %>

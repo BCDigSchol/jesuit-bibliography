@@ -18,6 +18,9 @@
     <% end %>
 
     <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
+    <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
+
+    <hr/>
 
     <%= form.input :reference_type, 
         :as => :hidden, 
@@ -111,7 +114,9 @@
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment' %>
 
-    <br/>
+    <hr/>
+    
     <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
+    <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
 <% end %>
 </div>
