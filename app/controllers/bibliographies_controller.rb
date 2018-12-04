@@ -61,25 +61,27 @@ class BibliographiesController < ApplicationController
     end
 
     def edit
-        @bib.comments.build
-        @bib.languages.build
-        @bib.reviewed_components.build
-        @bib.isbns.build
-        @bib.issns.build
-        @bib.dois.build
-        @bib.authors.build
-        @bib.editors.build
-        @bib.book_editors.build
-        @bib.author_of_reviews.build
-        @bib.translators.build
-        @bib.performers.build
-        @bib.translated_authors.build
-        @bib.bibliography_subjects.build
-        @bib.bibliography_periods.build
-        @bib.bibliography_locations.build
-        @bib.bibliography_entities.build
+        if !@bib.nil?
+            @bib.comments.build
+            @bib.languages.build
+            @bib.reviewed_components.build
+            @bib.isbns.build
+            @bib.issns.build
+            @bib.dois.build
+            @bib.authors.build
+            @bib.editors.build
+            @bib.book_editors.build
+            @bib.author_of_reviews.build
+            @bib.translators.build
+            @bib.performers.build
+            @bib.translated_authors.build
+            @bib.bibliography_subjects.build
+            @bib.bibliography_periods.build
+            @bib.bibliography_locations.build
+            @bib.bibliography_entities.build
 
-        @reference_type = @bib.reference_type
+            @reference_type = @bib.reference_type
+        end
     end
 
     def create
