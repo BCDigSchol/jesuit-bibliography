@@ -476,8 +476,8 @@
                 <ol class="field-value col-sm-10">
                     <% @bib.comments.each do |comment| %>
                         <li>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Comment</div>
+                            <div class="panel <%= comment.make_public ? 'panel-success' : 'panel-default' %>">
+                                <div class="panel-heading"><%= comment.make_public ? 'Public ' : 'Private ' %> Comment</div>
                                 <div class="panel-body clearfix">
                                     <div class="row">
                                         <label class="col-sm-2">Comment:</label>
