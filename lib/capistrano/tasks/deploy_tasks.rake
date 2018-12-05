@@ -6,7 +6,7 @@ namespace :deploy do
                 within "#{current_path}" do
                     execute :rake, 'db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
                     execute :rake, 'import:all'
-                    execute :rake, 'importdata:books'
+                    execute :rake, 'importdata:all'
                 end
             end
         end
