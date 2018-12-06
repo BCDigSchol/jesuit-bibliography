@@ -49,6 +49,14 @@ Activate the new environment variables in your current shell.
 
 ```source ~/.bashrc```
 
+Add `SOLR_CONF_HOME`
+
+```echo 'export SOLR_CONF_HOME="/path/to/solr/blacklight-core/conf"' >> ~/.bashrc```
+
+| **Hint** |
+| -------- |
+| if you used `brew` to install Solr then `SOLR_CONF_HOME` should be `/usr/local/Cellar/solr/7.5.0/server/solr/blacklight-core/conf` |
+
 ## Useful import commands for development
 
 ### Import test users:
@@ -64,6 +72,9 @@ Activate the new environment variables in your current shell.
 
 ### Clear all Bibliograhy records
 ```rake importdata:clear_all```
+
+### Update local Solr instance with project config files ([see this directory](solr/blacklight-core/conf).)
+```rake solr_config:update```
 
 ## Solr indexing
 Use the Rails [sunspot](https://github.com/sunspot/sunspot) gem to index all the Bibliography records.
