@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/BCDigSchol/alphabetical_paginate
+  revision: f0ca698fd36bedaa920ce775e8b8d185fcef3113
+  specs:
+    alphabetical_paginate (2.3.3)
+
+GIT
   remote: https://github.com/BCDigSchol/blacklight-marc.git
   revision: 650d6b9d6744b9831632b777aae5aef6d35ed46e
   tag: backport-traject
@@ -382,6 +388,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alphabetical_paginate!
   blacklight (>= 6.1)
   blacklight-marc!
   bootsnap (>= 1.1.0)

@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   resources :periods
   resources :locations
 
+  namespace :terms do
+    #root to: "entities#index"
+    resources :entities, only: [:index], path: 'who'
+  end
+
+
   mount Blacklight::Engine => '/'
   Blacklight::Marc.add_routes(self)
   root to: "catalog#index"
