@@ -5,9 +5,9 @@ namespace :solr_config do
     desc "Update local SOLR config files"
     task update: :environment do
         # TODO make sure this can only be run in development
-        
+
         local_solr_configs_home = Rails.root.join('solr/blacklight-core/conf/')
-        solr_conf_home = ENV['SOLR_CONF_HOME_FOO'] || nil
+        solr_conf_home = ENV['SOLR_CONF_HOME'] || nil
         solr_config_files = ["managed-schema", "solrconfig.xml"]
 
         puts "Update SOLR config files on this computer."
