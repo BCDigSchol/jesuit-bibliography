@@ -1,34 +1,35 @@
 <div class="page-header row">
-  <h2 class="col-md-8 page-heading"><%= t('blacklight.welcome') %></h2>
-  
-  <ul class="nav nav-pills col-md-4">
-    <li><a href="https://github.com/projectblacklight/blacklight/">Github</a></li>
-    <li><a href="https://github.com/projectblacklight/blacklight/wiki">Wiki</a></li>
-    <li><a href="https://github.com/projectblacklight/blacklight/releases/tag/v<%= Blacklight::VERSION %>">Release Notes</a></li>
+</div>
+
+<div class="home-text">
+  <p>The Jesuit Online Bibliography is a free, collaborative, multilingual, and fully searchable database of bibliographic records for the field of Jesuit Studies produced in the 21st century.</p>
+  <p>In the <a href="none">bibliographic tradition</a> of the Society of Jesus, this database provides the records, abstracts, subject categories, and direct links to books, book chapters, journal articles and book reviews related to the study of Jesuit history, spirituality, educational heritage, and pedagogy.</p> 
+  <p>The editorial staff for the Jesuit Online Bibliography is a collaborative effort between Jesuit institutions -- <a href="none">Archivum Romanum Societatis Iesu</a>, the <a href="none">Jesuitica Project at KU/Leuven</a>, and the <a href="none">Institute for Advanced Jesuit Studies</a> at Boston College.</p> 
+  <p>A network of voluntary correspondents and individual scholars and publishers contribute to the Jesuit Online Bibliography, which consists of more than 13,000 records in nearly 50 languages.</p>
+  <p>With the support of the project's <a href="none">collaborating institutions</a>, this resource is available in Open Access. Users also have the option to create a free account to save searches and to bookmark results.</p>
+  <p>The bibliographic records are aggregated within the search capabilities of the <a href="none">Portal to Jesuit Studies</a>.</p>
+  <p id="learn-more"> <a href="none">Learn More</a></p>
+</div>
+
+<div class="home-collaborators">
+  <h3 class="home-heading">Visit the Collaborative Partners</h3>
+  <ul class="collaborators-static">
+    <li><%= image_tag('Archivumlogo.png', width:150, alt:'Archivum Romanum Societatus vliesu')%></li>
+    <li><%= image_tag('Jesuitlogo.png', width:150, alt:'Institue for Advanced Jesuit Studies')%></li>
+    <li><%= image_tag('Jesuitica.png', width:150, alt:'Ku Leuven')%></li>
   </ul>
-
+  <div class="inner-collaborators">
+    <ul class="collaborator-links">
+      <li><%= image_tag('JHIA.png', width:150, alt:'JHIA')%></li>
+      <li><%= image_tag('XCHR.png', width:150, alt:'XCHR')%></li>
+      <li><%= image_tag('Broteria.png', width:150, alt:'Broteria')%></li>
+    </ul>
+  </div>
 </div>
 
-<div id="getting-started">
-  <h3 class='section-heading'>Here&rsquo;s how to get started: HELLO WORLD</h3>
-  
-  <ol>
-    <li>To modify this text, you need to <a href="http://guides.rubyonrails.org/engines.html#improving-engine-functionality">override the Blacklight-provided view</a>.
-You can copy this file, located in the blacklight gem: <br />
-<%= Blacklight.root %>/app/views/catalog/_home_text.html.erb <br />
-to your own application: <br />
- <%= Rails.root %>/app/views/catalog/_home_text.html.erb 
-    </li>
-    <li><a href="https://github.com/projectblacklight/blacklight/wiki/Indexing-your-data-into-solr">Index your own data</a> into Solr</li>
-    <li><a href="https://github.com/projectblacklight/blacklight/wiki#blacklight-configuration">Configure Blacklight</a> to match your data and user-experience needs</li>
-    <li><a href="https://github.com/projectblacklight/blacklight/wiki#support">Get in touch</a> with your comments, questions, and ideas</li>
-  </ol>
-</div>
-
-<%# This is the same panel shown in the Rails welcome template %>
-<div id="about">
-  <h3 class='section-heading'><a href="/rails/info/properties">About your application&rsquo;s environment</a></h3>
-  <div id="about-content" class="well" style="display: none"></div>
+<div class="home-featured">
+<h3 class="home-heading">Featured Records</h3>
+Featured record goes here
 </div>
 
 <script>
