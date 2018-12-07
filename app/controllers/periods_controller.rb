@@ -9,6 +9,13 @@ class PeriodsController < ApplicationController
     layout 'bibliography'
 
     def index
+        authorize! :read, Period, :message => "Unable to load this page."
+
+        @periods_grid = initialize_grid(Period, 
+            order:           'periods.name',
+            order_direction: 'asc'
+        )
+
         @periods = Period.all
     end
 
@@ -25,6 +32,8 @@ class PeriodsController < ApplicationController
     def create
         @period = Period.new(period_params)
 
+        authorize! :create, @period, :message => "Unable to create this Period record."
+
         if @period.save
             respond_to do |format|
                 format.html { redirect_to @period, notice: 'Period was successfully created.' }
@@ -39,6 +48,8 @@ class PeriodsController < ApplicationController
     end
 
     def update
+        authorize! :update, @period, :message => "Unable to update this Period record."
+
         if @period.update!(period_params)
             #@comments = @bib.comments
             respond_to do |format|
@@ -54,6 +65,8 @@ class PeriodsController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, @period, :message => "Unable to destroy this Period record."
+
         @period.destroy
         respond_to do |format|
             format.html { redirect_to periods_path, notice: 'Period was successfully destroyed.' }
@@ -66,6 +79,7 @@ class PeriodsController < ApplicationController
         def set_period
             begin
                 @period = Period.find(params[:id])
+                authorize! :read, @period, :message => "Unable to read this Period record."
             rescue ActiveRecord::RecordNotFound => e
                 @period = nil
             end

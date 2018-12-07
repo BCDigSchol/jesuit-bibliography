@@ -11,6 +11,6 @@ class CreateReviewedComponents < ActiveRecord::Migration[5.2]
 
     # clean up unnecessary column/table reference
     remove_column :bibliographies, :reviewed_title, :text
-    remove_reference :citations, :reviewed_author, index:true, foreign_key: true
+    remove_reference :citations, :reviewed_author, index:true
   end
 end

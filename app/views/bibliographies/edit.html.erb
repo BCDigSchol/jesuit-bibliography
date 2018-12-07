@@ -1,8 +1,10 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Records index', bibliography_path %>
-<% else %>
+<% elsif can? :edit, Bibliography %>
     <h1>Editing Bibliography #<%= @bib.id %></h1>
 
     <%= render 'form' %>
+<% else %>
+    <%= render 'not_permitted' %>
 <% end %>

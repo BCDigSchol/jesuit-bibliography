@@ -1150,7 +1150,7 @@ namespace :importdata do
         @format = "Multimedia"
 
         puts "Starting #{@format}s import"
-        import_logger.info("Starting #{@format}s import")
+        import_logger.info("Starting #{@format} import")
 
         # invoke destroy_all_bibs task to remove existing Bibliography records
         # Rake::Task["importdata:clear_all"].invoke

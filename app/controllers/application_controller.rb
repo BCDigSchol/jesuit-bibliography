@@ -11,5 +11,10 @@ class ApplicationController < ActionController::Base
     unless current_user
         redirect_to dashboard_path
     end
-end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    #redirect_to dashboard_url, :alert => exception.message
+    render template: "bibliographies/_not_permitted", locals: {alert: exception.message}
+  end
 end

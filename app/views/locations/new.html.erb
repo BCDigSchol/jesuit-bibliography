@@ -1,5 +1,7 @@
 <h1>Add New Location</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', locations_path %>
+<% if can? :create, Location %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

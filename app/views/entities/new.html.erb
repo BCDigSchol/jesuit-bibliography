@@ -1,5 +1,7 @@
 <h1>Add New Entity</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', entities_path %>
+<% if can? :create, Entity %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

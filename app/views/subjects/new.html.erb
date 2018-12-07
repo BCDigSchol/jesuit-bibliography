@@ -1,5 +1,7 @@
 <h1>Add New Subject</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', subjects_path %>
+<% if can? :create, Subject %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

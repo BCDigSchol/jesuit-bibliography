@@ -9,6 +9,13 @@ class EntitiesController < ApplicationController
     layout 'bibliography'
 
     def index
+        authorize! :read, Entity, :message => "Unable to load this page."
+
+        @entities_grid = initialize_grid(Entity, 
+            order:           'entities.name',
+            order_direction: 'asc'
+        )
+
         @entities = Entity.all
     end
 
@@ -25,6 +32,8 @@ class EntitiesController < ApplicationController
     def create
         @entity = Entity.new(entity_params)
 
+        authorize! :create, @entity, :message => "Unable to create this Entity record."
+
         if @entity.save
             respond_to do |format|
                 format.html { redirect_to @entity, notice: 'Entity was successfully created.' }
@@ -39,6 +48,8 @@ class EntitiesController < ApplicationController
     end
 
     def update
+        authorize! :update, @entity, :message => "Unable to update this Entity record."
+
         if @entity.update!(entity_params)
             respond_to do |format|
                 format.html { redirect_to @entity, notice: 'Entity was successfully updated.' }
@@ -53,6 +64,8 @@ class EntitiesController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, @entity, :message => "Unable to destroy this Entity record."
+
         @entity.destroy
         respond_to do |format|
             format.html { redirect_to entities_path, notice: 'Entity was successfully destroyed.' }
@@ -65,6 +78,7 @@ class EntitiesController < ApplicationController
         def set_entity
             begin
                 @entity = Entity.find(params[:id])
+                authorize! :read, @entity, :message => "Unable to read this Entity record."
             rescue ActiveRecord::RecordNotFound => e
                 @entity = nil
             end

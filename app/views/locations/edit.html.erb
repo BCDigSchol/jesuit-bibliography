@@ -1,10 +1,10 @@
 <% if @location.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Back', location_path %>
-<% else %>
+    <%= link_to 'Go Back to Location index', locations_path %>
+<% elsif can? :edit, Location %>
     <h1>Editing Location #<%= @location.id %></h1>
 
     <%= render 'form' %>
-
-    <%= link_to 'Back', location_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

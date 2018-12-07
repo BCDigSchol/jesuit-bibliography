@@ -1,12 +1,14 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Record index', bibliography_path %>
-<% else %>
+    <%= link_to 'Go Back to Bibliographies index', bibliographies_path %>
+<% elsif can? :read, Bibliography %>
     <h1>Bibliography #<%= @bib.id %></h1>
 
     <div class="record-view">
+        <% if can? :update, Bibliography %>
         <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
-        <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
+        <% end %>
+        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
         
         <hr/>
 
@@ -515,10 +517,15 @@
             <label class="col-sm-2">Updated At</label>
             <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
         </div>
+
+        <hr/>
+
+        <% if can? :update, Bibliography %>
+        <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
     </div>
-
-    <hr/>
-
-    <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
-    <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
+<% else %>
+    <p>You do not have the correct permissions to access this page.</p>
+    <%= link_to 'Go Back Dashboard', dashboard_path %>
 <% end %>

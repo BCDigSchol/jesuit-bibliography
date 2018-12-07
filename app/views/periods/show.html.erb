@@ -1,21 +1,44 @@
 <% if @period.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Back', period_path %>
-<% else %>
-    <h1>Here is Period #<%= @period.id %></h1>
+    <%= link_to 'Go Back to Periods index', periods_path %>
+<% elsif can? :read, Period %>
+    <h1>Period #<%= @period.id %></h1>
 
     <div class="record-view">
-        <label>Period Name</label>
-        <div class="field-value"><%= @period.name %></div>
+        <% if can? :update, Period %>
+        <%= link_to 'Edit this record', edit_period_path(@period), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Go Back to Period index', periods_path, class: 'btn btn-info' %>
 
-        <label>Period Sort Name</label>
-        <div class="field-value"><%= @period.sort_name %></div>
+        <hr/>
 
-        <label>Created At</label>
-        <div class="field-value"><%= @period.created_at %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Period Name</label>
+            <div class="field-value col-sm-10"><%= @period.name %></div>
+        </div>
 
-        <label>Updated At</label>
-        <div class="field-value"><%= @period.updated_at %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Period Sort Name</label>
+            <div class="field-value col-sm-10"><%= @period.sort_name %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Created At</label>
+            <div class="field-value col-sm-10"><%= @period.created_at %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Updated At</label>
+            <div class="field-value col-sm-10"><%= @period.updated_at %></div>
+        </div>
+
+        <hr/>
+
+        <% if can? :update, Period %>
+        <%= link_to 'Edit this record', edit_period_path(@period), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Go Back to Period index', periods_path, class: 'btn btn-info' %>
     </div>
-    <%= link_to 'Edit', edit_period_path(@period) %> | <%= link_to 'Back', periods_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

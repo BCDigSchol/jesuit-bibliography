@@ -1,4 +1,8 @@
 <%= simple_form_for @subject do |form| %>
+  <%= form.button :submit, "Save Subject", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
+
+  <hr/>
 
   <% if @subject.errors.any? %>
     <div id="error_explanation">
@@ -17,6 +21,7 @@
 
   <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
-  <br/>
+  <hr/>
   <%= form.button :submit, "Save Subject", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
 <% end %>

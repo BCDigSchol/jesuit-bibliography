@@ -9,6 +9,8 @@ class BibliographiesController < ApplicationController
     layout 'bibliography'
 
     def index
+        authorize! :read, Bibliography, :message => "Unable to load this page."
+
         @bibs_grid = initialize_grid(Bibliography, 
             order:           'bibliographies.created_at',
             order_direction: 'desc'
@@ -137,6 +139,8 @@ class BibliographiesController < ApplicationController
     def create
         @bib = Bibliography.new(bib_params)
 
+        authorize! :create, @bib, :message => "Unable to create this Bibliography record."
+
         # set the display_* fields for Blacklight views
         set_display_fields
 
@@ -170,6 +174,8 @@ class BibliographiesController < ApplicationController
     end
 
     def update
+        authorize! :update, @bib, :message => "Unable to update this Bibliography record."
+
         # copy over bib_params into @bib object so we can alter it
         @bib.attributes = bib_params
 
@@ -208,6 +214,8 @@ class BibliographiesController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, @bib, :message => "Unable to destroy this Bibliography record."
+
         @bib.destroy
         respond_to do |format|
             format.html { redirect_to bibliographies_path, notice: 'Bibliography was successfully destroyed.' }
@@ -234,6 +242,7 @@ class BibliographiesController < ApplicationController
         def set_bib
             begin
                 @bib = Bibliography.find(params[:id])
+                authorize! :read, @bib, :message => "Unable to read this Bibliography record."
             rescue ActiveRecord::RecordNotFound => e
                 @bib = nil
             end

@@ -9,6 +9,13 @@ class LocationsController < ApplicationController
     layout 'bibliography'
 
     def index
+        authorize! :read, Location, :message => "Unable to load this page."
+
+        @locations_grid = initialize_grid(Location, 
+            order:           'locations.name',
+            order_direction: 'asc'
+        )
+
         @locations = Location.all
     end
 
@@ -25,6 +32,8 @@ class LocationsController < ApplicationController
     def create
         @location = Location.new(location_params)
 
+        authorize! :create, @location, :message => "Unable to create this Location record."
+
         if @location.save
             respond_to do |format|
                 format.html { redirect_to @location, notice: 'Location was successfully created.' }
@@ -39,6 +48,8 @@ class LocationsController < ApplicationController
     end
 
     def update
+        authorize! :update, @location, :message => "Unable to update this Location record."
+
         if @location.update!(location_params)
             respond_to do |format|
                 format.html { redirect_to @location, notice: 'Location was successfully updated.' }
@@ -53,6 +64,8 @@ class LocationsController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, @location, :message => "Unable to destroy this Location record."
+
         @location.destroy
         respond_to do |format|
             format.html { redirect_to locations_path, notice: 'Location was successfully destroyed.' }
@@ -65,6 +78,7 @@ class LocationsController < ApplicationController
         def set_location
             begin
                 @location = Location.find(params[:id])
+                authorize! :read, @location, :message => "Unable to read this Location record."
             rescue ActiveRecord::RecordNotFound => e
                 @location = nil
             end
