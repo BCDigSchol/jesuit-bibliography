@@ -1,10 +1,8 @@
 <% if @period.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Back', period_path %>
+    <%= link_to 'Go Back to Period index', periods_path %>
 <% else %>
     <h1>Editing Period #<%= @period.id %></h1>
 
     <%= render 'form' %>
-
-    <%= link_to 'Back', period_path %>
 <% end %>

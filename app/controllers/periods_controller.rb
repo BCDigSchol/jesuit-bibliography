@@ -9,6 +9,11 @@ class PeriodsController < ApplicationController
     layout 'bibliography'
 
     def index
+        @periods_grid = initialize_grid(Period, 
+            order:           'periods.name',
+            order_direction: 'asc'
+        )
+
         @periods = Period.all
     end
 

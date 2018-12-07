@@ -1,12 +1,12 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Record index', bibliography_path %>
+    <%= link_to 'Go Back to Bibliographies index', bibliographies_path %>
 <% else %>
     <h1>Bibliography #<%= @bib.id %></h1>
 
     <div class="record-view">
         <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
-        <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
         
         <hr/>
 
@@ -515,10 +515,10 @@
             <label class="col-sm-2">Updated At</label>
             <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
         </div>
+
+        <hr/>
+
+        <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
     </div>
-
-    <hr/>
-
-    <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
-    <%= link_to 'Go Back', bibliographies_path, class: 'btn btn-info' %>
 <% end %>

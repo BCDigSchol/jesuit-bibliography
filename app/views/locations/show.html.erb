@@ -1,21 +1,38 @@
 <% if @location.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Back', location_path %>
+    <%= link_to 'Go Back to Location index', location_path %>
 <% else %>
-    <h1>Here is Location #<%= @location.id %></h1>
+    <h1>Location #<%= @location.id %></h1>
 
     <div class="record-view">
-        <label>Location Name</label>
-        <div class="field-value"><%= @location.name %></div>
+        <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+        
+        <hr/>
 
-        <label>Location Sort Name</label>
-        <div class="field-value"><%= @location.sort_name %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Location Name</label>
+            <div class="field-value col-sm-10"><%= @location.name %></div>
+        </div>
 
-        <label>Created At</label>
-        <div class="field-value"><%= @location.created_at %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Location Sort Name</label>
+            <div class="field-value col-sm-10"><%= @location.sort_name %></div>
+        </div>
 
-        <label>Updated At</label>
-        <div class="field-value"><%= @location.updated_at %></div>
+        <div class="field-pair row">
+            <label class="col-sm-2">Created At</label>
+            <div class="field-value col-sm-10"><%= @location.created_at %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Updated At</label>
+            <div class="field-value col-sm-10"><%= @location.updated_at %></div>
+        </div>
+
+        <hr/>
+
+        <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
     </div>
-    <%= link_to 'Edit', edit_location_path(@location) %> | <%= link_to 'Back', locations_path %>
 <% end %>

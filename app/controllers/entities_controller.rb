@@ -9,6 +9,11 @@ class EntitiesController < ApplicationController
     layout 'bibliography'
 
     def index
+        @entities_grid = initialize_grid(Entity, 
+            order:           'entities.name',
+            order_direction: 'asc'
+        )
+
         @entities = Entity.all
     end
 

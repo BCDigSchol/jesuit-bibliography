@@ -8,6 +8,11 @@ class SubjectsController < ApplicationController
     layout 'bibliography'
 
     def index
+        @subjects_grid = initialize_grid(Subject, 
+            order:           'subjects.name',
+            order_direction: 'asc'
+        )
+
         @subjects = Subject.all
     end
     

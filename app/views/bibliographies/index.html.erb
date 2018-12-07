@@ -3,6 +3,8 @@
 <% if current_user.admin_role? || current_user.editor_role? %>
 <h2>Bibliography listings</h2>
 
+<p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
+
 <%= grid(@bibs_grid,
       show_filters: :when_filtered,
       allow_showing_all_records: false, 

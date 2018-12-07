@@ -1,4 +1,8 @@
 <%= simple_form_for @location do |form| %>
+  <%= form.button :submit, "Save Location", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+
+  <hr/>
 
   <% if @location.errors.any? %>
     <div id="error_explanation">
@@ -17,6 +21,7 @@
 
   <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
-  <br/>
+  <hr/>
   <%= form.button :submit, "Save Location", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
 <% end %>

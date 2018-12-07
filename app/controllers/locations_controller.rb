@@ -9,6 +9,11 @@ class LocationsController < ApplicationController
     layout 'bibliography'
 
     def index
+        @locations_grid = initialize_grid(Location, 
+            order:           'locations.name',
+            order_direction: 'asc'
+        )
+
         @locations = Location.all
     end
 
