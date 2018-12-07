@@ -222,9 +222,9 @@ ActiveRecord::Schema.define(version: 2018_11_30_163549) do
     t.datetime "updated_at", null: false
     t.boolean "guest", default: false
     t.boolean "admin_role", default: false
-    t.boolean "collaborator_role", default: false
-    t.boolean "editor_role", default: false
-    t.boolean "user_role", default: true
+    t.boolean "associate_editor_role", default: false
+    t.boolean "assistant_editor_role", default: false
+    t.boolean "correspondent_role", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

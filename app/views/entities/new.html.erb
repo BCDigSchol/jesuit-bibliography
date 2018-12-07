@@ -1,3 +1,7 @@
 <h1>Add New Entity</h1>
 
-<%= render 'form' %>
+<% if can? :create, Entity %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

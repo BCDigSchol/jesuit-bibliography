@@ -1,37 +1,50 @@
 <h1>Jesuit Bibliography</h1>
 
-<% if current_user.admin_role? || current_user.editor_role? %>
-<h2>Bibliography listings</h2>
+<% if can? :read, Bibliography %>
+  <h2>Bibliography listings</h2>
 
-<p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
+  <p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
 
-<%= grid(@bibs_grid,
-      show_filters: :when_filtered,
-      allow_showing_all_records: false, 
-      upper_pagination_panel: true
-    ) do |g|
+  <%= grid(@bibs_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
 
-  g.column name: 'ID', attribute: 'id' do |bib|
-    bib.id
-  end
+    g.column name: 'ID', attribute: 'id' do |bib|
+      bib.id
+    end
 
-  g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
+    g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
 
-  g.column name: 'Title', attribute: 'display_title'
+    g.column name: 'Title', attribute: 'display_title'
 
-  g.column name: 'Author', attribute: 'display_author'
+    g.column name: 'Author', attribute: 'display_author'
 
-  g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
-    bib.created_at.strftime "%b %e, %Y"
-  end
+    g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
+      bib.created_at.strftime "%b %e, %Y"
+    end
 
-  g.column do |bib|
-    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
-    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
-    "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', bibliography_path(bib), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
-  end
-end -%>
+    if can? :detroy, Bibliography
+      g.column do |bib|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', bibliography_path(bib), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Bibliography
+      g.column do |bib|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe
+      end
+    else
+      g.column do |bib|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe
+      end
+    end
+  end -%>
 
+  <p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
+
+<% else %>
+  <%= render 'not_permitted' %>
 <% end %>
-
-<p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>

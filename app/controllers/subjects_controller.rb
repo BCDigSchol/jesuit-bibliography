@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
     protect_from_forgery with: :exception
+    #load_and_authorize_resource
 
     before_action :require_login
     before_action :authenticate_user!
@@ -8,6 +9,8 @@ class SubjectsController < ApplicationController
     layout 'bibliography'
 
     def index
+        authorize! :read, Subject, :message => "Unable to load this page."
+
         @subjects_grid = initialize_grid(Subject, 
             order:           'subjects.name',
             order_direction: 'asc'
@@ -29,6 +32,8 @@ class SubjectsController < ApplicationController
     def create
         @subject = Subject.new(subject_params)
 
+        authorize! :create, @subject, :message => "Unable to create this Subject record."
+
         if @subject.save
             respond_to do |format|
                 format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
@@ -43,6 +48,8 @@ class SubjectsController < ApplicationController
     end
 
     def update
+        authorize! :update, @subject, :message => "Unable to update this Subject record."
+
         if @subject.update!(subject_params)
             respond_to do |format|
                 format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
@@ -57,6 +64,8 @@ class SubjectsController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, @subject, :message => "Unable to destroy this Subject record."
+
         @subject.destroy
         respond_to do |format|
             format.html { redirect_to subjects_path, notice: 'Subject was successfully destroyed.' }
@@ -69,6 +78,7 @@ class SubjectsController < ApplicationController
         def set_subject
             begin
                 @subject = Subject.find(params[:id])
+                authorize! :read, @subject, :message => "Unable to read this Subject record."
             rescue ActiveRecord::RecordNotFound => e
                 @subject = nil
             end

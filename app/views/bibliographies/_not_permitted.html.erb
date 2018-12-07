@@ -1,0 +1,12 @@
+<% if alert %>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Error</div>
+        <div class="panel-body">
+            <p><%= alert %></p>
+            <p>Please make sure you have the correct permissions.</p>
+        </div>
+    </div>
+<% else %>
+    <p>You do not have the correct permissions to access this page.</p>
+<% end %>
+<%= link_to 'Go Back Dashboard', dashboard_path %>

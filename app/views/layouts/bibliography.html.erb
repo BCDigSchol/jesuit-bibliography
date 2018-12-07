@@ -32,15 +32,28 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <% if can? :read, Bibliography %>
                     <li><%= link_to 'Bibliographies', bibliographies_path %></li>
-                    <% if current_user and (current_user.admin_role? or current_user.editor_role?) %>
+                    <% end %>
+                    <% if can? :manage, 'Terms' %>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Term lists <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <% if can? :read, Location %>
                             <li><%= link_to 'Locations', locations_path %></li>
+                            <% end %>
+
+                            <% if can? :read, Period %>
                             <li><%= link_to 'Periods', periods_path %></li>
+                            <% end %>
+
+                            <% if can? :read, Subject %>
                             <li><%= link_to 'Subjects', subjects_path %></li>
+                            <% end %>
+
+                            <% if can? :read, Entity %>
                             <li><%= link_to 'Entities', entities_path %></li>
+                            <% end %>
                         </ul>
                     </li>
                     <% end %>

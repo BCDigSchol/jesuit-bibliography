@@ -1,8 +1,10 @@
 <% if @entity.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Entity index', entities_path, class: 'btn btn-info' %>
-<% else %>
+<% elsif can? :edit, Entity %>
     <h1>Editing Entity #<%= @entity.id %></h1>
 
     <%= render 'form' %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

@@ -1,11 +1,13 @@
 <% if @location.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Location index', location_path %>
-<% else %>
+<% elsif can? :read, Location %>
     <h1>Location #<%= @location.id %></h1>
 
     <div class="record-view">
+        <% if can? :update, Location %>
         <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
         
         <hr/>
@@ -32,7 +34,11 @@
 
         <hr/>
 
+        <% if can? :update, Location %>
         <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
     </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

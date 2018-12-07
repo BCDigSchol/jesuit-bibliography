@@ -1,11 +1,13 @@
 <% if @period.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Periods index', periods_path %>
-<% else %>
+<% elsif can? :read, Period %>
     <h1>Period #<%= @period.id %></h1>
 
     <div class="record-view">
+        <% if can? :update, Period %>
         <%= link_to 'Edit this record', edit_period_path(@period), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Period index', periods_path, class: 'btn btn-info' %>
 
         <hr/>
@@ -32,7 +34,11 @@
 
         <hr/>
 
+        <% if can? :update, Period %>
         <%= link_to 'Edit this record', edit_period_path(@period), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Period index', periods_path, class: 'btn btn-info' %>
     </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

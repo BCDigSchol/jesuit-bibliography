@@ -1,3 +1,7 @@
 <h1>Add New Period</h1>
 
-<%= render 'form' %>
+<% if can? :create, Period %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

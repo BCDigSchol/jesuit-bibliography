@@ -1,8 +1,10 @@
 <% if @subject.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Subject index', subjects_path %>
-<% else %>
+<% elsif can? :edit, Subject %>
     <h1>Editing Subject #<%= @subject.id %></h1>
 
     <%= render 'form' %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
 <% end %>

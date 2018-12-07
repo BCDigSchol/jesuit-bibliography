@@ -26,9 +26,15 @@
         min-height: 600px;
     }
 
-    #bib_form_container h3 {
-        margin: 2rem 0 3rem 0;
+    #bib_form_container {
+        .dashboard-btn {
+            margin-top: 3rem;
+        }
+        h3 {
+            margin: 2rem 0 3rem 0;
+        }
     }
+    
 
     .record-view {
         label {

@@ -1,11 +1,13 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Bibliographies index', bibliographies_path %>
-<% else %>
+<% elsif can? :read, Bibliography %>
     <h1>Bibliography #<%= @bib.id %></h1>
 
     <div class="record-view">
+        <% if can? :update, Bibliography %>
         <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
         
         <hr/>
@@ -518,7 +520,12 @@
 
         <hr/>
 
+        <% if can? :update, Bibliography %>
         <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <% end %>
         <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
     </div>
+<% else %>
+    <p>You do not have the correct permissions to access this page.</p>
+    <%= link_to 'Go Back Dashboard', dashboard_path %>
 <% end %>

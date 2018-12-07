@@ -1,3 +1,7 @@
 <h1>Add New Location</h1>
 
-<%= render 'form' %>
+<% if can? :create, Location %>
+    <%= render 'form' %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

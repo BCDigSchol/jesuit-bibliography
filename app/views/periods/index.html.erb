@@ -1,27 +1,40 @@
 <h1>Jesuit Bibliography</h1>
 
-<% if current_user.admin_role? || current_user.editor_role? %>
-<h2>Periods listings</h2>
+<% if can? :read, Period %>
+  <h2>Periods listings</h2>
 
-<p><%= link_to 'Add New Period', new_period_path, class: 'btn btn-primary' %></p>
+  <p><%= link_to 'Add New Period', new_period_path, class: 'btn btn-primary' %></p>
 
-<%= grid(@periods_grid,
-      show_filters: :when_filtered,
-      allow_showing_all_records: false, 
-      upper_pagination_panel: true
-    ) do |g|
+  <%= grid(@periods_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
 
-  g.column name: 'Name', attribute: 'name' do |per|
-    per.name
-  end
+    g.column name: 'Name', attribute: 'name' do |per|
+      per.name
+    end
 
-  g.column do |per|
-    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', period_path(per) )}</span></div>".html_safe + 
-    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_period_path(per) )}</span></div>".html_safe + 
-    "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', period_path(per), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
-  end
-end -%>
+    if can? :detroy, Period
+      g.column do |per|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', period_path(per) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_period_path(per) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', period_path(per), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Period
+      g.column do |per|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', period_path(per) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_period_path(per) )}</span></div>".html_safe
+      end
+    else
+      g.column do |per|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', period_path(per) )}</span></div>".html_safe
+      end
+    end
+  end -%>
 
+  <p><%= link_to 'Add New Period', new_period_path, class: 'btn btn-primary' %></p>
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
 <% end %>
-
-<p><%= link_to 'Add New Period', new_period_path, class: 'btn btn-primary' %></p>
