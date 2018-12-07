@@ -1,6 +1,6 @@
 require "alphabetical_paginate"
 
-class Terms::EntitiesController < ApplicationController
+class Terms::LocationsController < ApplicationController
     include Terms::ControllersHelper
 
     # use default Blacklight layout
@@ -16,9 +16,9 @@ class Terms::EntitiesController < ApplicationController
             js: false
         }
 
-        @entities, @alpha_params = Entity
-                        .order('display_name ASC')
-                        .where.not(display_name: [nil, '']) # filter out nils and blanks
-                        .alpha_paginate(@letter, @alpha_params_options) {|entity| entity.display_name.downcase}
+        @locations, @alpha_params = Location
+                        .order('name ASC')
+                        .where.not(name: [nil, '']) # filter out nils and blanks
+                        .alpha_paginate(@letter, @alpha_params_options) {|loc| loc.name.downcase}
     end
 end

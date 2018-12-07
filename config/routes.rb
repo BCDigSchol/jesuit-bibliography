@@ -20,8 +20,11 @@ Rails.application.routes.draw do
   resources :locations
 
   namespace :terms do
-    #root to: "entities#index"
-    resources :entities, only: [:index], path: 'who'
+    root to: redirect('/')
+    resources :entities, only: [:index], path: 'entities'
+    resources :locations, only: [:index], path: 'locations'
+    resources :subjects, only: [:index], path: 'subjects'
+    resources :periods, only: [:index], path: 'periods'
   end
 
 

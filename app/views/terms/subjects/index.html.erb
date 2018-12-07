@@ -1,0 +1,9 @@
+<h1>Term list: Subjects</h1>
+
+<%= alphabetical_paginate @alpha_params %>
+
+<div id="pagination_table" class="term-list-container">
+  <% @subjects.each do |sub| %>
+    <div class="term-list-item"><a href="/?f[subjects_facet][]=<%= sub.name %>"><%= sub.name %></a></div>
+  <% end %>
+</div>
