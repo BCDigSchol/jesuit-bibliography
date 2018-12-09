@@ -92,9 +92,9 @@ namespace :importdata do
             #@bib.isbn = row[12]
             #@bib.doi = row[13]
             @bib.reprint_edition = row[14]
-            @bib.worldcat_url = row[15]
-            @bib.publisher_url = row[16]
-            @bib.leuven_url = row[17]
+            #@bib.worldcat_url = row[15]
+            #@bib.publisher_url = row[16]
+            #@bib.leuven_url = row[17]
             #@bib.when_subject = row[18]
             #@bib.what_subject = row[19]
             #@bib.where_subject = row[20]
@@ -167,6 +167,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding DOI: #{v}")
                     @bib.dois << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[15]
+                values = row[15].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Publisher URLs
+            if row[16]
+                values = row[16].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher URL: #{v}")
+                    @bib.publisher_urls << Url.new(link: v)
+                end
+            end
+
+            # Leuven URLs
+            if row[17]
+                values = row[17].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Leuven URL: #{v}")
+                    @bib.leuven_urls << Url.new(link: v)
                 end
             end
 
@@ -301,9 +328,9 @@ namespace :importdata do
             #@bib.isbn = row[14]
             #@bib.doi = row[15]
             @bib.reprint_edition = row[16]
-            @bib.worldcat_url = row[17]
-            @bib.publisher_url = row[18]
-            @bib.leuven_url = row[19]
+            #@bib.worldcat_url = row[17]
+            #@bib.publisher_url = row[18]
+            #@bib.leuven_url = row[19]
             #@bib.when_subject = row[20]
             #@bib.what_subject = row[21]
             #@bib.where_subject = row[22]
@@ -376,6 +403,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding DOI: #{v}")
                     @bib.dois << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[17]
+                values = row[17].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Publisher URLs
+            if row[18]
+                values = row[18].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher URL: #{v}")
+                    @bib.publisher_urls << Url.new(link: v)
+                end
+            end
+
+            # Leuven URLs
+            if row[19]
+                values = row[19].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Leuven URL: #{v}")
+                    @bib.leuven_urls << Url.new(link: v)
                 end
             end
 
@@ -507,9 +561,9 @@ namespace :importdata do
             @bib.date = row[11]
             #@bib.issn = row[12]
             #@bib.doi = row[13]
-            @bib.worldcat_url = row[14]
-            @bib.publisher_url = row[15]
-            @bib.leuven_url = row[16]
+            #@bib.worldcat_url = row[14]
+            #@bib.publisher_url = row[15]
+            #@bib.leuven_url = row[16]
             #@bib.when_subject = row[17]
             #@bib.what_subject = row[18]
             #@bib.where_subject = row[19]
@@ -570,6 +624,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding DOI: #{v}")
                     @bib.dois << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[14]
+                values = row[14].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Publisher URLs
+            if row[15]
+                values = row[15].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher URL: #{v}")
+                    @bib.publisher_urls << Url.new(link: v)
+                end
+            end
+
+            # Leuven URLs
+            if row[16]
+                values = row[16].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Leuven URL: #{v}")
+                    @bib.leuven_urls << Url.new(link: v)
                 end
             end
 
@@ -700,9 +781,9 @@ namespace :importdata do
             @bib.date = row[9]
             #@bib.issn = row[10]
             #@bib.doi = row[11]
-            @bib.worldcat_url = row[12]
-            @bib.publisher_url = row[13]
-            @bib.leuven_url = row[14]
+            #@bib.worldcat_url = row[12]
+            #@bib.publisher_url = row[13]
+            #@bib.leuven_url = row[14]
             #@bib.when_subject = row[15]
             #@bib.what_subject = row[16]
             #@bib.where_subject = row[17]
@@ -757,6 +838,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding DOI: #{v}")
                     @bib.dois << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[12]
+                values = row[12].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Publisher URLs
+            if row[13]
+                values = row[13].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher URL: #{v}")
+                    @bib.publisher_urls << Url.new(link: v)
+                end
+            end
+
+            # Leuven URLs
+            if row[14]
+                values = row[14].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Leuven URL: #{v}")
+                    @bib.leuven_urls << Url.new(link: v)
                 end
             end
 
@@ -880,9 +988,9 @@ namespace :importdata do
             @bib.number_of_volumes = row[6]
             @bib.dissertation_thesis_type = row[7]
             #@bib.isbn = row[8]
-            @bib.worldcat_url = row[9]
-            @bib.dissertation_university_url = row[10]
-            @bib.leuven_url = row[11]
+            #@bib.worldcat_url = row[9]
+            #@bib.dissertation_university_url = row[10]
+            #@bib.leuven_url = row[11]
             #@bib.when_subject = row[12]
             #@bib.what_subject = row[13]
             #@bib.where_subject = row[14]
@@ -926,6 +1034,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding ISBN: #{v}")
                     @bib.isbns << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[9]
+                values = row[9].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Dissertation University  URLs
+            if row[10]
+                values = row[10].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Dissertation University URL: #{v}")
+                    @bib.dissertation_university_urls << Url.new(link: v)
+                end
+            end
+
+            # Leuven URLs
+            if row[11]
+                values = row[11].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Leuven URL: #{v}")
+                    @bib.leuven_urls << Url.new(link: v)
                 end
             end
 
@@ -1040,7 +1175,7 @@ namespace :importdata do
             @bib.event_institution = row[6]
             @bib.event_date = "#{row[8]} #{row[7]}"
             @bib.event_panel_title = row[9]
-            @bib.event_url = row[10]
+            #@bib.event_url = row[10]
             #@bib.when_subject = row[11]
             #@bib.what_subject = row[12]
             #@bib.where_subject = row[13]
@@ -1075,6 +1210,15 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Author: #{v}")
                     @bib.authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Event URLs
+            if row[10]
+                values = row[10].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Event URL: #{v}")
+                    @bib.event_urls << Url.new(link: v)
                 end
             end
 
@@ -1193,8 +1337,8 @@ namespace :importdata do
             @bib.multimedia_type = row[7]
             #@bib.performers = row[8]
             #@bib.isbn = row[9]
-            @bib.worldcat_url = row[10]
-            @bib.multimedia_url = row[11]
+            #@bib.worldcat_url = row[10]
+            #@bib.multimedia_url = row[11]
             @bib.multimedia_dimensions = row[12]
             #@bib.when_subject = row[13]
             #@bib.what_subject = row[14]
@@ -1248,6 +1392,24 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding ISBN: #{v}")
                     @bib.isbns << StandardIdentifier.new(value: v)
+                end
+            end
+
+            # Worldcat URLs
+            if row[10]
+                values = row[10].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Worldcat URL: #{v}")
+                    @bib.worldcat_urls << Url.new(link: v)
+                end
+            end
+
+            # Multimedia URLs
+            if row[11]
+                values = row[11].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Multimedia URL: #{v}")
+                    @bib.multimedia_urls << Url.new(link: v)
                 end
             end
 
