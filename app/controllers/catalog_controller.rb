@@ -207,21 +207,21 @@ class CatalogController < ApplicationController
     config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :separate_parts
     config.add_show_field 'translated_title_text', label: 'Translated Title'
     config.add_show_field 'volume_number_text', label: 'Volume Number'
-    config.add_show_field 'worldcat_url_text', label: 'Worldcat URL', :helper_method => :make_link
-    config.add_show_field 'publisher_url_text', label: 'Publisher URL', :helper_method => :make_link
-    config.add_show_field 'leuven_url_text', label: 'Leuven URL', :helper_method => :make_link
+    config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
+    config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
+    config.add_show_field 'leuven_urls_text', label: 'Leuven URL', :helper_method => :make_link
     config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
     config.add_show_field 'multimedia_series_text', label: 'Multimedia Series'
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
-    config.add_show_field 'multimedia_url_text', label: 'Multimedia URL', :helper_method => :make_link
+    config.add_show_field 'multimedia_urls_text', label: 'Multimedia URL', :helper_method => :make_link
     config.add_show_field 'event_title_text', label: 'Event Title'
     config.add_show_field 'event_location_text', label: 'Event Location'
     config.add_show_field 'event_institution_text', label: 'Event Institution'
     config.add_show_field 'event_date_text', label: 'Event Date'
     config.add_show_field 'event_panel_title_text', label: 'Event Panel Title'
-    config.add_show_field 'event_url_text', label: 'Event URL', :helper_method => :make_link
+    config.add_show_field 'event_urls_text', label: 'Event URL', :helper_method => :make_link
     config.add_show_field 'dissertation_university_text', label: 'University'
-    config.add_show_field 'dissertation_university_url_text', label: 'University URL', :helper_method => :make_link
+    config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
     config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
     config.add_show_field 'journal_title_text', label: 'Journal Title'

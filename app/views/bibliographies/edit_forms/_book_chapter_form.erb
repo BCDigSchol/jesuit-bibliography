@@ -92,23 +92,11 @@
         as: :string 
     %>
 
-    <%= form.input :worldcat_url, 
-        label: 'Worldcat URL',
-        as: :string, 
-        hint: 'URL must start with http:// or https://'
-    %>
+    <%= render 'bibliographies/fields/worldcat_url', :form => form, field_label: 'Worldcat URL' %>
 
-    <%= form.input :publisher_url, 
-        label: 'Publisher URL',
-        as: :string, 
-        hint: 'URL must start with http:// or https://'
-    %>
+    <%= render 'bibliographies/fields/publisher_url', :form => form, field_label: 'Publisher URL' %>
 
-    <%= form.input :leuven_url, 
-        label: 'Leuven URL',
-        as: :string, 
-        hint: 'URL must start with http:// or https://'
-    %>
+    <%= render 'bibliographies/fields/leuven_url', :form => form, field_label: 'Leuven URL' %>
 
     <%= render 'bibliographies/fields/subject', :form => form, field_label: 'Subject' %>
 

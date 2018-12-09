@@ -58,6 +58,12 @@ class BibliographiesController < ApplicationController
         @bib.bibliography_periods.build
         @bib.bibliography_locations.build
         @bib.bibliography_entities.build
+        @bib.worldcat_urls.build
+        @bib.publisher_urls.build
+        @bib.leuven_urls.build
+        @bib.multimedia_urls.build
+        @bib.event_urls.build
+        @bib.dissertation_university_urls.build
 
         @reference_type = nil
     end
@@ -130,6 +136,30 @@ class BibliographiesController < ApplicationController
 
             if @bib.bibliography_entities.count == 0
                 @bib.bibliography_entities.build
+            end
+
+            if @bib.worldcat_urls.count == 0
+                @bib.worldcat_urls.build
+            end
+
+            if @bib.publisher_urls.count == 0
+                @bib.publisher_urls.build
+            end
+
+            if @bib.leuven_urls.count == 0
+                @bib.leuven_urls.build
+            end
+
+            if @bib.multimedia_urls.count == 0
+                @bib.multimedia_urls.build
+            end
+
+            if @bib.event_urls.count == 0
+                @bib.event_urls.build
+            end
+
+            if @bib.dissertation_university_urls.count == 0
+                @bib.dissertation_university_urls.build
             end
 
             @reference_type = @bib.reference_type
@@ -251,12 +281,12 @@ class BibliographiesController < ApplicationController
         def bib_params
             params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
-                :reprint_edition, :worldcat_url, :publisher_url, :leuven_url, :multimedia_dimensions, :abstract, :translated_title,
+                :reprint_edition, :multimedia_dimensions, :abstract, :translated_title,
                 :journal_title, :issue, :page_range, :epub_date, :title_of_review, :chapter_title, :paper_title,
                 :display_title, :display_year, :display_author,
-                :dissertation_university, :dissertation_thesis_type, :dissertation_university_url,
-                :event_title, :event_location, :event_institution, :event_date, :event_panel_title, :event_url, 
-                :multimedia_series, :multimedia_type, :multimedia_url,
+                :dissertation_university, :dissertation_thesis_type,
+                :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
+                :multimedia_series, :multimedia_type,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 languages_attributes: [:id, :name, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
@@ -274,6 +304,12 @@ class BibliographiesController < ApplicationController
                 translators_attributes: [:id, :display_name, :_destroy],
                 performers_attributes: [:id, :display_name, :_destroy],
                 translated_authors_attributes: [:id, :display_name, :_destroy],
+                worldcat_urls_attributes: [:link, :_destroy],
+                publisher_urls_attributes: [:link, :_destroy],
+                leuven_urls_attributes: [:link, :_destroy],
+                multimedia_urls_attributes: [:link, :_destroy],
+                event_urls_attributes: [:link, :_destroy],
+                dissertation_university_urls_attributes: [:link, :_destroy],
             )
         end
 

@@ -310,45 +310,69 @@
             </div>
         <% end %>
 
-        <% if @bib.worldcat_url.present? %>
+        <% if @bib.worldcat_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Worldcat URL</label>
-                <div class="field-value col-sm-10"><%= @bib.worldcat_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.worldcat_urls.each do |worldcat_url| %>
+                    <li><%= worldcat_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.publisher_url.present? %>
+        <% if @bib.publisher_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Publisher URL</label>
-                <div class="field-value col-sm-10"><%= @bib.publisher_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.publisher_urls.each do |publisher_url| %>
+                    <li><%= publisher_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.multimedia_url.present? %>
+        <% if @bib.multimedia_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Multimedia URL</label>
-                <div class="field-value col-sm-10"><%= @bib.multimedia_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.multimedia_urls.each do |multimedia_url| %>
+                    <li><%= multimedia_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.event_url.present? %>
+        <% if @bib.event_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Event URL</label>
-                <div class="field-value col-sm-10"><%= @bib.event_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.event_urls.each do |event_url| %>
+                    <li><%= event_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.dissertation_university_url.present? %>
+        <% if @bib.dissertation_university_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">University URL</label>
-                <div class="field-value col-sm-10"><%= @bib.dissertation_university_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.dissertation_university_urls.each do |dissertation_university_url| %>
+                    <li><%= dissertation_university_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.leuven_url.present? %>
+        <% if @bib.leuven_urls.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Leuven URL</label>
-                <div class="field-value col-sm-10"><%= @bib.leuven_url %></div>
+                <ul class="field-value col-sm-10">
+                <% @bib.leuven_urls.each do |leuven_url| %>
+                    <li><%= leuven_url.link %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 

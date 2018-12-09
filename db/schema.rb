@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_163549) do
+ActiveRecord::Schema.define(version: 2018_12_09_210823) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -29,22 +29,16 @@ ActiveRecord::Schema.define(version: 2018_11_30_163549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "volume_number"
-    t.text "worldcat_url"
-    t.text "publisher_url"
-    t.text "leuven_url"
     t.text "multimedia_dimensions"
     t.text "multimedia_series"
     t.text "multimedia_type"
-    t.text "multimedia_url"
     t.text "event_title"
     t.text "event_location"
     t.text "event_institution"
     t.text "event_date"
     t.text "event_panel_title"
-    t.text "event_url"
     t.text "dissertation_university"
     t.text "dissertation_thesis_type"
-    t.text "dissertation_university_url"
     t.text "number_of_pages"
     t.text "journal_title"
     t.text "issue"
@@ -210,6 +204,24 @@ ActiveRecord::Schema.define(version: 2018_11_30_163549) do
     t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "urls", force: :cascade do |t|
+    t.text "link"
+    t.integer "worldcat_url_id"
+    t.integer "publisher_url_id"
+    t.integer "leuven_url_id"
+    t.integer "multimedia_url_id"
+    t.integer "event_url_id"
+    t.integer "dissertation_university_url_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dissertation_university_url_id"], name: "index_urls_on_dissertation_university_url_id"
+    t.index ["event_url_id"], name: "index_urls_on_event_url_id"
+    t.index ["leuven_url_id"], name: "index_urls_on_leuven_url_id"
+    t.index ["multimedia_url_id"], name: "index_urls_on_multimedia_url_id"
+    t.index ["publisher_url_id"], name: "index_urls_on_publisher_url_id"
+    t.index ["worldcat_url_id"], name: "index_urls_on_worldcat_url_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -63,17 +63,9 @@
 
     <%= render 'bibliographies/fields/isbn', :form => form, field_label: 'ISBN' %>
 
-    <%= form.input :worldcat_url, 
-        label: 'Worldcat URL',
-        as: :string, 
-        hint: 'URL must start with http:// or https://'
-    %>
+    <%= render 'bibliographies/fields/worldcat_url', :form => form, field_label: 'Worldcat URL' %>
 
-    <%= form.input :multimedia_url, 
-        label: 'Multimedia URL',
-        as: :string, 
-        hint: 'URL must start with http:// or https://'
-    %>
+    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL' %>
 
     <%= form.input :multimedia_dimensions, 
         label: 'Multimedia dimensions',

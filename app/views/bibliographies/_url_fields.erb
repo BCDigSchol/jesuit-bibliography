@@ -1,0 +1,17 @@
+<div class='bibliography-url-fields nested-fields form-group row'>
+    <%= form.input :link, wrapper: :vertical_input_group do %>
+        <%= form.input :link, 
+            label: false,
+            as: :string,
+            #hint: 'URL must start with http:// or https://',
+            label_html: { class: 'invisible' }
+        %>
+        <span class="input-group-btn" id="basic-addon-citation">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form,
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
+</div>

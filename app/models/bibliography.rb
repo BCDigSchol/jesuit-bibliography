@@ -33,6 +33,14 @@ class Bibliography < ApplicationRecord
     has_many :performers, class_name: 'Citation', foreign_key: 'performer_id',  inverse_of: 'performer', dependent: :destroy
     has_many :translated_authors, class_name: 'Citation', foreign_key: 'translated_author_id', inverse_of: 'translated_author', dependent: :destroy
 
+    has_many :worldcat_urls, class_name: 'Url', foreign_key: 'worldcat_url_id', inverse_of: 'worldcat_url', dependent: :destroy
+    has_many :publisher_urls, class_name: 'Url', foreign_key: 'publisher_url_id', inverse_of: 'publisher_url', dependent: :destroy
+    has_many :leuven_urls, class_name: 'Url', foreign_key: 'leuven_url_id', inverse_of: 'leuven_url', dependent: :destroy
+    has_many :multimedia_urls, class_name: 'Url', foreign_key: 'multimedia_url_id', inverse_of: 'multimedia_url', dependent: :destroy
+    has_many :event_urls, class_name: 'Url', foreign_key: 'event_url_id', inverse_of: 'event_url', dependent: :destroy
+    has_many :dissertation_university_urls, class_name: 'Url', foreign_key: 'dissertation_university_url_id', inverse_of: 'dissertation_university_url', dependent: :destroy
+    
+
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
     accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :reviewed_components, allow_destroy: true, reject_if: :all_blank
@@ -50,6 +58,13 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :translators, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :performers, reject_if: :citations_rejectable?, allow_destroy: true
     accepts_nested_attributes_for :translated_authors, reject_if: :citations_rejectable?, allow_destroy: true
+
+    accepts_nested_attributes_for :worldcat_urls, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :publisher_urls, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :leuven_urls, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :multimedia_urls, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :event_urls, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :dissertation_university_urls, reject_if: :all_blank, allow_destroy: true
 
     validates :reference_type, presence: true
     # some records will not have a title
@@ -138,17 +153,17 @@ class Bibliography < ApplicationRecord
             volume_number if self.volume_number.present?
         end
         
-        text :worldcat_url do
-            worldcat_url if self.worldcat_url.present?
-        end
+        #text :worldcat_url do
+        #    worldcat_url if self.worldcat_url.present?
+        #end
         
-        text :publisher_url do
-            publisher_url if self.publisher_url.present?
-        end
+        #text :publisher_url do
+        #    publisher_url if self.publisher_url.present?
+        #end
         
-        text :leuven_url do
-            leuven_url if self.leuven_url.present?
-        end
+        #text :leuven_url do
+        #    leuven_url if self.leuven_url.present?
+        #end
         
         text :multimedia_dimensions do
             multimedia_dimensions if self.multimedia_dimensions.present?
@@ -162,9 +177,9 @@ class Bibliography < ApplicationRecord
             multimedia_type if self.multimedia_type.present?
         end
         
-        text :multimedia_url do
-            multimedia_url if self.multimedia_url.present?
-        end
+        #text :multimedia_url do
+        #    multimedia_url if self.multimedia_url.present?
+        #end
         
         text :event_title do
             event_title if self.event_title.present?
@@ -186,9 +201,9 @@ class Bibliography < ApplicationRecord
             event_panel_title if self.event_panel_title.present?
         end
         
-        text :event_url do
-            event_url if self.event_url.present?
-        end
+        #text :event_url do
+        #    event_url if self.event_url.present?
+        #end
         
         text :dissertation_university do
             dissertation_university if self.dissertation_university.present?
@@ -198,9 +213,9 @@ class Bibliography < ApplicationRecord
             dissertation_thesis_type if self.dissertation_thesis_type.present?
         end
         
-        text :dissertation_university_url do
-            dissertation_university_url if self.dissertation_university_url.present?
-        end
+        #text :dissertation_university_url do
+        #    dissertation_university_url if self.dissertation_university_url.present?
+        #end
         
         # be sure 'number_of_pages_text' is defined as a 'text_general' field type in solr's managed-schema file
         text :number_of_pages do
@@ -255,6 +270,24 @@ class Bibliography < ApplicationRecord
         end
         text :translated_authors do     # for associations
             translated_authors.map { |translated_author| translated_author.display_name }
+        end
+        text :worldcat_urls do     # for associations
+            worldcat_urls.map { |worldcat_url| worldcat_url.link }
+        end
+        text :publisher_urls do     # for associations
+            publisher_urls.map { |publisher_url| publisher_url.link }
+        end
+        text :leuven_urls do     # for associations
+            leuven_urls.map { |leuven_url| leuven_url.link }
+        end
+        text :multimedia_urls do     # for associations
+            multimedia_urls.map { |multimedia_url| multimedia_url.link }
+        end
+        text :event_urls do     # for associations
+            event_urls.map { |event_url| event_url.link }
+        end
+        text :dissertation_university_urls do     # for associations
+            dissertation_university_urls.map { |dissertation_university_url| dissertation_university_url.link }
         end
 
         text :languages do     # for associations
