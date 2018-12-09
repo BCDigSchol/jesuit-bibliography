@@ -304,12 +304,12 @@ class BibliographiesController < ApplicationController
                 translators_attributes: [:id, :display_name, :_destroy],
                 performers_attributes: [:id, :display_name, :_destroy],
                 translated_authors_attributes: [:id, :display_name, :_destroy],
-                worldcat_urls_attributes: [:link, :_destroy],
-                publisher_urls_attributes: [:link, :_destroy],
-                leuven_urls_attributes: [:link, :_destroy],
-                multimedia_urls_attributes: [:link, :_destroy],
-                event_urls_attributes: [:link, :_destroy],
-                dissertation_university_urls_attributes: [:link, :_destroy],
+                worldcat_urls_attributes: [:id, :link, :_destroy],
+                publisher_urls_attributes: [:id, :link, :_destroy],
+                leuven_urls_attributes: [:id, :link, :_destroy],
+                multimedia_urls_attributes: [:id, :link, :_destroy],
+                event_urls_attributes: [:id, :link, :_destroy],
+                dissertation_university_urls_attributes: [:id, :link, :_destroy],
             )
         end
 
