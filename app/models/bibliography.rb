@@ -305,6 +305,12 @@ class Bibliography < ApplicationRecord
         time :updated_at
     end
 
+    # public method called from associated models to initiate a Solr reindex of this Bib record
+    def reindex_me
+        #puts "Bibliography ##{self.id} is reindexed\n\n"
+        Sunspot.index! [self]
+    end
+
     private
         def comments_json
             if self.comments.present?
