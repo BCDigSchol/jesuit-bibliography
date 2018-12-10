@@ -24,4 +24,5 @@
 //= require wice_grid
 //= require bootstrap-datepicker/core
 //= require select2
+//= require tinymce
 //= require_tree .

@@ -91,9 +91,7 @@
 
     <%= render 'bibliographies/fields/entity', :form => form, field_label: 'Entity' %>
 
-    <%= form.input :abstract, 
-        label: 'Abstract'
-    %>
+    <%= render 'bibliographies/abstract_field', :form => form %>
 
     <%= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author' %>
 
@@ -111,4 +109,5 @@
     <%= form.button :submit, "Save Bibliography", class: "btn btn-primary" %>
     <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
 <% end %>
+  <%= tinymce %>
 </div>
