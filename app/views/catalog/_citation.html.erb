@@ -1,7 +1,10 @@
 
 <% @documents.each do |document| %>
 
-  <h3 class="modal-title"><%= document_heading(document) %></h3>
+  <!--h3 class="modal-title"><%= document_heading(document) %></h3-->
+
+  <p>Title: <%= render_index_field_value(document, 'display_title_text') %></p>
+  <p>Publisher: <%= render_index_field_value(document, 'publisher_text') %></p>
 
 <% if document.respond_to?(:export_as_mla_citation_txt) %>
   <h4><%= t('blacklight.citation.mla') %></h4>
