@@ -70,8 +70,10 @@ class Bibliography < ApplicationRecord
     # some records will not have a title
     # validates :title, presence: true
 
-    searchable do
+    searchable :if => :published do
         integer :id
+
+        boolean :published
 
         # reference_type is a required field
         text :reference_type

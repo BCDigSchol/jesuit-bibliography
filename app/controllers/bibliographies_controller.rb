@@ -286,7 +286,7 @@ class BibliographiesController < ApplicationController
                 :display_title, :display_year, :display_author,
                 :dissertation_university, :dissertation_thesis_type,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
-                :multimedia_series, :multimedia_type,
+                :multimedia_series, :multimedia_type, :published,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 languages_attributes: [:id, :name, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],

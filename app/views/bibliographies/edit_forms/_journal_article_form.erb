@@ -22,6 +22,10 @@
 
     <hr/>
 
+    <% if current_user.admin_role? %>
+        <%= render 'bibliographies/fields/make_published', :form => form %>
+    <% end %>
+
     <%= form.input :reference_type, 
         :as => :hidden, 
         :input_html => { :value => "Journal Article" } 

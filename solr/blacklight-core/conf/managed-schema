@@ -89,8 +89,11 @@
     <field name="locations_text" type="text_general"/>
     <field name="entities_text" type="text_general"/>
     <field name="periods_text" type="text_general"/>
-    
 
+    <field name="created_at_d" type="date"/>
+    <field name="updated_at_d" type="date"/>
+    <field name="published_b" type="boolean"/>
+    
     <!-- older-style solr dynamicField declarations required for sunspot -->
     <dynamicField name="*_str" type="string" docValues="true" indexed="false" stored="false" useDocValuesAsStored="false" multiValued="true"/>
     <!-- same as *_ssim -->

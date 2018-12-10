@@ -12,6 +12,13 @@
         
         <hr/>
 
+        <% if current_user.admin_role? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Status</label>
+                <div class="field-value col-sm-10"><%= @bib.published? ? 'Published' : 'Not published' %></div>
+            </div>
+        <% end %>
+
         <div class="field-pair row">
             <label class="col-sm-2">Reference Type</label>
             <div class="field-value col-sm-10"><%= @bib.reference_type %></div>

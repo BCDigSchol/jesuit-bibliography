@@ -27,6 +27,10 @@
         :input_html => { :value => "Book" } 
     %>
 
+    <% if current_user.admin_role? %>
+        <%= render 'bibliographies/fields/make_published', :form => form %>
+    <% end %>
+
     <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
 
     <%= render 'bibliographies/fields/editor', :form => form, field_label: 'Editor' %>

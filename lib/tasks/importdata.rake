@@ -74,6 +74,8 @@ namespace :importdata do
 
             @bib = Bibliography.new
 
+            @bib.published = true
+
             @bib.reference_type = row[0]
             #@bib.author = row[1]
             #@bib.display_author = row[1]
@@ -307,6 +309,8 @@ namespace :importdata do
             # 20   21   22    23  24       25    26               27                28               29
 
             @bib = Bibliography.new
+
+            @bib.published = true
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -544,6 +548,8 @@ namespace :importdata do
 
             @bib = Bibliography.new
 
+            @bib.published = true
+
             @bib.reference_type = row[0]
             #@bib.author_of_review = row[1]
             #@bib.display_author = row[1]
@@ -766,6 +772,8 @@ namespace :importdata do
 
             @bib = Bibliography.new
 
+            @bib.published = true
+
             @bib.reference_type = row[0]
             #@bib.authors = row[1]
             #@bib.display_author = row[1]
@@ -976,6 +984,8 @@ namespace :importdata do
 
             @bib = Bibliography.new
 
+            @bib.published = true
+
             @bib.reference_type = row[0]
             #@bib.author = row[1]
             #@bib.display_author = row[1]
@@ -1163,6 +1173,8 @@ namespace :importdata do
 
             @bib = Bibliography.new
 
+            @bib.published = true
+
             @bib.reference_type = row[0]
             #@bib.author = row[1]
             #@bib.display_author = row[1]
@@ -1323,6 +1335,8 @@ namespace :importdata do
             # 20
 
             @bib = Bibliography.new
+
+            @bib.published = true
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
