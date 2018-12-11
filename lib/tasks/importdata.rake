@@ -1165,11 +1165,11 @@ namespace :importdata do
             item_count += 1
             # break if item_count >= 300
 
-            # Reference Type,Author,Year,Paper Title,Event Title,Event City/Country,Event Institution,Event Day,Event Month,Panel Title,
-            # 0              1      2    3           4           5                  6                 7         8           9
+            # Reference Type,Author,Year,Paper Title,Event Title,Event City/Country,Event Institution,Event Date,Panel Title,Event URL,
+            # 0              1      2    3           4           5                  6                 7          8           9
             #
-            # Event URL,When,What,Where,Who,Abstract,Notes,Notes to Editors,Language
-            # 10        11   12   13    14  15       16    17               18
+            # When,What,Where,Who,Abstract,Notes,Notes to Editors,Language
+            # 10   11   12   13   14       15    16               17
 
             @bib = Bibliography.new
 
@@ -1185,17 +1185,17 @@ namespace :importdata do
             @bib.event_title = row[4]
             @bib.event_location = row[5]
             @bib.event_institution = row[6]
-            @bib.event_date = "#{row[8]} #{row[7]}"
-            @bib.event_panel_title = row[9]
-            #@bib.event_url = row[10]
-            #@bib.when_subject = row[11]
-            #@bib.what_subject = row[12]
-            #@bib.where_subject = row[13]
-            #@bib.who_subject = row[14]
-            @bib.abstract = row[15]
-            #@bib.notes = row[16]
-            #@bib.notes_to_editor = row[17]
-            #@bib.languages = row[18]
+            @bib.event_date = row[7]
+            @bib.event_panel_title = row[8]
+            #@bib.event_url = row[9]
+            #@bib.when_subject = row[10]
+            #@bib.what_subject = row[11]
+            #@bib.where_subject = row[12]
+            #@bib.who_subject = row[13]
+            @bib.abstract = row[14]
+            #@bib.notes = row[15]
+            #@bib.notes_to_editor = row[16]
+            #@bib.languages = row[17]
 
             # Display Authors
             if row[1]
@@ -1226,8 +1226,8 @@ namespace :importdata do
             end
 
             # Event URLs
-            if row[10]
-                values = row[10].split("|")
+            if row[9]
+                values = row[9].split("|")
                 values.each do |v|
                     import_logger.info("  adding Event URL: #{v}")
                     @bib.event_urls << Url.new(link: v)
@@ -1235,8 +1235,8 @@ namespace :importdata do
             end
 
             # Periods
-            if row[11]
-                values = row[11].split("|")
+            if row[10]
+                values = row[10].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
                     @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
@@ -1244,8 +1244,8 @@ namespace :importdata do
             end
 
             # Subjects
-            if row[12]
-                values = row[12].split("|")
+            if row[11]
+                values = row[11].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
                     @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
@@ -1253,8 +1253,8 @@ namespace :importdata do
             end
 
             # Locations
-            if row[13]
-                values = row[13].split("|")
+            if row[12]
+                values = row[12].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
                     @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
@@ -1262,8 +1262,8 @@ namespace :importdata do
             end
 
             # Entities
-            if row[14]
-                values = row[14].split("|")
+            if row[13]
+                values = row[13].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
                     @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
@@ -1271,20 +1271,20 @@ namespace :importdata do
             end
 
             # Notes -- Note
-            if row[16]
-                import_logger.info("  adding Note: #{row[16]}")
-                @bib.comments << Comment.new(body: row[16], comment_type: 'Note', commenter: 'importer', make_public: false)
+            if row[15]
+                import_logger.info("  adding Note: #{row[15]}")
+                @bib.comments << Comment.new(body: row[15], comment_type: 'Note', commenter: 'importer', make_public: false)
             end
 
             # Notes -- Note to editor
-            if row[17]
-                import_logger.info("  adding Note: #{row[17]}")
-                @bib.comments << Comment.new(body: row[17], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+            if row[16]
+                import_logger.info("  adding Note: #{row[16]}")
+                @bib.comments << Comment.new(body: row[16], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
             end
 
             # Languages
-            if row[18]
-                values = row[18].split("|")
+            if row[17]
+                values = row[17].split("|")
                 values.each do |v|
                     import_logger.info("  adding Language: #{v}")
                     @bib.languages << Language.new(name: v)
