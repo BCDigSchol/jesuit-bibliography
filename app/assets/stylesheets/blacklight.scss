@@ -175,3 +175,9 @@ footer.bcfooter {
         }
     }
 }
+
+/* Abstracts can have <p> elements in them, which messes up spacing. */
+.blacklight-abstract_text {
+    p { margin-bottom: .75rem}
+    p:last-child { margin-bottom: 0}
+}
