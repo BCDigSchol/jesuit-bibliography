@@ -1,14 +1,14 @@
 <% if @subject.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Subject index', subjects_path %>
+    <%= link_to 'Go Back to Subject Records index', citationterms_subjects_path %>
 <% elsif can? :read, Subject %>
-    <h1>Subject #<%= @subject.id %></h1>
+    <h1>Viewing Subject: <%= @subject.name.present? ? @subject.name : @subject.id %></h1>
 
     <div class="record-view">
         <% if can? :update, Subject %>
-        <%= link_to 'Edit this record', edit_subject_path(@subject), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_subject_path(@subject), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
 
         <hr />
 
@@ -35,9 +35,9 @@
         <hr />
 
         <% if can? :update, Subject %>
-        <%= link_to 'Edit this record', edit_subject_path(@subject), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_subject_path(@subject), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

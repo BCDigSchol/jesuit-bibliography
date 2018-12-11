@@ -1,14 +1,14 @@
 <% if @entity.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Entity index', entities_path %>
+    <%= link_to 'Go Back to Jesuit Terms index', citationterms_entities_path %>
 <% elsif can? :read, Entity %>
-    <h1>Here is Entity #<%= @entity.id %></h1>
+    <h1>Viewing Jesuit: <%= @entity.name.present? ? @entity.name : @entity.id %></h1>
 
     <div class="record-view">
         <% if can? :update, Entity %>
-        <%= link_to 'Edit this record', edit_entity_path(@entity), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Entity index', entities_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
 
         <hr/>
         
@@ -50,9 +50,9 @@
         <hr/>
 
         <% if can? :update, Entity %>
-        <%= link_to 'Edit this record', edit_entity_path(@entity), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Entity index', entities_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

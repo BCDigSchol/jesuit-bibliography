@@ -1,7 +1,7 @@
-<h1>Add New Entity</h1>
+<h1>Add New Jesuit record</h1>
 
 <% if can? :create, Entity %>
-    <%= render 'form' %>
+    <%= render 'form', urlpath: citationterms_entities_path %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

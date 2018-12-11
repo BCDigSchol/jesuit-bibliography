@@ -1,6 +1,6 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Records index', bibliographies_path %>
+    <%= link_to 'Go Back to Citations index', bibliographies_path %>
 <% elsif can? :read, Bibliography %>
     <h1>Record #<%= @bib.id %></h1>
 
@@ -554,7 +554,7 @@
         <% if can? :update, Bibliography %>
         <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Records index', bibliographies_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Citations index', bibliographies_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'not_permitted' %>

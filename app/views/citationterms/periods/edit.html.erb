@@ -1,0 +1,10 @@
+<% if @period.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Century terms index', citationterms_periods_path %>
+<% elsif can? :edit, Period %>
+    <h1>Editing Century: <%= @period.name.present? ? @period.name : @period.id %></h1>
+
+    <%= render 'form', urlpath: citationterms_period_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

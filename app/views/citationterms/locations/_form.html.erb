@@ -1,6 +1,6 @@
-<%= simple_form_for @location do |form| %>
-  <%= form.button :submit, "Save Location", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+<%= simple_form_for @location, url: urlpath do |form| %>
+  <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Location terms index', citationterms_locations_path, class: 'btn btn-info' %>
 
   <hr/>
 
@@ -22,6 +22,6 @@
   <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <hr/>
-  <%= form.button :submit, "Save Location", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+  <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Location terms index', citationterms_locations_path, class: 'btn btn-info' %>
 <% end %>

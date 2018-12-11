@@ -1,14 +1,14 @@
 <% if @location.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Location index', location_path %>
+    <%= link_to 'Go Back to Location Terms index', citationterms_location_path %>
 <% elsif can? :read, Location %>
-    <h1>Location #<%= @location.id %></h1>
+    <h1>Viewing Location: <%= @location.name.present? ? @location.name : @location.id %></h1>
 
     <div class="record-view">
         <% if can? :update, Location %>
-        <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_location_path(@location), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Location terms index', citationterms_locations_path, class: 'btn btn-info' %>
         
         <hr/>
 
@@ -35,9 +35,9 @@
         <hr/>
 
         <% if can? :update, Location %>
-        <%= link_to 'Edit this record', edit_location_path(@location), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this record', edit_citationterms_location_path(@location), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Location index', locations_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Location terms index', citationterms_locations_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

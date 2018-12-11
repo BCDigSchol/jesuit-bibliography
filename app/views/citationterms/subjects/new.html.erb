@@ -1,7 +1,7 @@
-<h1>Add New Subject</h1>
+<h1>Add New Subject Term</h1>
 
 <% if can? :create, Subject %>
-    <%= render 'form' %>
+    <%= render 'form', urlpath: citationterms_subjects_path %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

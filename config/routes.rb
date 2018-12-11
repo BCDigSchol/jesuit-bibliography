@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :bibliographies do
+  # get paths like "/citations/1"
+  resources :bibliographies, path: '/citations' do
     resources :comments
     resources :standard_identifiers
     resources :citations
@@ -12,12 +13,16 @@ Rails.application.routes.draw do
     resources :reviewed_components
   end
 
+  # get paths like "/citations/terms/subject/1"
+  namespace :citationterms, path: '/citations/terms' do
+    resources :subjects, path: 'subjects'
+    resources :entities, path: 'jesuits'
+    resources :periods, path: 'centuries'
+    resources :locations, path: 'locations'
+  end
+
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'
 
-  resources :subjects
-  resources :entities
-  resources :periods
-  resources :locations
 
   namespace :terms do
     root to: redirect('/')

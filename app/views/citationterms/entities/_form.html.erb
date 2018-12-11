@@ -1,6 +1,6 @@
-<%= simple_form_for @entity do |form| %>
-  <%= form.button :submit, "Save Entity", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Entity index', entities_path, class: 'btn btn-info' %>
+<%= simple_form_for @entity, url: urlpath do |form| %>
+  <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
 
   <hr/>
 
@@ -28,6 +28,6 @@
   <%= form.input :death_date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <hr/>
-  <%= form.button :submit, "Save Entity", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Entity index', entities_path, class: 'btn btn-info' %>
+  <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
 <% end %>
