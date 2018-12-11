@@ -14,10 +14,15 @@
 
         <% if current_user.admin_role? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Status</label>
-                <div class="field-value col-sm-10"><%= @bib.published? ? 'Published' : 'Not published' %></div>
+                <label class="col-sm-2">Is published?</label>
+                <div class="field-value col-sm-10"><%= @bib.published? ? 'yes' : 'no' %></div>
             </div>
         <% end %>
+
+         <div class="field-pair row">
+            <label class="col-sm-2">Record Status</label>
+            <div class="field-value col-sm-10"><%= @bib.status %></div>
+        </div>
 
         <div class="field-pair row">
             <label class="col-sm-2">Reference Type</label>
