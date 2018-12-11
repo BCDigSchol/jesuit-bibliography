@@ -1,0 +1,22 @@
+<% @documents.each do |document| %>
+    <h3>Chicago</h3>
+    <!-- Chicago -->
+    <!-- Wiertz, Oliver J. Begründeter Glaube?: Rationale Glaubensverantwortung Auf Der Basis Der Analytischen Theologie Und Erkenntnistheorie. Mainz: Grünerwald. Accessed December 11, 2018. http://bibliographies.brillonline.com/entries/nso%252Fbegrundeter-glaube-rationale-glaubensverantwortung-auf-der-basis-der-analytischen-theologie-und-erkenntnistheorie-nso_db_____wiertzndeterglaube_1. -->
+    <span class="chicago-author"><%= render_index_field_value(document, 'display_author_text') %>. </span>
+    <span class="chicago-title"><%= render_index_field_value(document, 'display_title_text') %>. </span>
+    <span class="chicago-place_published"><%= render_index_field_value(document, 'place_published_text') %>: </span>
+    <span class="chicago-publisher"><%= render_index_field_value(document, 'publisher_text') %>. </span>
+    <span class="chicago-date_accessed">Accessed <%= Time.now.strftime("%B %d, %Y") %>. </span>
+    <span class="chicago-url"><%= request.original_url %>.</span>
+
+    <h3>MLA</h3>
+    <!-- MLA -->
+    <!-- Wiertz, Oliver J. Begründeter Glaube?: Rationale Glaubensverantwortung Auf Der Basis Der Analytischen Theologie Und Erkenntnistheorie. Mainz: Grünerwald. Brill Bibliographies Online. Web. 11 Dec. 2018.-->
+    <span class="mla-author"><%= render_index_field_value(document, 'display_author_text') %>. </span>
+    <span class="mla-title"><%= render_index_field_value(document, 'display_title_text') %>. </span>
+    <span class="mla-place_published"><%= render_index_field_value(document, 'place_published_text') %>: </span>
+    <span class="mla-publisher"><%= render_index_field_value(document, 'publisher_text') %>. </span>
+    <span class="mla-site_name">Jesuit Online Bibliography. </span>
+    <span class="mla-where">Web. </span>
+    <span class="mla-date_accessed"><%= Time.now.strftime("%d %b. %Y") %>.</span>
+<% end %>

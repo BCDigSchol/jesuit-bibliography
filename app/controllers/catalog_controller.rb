@@ -3,9 +3,12 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
   #include Blacklight::Marc::Catalog
-
+  #include Blacklight::BlacklightHelperBehavior
 
   configure_blacklight do |config|
+
+    add_show_tools_partial :citation_test
+
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
     #

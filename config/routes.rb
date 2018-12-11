@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'
+  get '/catalog/:id/citation_test' => 'catalog#citation_test', as: 'citation_test_solr_document'
 
   resources :subjects
   resources :entities
