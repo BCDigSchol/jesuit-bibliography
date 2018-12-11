@@ -15,11 +15,11 @@
             <p>Here are some actions for you:</p>
             <ul class="tasks">
                 <% if can? :create, Bibliography %>
-                <li><%= link_to 'Add new Bibliography', new_bibliography_path %></li>
+                <li><%= link_to 'Add new Record', new_bibliography_path %></li>
                 <% end %>
 
                 <% if can? :read, Bibliography %>
-                <li><%= link_to 'Review recent Bibliographies', bibliographies_path %></li>
+                <li><%= link_to 'Review recent Records', bibliographies_path %></li>
                 <% end %>
                 
                 <% if current_user.admin_role? %>

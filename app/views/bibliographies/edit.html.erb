@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Records index', bibliography_path %>
 <% elsif can? :edit, Bibliography %>
-    <h1>Editing Bibliography #<%= @bib.id %></h1>
+    <h1>Editing Record #<%= @bib.id %></h1>
 
     <%= render 'form' %>
 <% else %>

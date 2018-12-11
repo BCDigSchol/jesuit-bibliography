@@ -1,14 +1,14 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Bibliographies index', bibliographies_path %>
+    <%= link_to 'Go Back to Records index', bibliographies_path %>
 <% elsif can? :read, Bibliography %>
-    <h1>Bibliography #<%= @bib.id %></h1>
+    <h1>Record #<%= @bib.id %></h1>
 
     <div class="record-view">
         <% if can? :update, Bibliography %>
-        <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Records index', bibliographies_path, class: 'btn btn-info' %>
         
         <hr/>
 
@@ -552,11 +552,10 @@
         <hr/>
 
         <% if can? :update, Bibliography %>
-        <%= link_to 'Edit this record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Bibliographies index', bibliographies_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Records index', bibliographies_path, class: 'btn btn-info' %>
     </div>
 <% else %>
-    <p>You do not have the correct permissions to access this page.</p>
-    <%= link_to 'Go Back Dashboard', dashboard_path %>
+    <%= render 'not_permitted' %>
 <% end %>

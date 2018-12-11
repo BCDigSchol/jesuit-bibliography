@@ -1,9 +1,9 @@
 <h1>Jesuit Bibliography</h1>
 
 <% if can? :read, Bibliography %>
-  <h2>Bibliography listings</h2>
+  <h2>Record listings</h2>
 
-  <p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
+  <p><%= link_to 'Add New Record', new_bibliography_path, class: 'btn btn-primary' %></p>
 
   <%= grid(@bibs_grid,
         show_filters: :when_filtered,
@@ -43,7 +43,7 @@
     end
   end -%>
 
-  <p><%= link_to 'Add New Bibliography', new_bibliography_path, class: 'btn btn-primary' %></p>
+  <p><%= link_to 'Add New Record', new_bibliography_path, class: 'btn btn-primary' %></p>
 
 <% else %>
   <%= render 'not_permitted' %>
