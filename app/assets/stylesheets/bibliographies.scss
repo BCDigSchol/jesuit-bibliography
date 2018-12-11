@@ -88,6 +88,9 @@
                     }
                 }
             }
+            .input-group-btn {
+                vertical-align: top;
+            }
             /* override select2 stylings */
             .select2-container--default .select2-selection--single {
                 border-top-right-radius: 0;

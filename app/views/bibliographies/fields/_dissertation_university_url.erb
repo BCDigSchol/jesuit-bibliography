@@ -3,7 +3,8 @@
         <%= form.simple_fields_for :dissertation_university_urls do |c| %>
             <%= c.input :link, 
                 label: field_label,
-                as: :string
+                as: :string,
+                hint: BibliographiesController::URL_FIELD_HINT
             %>
         <% end %>
     </div>

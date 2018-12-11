@@ -3,7 +3,8 @@
         <%= form.simple_fields_for :translators do |c| %>
             <%= c.input :display_name, 
                 label: field_label,
-                as: :string
+                as: :string,
+                hint: BibliographiesController::PERSON_FIELD_HINT
             %>
         <% end %>
     </div>

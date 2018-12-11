@@ -8,6 +8,10 @@ class BibliographiesController < ApplicationController
 
     layout 'bibliography'
 
+    # Define form hints here
+    PERSON_FIELD_HINT = 'Last name, First name'.freeze
+    URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
+
     def index
         authorize! :read, Bibliography, :message => "Unable to load this page."
 
