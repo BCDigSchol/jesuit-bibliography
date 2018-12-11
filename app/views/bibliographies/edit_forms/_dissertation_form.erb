@@ -80,7 +80,8 @@
     <%= render 'bibliographies/fields/entity', :form => form, field_label: 'Entity' %>
 
     <%= form.input :abstract, 
-        label: 'Abstract'
+        label: 'Abstract',
+        input_html: {rows: '5'}
     %>
 
     <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>

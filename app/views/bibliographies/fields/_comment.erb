@@ -8,7 +8,8 @@
                         <div class="panel-heading"><%= c[comment.index.to_i].make_public ? 'Public ': 'Private ' %> <%= field_label %></div>
                         <div class="panel-body clearfix">
                             <%= comment.input :body,
-                                label: 'Comment text' 
+                                label: 'Comment text',
+                                input_html: {rows: '5'}
                             %>
                             <%= comment.input :comment_type, 
                                 collection: ['Note', 'Research note', 'Note to editor'], 

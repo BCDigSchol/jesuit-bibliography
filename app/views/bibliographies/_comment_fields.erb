@@ -2,7 +2,8 @@
     <div class="panel-heading">Comment</div>
     <div class="panel-body clearfix">
         <%= form.input :body,
-            label: 'Comment text' 
+            label: 'Comment text',
+            input_html: {rows: '5'}
         %>
         <%= form.input :comment_type, 
             collection: ['Note', 'Research note', 'Note to editor'], 
