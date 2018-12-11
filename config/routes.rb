@@ -26,10 +26,10 @@ Rails.application.routes.draw do
 
   namespace :terms do
     root to: redirect('/')
-    resources :entities, only: [:index], path: 'entities'
+    resources :entities, only: [:index], path: 'jesuits'
     resources :locations, only: [:index], path: 'locations'
     resources :subjects, only: [:index], path: 'subjects'
-    resources :periods, only: [:index], path: 'periods'
+    resources :periods, only: [:index], path: 'centuries'
   end
 
 
