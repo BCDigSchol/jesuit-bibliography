@@ -346,6 +346,13 @@ class Bibliography < ApplicationRecord
         Sunspot.index! [self]
     end
 
+    # Define form hints here
+    PERSON_FIELD_HINT = 'Last name, First name'.freeze
+    URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
+
+    # Define other static values here
+    COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
+
     private
         def comments_json
             if self.comments.present?

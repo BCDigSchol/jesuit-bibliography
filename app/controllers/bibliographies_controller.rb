@@ -7,14 +7,7 @@ class BibliographiesController < ApplicationController
     before_action :set_bib, only: [:show, :edit, :update, :destroy]
 
     layout 'bibliography'
-
-    # Define form hints here
-    PERSON_FIELD_HINT = 'Last name, First name'.freeze
-    URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
-
-    # Define other static values here
-    COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
-
+    
     def index
         authorize! :read, Bibliography, :message => "Unable to load this page."
 
