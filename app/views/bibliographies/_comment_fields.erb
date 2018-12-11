@@ -6,7 +6,7 @@
             input_html: {rows: '5'}
         %>
         <%= form.input :comment_type, 
-            collection: ['Note', 'Research note', 'Note to editor'], 
+            collection: BibliographiesController::COMMENT_TYPES, 
             selected: 'Note'
         %>
         <%= form.input :make_public, 

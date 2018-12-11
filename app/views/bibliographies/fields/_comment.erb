@@ -12,7 +12,7 @@
                                 input_html: {rows: '5'}
                             %>
                             <%= comment.input :comment_type, 
-                                collection: ['Note', 'Research note', 'Note to editor'], 
+                                collection: BibliographiesController::COMMENT_TYPES, 
                                 selected: 'Note'
                             %>
                             <%= comment.input :commenter, 
