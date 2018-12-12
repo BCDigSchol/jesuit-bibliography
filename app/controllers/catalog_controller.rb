@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
 
+  include BlacklightRangeLimit::ControllerOverride
+  include BlacklightAdvancedSearch::Controller
+
   include Blacklight::Catalog
   #include Blacklight::Marc::Catalog
 
@@ -84,7 +87,7 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
     config.add_facet_field 'reference_type_facet', label: 'Format'
-    config.add_facet_field 'year_published_text', label: 'Publication Year', limit: 20
+    config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
     config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
@@ -303,5 +306,20 @@ class CatalogController < ApplicationController
     # Configuration for autocomplete suggestor
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
+
+    config.advanced_search = {
+        :form_solr_parameters => {
+            'facet.field' => %w(years_published_itm),
+            'f.languages_facet.facet.limit' => -1, # return all facet values
+            'facet.sort' => :index # sort by byte order of values
+        }
+    }
+
+    # default advanced config values
+    config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+    # config.advanced_search[:qt] ||= 'advanced'
+    config.advanced_search[:url_key] ||= 'advanced'
+    config.advanced_search[:query_parser] ||= 'dismax'
+    config.advanced_search[:form_solr_parameters] ||= {}
   end
 end

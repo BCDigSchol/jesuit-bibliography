@@ -34,6 +34,7 @@
     <field name="title_of_review_text" type="text_general"/>
     <field name="paper_title_text" type="text_general"/>
     <field name="year_published_text" type="text_general"/>
+    <field name="years_published_itm" type="pint"/>
     <field name="display_title_text" type="text_general"/>
     <field name="display_year_text" type="text_general"/>
     <field name="display_author_text" type="text_general"/>
@@ -325,6 +326,7 @@
   <copyField source="title_tsim" dest="title_spell"/>
 
   <types>
+    <fieldType name="pint" class="solr.TrieIntField" multiValued="true" />
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
     <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
     <fieldType name="rand" class="solr.RandomSortField" omitNorms="true"/>

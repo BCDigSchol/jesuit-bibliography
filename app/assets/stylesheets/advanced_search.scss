@@ -1,0 +1,18 @@
+.blacklight-advanced {
+    #search-navbar {
+        display: none;
+    }
+
+    .publication-range-filter .form-control {
+        display: inline-block;
+        max-width: 6rem;
+
+        &.range_begin {
+            margin-right: 1rem;
+        }
+
+        &.range_end {
+            margin-left: 1rem;
+        }
+    }
+}
