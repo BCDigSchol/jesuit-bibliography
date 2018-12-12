@@ -1,0 +1,42 @@
+<h1>Jesuit Bibliography</h1>
+
+<% if can? :read, Entity %>
+  <h2>Jesuits index</h2>
+
+  <p><%= link_to 'Add New Jesuit record', new_citationterms_entity_path, class: 'btn btn-primary' %></p>
+
+  <%= grid(@entities_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
+
+    g.column name: 'Name', attribute: 'name' do |entity|
+      entity.name
+    end
+
+    if can? :detroy, Entity
+      g.column do |entity|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_entity_path(entity) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_entity_path(entity) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', citationterms_entity_path(entity), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Entity
+      g.column do |entity|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_entity_path(entity) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_entity_path(entity) )}</span></div>".html_safe
+      end
+    else
+      g.column do |entity|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_entity_path(entity) )}</span></div>".html_safe
+      end
+    end
+  end -%>
+
+  <p><%= link_to 'Add New Jesuit record', new_citationterms_entity_path, class: 'btn btn-primary' %></p>
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>
+
+

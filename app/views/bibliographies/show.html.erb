@@ -1,6 +1,6 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Records index', bibliographies_path %>
+    <%= link_to 'Go Back to Citations index', bibliographies_path %>
 <% elsif can? :read, Bibliography %>
     <h1>Record #<%= @bib.id %></h1>
 
@@ -14,10 +14,15 @@
 
         <% if current_user.admin_role? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Status</label>
-                <div class="field-value col-sm-10"><%= @bib.published? ? 'Published' : 'Not published' %></div>
+                <label class="col-sm-2">Is published?</label>
+                <div class="field-value col-sm-10"><%= @bib.published? ? 'yes' : 'no' %></div>
             </div>
         <% end %>
+
+         <div class="field-pair row">
+            <label class="col-sm-2">Record Status</label>
+            <div class="field-value col-sm-10"><%= @bib.status %></div>
+        </div>
 
         <div class="field-pair row">
             <label class="col-sm-2">Reference Type</label>
@@ -472,7 +477,7 @@
 
         <% if @bib.periods.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Periods</label>
+                <label class="col-sm-2">Centuries</label>
                 <ul class="field-value col-sm-10">
                 <% @bib.periods.each do |period| %>
                     <li><%= period.name %></li>
@@ -494,7 +499,7 @@
 
         <% if @bib.entities.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Entities</label>
+                <label class="col-sm-2">Jesuits</label>
                 <ul class="field-value col-sm-10">
                 <% @bib.entities.each do |entity| %>
                     <li><%= entity.display_name %></li>
@@ -549,12 +554,24 @@
             <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
         </div>
 
+        <div class="field-pair row">
+            <label class="col-sm-2">Created By</label>
+            <div class="field-value col-sm-10"><%= @bib.created_by %></div>
+        </div>
+
+        <% if @bib.modified_by.present? %>
+        <div class="field-pair row">
+            <label class="col-sm-2">Last Modified By</label>
+            <div class="field-value col-sm-10"><%= @bib.modified_by %></div>
+        </div>
+        <% end %>
+
         <hr/>
 
         <% if can? :update, Bibliography %>
         <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
         <% end %>
-        <%= link_to 'Go Back to Records index', bibliographies_path, class: 'btn btn-info' %>
+        <%= link_to 'Go Back to Citations index', bibliographies_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'not_permitted' %>

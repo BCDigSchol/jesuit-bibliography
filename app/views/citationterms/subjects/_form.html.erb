@@ -1,6 +1,6 @@
-<%= simple_form_for @subject do |form| %>
-  <%= form.button :submit, "Save Subject", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
+<%= simple_form_for @subject, url: urlpath do |form| %>
+  <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
 
   <hr/>
 
@@ -22,6 +22,6 @@
   <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
   <hr/>
-  <%= form.button :submit, "Save Subject", class: "btn btn-primary" %>
-  <%= link_to 'Go Back to Subject index', subjects_path, class: 'btn btn-info' %>
+  <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
+  <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
 <% end %>

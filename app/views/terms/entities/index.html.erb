@@ -1,9 +1,9 @@
-<h1>Term list: Entities</h1>
+<h1>Browse all Jesuits</h1>
 
 <%= alphabetical_paginate @alpha_params %>
 
 <div id="pagination_table" class="term-list-container">
   <% @entities.each do |entity| %>
-    <div class="term-list-item"><a href="/?f[entities_facet][]=<%= entity.display_name %>"><%= entity.display_name %></a></div>
+    <div class="term-list-item"><a href="/?f[jesuits_facet][]=<%= entity.display_name %>"><%= entity.display_name %></a></div>
   <% end %>
 </div>

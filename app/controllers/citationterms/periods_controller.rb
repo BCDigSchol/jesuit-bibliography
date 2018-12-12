@@ -1,4 +1,4 @@
-class PeriodsController < ApplicationController
+class Citationterms::PeriodsController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
@@ -34,9 +34,11 @@ class PeriodsController < ApplicationController
 
         authorize! :create, @period, :message => "Unable to create this Period record."
 
+        @period.created_by = current_user
+
         if @period.save
             respond_to do |format|
-                format.html { redirect_to @period, notice: 'Period was successfully created.' }
+                format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully created.' }
                 format.json { render :show, status: :created, location: @period }
             end
         else
@@ -50,10 +52,12 @@ class PeriodsController < ApplicationController
     def update
         authorize! :update, @period, :message => "Unable to update this Period record."
 
+        @period.modified_by = current_user
+
         if @period.update!(period_params)
             #@comments = @bib.comments
             respond_to do |format|
-                format.html { redirect_to @period, notice: 'Period was successfully updated.' }
+                format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully updated.' }
                 format.json { render :show, status: :ok, location: @period }
             end
         else
@@ -69,7 +73,7 @@ class PeriodsController < ApplicationController
 
         @period.destroy
         respond_to do |format|
-            format.html { redirect_to periods_path, notice: 'Period was successfully destroyed.' }
+            format.html { redirect_to citationterms_periods_path, notice: 'Period was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

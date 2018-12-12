@@ -1,4 +1,4 @@
-class LocationsController < ApplicationController
+class Citationterms::LocationsController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
@@ -34,9 +34,12 @@ class LocationsController < ApplicationController
 
         authorize! :create, @location, :message => "Unable to create this Location record."
 
+        @location.created_by = current_user
+
         if @location.save
             respond_to do |format|
-                format.html { redirect_to @location, notice: 'Location was successfully created.' }
+                # url: citationterms_location_path, action: show, id: @location.id
+                format.html { redirect_to citationterms_location_path(@location), notice: 'Location was successfully created.' }
                 format.json { render :show, status: :created, location: @location }
             end
         else
@@ -50,9 +53,11 @@ class LocationsController < ApplicationController
     def update
         authorize! :update, @location, :message => "Unable to update this Location record."
 
+        @location.modified_by = current_user
+
         if @location.update!(location_params)
             respond_to do |format|
-                format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+                format.html { redirect_to citationterms_location_path(@location), notice: 'Location was successfully updated.' }
                 format.json { render :show, status: :ok, location: @location }
             end
         else
@@ -68,7 +73,7 @@ class LocationsController < ApplicationController
 
         @location.destroy
         respond_to do |format|
-            format.html { redirect_to locations_path, notice: 'Location was successfully destroyed.' }
+            format.html { redirect_to citationterms_locations_path, notice: 'Location was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

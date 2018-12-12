@@ -87,12 +87,16 @@
     <field name="dois_text" type="text_general"/>
     <field name="subjects_text" type="text_general"/>
     <field name="locations_text" type="text_general"/>
-    <field name="entities_text" type="text_general"/>
-    <field name="periods_text" type="text_general"/>
+    <field name="jesuits_text" type="text_general"/>
+    <field name="centuries_text" type="text_general"/>
+
+    <field name="created_by_text" type="text_general"/>
+    <field name="modified_by_text" type="text_general"/>
 
     <field name="created_at_d" type="date"/>
     <field name="updated_at_d" type="date"/>
     <field name="published_b" type="boolean"/>
+    <field name="status_text" type="text_general"/>
     
     <!-- older-style solr dynamicField declarations required for sunspot -->
     <dynamicField name="*_str" type="string" docValues="true" indexed="false" stored="false" useDocValuesAsStored="false" multiValued="true"/>
@@ -618,16 +622,16 @@
     <copyField source="issns_text" dest="issns_text_str" maxChars="256"/>
     <copyField source="subjects_text" dest="subjects_text_str" maxChars="256"/>
     <copyField source="locations_text" dest="locations_text_str" maxChars="256"/>
-    <copyField source="entities_text" dest="entities_text_str" maxChars="256"/>
-    <copyField source="periods_text" dest="periods_text_str" maxChars="256"/>
+    <copyField source="jesuits_text" dest="jesuits_text_str" maxChars="256"/>
+    <copyField source="centuries_text" dest="centuries_text_str" maxChars="256"/>
 
     <!-- these fields are also used for display, so they must be stored -->
     <field name="reference_type_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="place_published_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="language_facet" type="string" indexed="true" stored="true" multiValued="true" />
-    <field name="entities_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="jesuits_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="subjects_facet" type="string" indexed="true" stored="true" multiValued="true" />
-    <field name="periods_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="centuries_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="locations_facet" type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- unstemmed fields -->
@@ -637,8 +641,8 @@
     <copyField source="place_published_facet" dest="place_published_facet_unstem_search"/>
     <copyField source="language_facet" dest="language_facet_unstem_search"/>
     <copyField source="subjects_facet" dest="subject_unstem_search"/>
-    <copyField source="entities_facet" dest="subject_unstem_search"/>
-    <copyField source="periods_facet" dest="subject_unstem_search"/>
+    <copyField source="jesuits_facet" dest="subject_unstem_search"/>
+    <copyField source="centuries_facet" dest="subject_unstem_search"/>
     <copyField source="locations_facet" dest="subject_unstem_search"/>
 
     <!-- spellcheck fields -->
@@ -652,8 +656,8 @@
     <copyField source="authors_text" dest="author_spell"/>
     <!-- subject spell check; should match fields for subject request handler -->
     <copyField source="subjects_text" dest="subject_spell"/>
-    <copyField source="entities_text" dest="subject_spell"/>
-    <copyField source="periods_text" dest="subject_spell"/>
+    <copyField source="jesuits_text" dest="subject_spell"/>
+    <copyField source="centuries_text" dest="subject_spell"/>
     <copyField source="locations_text" dest="subject_spell"/>
 
     <!-- OpenSearch query field should match request handler search fields -->
@@ -661,8 +665,8 @@
     <copyField source="title_text" dest="opensearch_display"/>
     <copyField source="authors_text" dest="opensearch_display"/>
     <copyField source="subjects_facet" dest="opensearch_display"/>
-    <copyField source="entities_facet" dest="opensearch_display"/>
-    <copyField source="periods_facet" dest="opensearch_display"/>
+    <copyField source="jesuits_facet" dest="opensearch_display"/>
+    <copyField source="centuries_facet" dest="opensearch_display"/>
     <copyField source="locations_facet" dest="opensearch_display"/>
 
     <!-- for suggestions -->

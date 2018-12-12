@@ -1,7 +1,7 @@
-<h1>Add New Location</h1>
+<h1>Add New Location Term</h1>
 
 <% if can? :create, Location %>
-    <%= render 'form' %>
+    <%= render 'form', urlpath: citationterms_locations_path %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

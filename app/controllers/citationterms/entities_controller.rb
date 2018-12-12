@@ -1,4 +1,4 @@
-class EntitiesController < ApplicationController
+class Citationterms::EntitiesController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
@@ -34,9 +34,11 @@ class EntitiesController < ApplicationController
 
         authorize! :create, @entity, :message => "Unable to create this Entity record."
 
+        @entity.created_by = current_user
+
         if @entity.save
             respond_to do |format|
-                format.html { redirect_to @entity, notice: 'Entity was successfully created.' }
+                format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully created.' }
                 format.json { render :show, status: :created, location: @entity }
             end
         else
@@ -50,9 +52,11 @@ class EntitiesController < ApplicationController
     def update
         authorize! :update, @entity, :message => "Unable to update this Entity record."
 
+        @entity.modified_by = current_user
+
         if @entity.update!(entity_params)
             respond_to do |format|
-                format.html { redirect_to @entity, notice: 'Entity was successfully updated.' }
+                format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully updated.' }
                 format.json { render :show, status: :ok, location: @entity }
             end
         else
@@ -68,7 +72,7 @@ class EntitiesController < ApplicationController
 
         @entity.destroy
         respond_to do |format|
-            format.html { redirect_to entities_path, notice: 'Entity was successfully destroyed.' }
+            format.html { redirect_to citationterms_entities_path, notice: 'Entity was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

@@ -1,4 +1,4 @@
-class SubjectsController < ApplicationController
+class Citationterms::SubjectsController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
 
@@ -34,9 +34,11 @@ class SubjectsController < ApplicationController
 
         authorize! :create, @subject, :message => "Unable to create this Subject record."
 
+        @subject.created_by = current_user
+
         if @subject.save
             respond_to do |format|
-                format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
+                format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully created.' }
                 format.json { render :show, status: :created, location: @subject }
             end
         else
@@ -50,9 +52,11 @@ class SubjectsController < ApplicationController
     def update
         authorize! :update, @subject, :message => "Unable to update this Subject record."
 
+        @subject.modified_by = current_user
+
         if @subject.update!(subject_params)
             respond_to do |format|
-                format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
+                format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully updated.' }
                 format.json { render :show, status: :ok, location: @subject }
             end
         else
@@ -68,7 +72,7 @@ class SubjectsController < ApplicationController
 
         @subject.destroy
         respond_to do |format|
-            format.html { redirect_to subjects_path, notice: 'Subject was successfully destroyed.' }
+            format.html { redirect_to citationterms_subjects_path, notice: 'Subject was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

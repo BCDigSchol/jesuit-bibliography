@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JesuitBibliographyStaff</title>
+    <title>Jesuit Bibliography Staff</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,26 +33,26 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <% if can? :read, Bibliography %>
-                    <li><%= link_to 'Records', bibliographies_path %></li>
+                    <li><%= link_to 'Citations', bibliographies_path %></li>
                     <% end %>
                     <% if can? :manage, 'Terms' %>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Term lists <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <% if can? :read, Location %>
-                            <li><%= link_to 'Locations', locations_path %></li>
+                            <li><%= link_to 'Locations', citationterms_locations_path %></li>
                             <% end %>
 
                             <% if can? :read, Period %>
-                            <li><%= link_to 'Periods', periods_path %></li>
+                            <li><%= link_to 'Centuries', citationterms_periods_path %></li>
                             <% end %>
 
                             <% if can? :read, Subject %>
-                            <li><%= link_to 'Subjects', subjects_path %></li>
+                            <li><%= link_to 'Subjects', citationterms_subjects_path %></li>
                             <% end %>
 
                             <% if can? :read, Entity %>
-                            <li><%= link_to 'Entities', entities_path %></li>
+                            <li><%= link_to 'Jesuits', citationterms_entities_path %></li>
                             <% end %>
                         </ul>
                     </li>
