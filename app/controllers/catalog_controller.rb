@@ -209,7 +209,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'volume_number_text', label: 'Volume Number'
     config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
     config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
-    config.add_show_field 'leuven_urls_text', label: 'Leuven URL', :helper_method => :make_link
+    config.add_show_field 'leuven_urls_text', label: 'Other links', :helper_method => :make_link
     config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
     config.add_show_field 'multimedia_series_text', label: 'Multimedia Series'
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
