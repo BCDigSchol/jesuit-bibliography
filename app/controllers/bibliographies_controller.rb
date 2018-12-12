@@ -174,6 +174,8 @@ class BibliographiesController < ApplicationController
         # set the display_* fields for Blacklight views
         set_display_fields
 
+        @bib.created_by = current_user
+
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
         @bib.comments.each do |comment|
@@ -211,6 +213,8 @@ class BibliographiesController < ApplicationController
 
         # set the display_* fields for Blacklight views
         set_display_fields
+
+        @bib.modified_by = current_user
 
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value

@@ -34,6 +34,8 @@ class Citationterms::PeriodsController < ApplicationController
 
         authorize! :create, @period, :message => "Unable to create this Period record."
 
+        @period.created_by = current_user
+
         if @period.save
             respond_to do |format|
                 format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully created.' }
@@ -49,6 +51,8 @@ class Citationterms::PeriodsController < ApplicationController
 
     def update
         authorize! :update, @period, :message => "Unable to update this Period record."
+
+        @period.modified_by = current_user
 
         if @period.update!(period_params)
             #@comments = @bib.comments

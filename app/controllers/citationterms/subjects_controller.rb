@@ -34,6 +34,8 @@ class Citationterms::SubjectsController < ApplicationController
 
         authorize! :create, @subject, :message => "Unable to create this Subject record."
 
+        @subject.created_by = current_user
+
         if @subject.save
             respond_to do |format|
                 format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully created.' }
@@ -49,6 +51,8 @@ class Citationterms::SubjectsController < ApplicationController
 
     def update
         authorize! :update, @subject, :message => "Unable to update this Subject record."
+
+        @subject.modified_by = current_user
 
         if @subject.update!(subject_params)
             respond_to do |format|

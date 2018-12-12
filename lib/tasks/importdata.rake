@@ -3,6 +3,8 @@ require 'progress_bar'
 
 bar = ProgressBar.new
 
+CREATED_BY_USER = "admin@test.com"
+
 def import_logger
     @import_logger ||= Logger.new("#{Rails.root}/log/import_bibs.log")
 end
@@ -76,6 +78,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -200,7 +203,7 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[18]
                 values = row[18].split("|")
                 values.each do |v|
@@ -214,7 +217,7 @@ namespace :importdata do
                 values = row[19].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -223,16 +226,16 @@ namespace :importdata do
                 values = row[20].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[21]
                 values = row[21].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -313,6 +316,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -439,12 +443,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[20]
                 values = row[20].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -453,7 +457,7 @@ namespace :importdata do
                 values = row[21].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -462,16 +466,16 @@ namespace :importdata do
                 values = row[22].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[23]
                 values = row[23].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -552,6 +556,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author_of_review = row[1]
@@ -663,12 +668,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[17]
                 values = row[17].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -677,7 +682,7 @@ namespace :importdata do
                 values = row[18].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -686,16 +691,16 @@ namespace :importdata do
                 values = row[19].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[20]
                 values = row[20].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -777,6 +782,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.authors = row[1]
@@ -880,12 +886,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[15]
                 values = row[15].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -894,7 +900,7 @@ namespace :importdata do
                 values = row[16].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -903,16 +909,16 @@ namespace :importdata do
                 values = row[17].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[18]
                 values = row[18].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -990,6 +996,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -1079,12 +1086,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[12]
                 values = row[12].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1093,7 +1100,7 @@ namespace :importdata do
                 values = row[13].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1102,16 +1109,16 @@ namespace :importdata do
                 values = row[14].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[15]
                 values = row[15].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1180,6 +1187,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -1240,12 +1248,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[10]
                 values = row[10].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1254,7 +1262,7 @@ namespace :importdata do
                 values = row[11].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1263,16 +1271,16 @@ namespace :importdata do
                 values = row[12].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[13]
                 values = row[13].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1344,6 +1352,7 @@ namespace :importdata do
 
             @bib.published = true
             @bib.status = "published"
+            @bib.created_by = CREATED_BY_USER
 
             @bib.reference_type = row[0]
             #@bib.author = row[1]
@@ -1434,12 +1443,12 @@ namespace :importdata do
                 end
             end
 
-            # Periods
+            # Periods/Centuries
             if row[13]
                 values = row[13].split("|")
                 values.each do |v|
                     import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
+                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1448,7 +1457,7 @@ namespace :importdata do
                 values = row[14].split("|")
                 values.each do |v|
                     import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v)
+                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
@@ -1457,16 +1466,16 @@ namespace :importdata do
                 values = row[15].split("|")
                 values.each do |v|
                     import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v)
+                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
                 end
             end
 
-            # Entities
+            # Entities/Jesuits
             if row[16]
                 values = row[16].split("|")
                 values.each do |v|
                     import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v)
+                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 end
             end
 

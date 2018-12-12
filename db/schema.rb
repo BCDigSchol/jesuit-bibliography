@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_194611) do
+ActiveRecord::Schema.define(version: 2018_12_12_035251) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.text "paper_title"
     t.boolean "published"
     t.text "status"
+    t.text "created_by"
+    t.text "modified_by"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
@@ -136,6 +138,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "created_by"
+    t.text "modified_by"
     t.index ["bibliography_id"], name: "index_comments_on_bibliography_id"
   end
 
@@ -147,6 +151,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.text "death_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "created_by"
+    t.text "modified_by"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -162,6 +168,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "created_by"
+    t.text "modified_by"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -169,6 +177,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "created_by"
+    t.text "modified_by"
   end
 
   create_table "reviewed_components", force: :cascade do |t|
@@ -206,6 +216,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_194611) do
     t.text "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "created_by"
+    t.text "modified_by"
   end
 
   create_table "urls", force: :cascade do |t|

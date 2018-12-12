@@ -75,6 +75,16 @@ class Bibliography < ApplicationRecord
 
         boolean :published
 
+        text :status
+
+        text :created_by do
+            created_by if self.created_by.present?
+        end
+
+        text :modified_by do
+            modified_by if self.modified_by.present?
+        end
+
         # reference_type is a required field
         text :reference_type
         text :reference_type_faceting, :as => 'reference_type_facet'

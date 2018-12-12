@@ -34,6 +34,8 @@ class Citationterms::LocationsController < ApplicationController
 
         authorize! :create, @location, :message => "Unable to create this Location record."
 
+        @location.created_by = current_user
+
         if @location.save
             respond_to do |format|
                 # url: citationterms_location_path, action: show, id: @location.id
@@ -50,6 +52,8 @@ class Citationterms::LocationsController < ApplicationController
 
     def update
         authorize! :update, @location, :message => "Unable to update this Location record."
+
+        @location.modified_by = current_user
 
         if @location.update!(location_params)
             respond_to do |format|

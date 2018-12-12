@@ -90,9 +90,13 @@
     <field name="jesuits_text" type="text_general"/>
     <field name="centuries_text" type="text_general"/>
 
+    <field name="created_by_text" type="text_general"/>
+    <field name="modified_by_text" type="text_general"/>
+
     <field name="created_at_d" type="date"/>
     <field name="updated_at_d" type="date"/>
     <field name="published_b" type="boolean"/>
+    <field name="status_text" type="text_general"/>
     
     <!-- older-style solr dynamicField declarations required for sunspot -->
     <dynamicField name="*_str" type="string" docValues="true" indexed="false" stored="false" useDocValuesAsStored="false" multiValued="true"/>

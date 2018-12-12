@@ -34,6 +34,8 @@ class Citationterms::EntitiesController < ApplicationController
 
         authorize! :create, @entity, :message => "Unable to create this Entity record."
 
+        @entity.created_by = current_user
+
         if @entity.save
             respond_to do |format|
                 format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully created.' }
@@ -49,6 +51,8 @@ class Citationterms::EntitiesController < ApplicationController
 
     def update
         authorize! :update, @entity, :message => "Unable to update this Entity record."
+
+        @entity.modified_by = current_user
 
         if @entity.update!(entity_params)
             respond_to do |format|
