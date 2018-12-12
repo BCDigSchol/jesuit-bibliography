@@ -111,7 +111,7 @@ class BibliographiesController < ApplicationController
             end
 
             if @bib.translators.count == 0
-            @bib.translators.build
+                @bib.translators.build
             end
 
             if @bib.performers.count == 0

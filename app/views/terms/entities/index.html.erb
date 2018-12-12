@@ -4,6 +4,6 @@
 
 <div id="pagination_table" class="term-list-container">
   <% @entities.each do |entity| %>
-    <div class="term-list-item"><a href="/?f[entities_facet][]=<%= entity.display_name %>"><%= entity.display_name %></a></div>
+    <div class="term-list-item"><a href="/?f[jesuits_facet][]=<%= entity.display_name %>"><%= entity.display_name %></a></div>
   <% end %>
 </div>

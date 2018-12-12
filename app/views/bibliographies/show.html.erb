@@ -477,7 +477,7 @@
 
         <% if @bib.periods.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Periods</label>
+                <label class="col-sm-2">Centuries</label>
                 <ul class="field-value col-sm-10">
                 <% @bib.periods.each do |period| %>
                     <li><%= period.name %></li>
@@ -499,7 +499,7 @@
 
         <% if @bib.entities.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Entities</label>
+                <label class="col-sm-2">Jesuits</label>
                 <ul class="field-value col-sm-10">
                 <% @bib.entities.each do |entity| %>
                     <li><%= entity.display_name %></li>

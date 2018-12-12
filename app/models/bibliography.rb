@@ -326,15 +326,15 @@ class Bibliography < ApplicationRecord
         end
         text :locations_faceting, :as => 'locations_facet'
 
-        text :entities do     # for associations
+        text :jesuits do     # for associations
             entities.map { |entity| entity.name }
         end
-        text :entities_faceting, :as => 'entities_facet'
+        text :jesuits_faceting, :as => 'jesuits_facet'
 
-        text :periods do     # for associations
+        text :centuries do     # for associations
             periods.map { |period| period.name }
         end
-        text :periods_faceting, :as => 'periods_facet'
+        text :centuries_faceting, :as => 'centuries_facet'
         
         time :created_at
         time :updated_at
@@ -396,7 +396,7 @@ class Bibliography < ApplicationRecord
             languages.map { |language| language.name }
         end
 
-        def periods_faceting
+        def centuries_faceting
             self.periods.map { |period| period.name }
         end
 
@@ -408,7 +408,7 @@ class Bibliography < ApplicationRecord
             self.locations.map { |location| location.name }
         end
 
-        def entities_faceting
+        def jesuits_faceting
             self.entities.map { |entity| entity.name }
         end
 

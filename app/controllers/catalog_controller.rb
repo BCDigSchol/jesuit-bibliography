@@ -88,9 +88,9 @@ class CatalogController < ApplicationController
     config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'periods_facet', label: 'Periods', limit: 20
+    config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20
     config.add_facet_field 'locations_facet', label: 'Locations', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'entities_facet', label: 'Entities', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'jesuits_facet', label: 'Jesuits', limit: 20, index_range: 'A'..'Z'
     
     #config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
 
@@ -142,9 +142,9 @@ class CatalogController < ApplicationController
     config.add_index_field 'place_published_text', label: 'Place published'
     config.add_index_field 'languages_text', label: 'Languages'
     config.add_index_field 'subjects_text', label: 'Subjects'
-    config.add_index_field 'periods_text', label: 'Periods'
+    config.add_index_field 'centuries_text', label: 'Centuries'
     config.add_index_field 'locations_text', label: 'Locations'
-    config.add_index_field 'entities_text', label: 'Entities'
+    config.add_index_field 'jesuits_text', label: 'Jesuits'
     
 
     #config.add_index_field 'author_display', label: 'Author'
@@ -190,9 +190,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :separate_parts
 
     config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
-    config.add_show_field 'periods_text', label: 'Periods', link_to_search: :periods_facet
+    config.add_show_field 'centuries_text', label: 'Centuries', link_to_search: :periods_facet
     config.add_show_field 'locations_text', label: 'Locations', link_to_search: :locations_facet
-    config.add_show_field 'entities_text', label: 'Entities', link_to_search: :entities_facet
+    config.add_show_field 'jesuits_text', label: 'Jesuits', link_to_search: :entities_facet
     
     config.add_show_field 'isbns_text', label: 'ISBN'
     config.add_show_field 'issns_text', label: 'ISSN'

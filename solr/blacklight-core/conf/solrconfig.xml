@@ -68,9 +68,9 @@
           issns_text
           dois_text
           subjects_text
-          periods_text
+          centuries_text
           locations_text
-          entities_text
+          jesuits_text
         </str>
         <str name="pf">
           all_text_timv^10
@@ -99,9 +99,9 @@
        <str name="subject_qf">
           <!--subject_tsim-->
           subjects_text
-          periods_text
+          centuries_text
           locations_text
-          entities_text
+          jesuits_text
        </str>
        <str name="subject_pf">
        </str>
