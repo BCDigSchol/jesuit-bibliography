@@ -23,6 +23,20 @@
 
   </div>
 
+  <div class="limit-criteria">
+    <h3 class="limit-criteria-heading"><%= t('blacklight_advanced_search.form.limit_criteria_heading_html') %></h3>
+
+    <div class="form-group advanced-search-facet publication-range-filter">
+      <%= label_tag "publication_date", :class => "col-sm-3 control-label" do %>
+        Published Between
+      <% end %>
+
+      <div class="col-sm-9">
+        <%= render_range_input("years_published_itm", :begin, :class => 'start-year') %> - <%= render_range_input("years_published_itm", :end) %>
+      </div>
+    </div>
+  </div>
+
   <hr>
 
   <div class="sort-submit-buttons clearfix">

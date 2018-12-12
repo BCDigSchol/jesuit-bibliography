@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
+
+  include BlacklightRangeLimit::ControllerOverride
   include BlacklightAdvancedSearch::Controller
 
   include Blacklight::Catalog
@@ -85,7 +87,7 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
     config.add_facet_field 'reference_type_facet', label: 'Format'
-    config.add_facet_field 'year_published_text', label: 'Publication Year', limit: 20
+    config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
     config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
@@ -307,7 +309,7 @@ class CatalogController < ApplicationController
 
     config.advanced_search = {
         :form_solr_parameters => {
-            'facet.field' => %w(languages_facet),
+            'facet.field' => %w(years_published_itm),
             'f.languages_facet.facet.limit' => -1, # return all facet values
             'facet.sort' => :index # sort by byte order of values
         }
