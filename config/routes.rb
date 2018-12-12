@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
 
   mount Blacklight::Engine => '/'
+  mount BlacklightAdvancedSearch::Engine => '/'
+
   Blacklight::Marc.add_routes(self)
   root to: "catalog#index"
   concern :searchable, Blacklight::Routes::Searchable.new

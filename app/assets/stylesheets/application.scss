@@ -15,7 +15,10 @@
  *= require select2
  *= require select2-bootstrap
  *= require_tree .
- */
+ 
+ *= require 'blacklight_advanced_search'
+
+*/
  
  @import "wice_grid";
  @import "font-awesome-sprockets";
