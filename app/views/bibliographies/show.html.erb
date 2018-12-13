@@ -403,7 +403,7 @@
         <% if @bib.abstract.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Abstract</label>
-                <div class="field-value col-sm-10"><%= @bib.abstract %></div>
+                <div class="field-value col-sm-10"><%= @bib.abstract.html_safe %></div>
             </div>
         <% end %>
 
