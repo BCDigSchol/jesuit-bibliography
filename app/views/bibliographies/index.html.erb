@@ -3,7 +3,10 @@
 <% if can? :read, Bibliography %>
   <h2>Citation index</h2>
 
-  <p><%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %>
+    <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+  </div>
 
   <%= grid(@bibs_grid,
         show_filters: :when_filtered,
@@ -20,6 +23,10 @@
     g.column name: 'Title', attribute: 'display_title'
 
     g.column name: 'Author', attribute: 'display_author'
+
+    g.column name: 'Status', attribute: 'status'
+
+    g.column name: 'Created by', attribute: 'created_by'
 
     g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
       bib.created_at.strftime "%b %e, %Y"
@@ -43,7 +50,10 @@
     end
   end -%>
 
-  <p><%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %>
+    <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+  </div>
 
 <% else %>
   <%= render 'not_permitted' %>

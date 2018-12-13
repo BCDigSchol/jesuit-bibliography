@@ -5,6 +5,7 @@ class BibliographiesController < ApplicationController
     before_action :require_login
     before_action :authenticate_user!
     before_action :set_bib, only: [:show, :edit, :update, :destroy]
+    before_action :get_current_user
 
     layout 'bibliography'
     
@@ -169,12 +170,14 @@ class BibliographiesController < ApplicationController
     def create
         @bib = Bibliography.new(bib_params)
 
-        authorize! :create, @bib, :message => "Unable to create this Bibliography record."
+        # set the created_by value to be the current_user
+        @bib.created_by = current_user
+
+        check_authorization(:create, "Unable to create this Bibliography record.")
+        #authorize! :create, Bibliography, :message => "Unable to create this Bibliography record."
 
         # set the display_* fields for Blacklight views
         set_display_fields
-
-        @bib.created_by = current_user
 
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
@@ -206,7 +209,7 @@ class BibliographiesController < ApplicationController
     end
 
     def update
-        authorize! :update, @bib, :message => "Unable to update this Bibliography record."
+        check_authorization(:update, "Unable to update this Bibliography record.")
 
         # copy over bib_params into @bib object so we can alter it
         @bib.attributes = bib_params
@@ -248,7 +251,7 @@ class BibliographiesController < ApplicationController
     end
 
     def destroy
-        authorize! :destroy, @bib, :message => "Unable to destroy this Bibliography record."
+        check_authorization(:destroy, "Unable to destroy this Bibliography record.")
 
         @bib.destroy
         respond_to do |format|
@@ -271,15 +274,50 @@ class BibliographiesController < ApplicationController
         end
     end
 
+    def mine
+        @bibs_grid = initialize_grid(Bibliography, 
+            conditions: {created_by: current_user.email},
+            order:           'bibliographies.created_at',
+            order_direction: 'desc'
+        )
+    end
+
     private
-        # Use callbacks to share common setup or constraints between actions.
+        # this method checks that one of two conditions is true:
+        #   the current user matches the account used to create this record,
+        #   or the proper cancan ability is set for this action
+        def check_authorization(action, msg)
+            message = msg || "Unable to access this Bibliography record."
+
+            if @bib.created_by.to_s == current_user.to_s
+                # the current user matches the account used to create this record
+            else
+                # the current user doesn't match the account used to create this record 
+                # so check if the current user can perform the give action on this record
+                case action
+                when :read
+                    authorize! :read, Bibliography, :message => msg
+                when :create
+                    authorize! :create, Bibliography, :message => msg
+                when :update
+                    authorize! :update, Bibliography, :message => msg
+                when :destroy
+                    authorize! :destroy, Bibliography, :message => msg
+                end
+            end
+        end
+
         def set_bib
             begin
                 @bib = Bibliography.find(params[:id])
-                authorize! :read, @bib, :message => "Unable to read this Bibliography record."
+                check_authorization(:read, "Unable to read this Bibliography record.")
             rescue ActiveRecord::RecordNotFound => e
                 @bib = nil
             end
+        end
+
+        def get_current_user
+            @this_user = current_user
         end
 
         def bib_params

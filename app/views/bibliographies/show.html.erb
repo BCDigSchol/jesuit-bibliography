@@ -1,14 +1,19 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
-    <%= link_to 'Go Back to Citations index', bibliographies_path %>
-<% elsif can? :read, Bibliography %>
-    <h1>Record #<%= @bib.id %></h1>
+    <%= link_to 'Go Back to Dashboard', dashboard_path %>
+<% elsif can? :read, Bibliography or creator_match? @bib.created_by, @this_user.email %>
+    <h1><%= @bib.display_title %></h1>
 
     <div class="record-view">
-        <% if can? :update, Bibliography %>
-        <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <% if can? :edit, Bibliography %>
+            <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+            <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
+        <% elsif creator_match? @this_user.email, @bib.created_by %>
+            <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+            <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
+        <% else %>
+            <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% end %>
-        <%= link_to 'Go Back to Records index', bibliographies_path, class: 'btn btn-info' %>
         
         <hr/>
 
@@ -549,17 +554,19 @@
             <div class="field-value col-sm-10"><%= @bib.created_at %></div>
         </div>
 
+        <% if @bib.modified_by.present? and can? :read, Bibliography %>
         <div class="field-pair row">
             <label class="col-sm-2">Updated At</label>
             <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
         </div>
+        <% end %>
 
         <div class="field-pair row">
             <label class="col-sm-2">Created By</label>
             <div class="field-value col-sm-10"><%= @bib.created_by %></div>
         </div>
 
-        <% if @bib.modified_by.present? %>
+        <% if @bib.modified_by.present? and can? :read, Bibliography %>
         <div class="field-pair row">
             <label class="col-sm-2">Last Modified By</label>
             <div class="field-value col-sm-10"><%= @bib.modified_by %></div>
@@ -568,10 +575,15 @@
 
         <hr/>
 
-        <% if can? :update, Bibliography %>
-        <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+        <% if can? :edit, Bibliography %>
+            <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+            <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
+        <% elsif creator_match? @this_user.email, @bib.created_by %>
+            <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
+            <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
+        <% else %>
+            <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% end %>
-        <%= link_to 'Go Back to Citations index', bibliographies_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'not_permitted' %>

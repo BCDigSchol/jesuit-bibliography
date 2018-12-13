@@ -5,8 +5,16 @@ Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  # custom path for displaying records created by signed-in user
+  get '/citations/mine' => 'bibliographies#mine'
+
+  # custom path for displaying all records
+  # this is effectively the same as /citations  
+  get '/citations/all' => 'bibliographies#index'
+
   # get paths like "/citations/1"
   resources :bibliographies, path: '/citations' do
+    root to: redirect('/citations/mine')
     resources :comments
     resources :standard_identifiers
     resources :citations
