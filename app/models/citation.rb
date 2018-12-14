@@ -7,4 +7,8 @@ class Citation < ApplicationRecord
     belongs_to :translator, class_name: 'Citation', foreign_key: :translator_id, optional: true
     belongs_to :performer, class_name: 'Citation', foreign_key: :performer_id, optional: true
     belongs_to :translated_author, class_name: 'Citation', foreign_key: :translated_author_id, optional: true
+
+    rails_admin do 
+        object_label_method { :display_name }
+    end
 end

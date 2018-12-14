@@ -38,4 +38,170 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.main_app_name = ["Jesuit Online Bibliography"]
+
+  config.label_methods << :display_name
+  config.label_methods << :display_title
+
+  config.model 'Foo' do
+    navigation_label 'Foo'
+  end
+
+  config.model 'Subject' do
+    navigation_label 'Terms'
+    #parent 'Foo'
+    weight -1
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+    end
+  end
+
+  config.model 'Location' do
+    navigation_label 'Terms'
+    #parent 'Foo'
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+    end
+  end
+
+  config.model 'Entity' do
+    navigation_label 'Terms'
+    #parent 'Foo'
+    label 'Jesuit'
+    label_plural 'Jesuits'
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+    end
+  end
+
+  config.model 'Period' do
+    navigation_label 'Terms'
+    #parent 'Foo'
+    label 'Century'
+    label_plural 'Centuries'
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+    end
+  end
+
+  config.model 'Bibliography' do
+    navigation_label 'All records'
+    weight -2
+    label 'Citation'
+    label_plural 'Citations'
+    list do
+      field :id
+      field :reference_type
+      field :display_title
+      field :display_author
+      field :year_published
+    end
+  end
+
+  config.model 'Citation' do
+    parent Bibliography
+    label 'Person'
+    label_plural 'People'
+    list do
+      field :id
+      field :display_name do
+        label "Name"
+      end
+    end
+    edit do
+      field :display_name
+      field :surname
+      field :middlename
+      field :forename
+      field :title
+    end
+  end
+
+  config.model 'Comment' do
+    parent Bibliography
+    list do
+      field :id
+      field :body
+      field :comment_type
+      field :make_public
+      field :commenter
+    end
+    edit do
+      field :body
+      field :comment_type
+      field :commenter
+      field :make_public
+    end
+  end
+
+  config.model 'Language' do
+    parent Bibliography
+    visible false
+  end
+
+  config.model 'ReviewedComponent' do
+    parent Bibliography
+    list do
+      field :id
+      field :reviewed_author
+      field :reviewed_title
+    end
+    edit do
+      field :reviewed_author
+      field :reviewed_title
+    end
+  end
+
+  config.model 'BibliographyEntity' do
+    visible false
+  end
+
+  config.model 'BibliographyLocation' do
+    visible false
+  end
+
+  config.model 'BibliographyPeriod' do
+    visible false
+  end
+
+  config.model 'BibliographySubject' do
+    visible false
+  end
+
+  config.model 'Url' do
+    visible false
+  end
+
+  config.model 'StandardIdentifier' do
+    visible false
+  end
+
+  config.model 'User' do
+    navigation_label 'Edit Accounts'
+  end
+
+  config.model 'Search' do
+    navigation_label 'Blacklight'
+  end
+
+  config.model 'Bookmark' do
+    navigation_label 'Blacklight'
+  end
 end

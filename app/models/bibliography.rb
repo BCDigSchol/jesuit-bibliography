@@ -362,6 +362,10 @@ class Bibliography < ApplicationRecord
         time :updated_at
     end
 
+    rails_admin do 
+        object_label_method { :display_title }
+    end
+
     # public method called from associated models to initiate a Solr reindex of this Bib record
     def reindex_me
         #puts "Bibliography ##{self.id} is reindexed\n\n"
