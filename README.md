@@ -39,19 +39,19 @@ This only needs to be done once.
 
 Add `SECRET_KEY_BASE`
 
-```echo 'export SECRET_KEY_BASE="abcdef...7890"' >> ~/.bashrc```
+```echo 'export SECRET_KEY_BASE="abcdef...7890"' >> ~/.bash_profile```
 
 Add `RAILS_ENV`
 
-```echo 'export RAILS_ENV="development"' >> ~/.bashrc```
+```echo 'export RAILS_ENV="development"' >> ~/.bash_profile```
 
 Activate the new environment variables in your current shell.
 
-```source ~/.bashrc```
+```source ~/.bash_profile```
 
 Add `SOLR_CONF_HOME`
 
-```echo 'export SOLR_CONF_HOME="/path/to/solr/blacklight-core/conf"' >> ~/.bashrc```
+```echo 'export SOLR_CONF_HOME="/path/to/solr/blacklight-core/conf"' >> ~/.bash_profile```
 
 | **Hint** |
 | -------- |
@@ -59,10 +59,16 @@ Add `SOLR_CONF_HOME`
 
 ## Useful import commands for development
 
+### Drop the local database
+```rake db:drop```
+
+### Rebuild the database with all the migrations
+```rake db:migrate```
+
 ### Import test users:
 ```rake import:users```
 
-### Import sample records
+### Import set of sample records
 ```rake importdata:books```
 
 ```rake importdata:book_chapters```
@@ -76,10 +82,27 @@ Add `SOLR_CONF_HOME`
 ### Update local Solr instance with project config files ([see this directory](solr/blacklight-core/conf).)
 ```rake solr_config:update```
 
+### Restart local Solr instance
+```solr restart```
+
 ## Solr indexing
 Use the Rails [sunspot](https://github.com/sunspot/sunspot) gem to index all the Bibliography records.
 
 ```rake sunspot:reindex```
+
+## Going NUCLEAR
+
+Want to completely clear out and restart your local development database? Run the following commands in succession:
+
+```shell
+rake solr_config:update
+solr restart
+rake db:drop
+rake db:migrate
+rake import:users
+rake importdata:all
+rake sunspot:reindex
+```
 
 ## Deployment
 
