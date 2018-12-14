@@ -41,7 +41,11 @@
 
         <div class="field-pair row">
             <label class="col-sm-2">Display Author</label>
-            <div class="field-value col-sm-10"><%= @bib.display_author %></div>
+            <div class="field-value col-sm-10"> 
+                <% @bib.display_author.split('|').each do |author| %>
+                    <span class='value-part'><%= author %></span>
+                <% end %>
+            </div>
         </div>
 
         <% if @bib.authors.present? %>

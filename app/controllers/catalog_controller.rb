@@ -135,7 +135,7 @@ class CatalogController < ApplicationController
     #config.add_index_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_index_field 'title_of_review_text', label: 'Title of Review'
     #config.add_index_field 'paper_title_text', label: 'Paper Title'
-    #config.add_index_field 'display_author_text', label: 'Display Author'
+    config.add_index_field 'display_author_text', label: 'Display Author', :helper_method => :display_in_parts
     config.add_index_field 'authors_text', label: 'Author'
     config.add_index_field 'editors_text', label: 'Editor'
     #config.add_index_field 'book_editors_text', label: 'Book Editor'
@@ -183,22 +183,23 @@ class CatalogController < ApplicationController
     config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
     config.add_show_field 'place_published_text', label: 'Place published'
     config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
-    config.add_show_field 'authors_text', label: 'Authors'
+    config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :display_in_parts
+    config.add_show_field 'authors_text', label: 'Authors', :helper_method => :display_in_parts
     config.add_show_field 'editors_text', label: 'Editors'
     config.add_show_field 'book_editors_text', label: 'Book Editors'
     config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews'
     config.add_show_field 'translators_text', label: 'Translators'
     config.add_show_field 'translated_authors_text', label: 'Translated Authors'
 
-    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :separate_parts
+    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_in_parts
 
     config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
     config.add_show_field 'centuries_text', label: 'Centuries', link_to_search: :periods_facet
     config.add_show_field 'locations_text', label: 'Locations', link_to_search: :locations_facet
     config.add_show_field 'jesuits_text', label: 'Jesuits', link_to_search: :entities_facet
     
-    config.add_show_field 'isbns_text', label: 'ISBN'
-    config.add_show_field 'issns_text', label: 'ISSN'
+    config.add_show_field 'isbns_text', label: 'ISBN', :helper_method => :display_in_parts
+    config.add_show_field 'issns_text', label: 'ISSN', :helper_method => :display_in_parts
     config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
 
     config.add_show_field 'publisher_text', label: 'Publisher'
@@ -207,7 +208,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'edition_text', label: 'Edition'
     config.add_show_field 'date_text', label: 'Date'
     config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
-    config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :separate_parts
+    config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
     config.add_show_field 'translated_title_text', label: 'Translated Title'
     config.add_show_field 'volume_number_text', label: 'Volume Number'
     config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
@@ -234,7 +235,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'chapter_number_text', label: 'Chapter Number'
     config.add_show_field 'book_title_text', label: 'Book Title'
 
-    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :separate_parts
+    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :display_in_parts
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

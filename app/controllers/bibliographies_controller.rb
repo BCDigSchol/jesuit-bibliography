@@ -8,6 +8,8 @@ class BibliographiesController < ApplicationController
     before_action :get_current_user
 
     layout 'bibliography'
+
+    NO_VALUE_FOUND = "n/a"
     
     def index
         authorize! :read, Bibliography, :message => "Unable to load this page."
@@ -356,33 +358,91 @@ class BibliographiesController < ApplicationController
         end
 
         def set_display_fields
-            if @bib.reference_type.downcase == "book chapter"
+            if @bib.reference_type.downcase == "book"
+                if @bib.title.present?
+                    @bib.display_title = @bib.title
+                else
+                    @bib.display_title = NO_VALUE_FOUND
+                end
+                
+                if @bib.authors.present?
+                    out = []
+                    @bib.authors.each do |author|
+                        out << author.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                elsif @bib.editors.present?
+                    out = []
+                    @bib.editors.each do |editor|
+                        out << editor.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                else
+                    @bib.display_author = NO_VALUE_FOUND
+                end
+            elsif @bib.reference_type.downcase == "book chapter"
                 if @bib.chapter_title.present?
                     @bib.display_title = @bib.chapter_title
+                else
+                    @bib.display_title = NO_VALUE_FOUND
                 end
+                
                 if @bib.authors.present?
-                    @bib.display_author = @bib.authors.map { |author| author.display_name }.to_sentence
+                    out = []
+                    @bib.authors.each do |author|
+                        out << author.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                else
+                    @bib.display_author = NO_VALUE_FOUND
                 end
             elsif @bib.reference_type.downcase == "book review"
                 if @bib.title_of_review.present?
                     @bib.display_title = @bib.title_of_review
+                else
+                    @bib.display_title = NO_VALUE_FOUND
                 end
-                if @bib.authors.present?
-                    @bib.display_author = @bib.author_of_reviews.map { |author| author.display_name }.to_sentence
+
+                if @bib.author_of_reviews.present?
+                    out = []
+                    @bib.author_of_reviews.each do |author|
+                        out << author.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                else
+                    @bib.display_author = NO_VALUE_FOUND
                 end
             elsif @bib.reference_type.downcase == "conference paper"
                 if @bib.paper_title.present?
                     @bib.display_title = @bib.paper_title
+                else
+                    @bib.display_title = NO_VALUE_FOUND
                 end
-                if @bib.authors.present?
-                    @bib.display_author = @bib.author_of_reviews.map { |author| author.display_name }.to_sentence
+
+                if @bib.author_of_reviews.present?
+                    out = []
+                    @bib.author_of_reviews.each do |author|
+                        out << author.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                else
+                    @bib.display_author = NO_VALUE_FOUND
                 end
-            else # book, dissertation, journal article, multimedia
+            else # dissertation, journal article, multimedia
                 if @bib.title.present?
                     @bib.display_title = @bib.title
+                else
+                    @bib.display_title = NO_VALUE_FOUND
                 end
+
                 if @bib.authors.present?
-                    @bib.display_author = @bib.authors.map { |author| author.display_name }.to_sentence
+                    out = []
+                    @bib.authors.each do |author|
+                        out << author.display_name
+                    end
+                    @bib.display_author = out.join('|')
+                else
+                    @bib.display_author = NO_VALUE_FOUND
                 end
             end
         end

@@ -114,14 +114,9 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
+            elsif row[9]
+                @bib.display_author = row[9]
             end
 
             @bib.save!
@@ -354,14 +349,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!
@@ -591,14 +579,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!
@@ -815,14 +796,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!
@@ -1024,14 +998,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!
@@ -1213,14 +1180,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!
@@ -1381,14 +1341,7 @@ namespace :importdata do
 
             # Display Authors
             if row[1]
-                values = row[1].split("|")
-                out = []
-                values.each do |v|
-                    out << v
-                end
-                if !out.empty?
-                    @bib.display_author = out.to_sentence
-                end
+                @bib.display_author = row[1]
             end
 
             @bib.save!

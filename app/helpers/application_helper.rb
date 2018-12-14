@@ -38,15 +38,17 @@ module ApplicationHelper
         out
     end
 
-    # separate parts by html breakrule
-    # for now, this method uses a double pipe "||" as the delimiter
-    # TODO allow custom delimiters
-    def separate_parts args
+    # split field value into parts with html element wrappers.
+    # this method allow for single or double (or more) pipes as a delimiter.
+    # can be extended to allow other delimiters
+    def display_in_parts args
         out = "".html_safe
         args[:document][args[:field]].each do |part|
-            components = part.split("||")
-            components.each do |c|
-                out << "<div class='dd-part'>#{c}</div>".html_safe
+            components = part.split(/[|]+/)
+            if !components.empty?
+                components.each do |c|
+                    out << "<div class='dd-part'>#{c}</div>".html_safe
+                end
             end
         end
         out

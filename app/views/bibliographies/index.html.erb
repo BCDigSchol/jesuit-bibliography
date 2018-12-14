@@ -22,7 +22,13 @@
 
     g.column name: 'Title', attribute: 'display_title'
 
-    g.column name: 'Author', attribute: 'display_author'
+    g.column name: 'Author(s)', attribute: 'display_author' do |task|
+        out = "".html_safe
+        task.display_author.split('|').each do |author|
+            out << "<span class='value-part'>#{author}</span>".html_safe
+        end
+        out
+    end
 
     g.column name: 'Status', attribute: 'status'
 
