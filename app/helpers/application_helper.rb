@@ -21,6 +21,23 @@ module ApplicationHelper
         out
     end
 
+    # make field value into a link
+    # for now, this method uses a single pipe "|" as the delimiter;
+    # assumes value is a valid url
+    # TODO sanitize field value to avoid potential XSS
+    def make_people_link args
+        out = "".html_safe
+        args[:document][args[:field]].each do |part|
+            components = part.split("|")
+            if !components.empty?
+                components.each do |link|
+                    out << "<div class='dd-part'><a class='bl-view-link' href='/?search_field=people&q=\"#{link}\"' target='_blank'>#{link}</a></div>".html_safe
+                end
+            end
+        end
+        out
+    end
+
     # make field value into a DOI link
     # for now, this method uses a single pipe "|" as the delimiter;
     # assumes value is a valid url
