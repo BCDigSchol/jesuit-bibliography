@@ -44,13 +44,8 @@ RailsAdmin.config do |config|
   config.label_methods << :display_name
   config.label_methods << :display_title
 
-  config.model 'Foo' do
-    navigation_label 'Foo'
-  end
-
   config.model 'Subject' do
     navigation_label 'Terms'
-    #parent 'Foo'
     weight -1
     list do
       field :id
@@ -63,7 +58,6 @@ RailsAdmin.config do |config|
 
   config.model 'Location' do
     navigation_label 'Terms'
-    #parent 'Foo'
     list do
       field :id
       field :name
@@ -75,7 +69,6 @@ RailsAdmin.config do |config|
 
   config.model 'Entity' do
     navigation_label 'Terms'
-    #parent 'Foo'
     label 'Jesuit'
     label_plural 'Jesuits'
     list do
@@ -89,7 +82,6 @@ RailsAdmin.config do |config|
 
   config.model 'Period' do
     navigation_label 'Terms'
-    #parent 'Foo'
     label 'Century'
     label_plural 'Centuries'
     list do
