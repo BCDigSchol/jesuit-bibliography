@@ -22,8 +22,7 @@ namespace :deploy do
 
             on roles(:app) do
                 within "#{current_path}" do
-                    execute "cp #{modified_conf}/managed-schema #{solr_instance_dir}/conf/schema.xml"
-                    execute "cp #{modified_conf}/* #{solr_instance_dir}/conf/"
+                    execute :rake, 'solr_config:update'
                     execute "curl http://localhost:8983/solr/admin/cores?action=RELOAD&core=#{core_name}"
                     execute :rake, 'sunspot:solr:reindex'
                 end
