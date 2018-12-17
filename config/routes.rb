@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     resources :citations
     resources :languages
     resources :reviewed_components
+    resources :publishers
+    resources :publish_places
+    resources :dissertation_universities
+    resources :series_multimedias
+    resources :tags
   end
 
   # get paths like "/citations/terms/subject/1"

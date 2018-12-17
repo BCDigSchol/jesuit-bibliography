@@ -1,0 +1,2 @@
+class SeriesMultimediasController < ApplicationController
+end

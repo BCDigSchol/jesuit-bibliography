@@ -31,6 +31,7 @@ class Ability
       can :manage, Period           # can manage Period Term lists
       can :manage, Entity           # can manage Entity Term lists
       can :manage, Bibliography     # can manage Bib records
+      can :manage, Tag              # can manage Bib record Tags
     end
 
     # Role can:

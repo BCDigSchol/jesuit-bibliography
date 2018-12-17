@@ -84,6 +84,10 @@
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 
+    <% if can? :update, Tag %>
+        <%= render 'bibliographies/fields/tag', :form => form, field_label: 'Tags'%>
+    <% end %>
+
     <hr/>
     
     <%= form.button :submit, "Save Record", class: "btn btn-primary" %>

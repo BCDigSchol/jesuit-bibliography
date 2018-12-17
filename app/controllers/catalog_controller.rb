@@ -88,7 +88,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'reference_type_facet', label: 'Format'
     config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
-    config.add_facet_field 'place_published_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20
@@ -143,7 +143,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'translators_text', label: 'Author of Review', :helper_method => :display_in_parts
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
-    config.add_index_field 'place_published_text', label: 'Place published'
+    config.add_index_field 'publish_places_text', label: 'Place published', :helper_method => :display_in_parts
     config.add_index_field 'languages_text', label: 'Languages', :helper_method => :display_in_parts
     config.add_index_field 'subjects_text', label: 'Subjects'
     config.add_index_field 'centuries_text', label: 'Centuries'
@@ -182,7 +182,7 @@ class CatalogController < ApplicationController
     #config.add_show_field 'paper_title_text', label: 'Paper Title'
     config.add_show_field 'year_published_text', label: 'Year Published', link_to_search: :year_published_text
     config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
-    config.add_show_field 'place_published_text', label: 'Place published'
+    config.add_show_field 'publish_places_text', label: 'Places published', link_to_search: :publish_places_facet
     config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
     #config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :make_people_link
     config.add_show_field 'authors_text', label: 'Authors', :helper_method => :make_people_link
@@ -204,7 +204,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'issns_text', label: 'ISSN', :helper_method => :display_in_parts
     config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
 
-    config.add_show_field 'publisher_text', label: 'Publisher'
+    config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
     config.add_show_field 'volume_text', label: 'Volume'
     config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
     config.add_show_field 'edition_text', label: 'Edition'
@@ -217,7 +217,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
     config.add_show_field 'leuven_urls_text', label: 'Other links', :helper_method => :make_link
     config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
-    config.add_show_field 'multimedia_series_text', label: 'Multimedia Series'
+    config.add_show_field 'series_multimedium_text', label: 'Multimedia Series', :helper_method => :display_in_parts
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
     config.add_show_field 'multimedia_urls_text', label: 'Multimedia URL', :helper_method => :make_link
     config.add_show_field 'event_title_text', label: 'Event Title'
@@ -226,7 +226,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'event_date_text', label: 'Event Date'
     config.add_show_field 'event_panel_title_text', label: 'Event Panel Title'
     config.add_show_field 'event_urls_text', label: 'Event URL', :helper_method => :make_link
-    config.add_show_field 'dissertation_university_text', label: 'University'
+    config.add_show_field 'dissertation_universities_text', label: 'Universities', :helper_method => :display_in_parts
     config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
     config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     config.add_show_field 'number_of_pages_text', label: 'Number of Pages'

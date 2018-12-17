@@ -50,15 +50,9 @@
         as: :string 
     %>
 
-    <%= form.input :place_published, 
-        label: 'Place published', 
-        as: :string
-    %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
 
-    <%= form.input :publisher, 
-        label: 'Publisher',
-        as: :string
-    %>
+    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>
 
     <%= form.input :volume, 
         label: 'Volume',
@@ -122,6 +116,10 @@
     <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
+    
+    <% if can? :update, Tag %>
+        <%= render 'bibliographies/fields/tag', :form => form, field_label: 'Tags' %>
+    <% end %>
 
     <hr/>
     

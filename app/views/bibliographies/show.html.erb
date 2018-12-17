@@ -141,17 +141,25 @@
             </div>
         <% end %>
 
-        <% if @bib.multimedia_series.present? %>
+        <% if @bib.series_multimedium.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Multimedia Series</label>
-                <div class="field-value col-sm-10"><%= @bib.multimedia_series %></div>
+                <label class="col-sm-2">Series</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.series_multimedium.each do |s| %>
+                    <li><%= s.name %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
-        <% if @bib.place_published.present? %>
+        <% if @bib.publish_places.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Place Published</label>
-                <div class="field-value col-sm-10"><%= @bib.place_published %></div>
+                <label class="col-sm-2">Places Published</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.publish_places.each do |p| %>
+                    <li><%= p.name %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
@@ -169,10 +177,14 @@
             </div>
         <% end %>
 
-        <% if @bib.publisher.present? %>
+        <% if @bib.publishers.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Publisher</label>
-                <div class="field-value col-sm-10"><%= @bib.publisher %></div>
+                <label class="col-sm-2">Publishers</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.publishers.each do |p| %>
+                    <li><%= p.name %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
@@ -183,10 +195,14 @@
             </div>
         <% end %>
 
-        <% if @bib.dissertation_university.present? %>
+        <% if @bib.dissertation_universities.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">University</label>
-                <div class="field-value col-sm-10"><%= @bib.dissertation_university %></div>
+                <label class="col-sm-2">Publishers</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.dissertation_universities.each do |u| %>
+                    <li><%= u.name %></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 
@@ -550,6 +566,17 @@
                         </li>
                     <% end %>
                 </ol>
+            </div>
+        <% end %>
+
+        <% if can? :read, Tag and @bib.tags.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Tags</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.tags.each do |tag| %>
+                    <li><span class="badge"><%= tag.name %></span></li>
+                <% end %>
+                </ul>
             </div>
         <% end %>
 

@@ -47,6 +47,11 @@ class BibliographiesController < ApplicationController
         @bib.comments.build
         @bib.languages.build
         @bib.reviewed_components.build
+        @bib.publishers.build
+        @bib.publish_places.build
+        @bib.dissertation_universities.build
+        @bib.series_multimedium.build
+        @bib.tags.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -83,6 +88,26 @@ class BibliographiesController < ApplicationController
 
             if @bib.reviewed_components.count == 0
                 @bib.reviewed_components.build
+            end
+
+            if @bib.publishers.count == 0
+                @bib.publishers.build
+            end
+
+            if @bib.publish_places.count == 0
+                @bib.publish_places.build
+            end
+
+            if @bib.dissertation_universities.count == 0
+                @bib.dissertation_universities.build
+            end
+
+            if @bib.series_multimedium.count == 0
+                @bib.series_multimedium.build
+            end
+
+            if @bib.tags.count == 0
+                @bib.tags.build
             end
 
             if @bib.isbns.count == 0
@@ -323,16 +348,21 @@ class BibliographiesController < ApplicationController
         end
 
         def bib_params
-            params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, :place_published, :publisher, 
+            params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, 
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :multimedia_dimensions, :abstract, :translated_title,
                 :journal_title, :issue, :page_range, :epub_date, :title_of_review, :chapter_title, :paper_title,
                 :display_title, :display_year, :display_author,
-                :dissertation_university, :dissertation_thesis_type,
+                :dissertation_thesis_type,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
-                :multimedia_series, :multimedia_type, :published,
+                :multimedia_type, :published,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 languages_attributes: [:id, :name, :_destroy],
+                publishers_attributes: [:id, :name, :_destroy],
+                publish_places_attributes: [:id, :name, :_destroy],
+                dissertation_universities_attributes: [:id, :name, :_destroy],
+                series_multimedium_attributes: [:id, :name, :_destroy],
+                tags_attributes: [:id, :name, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],

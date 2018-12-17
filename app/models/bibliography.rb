@@ -2,6 +2,11 @@ class Bibliography < ApplicationRecord
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     has_many :languages, inverse_of: :bibliography, dependent: :destroy
     has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy
+    has_many :publishers, inverse_of: :bibliography, dependent: :destroy
+    has_many :publish_places, inverse_of: :bibliography, dependent: :destroy
+    has_many :dissertation_universities, inverse_of: :bibliography, dependent: :destroy
+    has_many :series_multimedium, inverse_of: :bibliography, dependent: :destroy
+    has_many :tags, inverse_of: :bibliography, dependent: :destroy
 
     # many-to-many relationship through bibliography_subjects
     has_many :bibliography_subjects, inverse_of: :bibliography, dependent: :destroy
@@ -44,6 +49,11 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
     accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :reviewed_components, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :publishers, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :publish_places, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :dissertation_universities, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :series_multimedium, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :tags, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :bibliography_subjects, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true
@@ -121,15 +131,15 @@ class Bibliography < ApplicationRecord
             display_author if self.display_author.present?
         end
 
-        text :place_published do
-            place_published if self.place_published.present?
-        end
+        #text :place_published do
+        #    place_published if self.place_published.present?
+        #end
 
-        text :place_published_faceting, :as => 'place_published_facet'
+        #text :place_published_faceting, :as => 'place_published_facet'
 
-        text :publisher do
-            publisher if self.publisher.present?
-        end
+        #text :publisher do
+        #    publisher if self.publisher.present?
+        #end
 
         text :volume do
             volume if self.volume.present?
@@ -154,7 +164,6 @@ class Bibliography < ApplicationRecord
 
         text :abstract do
             abstract if self.abstract.present?
-
         end
 
         text :translated_title do
@@ -181,9 +190,9 @@ class Bibliography < ApplicationRecord
             multimedia_dimensions if self.multimedia_dimensions.present?
         end
 
-        text :multimedia_series do
-            multimedia_series if self.multimedia_series.present?
-        end
+        #text :multimedia_series do
+        #    multimedia_series if self.multimedia_series.present?
+        #end
 
         text :multimedia_type do
             multimedia_type if self.multimedia_type.present?
@@ -217,9 +226,13 @@ class Bibliography < ApplicationRecord
         #    event_url if self.event_url.present?
         #end
 
-        text :dissertation_university do
-            dissertation_university if self.dissertation_university.present?
-        end
+        #text :dissertation_university do
+        #    dissertation_university if self.dissertation_university.present?
+        #end
+
+        #text :dissertation_university do
+        #    dissertation_university if self.dissertation_university.present?
+        #end
 
         text :dissertation_thesis_type do
             dissertation_thesis_type if self.dissertation_thesis_type.present?
@@ -306,6 +319,27 @@ class Bibliography < ApplicationRecord
             languages.map { |language| language.name }
         end
         text :languages_faceting, :as => 'languages_facet'
+
+        text :publishers do     # for associations
+            publishers.map { |publisher| publisher.name }
+        end
+
+        text :publish_places do     # for associations
+            publish_places.map { |publish_place| publish_place.name }
+        end
+        text :publish_places_faceting, :as => 'publish_places_facet'
+
+        text :dissertation_universities do     # for associations
+            dissertation_universities.map { |dissertation_university| dissertation_university.name }
+        end
+
+        text :series_multimedium do     # for associations
+            series_multimedium.map { |series_multimedia| series_multimedia.name }
+        end
+
+        text :tags do     # for associations
+            tags.map { |tag| tag.name }
+        end
 
         text :comments do     # for associations
             comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
@@ -414,8 +448,8 @@ class Bibliography < ApplicationRecord
             self.reference_type
         end
 
-        def place_published_faceting
-            self.place_published
+        def publish_places_faceting
+            publish_places.map { |publish_place| publish_place.name }
         end
 
         def languages_faceting

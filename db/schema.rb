@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_035251) do
+ActiveRecord::Schema.define(version: 2018_12_17_020855) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
     t.text "year_published"
     t.text "title"
     t.text "title_secondary"
-    t.text "place_published"
-    t.text "publisher"
     t.text "volume"
     t.text "number_of_volumes"
     t.text "edition"
@@ -30,14 +28,12 @@ ActiveRecord::Schema.define(version: 2018_12_12_035251) do
     t.datetime "updated_at", null: false
     t.text "volume_number"
     t.text "multimedia_dimensions"
-    t.text "multimedia_series"
     t.text "multimedia_type"
     t.text "event_title"
     t.text "event_location"
     t.text "event_institution"
     t.text "event_date"
     t.text "event_panel_title"
-    t.text "dissertation_university"
     t.text "dissertation_thesis_type"
     t.text "number_of_pages"
     t.text "journal_title"
@@ -143,6 +139,16 @@ ActiveRecord::Schema.define(version: 2018_12_12_035251) do
     t.index ["bibliography_id"], name: "index_comments_on_bibliography_id"
   end
 
+  create_table "dissertation_universities", force: :cascade do |t|
+    t.text "name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_dissertation_universities_on_bibliography_id"
+  end
+
   create_table "entities", force: :cascade do |t|
     t.text "name"
     t.text "sort_name"
@@ -181,6 +187,26 @@ ActiveRecord::Schema.define(version: 2018_12_12_035251) do
     t.text "modified_by"
   end
 
+  create_table "publish_places", force: :cascade do |t|
+    t.text "name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_publish_places_on_bibliography_id"
+  end
+
+  create_table "publishers", force: :cascade do |t|
+    t.text "name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_publishers_on_bibliography_id"
+  end
+
   create_table "reviewed_components", force: :cascade do |t|
     t.text "reviewed_author"
     t.text "reviewed_title"
@@ -197,6 +223,16 @@ ActiveRecord::Schema.define(version: 2018_12_12_035251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "series_multimedia", force: :cascade do |t|
+    t.text "name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_series_multimedia_on_bibliography_id"
   end
 
   create_table "standard_identifiers", force: :cascade do |t|
@@ -218,6 +254,16 @@ ActiveRecord::Schema.define(version: 2018_12_12_035251) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.text "name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_tags_on_bibliography_id"
   end
 
   create_table "urls", force: :cascade do |t|

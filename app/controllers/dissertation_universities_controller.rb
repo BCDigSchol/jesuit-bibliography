@@ -1,0 +1,2 @@
+class DissertationUniversitiesController < ApplicationController
+end

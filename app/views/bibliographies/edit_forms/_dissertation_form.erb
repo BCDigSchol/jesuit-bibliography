@@ -43,15 +43,9 @@
         as: :string
     %>
 
-    <%= form.input :place_published, 
-        label: 'Place published', 
-        as: :string 
-    %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
 
-    <%= form.input :dissertation_university, 
-        label: 'University',
-        as: :string
-    %>
+    <%= render 'bibliographies/fields/dissertation_university', :form => form, field_label: 'University' %>
 
     <%= form.input :number_of_pages, 
         label: 'Number of pages',
@@ -84,6 +78,10 @@
     <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
+
+    <% if can? :update, Tag %>
+        <%= render 'bibliographies/fields/tag', :form => form, field_label: 'Tags' %>
+    <% end %>
 
     <hr/>
     
