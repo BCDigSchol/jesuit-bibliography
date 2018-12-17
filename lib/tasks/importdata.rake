@@ -105,7 +105,7 @@ namespace :importdata do
             #@bib.what_subject = row[19]
             #@bib.where_subject = row[20]
             #@bib.who_subject = row[21]
-            @bib.abstract = row[22]
+            #@bib.abstract = row[22]
             #@bib.notes = row[23]
             #@bib.notes_to_editor = row[24]
             #@bib.translated_author = row[25]
@@ -120,12 +120,24 @@ namespace :importdata do
                 @bib.display_author = row[9]
             end
 
+            # Abstract
+            if row[22]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[22].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
@@ -371,7 +383,7 @@ namespace :importdata do
             #@bib.what_subject = row[21]
             #@bib.where_subject = row[22]
             #@bib.who_subject = row[23]
-            @bib.abstract = row[24]
+            #@bib.abstract = row[24]
             #@bib.notes = row[25]
             #@bib.notes_to_editor = row[26]
             #@bib.translated_author = row[27]
@@ -384,12 +396,24 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+            # Abstract
+            if row[22]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[22].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.chapter_title}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
@@ -629,7 +653,7 @@ namespace :importdata do
             #@bib.what_subject = row[18]
             #@bib.where_subject = row[19]
             #@bib.who_subject = row[20]
-            @bib.abstract = row[21]
+            #@bib.abstract = row[21]
             #@bib.notes = row[22]
             #@bib.notes_to_editor = row[23]
             #@bib.translated_author = row[24]
@@ -642,12 +666,25 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+             # Abstract
+             if row[21]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[21].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title_of_review}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Author of Reviews
             if row[1]
@@ -856,7 +893,7 @@ namespace :importdata do
             #@bib.what_subject = row[16]
             #@bib.where_subject = row[17]
             #@bib.who_subject = row[18]
-            @bib.abstract = row[19]
+            #@bib.abstract = row[19]
             #@bib.notes = row[20]
             #@bib.notes_to_editor = row[21]
             #@bib.translated_author = row[22]
@@ -869,12 +906,24 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+            # Abstract
+            if row[19]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[19].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title_of_review}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
@@ -1073,7 +1122,7 @@ namespace :importdata do
             #@bib.what_subject = row[13]
             #@bib.where_subject = row[14]
             #@bib.who_subject = row[15]
-            @bib.abstract = row[16]
+            #@bib.abstract = row[16]
             #@bib.notes = row[17]
             #@bib.notes_to_editor = row[18]
             #@bib.languages = row[19]
@@ -1084,12 +1133,24 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+            # Abstract
+            if row[16]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[16].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
@@ -1283,7 +1344,7 @@ namespace :importdata do
             #@bib.what_subject = row[11]
             #@bib.where_subject = row[12]
             #@bib.who_subject = row[13]
-            @bib.abstract = row[14]
+            #@bib.abstract = row[14]
             #@bib.notes = row[15]
             #@bib.notes_to_editor = row[16]
             #@bib.languages = row[17]
@@ -1294,12 +1355,24 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+            # Abstract
+            if row[14]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[14].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.chapter_title}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
@@ -1454,7 +1527,7 @@ namespace :importdata do
             #@bib.what_subject = row[14]
             #@bib.where_subject = row[15]
             #@bib.who_subject = row[16]
-            @bib.abstract = row[17]
+            #@bib.abstract = row[17]
             #@bib.notes = row[18]
             #@bib.notes_to_editor = row[19]
             #@bib.languages = row[20]
@@ -1465,12 +1538,24 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
+            # Abstract
+            if row[17]
+                formatted_abstract = ""
+                # split by either | or ||
+                values = row[17].split(/[|]+/)
+                values.each do |v|
+                    formatted_abstract << "<p>#{v}</p>"
+                end
+                @bib.abstract = formatted_abstract
+            end
+
             @bib.save!
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
             import_logger.info("  title: #{@bib.title}")
             import_logger.info("  year: #{@bib.year_published}")
+            import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
             if row[1]
