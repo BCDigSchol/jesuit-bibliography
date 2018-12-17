@@ -71,8 +71,8 @@ namespace :importdata do
             # Edition,Translator,ISBN,DOI,Reprint Edition,WorldCat URL,Publisher URL,Leuven URL,When,What,
             # 10      11         12   13  14              15           16            17         18   19
             #
-            # Where,Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language
-            # 20    21  22       23    24               25                26               27
+            # Where,Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language,Editing Tags
+            # 20    21  22       23    24               25                26               27       28
 
             @bib = Bibliography.new
 
@@ -87,8 +87,8 @@ namespace :importdata do
             @bib.display_year = row[2]
             @bib.title = row[3]
             @bib.display_title = row[3]
-            @bib.place_published = row[4]
-            @bib.publisher = row[5]
+            #@bib.place_published = row[4]
+            #@bib.publisher = row[5]
             @bib.volume = row[6]
             @bib.number_of_volumes = row[7]
             @bib.number_of_pages = row[8]
@@ -111,6 +111,7 @@ namespace :importdata do
             #@bib.translated_author = row[25]
             @bib.translated_title = row[26]
             #@bib.languages = row[27]
+            #@bib.tags = row[28]
 
             # Display Authors
             if row[1]
@@ -132,6 +133,24 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Author: #{v}")
                     @bib.authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Places Published
+            if row[4]
+                values = row[4].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Place Published: #{v}")
+                    @bib.publish_places << PublishPlace.new(name: v)
+                end
+            end
+
+            # Publishers
+            if row[5]
+                values = row[5].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher: #{v}")
+                    @bib.publishers << Publisher.new(name: v)
                 end
             end
 
@@ -264,6 +283,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[28]
+                values = row[28].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -306,6 +334,9 @@ namespace :importdata do
             #
             # When,What,Where,Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language
             # 20   21   22    23  24       25    26               27                28               29
+            #
+            # Editing Tags
+            # 30
 
             @bib = Bibliography.new
 
@@ -322,8 +353,8 @@ namespace :importdata do
             @bib.display_title = row[3]
             #@bib.book_editor = row[4]
             @bib.book_title = row[5]
-            @bib.place_published = row[6]
-            @bib.publisher = row[7]
+            #@bib.place_published = row[6]
+            #@bib.publisher = row[7]
             @bib.volume = row[8]
             @bib.number_of_volumes = row[9]
             @bib.page_range = row[10]
@@ -346,6 +377,7 @@ namespace :importdata do
             #@bib.translated_author = row[27]
             @bib.translated_title = row[28]
             #@bib.languages = row[29]
+            #@bib.tags = row[30]
 
             # Display Authors
             if row[1]
@@ -374,6 +406,24 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Book Editor: #{v}")
                     @bib.book_editors << Citation.new(display_name: v)
+                end
+            end
+
+            # Places Published
+            if row[6]
+                values = row[6].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Place Published: #{v}")
+                    @bib.publish_places << PublishPlace.new(name: v)
+                end
+            end
+
+            # Publishers
+            if row[7]
+                values = row[7].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher: #{v}")
+                    @bib.publishers << Publisher.new(name: v)
                 end
             end
 
@@ -497,6 +547,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[30]
+                values = row[30].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -537,8 +596,8 @@ namespace :importdata do
             # Epub Date,Date,ISSN,DOI,WorldCat URL,Publisher URL,Leuven URL,When,What,Where,
             # 10        11   12  13   14           15            16         17   18   19
             #
-            # Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language
-            # 20  21       22    23               24                25               26
+            # Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language,Editing Tags
+            # 20  21       22    23               24                25               26       27
 
             @bib = Bibliography.new
 
@@ -576,6 +635,7 @@ namespace :importdata do
             #@bib.translated_author = row[24]
             @bib.translated_title = row[25]
             #@bib.languages = row[26]
+            #@bib.tags = row[27]
 
             # Display Authors
             if row[1]
@@ -715,6 +775,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[27]
+                values = row[27].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -755,8 +824,8 @@ namespace :importdata do
             # ISSN,DOI,WorldCat URL,Publisher URL,Leuven URL,When,What,Where,Who,Abstract,
             # 10   11  12           13            14         15   16   17    18  19
             #
-            # Notes,Notes to Editors,Translated Author,Translated Title,Language
-            # 20   21                22                23               24
+            # Notes,Notes to Editors,Translated Author,Translated Title,Language,Editing Tags
+            # 20   21                22                23               24       25
 
 
             @bib = Bibliography.new
@@ -793,6 +862,7 @@ namespace :importdata do
             #@bib.translated_author = row[22]
             @bib.translated_title = row[23]
             #@bib.languages = row[24]
+            #@bib.tags = tag[25]
 
             # Display Authors
             if row[1]
@@ -926,6 +996,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[25]
+                values = row[25].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -965,6 +1044,9 @@ namespace :importdata do
             #
             # University URL,Leuven URL,When,What,Where,Who,Abstract,Notes,Notes to Editors,Language
             # 10             11         12   13  14     15  16       17    18               19
+            #
+            # Editing Tags
+            # 20
 
             @bib = Bibliography.new
 
@@ -979,8 +1061,8 @@ namespace :importdata do
             @bib.display_year = row[2]
             @bib.title = row[3]
             @bib.display_title = row[3]
-            @bib.place_published = row[4]
-            @bib.dissertation_university = row[5]
+            #@bib.place_published = row[4]
+            #@bib.dissertation_university = row[5]
             @bib.number_of_volumes = row[6]
             @bib.dissertation_thesis_type = row[7]
             #@bib.isbn = row[8]
@@ -995,6 +1077,7 @@ namespace :importdata do
             #@bib.notes = row[17]
             #@bib.notes_to_editor = row[18]
             #@bib.languages = row[19]
+            #@bib.tags = row[20]
 
             # Display Authors
             if row[1]
@@ -1014,6 +1097,24 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Author: #{v}")
                     @bib.authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Places Published
+            if row[4]
+                values = row[4].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Place Published: #{v}")
+                    @bib.publish_places << PublishPlace.new(name: v)
+                end
+            end
+
+            # Universities
+            if row[5]
+                values = row[5].split("|")
+                values.each do |v|
+                    import_logger.info("  adding University: #{v}")
+                    @bib.dissertation_universities << DissertationUniversity.new(name: v)
                 end
             end
 
@@ -1110,6 +1211,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[20]
+                values = row[20].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -1147,8 +1257,8 @@ namespace :importdata do
             # Reference Type,Author,Year,Paper Title,Event Title,Event City/Country,Event Institution,Event Date,Panel Title,Event URL,
             # 0              1      2    3           4           5                  6                 7          8           9
             #
-            # When,What,Where,Who,Abstract,Notes,Notes to Editors,Language
-            # 10   11   12   13   14       15    16               17
+            # When,What,Where,Who,Abstract,Notes,Notes to Editors,Language,Editing Tags
+            # 10   11   12   13   14       15    16               17       18
 
             @bib = Bibliography.new
 
@@ -1177,6 +1287,7 @@ namespace :importdata do
             #@bib.notes = row[15]
             #@bib.notes_to_editor = row[16]
             #@bib.languages = row[17]
+            #@bib.tags = row[18]
 
             # Display Authors
             if row[1]
@@ -1265,6 +1376,15 @@ namespace :importdata do
                 end
             end
 
+            # Tags
+            if row[18]
+                values = row[18].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
+                end
+            end
+
             bar.increment!
         end
 
@@ -1305,8 +1425,8 @@ namespace :importdata do
             # WorldCat URL,URL,Size/Length,When,What,Where,Who,Abstract,Notes,Notes to Editors,
             # 10           11  12          13   14   15    16  17       18    19
             #
-            # Language
-            # 20
+            # Language,Editing Tags
+            # 20       21
 
             @bib = Bibliography.new
 
@@ -1321,9 +1441,9 @@ namespace :importdata do
             @bib.display_year = row[2]
             @bib.title = row[3]
             @bib.display_title = row[3]
-            @bib.multimedia_series = row[4]
-            @bib.place_published = row[5]
-            @bib.publisher = row[6]
+            #@bib.multimedia_series = row[4]
+            #@bib.place_published = row[5]
+            #@bib.publisher = row[6]
             @bib.multimedia_type = row[7]
             #@bib.performers = row[8]
             #@bib.isbn = row[9]
@@ -1338,6 +1458,7 @@ namespace :importdata do
             #@bib.notes = row[18]
             #@bib.notes_to_editor = row[19]
             #@bib.languages = row[20]
+            #@bib.tags = row[21]
 
             # Display Authors
             if row[1]
@@ -1357,6 +1478,33 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Author: #{v}")
                     @bib.authors << Citation.new(display_name: v)
+                end
+            end
+
+            # Multimedia Series
+            if row[4]
+                values = row[4].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Multimedia Series: #{v}")
+                    @bib.series_multimedium << SeriesMultimedium.new(name: v)
+                end
+            end
+
+            # Places Published
+            if row[5]
+                values = row[5].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Place Published: #{v}")
+                    @bib.publish_places << PublishPlace.new(name: v)
+                end
+            end
+
+            # Publishers
+            if row[6]
+                values = row[6].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Publisher: #{v}")
+                    @bib.publishers << Publisher.new(name: v)
                 end
             end
 
@@ -1450,6 +1598,15 @@ namespace :importdata do
                 values.each do |v|
                     import_logger.info("  adding Language: #{v}")
                     @bib.languages << Language.new(name: v)
+                end
+            end
+
+            # Tags
+            if row[21]
+                values = row[21].split("|")
+                values.each do |v|
+                    import_logger.info("  adding Tag: #{v}")
+                    @bib.tags << Tag.new(name: v)
                 end
             end
 
