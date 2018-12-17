@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_020855) do
+ActiveRecord::Schema.define(version: 2018_12_17_231123) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -161,12 +161,34 @@ ActiveRecord::Schema.define(version: 2018_12_17_020855) do
     t.text "modified_by"
   end
 
+  create_table "entity_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_entity_suggestions_on_bibliography_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.text "name"
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_languages_on_bibliography_id"
+  end
+
+  create_table "location_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_location_suggestions_on_bibliography_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -176,6 +198,17 @@ ActiveRecord::Schema.define(version: 2018_12_17_020855) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+  end
+
+  create_table "period_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_period_suggestions_on_bibliography_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -245,6 +278,17 @@ ActiveRecord::Schema.define(version: 2018_12_17_020855) do
     t.index ["doi_id"], name: "index_standard_identifiers_on_doi_id"
     t.index ["isbn_id"], name: "index_standard_identifiers_on_isbn_id"
     t.index ["issn_id"], name: "index_standard_identifiers_on_issn_id"
+  end
+
+  create_table "subject_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_subject_suggestions_on_bibliography_id"
   end
 
   create_table "subjects", force: :cascade do |t|

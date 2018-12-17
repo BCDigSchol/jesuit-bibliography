@@ -1,0 +1,2 @@
+class LocationSuggestionsController < ApplicationController
+end

@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     resources :dissertation_universities
     resources :series_multimedias
     resources :tags
+    resources :subject_suggestions
+    resources :location_suggestions
+    resources :entity_suggestions
+    resources :period_suggestions
   end
 
   # get paths like "/citations/terms/subject/1"

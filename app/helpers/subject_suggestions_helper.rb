@@ -1,0 +1,2 @@
+module SubjectSuggestionsHelper
+end

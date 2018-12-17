@@ -10,6 +10,11 @@
             %>
         <% end %>
     </div>
+    <div id="bibliography_period_suggestions">
+        <%= form.simple_fields_for :period_suggestions do |suggestion| %>
+            <%= render 'suggest_fields', :form => suggestion, fieldname: 'century' %>
+        <% end %>
+    </div>
     <div class='links clearfix'>
         <div class="col-sm-2"></div>
         <div class="col-sm-10 btn-add-container">
@@ -23,6 +28,19 @@
                     'association-insertion-method' => 'append'
                 }, 
                 partial: 'bibliography_period_fields'
+            %>
+
+            <%= link_to_add_association 'Suggest a new Century term', 
+                form, 
+                :period_suggestions, 
+                class: 'btn btn-warning btn-add', 
+                form_name: 'form',
+                data: {
+                    'association-insertion-node' => '#bibliography_period_suggestions', 
+                    'association-insertion-method' => 'after'
+                }, 
+                partial: 'suggest_fields',
+                render_options: {locals: {fieldname: 'century'}}
             %>
         </div>
     </div>

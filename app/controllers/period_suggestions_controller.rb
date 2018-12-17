@@ -1,0 +1,2 @@
+class PeriodSuggestionsController < ApplicationController
+end

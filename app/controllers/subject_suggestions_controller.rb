@@ -1,0 +1,2 @@
+class SubjectSuggestionsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class EntitySuggestionsController < ApplicationController
+end
