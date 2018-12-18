@@ -52,10 +52,10 @@ class BibliographiesController < ApplicationController
         @bib.dissertation_universities.build
         @bib.series_multimedium.build
         @bib.tags.build
-        @bib.subject_suggestions.build
-        @bib.location_suggestions.build
-        @bib.entity_suggestions.build
-        @bib.period_suggestions.build
+        #@bib.subject_suggestions.build
+        #@bib.location_suggestions.build
+        #@bib.entity_suggestions.build
+        #@bib.period_suggestions.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
