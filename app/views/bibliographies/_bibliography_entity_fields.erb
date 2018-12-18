@@ -1,8 +1,8 @@
-<div class='bibliography-entity-fields nested-fields form-group row'>
-    <%= form.input :entity, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :entity, wrapper: :vertical_input_group_job do %>
         <%= form.association :entity, 
             label: false,
-            collection: Entity.all.order(:display_name), 
+            collection: Entity.order(:display_name), 
             prompt: 'Choose a Jesuit', 
             form_name: 'form',
             input_html: {class: 'entities'}
@@ -13,6 +13,6 @@
                 class: 'remove-link', 
                 form_name: 'form' 
             %>
-        </div>
+        </span>
     <% end %>
 </div>

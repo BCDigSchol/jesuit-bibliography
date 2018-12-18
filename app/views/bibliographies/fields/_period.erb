@@ -1,14 +1,13 @@
 <div id='bibliography_periods' class='repeatable-field'>
-    <div class="fields">
-        <%= form.simple_fields_for :bibliography_periods do |period| %>
-            <%= period.association :period, 
-                label: field_label,
-                collection: Period.order(:sort_name), 
-                prompt: 'Choose a ' + field_label, 
-                form_name: 'form',
-                input_html: {class: 'periods'}
-            %>
-        <% end %>
+    <div class="row string optional bibliography-period-fields">
+        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %></label>
+        <div class="col-sm-10">
+            <div class="fields">
+                <%= form.simple_fields_for :bibliography_periods do |period| %>
+                    <%= render 'bibliography_period_fields', :form => period, fieldname: 'subject' %>
+                <% end %>
+            </div>
+        </div>
     </div>
     <div id="bibliography_period_suggestions">
         <%= form.simple_fields_for :period_suggestions do |suggestion| %>

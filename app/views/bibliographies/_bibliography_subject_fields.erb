@@ -1,9 +1,9 @@
-<div class='bibliography-subject-fields nested-fields form-group row'>
-    <%= form.input :subject, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :subject, wrapper: :vertical_input_group_job do %>
         <%= form.association :subject, 
             label: false,
             collection: Subject.order(:name), 
-            prompt: 'Choose a subject', 
+            prompt: 'Choose a Subject', 
             form_name: 'form',
             input_html: {class: 'subjects'}
         %>
