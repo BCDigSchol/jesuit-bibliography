@@ -114,6 +114,25 @@ h2.page-heading{
     z-index:2;
 }
 
+.navbar {
+    background-color: #8c8a89;
+    li a:link {
+        color: white;
+    }
+}
+
+.navbar-inverse .navbar-nav li a{
+    color: white;
+} 
+
+.dropdown-menu li a:link {
+    color:  black;
+    a:hover {
+        color: #8c8a89;
+    }
+}
+
+
 #document {
     dl {
         dt, dd {
