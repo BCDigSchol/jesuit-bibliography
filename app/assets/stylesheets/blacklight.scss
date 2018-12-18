@@ -9,12 +9,22 @@ h2.page-heading{
     font-size: 30px;
 }
 
+.button-container {
+    padding-bottom: 20px;
+    text-align: center;
+}
+.record-button {
+    display: inline-block;
+    padding: 10px;
+    font-size: 20px;
+}
+
 .navbar-static-top {
     z-index:1;
 }
 .blacklight-catalog-index {
     #search-navbar {
-        background: #ccc url("/assets/searchbarbox.jpg") 0 0%;
+        background-image: asset-url("/assets/searchbarbox.jpg");
         background-size: cover;
         height: 400px;
         padding-top: 100px;
