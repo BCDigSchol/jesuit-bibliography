@@ -500,6 +500,25 @@
             </div>
         <% end %>
 
+        <% if @bib.subject_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Subjects</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.subject_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% end %>
+
         <% if @bib.periods.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Centuries</label>
@@ -508,6 +527,25 @@
                     <li><%= period.name %></li>
                 <% end %>
                 </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.period_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Centuries</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.period_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         <% end %>
 
@@ -522,6 +560,25 @@
             </div>
         <% end %>
 
+        <% if @bib.location_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Locations</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.location_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% end %>
+
         <% if @bib.entities.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Jesuits</label>
@@ -530,6 +587,25 @@
                     <li><%= entity.display_name %></li>
                 <% end %>
                 </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.entity_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Jesuits</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.entity_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         <% end %>
 
