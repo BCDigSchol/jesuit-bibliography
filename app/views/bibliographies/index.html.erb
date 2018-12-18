@@ -50,7 +50,7 @@
           end
 
           if bib.period_suggestions.present?
-              out << "<span class='badge badge-info'>#{bib.period_suggestions.count} #{"Century".pluralize(bib.entity_suggestions.count)}</span>".html_safe
+              out << "<span class='badge badge-info'>#{bib.period_suggestions.count} #{"Century".pluralize(bib.period_suggestions.count)}</span>".html_safe
           end
           out
       end
