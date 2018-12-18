@@ -60,6 +60,21 @@
             list-style-type: none;
         }
     }
+    .citations-list {
+        .value-part {
+            padding-bottom: .5rem;
+            border-bottom: 1px dashed #ddd;
+            &:last-child {
+                padding-bottom: 0;
+                border-bottom: none;
+            }      
+        }
+        .badge-published {
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+    }
 
     form.form-horizontal {
         label.col-form-label {
