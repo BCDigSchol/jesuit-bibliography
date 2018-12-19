@@ -3,7 +3,9 @@
         <%= form.simple_fields_for :languages do |language| %>
             <%= language.input :name, 
                 label: field_label,
-                as: :string
+                collection: Language::LANGUAGES, 
+                prompt: 'Choose a Language',
+                input_html: {class: 'languages'}
             %>
         <% end %>
     </div>
@@ -24,3 +26,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.languages').select2();
+    $("#bibliography_languages").on('cocoon:after-insert', function(e, insertedItem){
+        $('.languages').last().select2();
+    });
+});
+</script>
