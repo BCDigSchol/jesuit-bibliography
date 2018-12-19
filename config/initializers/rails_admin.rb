@@ -99,11 +99,11 @@ RailsAdmin.config do |config|
     label 'Citation'
     label_plural 'Citations'
     list do
-      field :id
-      field :reference_type
-      field :display_title
-      field :display_author
-      field :year_published
+      #field :id
+      #field :reference_type
+      #field :display_title
+      #field :display_author
+      #field :year_published
     end
   end
 
@@ -145,21 +145,73 @@ RailsAdmin.config do |config|
 
   config.model 'Language' do
     parent Bibliography
-    visible false
+    #visible false
   end
 
   config.model 'ReviewedComponent' do
     parent Bibliography
     list do
-      field :id
-      field :reviewed_author
-      field :reviewed_title
+      #field :id
+      #field :reviewed_author
+      #field :reviewed_title
     end
     edit do
-      field :reviewed_author
-      field :reviewed_title
+      #field :reviewed_author
+      #field :reviewed_title
     end
   end
+
+  config.model 'PublishPlace' do
+    parent Bibliography
+    label 'Place Published'
+    label_plural 'Places Published'
+  end
+
+  config.model 'Publisher' do
+    parent Bibliography
+  end
+
+  config.model 'SeriesMultimedium' do
+    parent Bibliography
+    label 'Multimedia Series'
+    label_plural 'Mulitimedia Series'
+  end
+
+  config.model 'DissertationUniversity' do
+    parent Bibliography
+    label 'Dissertation University'
+    label_plural 'Dissertation Universities'
+  end
+
+  config.model 'Tag' do
+    parent Bibliography
+  end
+
+  config.model 'EntitySuggestion' do
+    navigation_label 'Suggestions'
+    label 'Jesuit Suggestion'
+    label_plural 'Jesuit Suggestions'
+  end
+
+  config.model 'LocationSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Location Suggestion'
+    label_plural 'Location Suggestions'
+  end
+
+  config.model 'SubjectSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Subject Suggestion'
+    label_plural 'Subject Suggestions'
+  end
+
+  config.model 'PeriodSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Century Suggestion'
+    label_plural 'Century Suggestions'
+  end
+
+  
 
   config.model 'BibliographyEntity' do
     visible false
