@@ -5,6 +5,9 @@ bar = ProgressBar.new
 
 CREATED_BY_USER = "admin@test.com"
 
+# find strings delimited by single or double pipe characters
+PIPE_DELIMITER_REGEX = /[|]+/
+
 def import_logger
     @import_logger ||= Logger.new("#{Rails.root}/log/import_bibs.log")
 end
@@ -121,15 +124,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[22]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[22].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[22])
 
             @bib.save!
 
@@ -140,169 +135,61 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # Places Published
-            if row[4]
-                values = row[4].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Place Published: #{v}")
-                    @bib.publish_places << PublishPlace.new(name: v)
-                end
-            end
+            import_add_places_published(@bib, row[4])
 
             # Publishers
-            if row[5]
-                values = row[5].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher: #{v}")
-                    @bib.publishers << Publisher.new(name: v)
-                end
-            end
+            import_add_publishers(@bib, row[5])
 
             # Editors
-            if row[9]
-                values = row[9].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Editor: #{v}")
-                    @bib.editors << Citation.new(display_name: v)
-                end
-            end
+            import_add_editors(@bib, row[9])
 
             # Translators
-            if row[11]
-                values = row[11].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translator: #{v}")
-                    @bib.translators << Citation.new(display_name: v)
-                end
-            end
+            import_add_translators(@bib, row[11])
 
             # ISBNs
-            if row[12]
-                values = row[12].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISBN: #{v}")
-                    @bib.isbns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_isbns(@bib, row[12])
 
             # DOIs
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding DOI: #{v}")
-                    @bib.dois << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_dois(@bib, row[13])
 
             # Worldcat URLs
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[15])
 
             # Publisher URLs
-            if row[16]
-                values = row[16].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher URL: #{v}")
-                    @bib.publisher_urls << Url.new(link: v)
-                end
-            end
+            import_add_publisher_urls(@bib, row[16])
 
-            # Leuven URLs
-            if row[17]
-                values = row[17].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Leuven URL: #{v}")
-                    @bib.leuven_urls << Url.new(link: v)
-                end
-            end
+            # Leuven URLs/Other Links
+            import_add_leuven_urls(@bib, row[17])
 
             # Periods/Centuries
-            if row[18]
-                values = row[18].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v)
-                end
-            end
+            import_add_periods(@bib, row[18])
 
             # Subjects
-            if row[19]
-                values = row[19].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[19])
 
             # Locations
-            if row[20]
-                values = row[20].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[20])
 
             # Entities/Jesuits
-            if row[21]
-                values = row[21].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[21])
 
             # Notes -- Note
-            if row[23]
-                import_logger.info("  adding Note: #{row[23]}")
-                @bib.comments << Comment.new(body: row[23], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[23])
 
             # Notes -- Note to editor
-            if row[24]
-                import_logger.info("  adding Note: #{row[24]}")
-                @bib.comments << Comment.new(body: row[24], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[24])
 
             # Translated Authors
-            if row[25]
-                values = row[25].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translated author: #{v}")
-                    @bib.translated_authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_translated_authors(@bib, row[25])
 
             # Languages
-            if row[27]
-                values = row[27].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[27])
 
             # Tags
-            if row[28]
-                values = row[28].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[28])
 
             bar.increment!
         end
@@ -397,15 +284,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[22]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[22].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[24])
 
             @bib.save!
 
@@ -416,169 +295,61 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # Book Editors
-            if row[4]
-                values = row[4].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Book Editor: #{v}")
-                    @bib.book_editors << Citation.new(display_name: v)
-                end
-            end
+            import_book_editors(@bib, row[4])
 
             # Places Published
-            if row[6]
-                values = row[6].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Place Published: #{v}")
-                    @bib.publish_places << PublishPlace.new(name: v)
-                end
-            end
+            import_add_places_published(@bib, row[6])
 
             # Publishers
-            if row[7]
-                values = row[7].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher: #{v}")
-                    @bib.publishers << Publisher.new(name: v)
-                end
-            end
+            import_add_publishers(@bib, row[7])
 
             # Translators
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translator: #{v}")
-                    @bib.translators << Citation.new(display_name: v)
-                end
-            end
+            import_add_translators(@bib, row[13])
 
             # ISBNs
-            if row[14]
-                values = row[14].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISBN: #{v}")
-                    @bib.isbns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_isbns(@bib, row[14])
 
             # DOIs
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding DOI: #{v}")
-                    @bib.dois << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_dois(@bib, row[15])
 
             # Worldcat URLs
-            if row[17]
-                values = row[17].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[17])
 
             # Publisher URLs
-            if row[18]
-                values = row[18].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher URL: #{v}")
-                    @bib.publisher_urls << Url.new(link: v)
-                end
-            end
+            import_add_publisher_urls(@bib, row[18])
 
-            # Leuven URLs
-            if row[19]
-                values = row[19].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Leuven URL: #{v}")
-                    @bib.leuven_urls << Url.new(link: v)
-                end
-            end
+            # Leuven URLs/Other Links
+            import_add_leuven_urls(@bib, row[19])
 
             # Periods/Centuries
-            if row[20]
-                values = row[20].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[20])
 
             # Subjects
-            if row[21]
-                values = row[21].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[21])
 
             # Locations
-            if row[22]
-                values = row[22].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[22])
 
             # Entities/Jesuits
-            if row[23]
-                values = row[23].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[23])
 
             # Notes -- Note
-            if row[25]
-                import_logger.info("  adding Note: #{row[25]}")
-                @bib.comments << Comment.new(body: row[25], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[25])
 
             # Notes -- Note to editor
-            if row[26]
-                import_logger.info("  adding Note: #{row[26]}")
-                @bib.comments << Comment.new(body: row[26], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[26])
 
             # Translated Authors
-            if row[27]
-                values = row[27].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translated author: #{v}")
-                    @bib.translated_authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_translated_authors(@bib, row[27])
 
             # Languages
-            if row[29]
-                values = row[29].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[29])
 
             # Tags
-            if row[30]
-                values = row[30].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[30])
 
             bar.increment!
         end
@@ -666,16 +437,8 @@ namespace :importdata do
                 @bib.display_author = row[1]
             end
 
-             # Abstract
-             if row[21]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[21].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            # Abstract
+            import_add_abstract(@bib, row[21])
 
             @bib.save!
 
@@ -687,13 +450,7 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Author of Reviews
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author of Review: #{v}")
-                    @bib.author_of_reviews << Citation.new(display_name: v)
-                end
-            end
+            import_author_of_reviews(@bib, row[1])
 
             # Reviewed Title/Author
             # combine both fields into Reviewed_component record object
@@ -702,124 +459,46 @@ namespace :importdata do
             end
 
             # ISSNs
-            if row[12]
-                values = row[12].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISSN: #{v}")
-                    @bib.issns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_issns(@bib, row[12])
 
             # DOIs
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding DOI: #{v}")
-                    @bib.dois << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_dois(@bib, row[13])
 
             # Worldcat URLs
-            if row[14]
-                values = row[14].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[14])
 
             # Publisher URLs
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher URL: #{v}")
-                    @bib.publisher_urls << Url.new(link: v)
-                end
-            end
+            import_add_publisher_urls(@bib, row[15])
 
-            # Leuven URLs
-            if row[16]
-                values = row[16].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Leuven URL: #{v}")
-                    @bib.leuven_urls << Url.new(link: v)
-                end
-            end
+            # Leuven URLs/Other Links
+            import_add_leuven_urls(@bib, row[16])
 
             # Periods/Centuries
-            if row[17]
-                values = row[17].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[17])
 
             # Subjects
-            if row[18]
-                values = row[18].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[18])
 
             # Locations
-            if row[19]
-                values = row[19].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[19])
 
             # Entities/Jesuits
-            if row[20]
-                values = row[20].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[20])
 
             # Notes -- Note
-            if row[22]
-                import_logger.info("  adding Note: #{row[22]}")
-                @bib.comments << Comment.new(body: row[22], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[22])
 
             # Notes -- Note to editor
-            if row[23]
-                import_logger.info("  adding Note: #{row[23]}")
-                @bib.comments << Comment.new(body: row[23], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[23])
 
             # Translated Authors
-            if row[24]
-                values = row[24].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translated author: #{v}")
-                    @bib.translated_authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_translated_authors(@bib, row[24])
 
             # Languages
-            if row[26]
-                values = row[26].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[26])
 
             # Tags
-            if row[27]
-                values = row[27].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[27])
 
             bar.increment!
         end
@@ -907,15 +586,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[19]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[19].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[19])
 
             @bib.save!
 
@@ -926,133 +597,49 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # ISSNs
-            if row[10]
-                values = row[10].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISSN: #{v}")
-                    @bib.issns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_issns(@bib, row[10])
 
             # DOIs
-            if row[11]
-                values = row[11].split("|")
-                values.each do |v|
-                    import_logger.info("  adding DOI: #{v}")
-                    @bib.dois << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_dois(@bib, row[11])
 
             # Worldcat URLs
-            if row[12]
-                values = row[12].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[12])
 
             # Publisher URLs
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher URL: #{v}")
-                    @bib.publisher_urls << Url.new(link: v)
-                end
-            end
+            import_add_publisher_urls(@bib, row[13])
 
-            # Leuven URLs
-            if row[14]
-                values = row[14].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Leuven URL: #{v}")
-                    @bib.leuven_urls << Url.new(link: v)
-                end
-            end
+            # Leuven URLs/Other Links
+            import_add_leuven_urls(@bib, row[14])
 
             # Periods/Centuries
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[15])
 
             # Subjects
-            if row[16]
-                values = row[16].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[16])
 
             # Locations
-            if row[17]
-                values = row[17].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[17])
 
             # Entities/Jesuits
-            if row[18]
-                values = row[18].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[18])
 
             # Notes -- Note
-            if row[20]
-                import_logger.info("  adding Note: #{row[20]}")
-                @bib.comments << Comment.new(body: row[20], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[20])
 
             # Notes -- Note to editor
-            if row[21]
-                import_logger.info("  adding Note: #{row[21]}")
-                @bib.comments << Comment.new(body: row[21], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[21])
 
             # Translated Authors
-            if row[22]
-                values = row[22].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Translated author: #{v}")
-                    @bib.translated_authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_translated_authors(@bib, row[22])
 
             # Languages
-            if row[24]
-                values = row[24].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[24])
 
             # Tags
-            if row[25]
-                values = row[25].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[25])
 
             bar.increment!
         end
@@ -1134,15 +721,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[16]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[16].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[16])
 
             @bib.save!
 
@@ -1153,133 +732,49 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # Places Published
-            if row[4]
-                values = row[4].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Place Published: #{v}")
-                    @bib.publish_places << PublishPlace.new(name: v)
-                end
-            end
+            import_add_places_published(@bib, row[4])
 
             # Universities
-            if row[5]
-                values = row[5].split("|")
-                values.each do |v|
-                    import_logger.info("  adding University: #{v}")
-                    @bib.dissertation_universities << DissertationUniversity.new(name: v)
-                end
-            end
+            import_add_dissertation_universities(@bib, row[5])
 
             # ISBNs
-            if row[8]
-                values = row[8].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISBN: #{v}")
-                    @bib.isbns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_isbns(@bib, row[8])
 
             # Worldcat URLs
-            if row[9]
-                values = row[9].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[9])
 
             # Dissertation University  URLs
-            if row[10]
-                values = row[10].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Dissertation University URL: #{v}")
-                    @bib.dissertation_university_urls << Url.new(link: v)
-                end
-            end
+            import_dissertation_university_urls(@bib, row[10])
 
             # Leuven URLs
-            if row[11]
-                values = row[11].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Leuven URL: #{v}")
-                    @bib.leuven_urls << Url.new(link: v)
-                end
-            end
+            import_add_leuven_urls(@bib, row[11])
 
             # Periods/Centuries
-            if row[12]
-                values = row[12].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[12])
 
             # Subjects
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[13])
 
             # Locations
-            if row[14]
-                values = row[14].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[14])
 
             # Entities/Jesuits
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[15])
 
             # Notes -- Note
-            if row[17]
-                import_logger.info("  adding Note: #{row[17]}")
-                @bib.comments << Comment.new(body: row[17], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[17])
 
             # Notes -- Note to editor
-            if row[18]
-                import_logger.info("  adding Note: #{row[18]}")
-                @bib.comments << Comment.new(body: row[18], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[18])
 
             # Languages
-            if row[19]
-                values = row[19].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[19])
 
             # Tags
-            if row[20]
-                values = row[20].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[20])
 
             bar.increment!
         end
@@ -1356,15 +851,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[14]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[14].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[14])
 
             @bib.save!
 
@@ -1375,88 +862,34 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # Event URLs
-            if row[9]
-                values = row[9].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Event URL: #{v}")
-                    @bib.event_urls << Url.new(link: v)
-                end
-            end
+            import_add_event_urls(@bib, row[9])
 
             # Periods/Centuries
-            if row[10]
-                values = row[10].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[10])
 
             # Subjects
-            if row[11]
-                values = row[11].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[11])
 
             # Locations
-            if row[12]
-                values = row[12].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[12])
 
             # Entities/Jesuits
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[13])
 
             # Notes -- Note
-            if row[15]
-                import_logger.info("  adding Note: #{row[15]}")
-                @bib.comments << Comment.new(body: row[15], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[15])
 
             # Notes -- Note to editor
-            if row[16]
-                import_logger.info("  adding Note: #{row[16]}")
-                @bib.comments << Comment.new(body: row[16], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[16])
 
             # Languages
-            if row[17]
-                values = row[17].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[17])
 
             # Tags
-            if row[18]
-                values = row[18].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[18])
 
             bar.increment!
         end
@@ -1539,15 +972,7 @@ namespace :importdata do
             end
 
             # Abstract
-            if row[17]
-                formatted_abstract = ""
-                # split by either | or ||
-                values = row[17].split(/[|]+/)
-                values.each do |v|
-                    formatted_abstract << "<p>#{v}</p>"
-                end
-                @bib.abstract = formatted_abstract
-            end
+            import_add_abstract(@bib, row[17])
 
             @bib.save!
 
@@ -1558,142 +983,52 @@ namespace :importdata do
             import_logger.info("  abstract: #{@bib.abstract}")
             
             # Authors
-            if row[1]
-                values = row[1].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Author: #{v}")
-                    @bib.authors << Citation.new(display_name: v)
-                end
-            end
+            import_add_authors(@bib, row[1])
 
             # Multimedia Series
-            if row[4]
-                values = row[4].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Multimedia Series: #{v}")
-                    @bib.series_multimedium << SeriesMultimedium.new(name: v)
-                end
-            end
+            import_series_multimedium(@bib, row[4])
 
             # Places Published
-            if row[5]
-                values = row[5].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Place Published: #{v}")
-                    @bib.publish_places << PublishPlace.new(name: v)
-                end
-            end
+            import_add_places_published(@bib, row[5])
 
             # Publishers
-            if row[6]
-                values = row[6].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Publisher: #{v}")
-                    @bib.publishers << Publisher.new(name: v)
-                end
-            end
+            import_add_publishers(@bib, row[6])
 
             # Performers
-            if row[8]
-                values = row[8].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Performer: #{v}")
-                    @bib.performers << Citation.new(display_name: v)
-                end
-            end
+            import_add_performers(@bib, row[8])
 
             # ISBNs
-            if row[9]
-                values = row[9].split("|")
-                values.each do |v|
-                    import_logger.info("  adding ISBN: #{v}")
-                    @bib.isbns << StandardIdentifier.new(value: v)
-                end
-            end
+            import_add_isbns(@bib, row[9])
 
             # Worldcat URLs
-            if row[10]
-                values = row[10].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Worldcat URL: #{v}")
-                    @bib.worldcat_urls << Url.new(link: v)
-                end
-            end
+            import_add_worldcat_urls(@bib, row[10])
 
             # Multimedia URLs
-            if row[11]
-                values = row[11].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Multimedia URL: #{v}")
-                    @bib.multimedia_urls << Url.new(link: v)
-                end
-            end
+            import_add_multimedia_urls(@bib, row[11])
 
             # Periods/Centuries
-            if row[13]
-                values = row[13].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Period: #{v}")
-                    @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_periods(@bib, row[13])
 
             # Subjects
-            if row[14]
-                values = row[14].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Subject: #{v}")
-                    @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_subjects(@bib, row[14])
 
             # Locations
-            if row[15]
-                values = row[15].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Location: #{v}")
-                    @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_locations(@bib, row[15])
 
             # Entities/Jesuits
-            if row[16]
-                values = row[16].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Entity: #{v}")
-                    @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
-                end
-            end
+            import_add_jesuits(@bib, row[16])
 
             # Notes -- Note
-            if row[18]
-                import_logger.info("  adding Note: #{row[18]}")
-                @bib.comments << Comment.new(body: row[18], comment_type: 'Note', commenter: 'importer', make_public: false)
-            end
+            import_add_notes(@bib, row[18])
 
             # Notes -- Note to editor
-            if row[19]
-                import_logger.info("  adding Note: #{row[19]}")
-                @bib.comments << Comment.new(body: row[19], comment_type: 'Note to editor', commenter: 'importer', make_public: false)
-            end
+            import_add_notes_to_editor(@bib, row[19])
 
             # Languages
-            if row[20]
-                values = row[20].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Language: #{v}")
-                    @bib.languages << Language.new(name: v)
-                end
-            end
+            import_add_languages(@bib, row[20])
 
             # Tags
-            if row[21]
-                values = row[21].split("|")
-                values.each do |v|
-                    import_logger.info("  adding Tag: #{v}")
-                    @bib.tags << Tag.new(name: v)
-                end
-            end
+            import_add_tags(@bib, row[21])
 
             bar.increment!
         end
@@ -1702,5 +1037,322 @@ namespace :importdata do
         diff = finish - start
         puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
+    end
+
+
+    # Authors
+    def import_add_authors(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Author: #{v}")
+                @bib.authors << Citation.new(display_name: v)
+            end
+        end
+    end
+
+    # Book Editors
+    def import_book_editors(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Book Editor: #{v}")
+                @bib.book_editors << Citation.new(display_name: v)
+            end
+        end
+    end
+
+    # Author of Reviews
+    def import_author_of_reviews(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Author of Review: #{v}")
+                @bib.author_of_reviews << Citation.new(display_name: v)
+            end
+        end
+    end
+
+    # Multimedia Series
+    def import_series_multimedium(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Multimedia Series: #{v}")
+                @bib.series_multimedium << SeriesMultimedium.new(name: v)
+            end
+        end
+    end
+
+    # Places Published
+    def import_add_places_published(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Place Published: #{v}")
+                @bib.publish_places << PublishPlace.new(name: v)
+            end
+        end
+    end
+
+    # Publishers
+    def import_add_publishers(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Publisher: #{v}")
+                @bib.publishers << Publisher.new(name: v)
+            end
+        end
+    end
+
+
+    # Editors
+    def import_add_editors(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Editor: #{v}")
+                @bib.editors << Citation.new(display_name: v)
+            end
+        end
+    end
+
+
+    # Translators
+    def import_add_translators(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Translator: #{v}")
+                @bib.translators << Citation.new(display_name: v)
+            end
+        end
+    end
+
+    # Performers
+    def import_add_performers(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Performer: #{v}")
+                @bib.performers << Citation.new(display_name: v)
+            end
+        end
+    end
+
+
+    # Universities
+    def import_add_dissertation_universities(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding University: #{v}")
+                @bib.dissertation_universities << DissertationUniversity.new(name: v)
+            end
+        end
+    end
+
+    # ISBNs
+    def import_add_isbns(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding ISBN: #{v}")
+                @bib.isbns << StandardIdentifier.new(value: v)
+            end
+        end
+    end
+
+    # ISSNs
+    def import_add_issns(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding ISSN: #{v}")
+                @bib.issns << StandardIdentifier.new(value: v)
+            end
+        end
+    end
+
+    # DOIs
+    def import_add_dois(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding DOI: #{v}")
+                @bib.dois << StandardIdentifier.new(value: v)
+            end
+        end
+    end
+
+    # Worldcat URLs
+    def import_add_worldcat_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Worldcat URL: #{v}")
+                @bib.worldcat_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Dissertation University  URLs
+    def import_dissertation_university_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Dissertation University URL: #{v}")
+                @bib.dissertation_university_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Publisher URLs
+    def import_add_publisher_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Publisher URL: #{v}")
+                @bib.publisher_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Leuven URLs
+    def import_add_leuven_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Leuven URL: #{v}")
+                @bib.leuven_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Event URLs
+    def import_add_event_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Event URL: #{v}")
+                @bib.event_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Multimedia URLs
+    def import_add_multimedia_urls(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Multimedia URL: #{v}")
+                @bib.multimedia_urls << Url.new(link: v)
+            end
+        end
+    end
+
+    # Periods/Centuries
+    def import_add_periods(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Period: #{v}")
+                @bib.periods << Period.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
+            end
+        end
+    end
+
+    # Subjects
+    def import_add_subjects(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Subject: #{v}")
+                @bib.subjects << Subject.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
+            end
+        end
+    end
+
+    # Locations
+    def import_add_locations(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Location: #{v}")
+                @bib.locations << Location.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
+            end
+        end
+    end
+
+    # Entities/Jesuits
+    def import_add_jesuits(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Entity: #{v}")
+                @bib.entities << Entity.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
+            end
+        end
+    end
+
+    # Notes -- Note
+    def import_add_notes(bib, col)
+        if col
+            import_logger.info("  adding Note: #{col}")
+            @bib.comments << Comment.new(body: col, comment_type: 'Note', commenter: 'importer', make_public: false)
+        end
+    end
+
+    def import_add_notes_to_editor(bib, col)
+        if col
+            import_logger.info("  adding Note: #{col}")
+            @bib.comments << Comment.new(body: col, comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+        end
+    end
+
+    # Translated Authors
+    def import_add_translated_authors(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Translated author: #{v}")
+                @bib.translated_authors << Citation.new(display_name: v)
+            end
+        end
+    end
+
+    # Languages
+    def import_add_languages(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Language: #{v}")
+                @bib.languages << Language.new(name: v)
+            end
+        end
+    end
+
+    # Abstract
+    def import_add_abstract(bib, col)
+        if col
+            formatted_abstract = ""
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                formatted_abstract << "<p>#{v}</p>"
+            end
+            @bib.abstract = formatted_abstract
+        end
+    end
+
+    # Tags
+    def import_add_tags(bib, col)
+        if col
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Tag: #{v}")
+                @bib.tags << Tag.new(name: v)
+            end
+        end
     end
 end

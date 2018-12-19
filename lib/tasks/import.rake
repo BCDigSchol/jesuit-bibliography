@@ -24,6 +24,7 @@ namespace :import do
 
     desc "Import test Periods"
     task periods: :environment do
+=begin
         puts "Starting Periods import..."
         item_count = 0
         start = Time.now
@@ -38,10 +39,12 @@ namespace :import do
         finish = Time.now
         diff = finish - start
         puts "Created #{item_count} Period records in #{diff} seconds\n\n"
+=end
     end
 
     desc "Import test Locations"
     task locations: :environment do
+=begin
         puts "Starting Locations import..."
         item_count = 0
         start = Time.now
@@ -59,10 +62,12 @@ namespace :import do
         finish = Time.now
         diff = finish - start
         puts "Created #{item_count} Location records in #{diff} seconds\n\n"
+=end
     end
 
     desc "Import test Subjects"
     task subjects: :environment do
+=begin
         puts "Starting Subjects import..."
         item_count = 0
         start = Time.now
@@ -80,10 +85,12 @@ namespace :import do
         finish = Time.now
         diff = finish - start
         puts "Created #{item_count} Subject records in #{diff} seconds\n\n"
+=end
     end
 
     desc "Import test Entities"
     task entities: :environment do
+=begin
         puts "Starting Entities import..."
         item_count = 0
         start = Time.now
@@ -101,5 +108,6 @@ namespace :import do
         finish = Time.now
         diff = finish - start
         puts "Created #{item_count} Entity records in #{diff} seconds\n\n"
+=end
     end
 end

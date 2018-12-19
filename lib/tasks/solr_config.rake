@@ -1,16 +1,14 @@
-require 'csv'
-
 namespace :solr_config do
 
-    desc "Update local SOLR config files"
+    desc "Update local Solr config files"
     task update: :environment do
-        # TODO make sure this can only be run in development
+        # TODO make sure this can only be run in development?
 
         local_solr_configs_home = Rails.root.join('solr/blacklight-core/conf/')
         solr_conf_home = ENV['SOLR_CONF_HOME'] || nil
         solr_config_files = ["managed-schema", "solrconfig.xml"]
 
-        puts "Update SOLR config files on this computer."
+        puts "Update Solr config files on this computer."
         
         # check that SOLR_CONF_HOME is not nil
         puts "\nChecking for SOLR_CONF_HOME environmental variable in this shell:"
@@ -33,39 +31,39 @@ namespace :solr_config do
         end
 
         # check that our local /path/to/jesuit-bibliography/solr/blacklight-core/conf directory exist
-        puts "\nChecking for local project SOLR config files:"
+        puts "\nChecking for local project Solr config files:"
         local_solr_configs_home_exists = File.directory?(local_solr_configs_home)
         if local_solr_configs_home_exists
-            puts "Project SOLR config files directory: \"#{local_solr_configs_home}\""
+            puts "Project Solr config files directory: \"#{local_solr_configs_home}\""
         else
-            puts "WARNING: Could not find local solr config files."
+            puts "WARNING: Could not find local Solr config files."
             puts "Please check that \"#{local_solr_configs_home}\" is a valid directory and try again.\n\n"
             next
         end
 
         # check that the solr_config_files files exist and are not empty
-        puts "\nChecking for local project SOLR config files:"
+        puts "\nChecking for local project Solr config files:"
         solr_config_files.each do |file_name|
             file_path = local_solr_configs_home.join(file_name)
             file_size = File.size?(file_path)
 
             if !file_size.nil?
-                puts "Found #{file_name} with size #{file_size}"
+                puts "Found file '#{file_name}' with size #{file_size} bytes"
             else
-                puts "WARNING: File #{file_name} either doesn't exist or is a zero-length file."
+                puts "WARNING: File '#{file_name}' either doesn't exist or is a zero-length file."
                 puts "Please check this file and try again.\n\n"
                 next
             end
         end
 
         # copy over files to SOLR_CONF_HOME
-        puts "\nNow copying over SOLR config files"
+        puts "\nNow copying over Solr config files."
         solr_config_files.each do |file_name|
             file_path = local_solr_configs_home.join(file_name)
             # TODO check for return value?
             FileUtils.cp_r(file_path, solr_conf_home, remove_destination: true)
         end
 
-        puts "\nComplete! Please restart SOLR.\n"
+        puts "\nTask complete! \n\nPlease restart Solr to have the configuration changes applied.\n"
     end
 end
