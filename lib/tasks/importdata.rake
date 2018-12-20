@@ -1043,6 +1043,7 @@ namespace :importdata do
     # Authors
     def import_add_authors(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author: #{v}")
@@ -1054,6 +1055,7 @@ namespace :importdata do
     # Book Editors
     def import_book_editors(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Book Editor: #{v}")
@@ -1065,6 +1067,7 @@ namespace :importdata do
     # Author of Reviews
     def import_author_of_reviews(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author of Review: #{v}")
@@ -1076,6 +1079,7 @@ namespace :importdata do
     # Multimedia Series
     def import_series_multimedium(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Multimedia Series: #{v}")
@@ -1087,6 +1091,7 @@ namespace :importdata do
     # Places Published
     def import_add_places_published(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Place Published: #{v}")
@@ -1098,6 +1103,7 @@ namespace :importdata do
     # Publishers
     def import_add_publishers(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Publisher: #{v}")
@@ -1110,6 +1116,7 @@ namespace :importdata do
     # Editors
     def import_add_editors(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Editor: #{v}")
@@ -1122,6 +1129,7 @@ namespace :importdata do
     # Translators
     def import_add_translators(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translator: #{v}")
@@ -1133,6 +1141,7 @@ namespace :importdata do
     # Performers
     def import_add_performers(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Performer: #{v}")
@@ -1145,6 +1154,7 @@ namespace :importdata do
     # Universities
     def import_add_dissertation_universities(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding University: #{v}")
@@ -1156,6 +1166,7 @@ namespace :importdata do
     # ISBNs
     def import_add_isbns(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding ISBN: #{v}")
@@ -1167,6 +1178,7 @@ namespace :importdata do
     # ISSNs
     def import_add_issns(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding ISSN: #{v}")
@@ -1178,6 +1190,7 @@ namespace :importdata do
     # DOIs
     def import_add_dois(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding DOI: #{v}")
@@ -1189,6 +1202,7 @@ namespace :importdata do
     # Worldcat URLs
     def import_add_worldcat_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Worldcat URL: #{v}")
@@ -1200,6 +1214,7 @@ namespace :importdata do
     # Dissertation University  URLs
     def import_dissertation_university_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Dissertation University URL: #{v}")
@@ -1211,6 +1226,7 @@ namespace :importdata do
     # Publisher URLs
     def import_add_publisher_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Publisher URL: #{v}")
@@ -1222,6 +1238,7 @@ namespace :importdata do
     # Leuven URLs
     def import_add_leuven_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Leuven URL: #{v}")
@@ -1233,6 +1250,7 @@ namespace :importdata do
     # Event URLs
     def import_add_event_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Event URL: #{v}")
@@ -1244,6 +1262,7 @@ namespace :importdata do
     # Multimedia URLs
     def import_add_multimedia_urls(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Multimedia URL: #{v}")
@@ -1255,6 +1274,7 @@ namespace :importdata do
     # Periods/Centuries
     def import_add_periods(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Period: #{v}")
@@ -1266,6 +1286,7 @@ namespace :importdata do
     # Subjects
     def import_add_subjects(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Subject: #{v}")
@@ -1277,6 +1298,7 @@ namespace :importdata do
     # Locations
     def import_add_locations(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Location: #{v}")
@@ -1288,6 +1310,7 @@ namespace :importdata do
     # Entities/Jesuits
     def import_add_jesuits(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Entity: #{v}")
@@ -1299,6 +1322,7 @@ namespace :importdata do
     # Notes -- Note
     def import_add_notes(bib, col)
         if col
+            col.unicode_normalize!
             import_logger.info("  adding Note: #{col}")
             @bib.comments << Comment.new(body: col, comment_type: 'Note', commenter: 'importer', make_public: false)
         end
@@ -1306,6 +1330,7 @@ namespace :importdata do
 
     def import_add_notes_to_editor(bib, col)
         if col
+            col.unicode_normalize!
             import_logger.info("  adding Note: #{col}")
             @bib.comments << Comment.new(body: col, comment_type: 'Note to editor', commenter: 'importer', make_public: false)
         end
@@ -1314,6 +1339,7 @@ namespace :importdata do
     # Translated Authors
     def import_add_translated_authors(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translated author: #{v}")
@@ -1325,6 +1351,7 @@ namespace :importdata do
     # Languages
     def import_add_languages(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Language: #{v}")
@@ -1336,6 +1363,7 @@ namespace :importdata do
     # Abstract
     def import_add_abstract(bib, col)
         if col
+            col.unicode_normalize!
             formatted_abstract = ""
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
@@ -1348,6 +1376,7 @@ namespace :importdata do
     # Tags
     def import_add_tags(bib, col)
         if col
+            col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Tag: #{v}")
