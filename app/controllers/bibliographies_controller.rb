@@ -45,7 +45,7 @@ class BibliographiesController < ApplicationController
     def new
         @bib = Bibliography.new
         @bib.comments.build
-        @bib.languages.build
+        #@bib.languages.build
         @bib.reviewed_components.build
         @bib.publishers.build
         @bib.publish_places.build
@@ -70,6 +70,7 @@ class BibliographiesController < ApplicationController
         @bib.bibliography_periods.build
         @bib.bibliography_locations.build
         @bib.bibliography_entities.build
+        @bib.bibliography_languages.build
         @bib.worldcat_urls.build
         @bib.publisher_urls.build
         @bib.leuven_urls.build
@@ -184,6 +185,10 @@ class BibliographiesController < ApplicationController
 
             if @bib.bibliography_entities.count == 0
                 @bib.bibliography_entities.build
+            end
+
+            if @bib.bibliography_languages.count == 0
+                @bib.bibliography_languages.build
             end
 
             if @bib.worldcat_urls.count == 0
@@ -377,7 +382,7 @@ class BibliographiesController < ApplicationController
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
                 :multimedia_type, :published,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
-                languages_attributes: [:id, :name, :_destroy],
+                #languages_attributes: [:id, :name, :_destroy],
                 publishers_attributes: [:id, :name, :_destroy],
                 publish_places_attributes: [:id, :name, :_destroy],
                 dissertation_universities_attributes: [:id, :name, :_destroy],
@@ -392,6 +397,7 @@ class BibliographiesController < ApplicationController
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],
                 bibliography_entities_attributes: [:id, :entity_id, :_destroy],
+                bibliography_languages_attributes: [:id, :language_id, :_destroy],
                 isbns_attributes: [:id, :value, :_destroy],
                 issns_attributes: [:id, :value, :_destroy],
                 dois_attributes: [:id, :value, :_destroy],

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :standard_identifiers
     resources :citations
-    resources :languages
+    #resources :languages
     resources :reviewed_components
     resources :publishers
     resources :publish_places

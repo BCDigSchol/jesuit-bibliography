@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_231123) do
+ActiveRecord::Schema.define(version: 2018_12_20_165350) do
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 2018_12_17_231123) do
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_entities_on_bibliography_id"
     t.index ["entity_id"], name: "index_bibliography_entities_on_entity_id"
+  end
+
+  create_table "bibliography_languages", force: :cascade do |t|
+    t.integer "language_id"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_languages_on_bibliography_id"
+    t.index ["language_id"], name: "index_bibliography_languages_on_language_id"
   end
 
   create_table "bibliography_locations", force: :cascade do |t|
@@ -177,6 +186,9 @@ ActiveRecord::Schema.define(version: 2018_12_17_231123) do
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "sort_name"
+    t.text "created_by"
+    t.text "modified_by"
     t.index ["bibliography_id"], name: "index_languages_on_bibliography_id"
   end
 

@@ -1,9 +1,10 @@
 <div class='bibliography-languages-fields nested-fields form-group row'>
     <%= form.input :name, wrapper: :vertical_input_group do %>
-        <%= form.input :name, 
+        <%= form.association :language, 
             label: false,
-            collection: Language::LANGUAGES, 
+            collection: Language.order(:name),
             prompt: 'Choose a Language', 
+            form_name: 'form',
             label_html: { class: 'invisible' },
             input_html: {class: 'languages'}
         %>

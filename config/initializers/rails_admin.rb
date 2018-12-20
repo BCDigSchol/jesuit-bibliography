@@ -53,6 +53,7 @@ RailsAdmin.config do |config|
     end
     edit do
       field :name
+      field :sort_name
     end
   end
 
@@ -64,6 +65,7 @@ RailsAdmin.config do |config|
     end
     edit do
       field :name
+      field :sort_name
     end
   end
 
@@ -77,6 +79,7 @@ RailsAdmin.config do |config|
     end
     edit do
       field :name
+      field :sort_name
     end
   end
 
@@ -90,6 +93,7 @@ RailsAdmin.config do |config|
     end
     edit do
       field :name
+      field :sort_name
     end
   end
 
@@ -144,8 +148,15 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Language' do
-    parent Bibliography
-    #visible false
+    navigation_label 'Terms'
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+      field :sort_name
+    end
   end
 
   config.model 'ReviewedComponent' do
@@ -226,6 +237,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'BibliographySubject' do
+    visible false
+  end
+
+  config.model 'BibliographyLocation' do
     visible false
   end
 

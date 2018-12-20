@@ -1,10 +1,11 @@
 <div id='bibliography_languages' class='repeatable-field'>
     <div class="fields">
-        <%= form.simple_fields_for :languages do |language| %>
-            <%= language.input :name, 
+        <%= form.simple_fields_for :bibliography_languages do |language| %>
+            <%= language.association :language, 
                 label: field_label,
-                collection: Language::LANGUAGES, 
+                collection: Language.order(:name),
                 prompt: 'Choose a Language',
+                form_name: 'language',
                 input_html: {class: 'languages'}
             %>
         <% end %>
@@ -14,7 +15,7 @@
         <div class="col-sm-10 btn-add-container">
             <%= link_to_add_association 'Add ' + field_label, 
                 form, 
-                :languages, 
+                :bibliography_languages, 
                 class: 'btn btn-warning btn-add', 
                 form_name: 'form', 
                 data: {

@@ -1304,6 +1304,7 @@ namespace :importdata do
         end
     end
 
+    # Notes -- Note to Editor
     def import_add_notes_to_editor(bib, col)
         if col
             import_logger.info("  adding Note: #{col}")
@@ -1328,7 +1329,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Language: #{v}")
-                @bib.languages << Language.new(name: v)
+                @bib.languages << Language.find_or_create_by(name: v, sort_name: v, created_by: CREATED_BY_USER)
             end
         end
     end

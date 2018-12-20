@@ -1,6 +1,6 @@
 class Bibliography < ApplicationRecord
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
-    has_many :languages, inverse_of: :bibliography, dependent: :destroy
+    #has_many :languages, inverse_of: :bibliography, dependent: :destroy
     has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy
     has_many :publishers, inverse_of: :bibliography, dependent: :destroy
     has_many :publish_places, inverse_of: :bibliography, dependent: :destroy
@@ -28,6 +28,10 @@ class Bibliography < ApplicationRecord
     has_many :bibliography_entities, inverse_of: :bibliography, dependent: :destroy
     has_many :entities, through: :bibliography_entities
 
+    # many-to-many relationship through bibliography_subjects
+    has_many :bibliography_languages, inverse_of: :bibliography, dependent: :destroy
+    has_many :languages, through: :bibliography_languages
+
     # relationship using class_name and foreign_key atributes
     has_many :isbns, class_name: 'StandardIdentifier', foreign_key: 'isbn_id', inverse_of: 'isbn', dependent: :destroy
     has_many :issns, class_name: 'StandardIdentifier', foreign_key: 'issn_id', inverse_of: 'issn', dependent: :destroy
@@ -51,7 +55,7 @@ class Bibliography < ApplicationRecord
 
 
     accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: :comments_rejectable?
-    accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
+    #accepts_nested_attributes_for :languages, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :reviewed_components, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :publishers, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :publish_places, allow_destroy: true, reject_if: :all_blank
@@ -66,6 +70,7 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_entities, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :bibliography_languages, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :isbns, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :issns, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :dois, reject_if: :all_blank, allow_destroy: true
