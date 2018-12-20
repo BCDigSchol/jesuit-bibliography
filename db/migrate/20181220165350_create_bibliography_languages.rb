@@ -9,7 +9,9 @@ class CreateBibliographyLanguages < ActiveRecord::Migration[5.2]
     add_column :languages, :sort_name, :text
     add_column :languages, :created_by, :text
     add_column :languages, :modified_by, :text
-    
-    remove_reference :bibliographies, :language, index: true
+
+    if column_exists?(:bibliographies, :language)
+        remove_reference :bibliographies, :language, index: true
+    end
   end
 end
