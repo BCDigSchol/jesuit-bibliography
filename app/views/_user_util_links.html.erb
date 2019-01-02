@@ -1,4 +1,4 @@
-<div class="navbar-right col-sm-10 center-col">
+<div class="navbar col-sm-12 center-col">
   <ul class="nav navbar-nav">
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
@@ -25,10 +25,8 @@
       <li><%= action %></li>
     <% end %>
     <li><a href="#">Saved Searches</a></li>
-  </ul>
 
-  <% if has_user_authentication_provider? %>
-    <ul class="nav navbar-nav">
+    <% if has_user_authentication_provider? %>
       <% if current_user %>
       <li>
         <%= link_to t('blacklight.header_links.logout'), destroy_user_session_path %>
@@ -43,6 +41,7 @@
         <%= link_to t('blacklight.header_links.login'), new_user_session_path %>
       </li>
       <% end %>
-      </ul>
   <% end %>
+
+  </ul>
 </div>

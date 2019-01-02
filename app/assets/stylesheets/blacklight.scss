@@ -241,3 +241,19 @@ footer.bcfooter {
     p { margin-bottom: .75rem}
     p:last-child { margin-bottom: 0}
 }
+
+@media (min-width: 768px) {
+    #header-navbar {
+        .navbar {
+            margin-bottom: 0px;
+            .navbar-nav {
+                /* float: left; */
+                /* margin: 0; */
+                float: none;
+                margin: 0 auto;
+                display: table;
+                table-layout: fixed;
+            }
+        }
+    }
+}
