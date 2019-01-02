@@ -205,6 +205,14 @@ footer.bcfooter {
     }
 }
 
+.twitter-typeahead {
+    color: #000;
+}
+
+.blacklight-catalog-index #search-navbar .search-navbar-job .form-wrapper {
+    text-transform: none;
+}
+
 /* Abstracts can have <p> elements in them, which messes up spacing. */
 .blacklight-abstract_text {
     p { margin-bottom: .75rem}
