@@ -311,6 +311,7 @@
   <copyField source="*_ssim" dest="all_text_timv" maxChars="3000"/>
   <copyField source="*_si" dest="all_text_timv" maxChars="3000"/>
 
+  <!--copyField source="*_text" dest="suggest"/-->
   <copyField source="*_tsim" dest="suggest"/>
   <copyField source="*_tesim" dest="suggest"/>
   <copyField source="*_ssim" dest="suggest"/>
