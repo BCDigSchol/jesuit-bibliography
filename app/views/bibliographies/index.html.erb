@@ -32,7 +32,9 @@
       end
 
       g.column name: 'Status', attribute: 'status' do |bib|
-           "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+          if bib.status.present?
+            "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+          end
       end
 
       g.column name: 'Pending Suggestions' do |bib|
