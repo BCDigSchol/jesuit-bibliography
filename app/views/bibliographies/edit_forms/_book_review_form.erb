@@ -26,6 +26,10 @@
         <%= render 'bibliographies/fields/make_published', :form => form %>
     <% end %>
 
+    <% if can? :manage, 'Status' %>
+        <%= render 'bibliographies/fields/status', :form => form %>
+    <% end %>
+
     <%= form.input :reference_type, 
         :as => :hidden, 
         :input_html => { :value => "Book Review" } 

@@ -228,6 +228,9 @@ class BibliographiesController < ApplicationController
         check_authorization(:create, "Unable to create this Bibliography record.")
         #authorize! :create, Bibliography, :message => "Unable to create this Bibliography record."
 
+        # check that this record has a status assigned
+        check_record_status
+
         # set the display_* fields for Blacklight views
         set_display_fields
 
@@ -265,6 +268,9 @@ class BibliographiesController < ApplicationController
 
         # copy over bib_params into @bib object so we can alter it
         @bib.attributes = bib_params
+
+        # check that this record has a status assigned
+        check_record_status
 
         # set the display_* fields for Blacklight views
         set_display_fields
@@ -359,6 +365,25 @@ class BibliographiesController < ApplicationController
             end
         end
 
+        # set the record status if it is not already set.
+        # if the status value is blank then assign to Bibliography::DEFAULT_STATUS
+        # TODO make sure a contributor can't somehow force their record to be 'published'
+        def check_record_status
+            if @bib.status.blank?
+                @bib.status = Bibliography::DEFAULT_STATUS
+            end
+
+            # also make sure that if the record has a status of Bibliography::PUBLISHED_STATUS 
+            # that we also set the @bib.published field to be 'true'. 
+            # otherwise, set @bib.published field to 'false'
+            # TODO remove/hide the @bib.published field as it duplicates the status field
+            if @bib.status == Bibliography::PUBLISHED_STATUS
+                @bib.published = true
+            else
+                @bib.published = false
+            end
+        end
+
         def set_bib
             begin
                 @bib = Bibliography.find(params[:id])
@@ -380,7 +405,7 @@ class BibliographiesController < ApplicationController
                 :display_title, :display_year, :display_author,
                 :dissertation_thesis_type,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
-                :multimedia_type, :published,
+                :multimedia_type, :published, :status,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 #languages_attributes: [:id, :name, :_destroy],
                 publishers_attributes: [:id, :name, :_destroy],

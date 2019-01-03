@@ -422,9 +422,13 @@ class Bibliography < ApplicationRecord
     # Define form hints here
     PERSON_FIELD_HINT = 'Last name, First name'.freeze
     URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
+    STATUS_FIELD_HINT = "Only 'published' records will be made public".freeze
 
-    # Define other static values here
+    # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
+    STATUS_LIST = ['submitted', 'reviewed', 'pending', 'published'].freeze
+    DEFAULT_STATUS = 'submitted'.freeze
+    PUBLISHED_STATUS = 'published'.freeze
 
     private
         def comments_json

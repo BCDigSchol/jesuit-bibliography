@@ -60,7 +60,7 @@
             bib.created_at.strftime "%b %e, %Y"
         end
 
-        if can? :detroy, Bibliography
+        if can? :destroy, Bibliography
             g.column do |bib|
                 "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
                 "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
@@ -69,7 +69,7 @@
         else
             g.column do |bib|
                 "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
-                "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe
+                ( (can? :edit, Bibliography or bib.status != Bibliography::PUBLISHED_STATUS) ?  "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe : ''.html_safe)
             end
         end
     end -%>

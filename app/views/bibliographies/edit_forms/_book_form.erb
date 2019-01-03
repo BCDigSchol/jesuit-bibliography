@@ -31,6 +31,10 @@
         <%= render 'bibliographies/fields/make_published', :form => form %>
     <% end %>
 
+    <% if can? :manage, 'Status' %>
+        <%= render 'bibliographies/fields/status', :form => form %>
+    <% end %>
+
     <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
 
     <%= render 'bibliographies/fields/editor', :form => form, field_label: 'Editor' %>

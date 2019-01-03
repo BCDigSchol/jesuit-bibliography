@@ -8,7 +8,7 @@
         <% if can? :edit, Bibliography %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
-        <% elsif creator_match? @this_user.email, @bib.created_by %>
+        <% elsif creator_match? @this_user.email, @bib.created_by and @bib.status != Bibliography::PUBLISHED_STATUS %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% else %>
@@ -685,7 +685,7 @@
         <% if can? :edit, Bibliography %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
-        <% elsif creator_match? @this_user.email, @bib.created_by %>
+        <% elsif creator_match? @this_user.email, @bib.created_by and @bib.status != Bibliography::PUBLISHED_STATUS %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% else %>

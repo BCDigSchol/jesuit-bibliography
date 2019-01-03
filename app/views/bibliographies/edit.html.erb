@@ -1,7 +1,7 @@
 <% if @bib.nil? %>
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Dashboard', dashboard_path %>
-<% elsif can? :edit, Bibliography or creator_match? @this_user.email, @bib.created_by %>
+<% elsif can? :edit, Bibliography or (creator_match? @this_user.email, @bib.created_by and @bib.status != Bibliography::PUBLISHED_STATUS) %>
     <h1>Editing: <%= @bib.display_title %></h1>
 
     <%= render 'form' %>

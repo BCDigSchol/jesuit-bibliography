@@ -30,6 +30,10 @@
         :as => :hidden, 
         :input_html => { :value => "Multimedia" } 
     %>
+
+    <% if can? :manage, 'Status' %>
+        <%= render 'bibliographies/fields/status', :form => form %>
+    <% end %>
     
     <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
     

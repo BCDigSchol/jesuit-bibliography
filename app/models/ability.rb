@@ -21,11 +21,12 @@ class Ability
     #   Manage Correspondents
     #   Manage Assistant Editors
     if user.associate_editor_role?
-      can :manage, Correspondents   # manage correspondents
-      can :manage, Assistants       # manage assistant editors
+      can :manage, 'Correspondents' # manage correspondents
+      can :manage, 'Assistants'     # manage assistant editors
       can :read, 'Dashboard'        # allow access to dashboard
       can :approve, Bibliography    # can approve record for publication
       can :manage, 'Terms'          # can access Term lists dropdown
+      can :manage, 'Status'         # can manage record Status value
       can :manage, Location         # can manage Location Term lists
       can :manage, Subject          # can manage Subject Term lists
       can :manage, Period           # can manage Period Term lists
@@ -39,9 +40,10 @@ class Ability
     #   Read/Update/Create Bib records (not destroy)
     #   Manage Correspondents
     if user.assistant_editor_role?
-      can :manage_correspondents                    # manage correspondents
+      can :manage, 'Correspondents'                 # manage correspondents
       can :read, 'Dashboard'                        # allow access to dashboard
       can :manage, 'Terms'                          # can access Term lists dropdown
+      can :manage, 'Status'                         # can manage record Status value
       can :read, Location                           # can read Location Term lists
       can :read, Subject                            # can read Subject Term lists
       can :read, Period                             # can read Period Term lists

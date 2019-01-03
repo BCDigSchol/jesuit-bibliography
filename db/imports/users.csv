@@ -1,6 +1,6 @@
 email,password,admin_role,associate_editor_role,assistant_editor_role,correspondent_role
 admin@test.com,password,true,,,
-associate_editor@test.com',password,,true,,
+associate_editor@test.com,password,,true,,
 assistant_editor@test.com,password,,,true,
 correspondent@test.com,password,,,,true
 user@test.com,password,,,,
