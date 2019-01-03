@@ -1,7 +1,7 @@
 <div id="multimedia_form" class="bib_form">
 <%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
-    <h3>Multimedia</h3>
+    <h3><span class="header-label">Reference Type:</span> Multimedia</h3>
 
     <% if @bib.errors.any? %>
         <div id="error_explanation">
@@ -22,18 +22,13 @@
 
     <hr/>
 
-    <% if current_user.admin_role? %>
-        <%= render 'bibliographies/fields/make_published', :form => form %>
-    <% end %>
+    <%# includes created_by, created_at, status #%>
+    <%= render 'bibliographies/fields/common_fields', :form => form %>
 
     <%= form.input :reference_type, 
         :as => :hidden, 
         :input_html => { :value => "Multimedia" } 
     %>
-
-    <% if can? :manage, 'Status' %>
-        <%= render 'bibliographies/fields/status', :form => form %>
-    <% end %>
     
     <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
     

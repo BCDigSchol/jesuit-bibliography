@@ -1,7 +1,7 @@
-<h1>Jesuit Bibliography</h1>
+<h1>Citations List</h1>
 
 <% if can? :read, Bibliography %>
-  <h2>Citation index</h2>
+  <h2>All Citations</h2>
 
   <div class="button-group">
     <%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %>
@@ -23,12 +23,14 @@
 
       g.column name: 'Title', attribute: 'display_title'
 
-      g.column name: 'Author(s)', attribute: 'display_author' do |task|
-          out = "".html_safe
-          task.display_author.split('|').each do |author|
-              out << "<span class='value-part'>#{author}</span>".html_safe
-          end
-          out
+      g.column name: 'Author(s)', attribute: 'display_author' do |bib|
+        if bib.display_author.present?
+            out = "".html_safe
+            bib.display_author.split('|').each do |author|
+                out << "<span class='value-part'>#{author}</span>".html_safe
+            end
+            out
+        end
       end
 
       g.column name: 'Status', attribute: 'status' do |bib|

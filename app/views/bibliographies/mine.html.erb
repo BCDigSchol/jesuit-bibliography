@@ -1,6 +1,6 @@
-<h1>Jesuit Bibliography</h1>
+<h1>Citations List</h1>
 
-<h2>Here are the Citation records you have submitted:</h2>
+<h2>Your submitted Citations</h2>
 
 <div class="button-group">
     <%= link_to 'Add New Citation', new_bibliography_path, class: 'btn btn-primary' %>
@@ -22,16 +22,20 @@
 
         g.column name: 'Title', attribute: 'display_title'
 
-        g.column name: 'Author(s)', attribute: 'display_author' do |task|
-            out = "".html_safe
-            task.display_author.split('|').each do |author|
-                out << "<span class='value-part'>#{author}</span>".html_safe
+        g.column name: 'Author(s)', attribute: 'display_author' do |bib|
+            if bib.display_author.present?
+                out = "".html_safe
+                bib.display_author.split('|').each do |author|
+                    out << "<span class='value-part'>#{author}</span>".html_safe
+                end
+                out
             end
-            out
         end
 
         g.column name: 'Status', attribute: 'status' do |bib|
-           "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+            if bib.status.present?
+                "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+            end
         end
 
         g.column name: 'Pending Suggestions' do |bib|
