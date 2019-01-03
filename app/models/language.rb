@@ -11,4 +11,6 @@ class Language < ApplicationRecord
             bs.reindex_me
         end
     end
+
+    validates :name, presence: true
 end

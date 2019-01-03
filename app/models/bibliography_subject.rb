@@ -1,4 +1,6 @@
 class BibliographySubject < ApplicationRecord
     belongs_to :bibliography
     belongs_to :subject
+
+    NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
 end

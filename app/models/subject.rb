@@ -13,5 +13,5 @@ class Subject < ApplicationRecord
     end
 
     validates :name, presence: true
-    validates :sort_name, presence: true
+    #validates :sort_name, presence: true
 end

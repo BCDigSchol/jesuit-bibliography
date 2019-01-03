@@ -36,6 +36,8 @@ class Citationterms::SubjectsController < ApplicationController
 
         @subject.created_by = current_user
 
+        @subject.sort_name = @subject.name
+
         if @subject.save
             respond_to do |format|
                 format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully created.' }
@@ -52,9 +54,16 @@ class Citationterms::SubjectsController < ApplicationController
     def update
         authorize! :update, @subject, :message => "Unable to update this Subject record."
 
-        @subject.modified_by = current_user
+        # copy over subject_params into subject_attributes so we can alter it
+        subject_attributes = subject_params
 
-        if @subject.update!(subject_params)
+        # update modified_by
+        subject_attributes[:modified_by] = current_user
+
+        # fill in sort_name
+        subject_attributes[:sort_name] = @subject.name
+
+        if @subject.update!(subject_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully updated.' }
                 format.json { render :show, status: :ok, location: @subject }

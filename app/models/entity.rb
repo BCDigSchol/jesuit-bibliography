@@ -15,4 +15,6 @@ class Entity < ApplicationRecord
     def to_label
         self.display_name
     end
+
+    validates :name, presence: true
 end

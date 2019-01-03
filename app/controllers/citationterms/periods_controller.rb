@@ -36,6 +36,8 @@ class Citationterms::PeriodsController < ApplicationController
 
         @period.created_by = current_user
 
+        @period.sort_name = @period.name
+
         if @period.save
             respond_to do |format|
                 format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully created.' }
@@ -52,10 +54,16 @@ class Citationterms::PeriodsController < ApplicationController
     def update
         authorize! :update, @period, :message => "Unable to update this Period record."
 
-        @period.modified_by = current_user
+        # copy over subject_params into period_attributes so we can alter it
+        period_attributes = period_params
 
-        if @period.update!(period_params)
-            #@comments = @bib.comments
+        # update modified_by
+        period_attributes[:modified_by] = current_user
+
+        # fill in sort_name
+        period_attributes[:sort_name] = @period.name
+
+        if @period.update!(period_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully updated.' }
                 format.json { render :show, status: :ok, location: @period }

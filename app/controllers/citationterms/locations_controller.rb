@@ -36,6 +36,8 @@ class Citationterms::LocationsController < ApplicationController
 
         @location.created_by = current_user
 
+        @location.sort_name = @location.name
+
         if @location.save
             respond_to do |format|
                 # url: citationterms_location_path, action: show, id: @location.id
@@ -53,9 +55,16 @@ class Citationterms::LocationsController < ApplicationController
     def update
         authorize! :update, @location, :message => "Unable to update this Location record."
 
-        @location.modified_by = current_user
+        # copy over subject_params into location_attributes so we can alter it
+        location_attributes = location_params
 
-        if @location.update!(location_params)
+        # update modified_by
+        location_attributes[:modified_by] = current_user
+
+        # fill in sort_name
+        location_attributes[:sort_name] = @location.name
+
+        if @location.update!(location_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_location_path(@location), notice: 'Location was successfully updated.' }
                 format.json { render :show, status: :ok, location: @location }

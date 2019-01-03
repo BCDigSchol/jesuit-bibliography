@@ -1,4 +1,4 @@
-<%= simple_form_for @period, url: urlpath do |form| %>
+<%= simple_form_for @period, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save record", class: "btn btn-primary" %>
@@ -8,21 +8,27 @@
   <hr/>
 
   <% if @period.errors.any? %>
-    <div id="error_explanation">
-      <h4>
-        <%= pluralize(@period.errors.count, "error") %> prohibited
-        this Century term from being saved:
-      </h4>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@period.errors.count, "error") %> prohibited this century record from being saved:</div>
+    <div class="panel-body">
       <ul>
         <% @period.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
+  </div>
   <% end %>
-  <%= form.input :name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
-  <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :name, 
+      as: :string
+  %>
+
+  <%= form.input :sort_name, 
+      as: :string,
+      disabled: !@period.name.present?,
+      placeholder: (!@period.name.present? ? BibliographyPeriod::NAME_PLACEHOLDER : '')
+  %>
 
   <hr/>
   

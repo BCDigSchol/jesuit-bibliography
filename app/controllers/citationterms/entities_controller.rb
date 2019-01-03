@@ -36,6 +36,10 @@ class Citationterms::EntitiesController < ApplicationController
 
         @entity.created_by = current_user
 
+        @entity.sort_name = @entity.name
+
+        @entity.display_name = @entity.name
+
         if @entity.save
             respond_to do |format|
                 format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully created.' }
@@ -52,9 +56,17 @@ class Citationterms::EntitiesController < ApplicationController
     def update
         authorize! :update, @entity, :message => "Unable to update this Entity record."
 
-        @entity.modified_by = current_user
+        # copy over subject_params into period_attributes so we can alter it
+        entity_attributes = entity_params
 
-        if @entity.update!(entity_params)
+        # update modified_by
+        entity_attributes[:modified_by] = current_user
+
+        # fill in sort_name, display_name
+        entity_attributes[:sort_name] = @entity.name
+        entity_attributes[:display_name] = @entity.name
+
+        if @entity.update!(entity_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully updated.' }
                 format.json { render :show, status: :ok, location: @entity }

@@ -1,4 +1,4 @@
-<%= simple_form_for @entity, url: urlpath do |form| %>
+<%= simple_form_for @entity, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save record", class: "btn btn-primary" %>
@@ -8,27 +8,41 @@
   <hr/>
 
   <% if @entity.errors.any? %>
-    <div id="error_explanation">
-      <h4>
-        <%= pluralize(@entity.errors.count, "error") %> prohibited
-        this entity from being saved:
-      </h4>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@entity.errors.count, "error") %> prohibited this Jesuit record from being saved:</div>
+    <div class="panel-body">
       <ul>
         <% @entity.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
+  </div>
   <% end %>
-  <%= form.input :name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
 
-  <%= form.input :sort_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :name, 
+      as: :string
+  %>
 
-  <%= form.input :display_name, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :sort_name, 
+      as: :string,
+      disabled: !@entity.name.present?,
+      placeholder: (!@entity.name.present? ? BibliographyEntity::NAME_PLACEHOLDER : '') 
+  %>
 
-  <%= form.input :birth_date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :display_name, 
+      as: :string,
+      disabled: !@entity.name.present?,
+      placeholder: (!@entity.name.present? ? BibliographyEntity::NAME_PLACEHOLDER : '')
+  %>
 
-  <%= form.input :death_date, as: :string, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :birth_date, 
+      as: :string 
+  %>
+
+  <%= form.input :death_date, 
+      as: :string 
+  %>
 
   <hr/>
   
