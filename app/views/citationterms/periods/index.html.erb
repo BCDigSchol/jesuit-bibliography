@@ -1,9 +1,9 @@
-<h1>Jesuit Bibliography</h1>
-
 <% if can? :read, Period %>
   <h2>Century terms index</h2>
 
-  <p><%= link_to 'Add New Century term', new_citationterms_period_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Century term', new_citationterms_period_path, class: 'btn btn-primary' %>
+  </div>
 
   <%= grid(@periods_grid,
         show_filters: :when_filtered,
@@ -33,7 +33,9 @@
     end
   end -%>
 
-  <p><%= link_to 'Add New Century term', new_citationterms_period_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Century term', new_citationterms_period_path, class: 'btn btn-primary' %>
+  </div>
 
 <% else %>
   <%= render 'bibliographies/not_permitted' %>

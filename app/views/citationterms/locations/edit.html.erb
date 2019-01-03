@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Location Records index', citationterms_locations_path %>
 <% elsif can? :edit, Location %>
-    <h1>Editing Location Record #<%= @location.id %></h1>
+    <h2 class="edit-label"><span class="header-label">Editing Location:</span> <%= @location.name %></h2>
 
     <%= render 'form', urlpath: citationterms_location_path %>
 <% else %>

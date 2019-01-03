@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Jesuit Terms index', citationterms_entities_path %>
 <% elsif can? :read, Entity %>
-    <h1>Viewing Jesuit: <%= @entity.name.present? ? @entity.name : @entity.id %></h1>
+    <h2><%= @entity.name.present? ? @entity.name : @entity.id %></h2>
 
     <div class="record-view">
         <% if can? :update, Entity %>

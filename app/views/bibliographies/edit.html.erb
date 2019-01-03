@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Dashboard', dashboard_path %>
 <% elsif can? :edit, Bibliography or (creator_match? @this_user.email, @bib.created_by and @bib.status != Bibliography::PUBLISHED_STATUS) %>
-    <h1><span class="header-label">Editing:</span> <%= @bib.display_title %></h1>
+    <h2 class="edit-label"><span class="header-label">Editing:</span> <%= @bib.display_title %></h2>
 
     <%= render 'form' %>
 <% else %>

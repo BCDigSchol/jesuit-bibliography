@@ -1,9 +1,9 @@
-<h1>Jesuit Bibliography</h1>
-
 <% if can? :read, Subject %>
   <h2>Subject terms Index</h2>
 
-  <p><%= link_to 'Add New Subject term', new_citationterms_subject_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Subject term', new_citationterms_subject_path, class: 'btn btn-primary' %>
+  </div>
 
   <%= grid(@subjects_grid,
         show_filters: :when_filtered,
@@ -33,7 +33,9 @@
     end
   end -%>
 
-  <p><%= link_to 'Add New Subject term', new_citationterms_subject_path, class: 'btn btn-primary' %></p>
+  <div class="button-group">
+    <%= link_to 'Add New Subject term', new_citationterms_subject_path, class: 'btn btn-primary' %>
+  </div>
 
 <% else %>
   <%= render 'bibliographies/not_permitted' %>

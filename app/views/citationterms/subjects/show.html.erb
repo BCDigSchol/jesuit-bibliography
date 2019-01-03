@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Subject Records index', citationterms_subjects_path %>
 <% elsif can? :read, Subject %>
-    <h1>Viewing Subject: <%= @subject.name.present? ? @subject.name : @subject.id %></h1>
+    <h2><%= @subject.name.present? ? @subject.name : @subject.id %></h2>
 
     <div class="record-view">
         <% if can? :update, Subject %>

@@ -1,14 +1,14 @@
 <div id="multimedia_form" class="bib_form">
 <%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
-    <h3><span class="header-label">Reference Type:</span> Multimedia</h3>
+    <h3 class="edit-label"><span class="header-label">Reference Type:</span> Multimedia</h3>
 
     <% if @bib.errors.any? %>
         <div id="error_explanation">
-        <h2>
+        <h4>
             <%= pluralize(@bib.errors.count, "error") %> prohibited
             this article from being saved:
-        </h2>
+        </h4>
         <ul>
             <% @bib.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -17,8 +17,10 @@
         </div>
     <% end %>
 
-    <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
-    <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
+    <div class="button-group">
+        <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
+        <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
+    </div>
 
     <hr/>
 
@@ -86,7 +88,9 @@
 
     <hr/>
     
-    <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
-    <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
+    <div class="button-group">
+        <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
+        <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
+    </div>
 <% end %>
 </div>
