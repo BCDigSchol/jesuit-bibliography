@@ -10,91 +10,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body id="bibliography">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-            <%= link_to 'Jesuit Bibliography', dashboard_path, class: 'navbar-brand' %>
-            </div>
+    <%= render :partial => 'shared/bc_header' %>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <% if can? :read, Bibliography %>
-                    <li><%= link_to 'Citations', bibliographies_path %></li>
-                    <% end %>
-                    <% if can? :manage, 'Terms' %>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Term lists <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <% if can? :read, Location %>
-                            <li><%= link_to 'Locations', citationterms_locations_path %></li>
-                            <% end %>
-
-                            <% if can? :read, Period %>
-                            <li><%= link_to 'Centuries', citationterms_periods_path %></li>
-                            <% end %>
-
-                            <% if can? :read, Subject %>
-                            <li><%= link_to 'Subjects', citationterms_subjects_path %></li>
-                            <% end %>
-
-                            <% if can? :read, Entity %>
-                            <li><%= link_to 'Jesuits', citationterms_entities_path %></li>
-                            <% end %>
-                        </ul>
-                    </li>
-                    <% end %>
-                </ul>
-                <% if user_signed_in? %>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <% if current_user.admin_role? %>
-                            <li>
-                                <%= link_to rails_admin_path, target: :_blank do %>
-                                    Admin Panel <i class="fas fa-sm fa-external-link-alt"></i>
-                                <% end %>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                        <% end %>
-                        <li>
-                        <%= link_to dashboard_path do %>
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                        <% end %>
-                        </li>
-                        <li>
-                        <%= link_to blacklight_path do %>
-                            <i class="fas fa-home"></i> Public search
-                        <% end %>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li><%= link_to 'Logout', destroy_user_session_path %></li>
-                    </ul>
-                    </li>
-                </ul>
-                <% else %>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><%= link_to 'Signin', new_user_session_path %></li>
-                </ul>
-                <% end %>
-                
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
+    <%= render :partial => 'shared/bibliography_navbar' %>
 
     <main role="main" class="container">
       <div class="starter-template">
@@ -102,14 +25,6 @@
       </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <ul class="footer-links text-muted">
-                <li><%= link_to 'Public search', blacklight_path %></li>
-                <li><a href="https://jesuitportal.bc.edu/">IAJS</a></li>
-                <li><a href="https://library.bc.edu">BC Libraries</a></li>
-            </ul>
-        </div>
-    </footer>
+    <%= render :partial => 'shared/footer' %>
   </body>
 </html>
