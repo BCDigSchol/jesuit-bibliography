@@ -15,6 +15,10 @@
       sub.name
     end
 
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
+      loc.created_at
+    end
+
     if can? :detroy, Subject
       g.column do |sub|
         "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_subject_path(sub) )}</span></div>".html_safe + 

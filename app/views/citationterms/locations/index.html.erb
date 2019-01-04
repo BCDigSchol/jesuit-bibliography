@@ -15,6 +15,10 @@
       loc.name
     end
 
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
+      loc.created_at
+    end
+
     if can? :detroy, Location
       g.column do |loc|
         "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_location_path(loc) )}</span></div>".html_safe + 

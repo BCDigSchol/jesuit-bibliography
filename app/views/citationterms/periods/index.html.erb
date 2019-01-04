@@ -15,6 +15,10 @@
       per.name
     end
 
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
+      loc.created_at
+    end
+
     if can? :detroy, Period
       g.column do |per|
         "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_period_path(per) )}</span></div>".html_safe + 

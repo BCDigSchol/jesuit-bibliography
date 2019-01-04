@@ -15,6 +15,10 @@
       entity.name
     end
 
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
+      loc.created_at
+    end
+
     if can? :detroy, Entity
       g.column do |entity|
         "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_entity_path(entity) )}</span></div>".html_safe + 
