@@ -59,13 +59,16 @@ class BibliographiesController < ApplicationController
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
-        @bib.authors.build
-        @bib.editors.build
-        @bib.book_editors.build
-        @bib.author_of_reviews.build
-        @bib.translators.build
-        @bib.performers.build
-        @bib.translated_authors.build
+
+        @bib.authors = @bib.citations.build
+
+        #@bib.authors.build
+        #@bib.editors.build
+        #@bib.book_editors.build
+        #@bib.author_of_reviews.build
+        #@bib.translators.build
+        #@bib.performers.build
+        #@bib.translated_authors.build
         @bib.bibliography_subjects.build
         @bib.bibliography_periods.build
         @bib.bibliography_locations.build
@@ -146,7 +149,7 @@ class BibliographiesController < ApplicationController
             if @bib.dois.count == 0
                 @bib.dois.build
             end
-
+=begin
             if @bib.authors.count == 0
                 @bib.authors.build
             end
@@ -174,7 +177,7 @@ class BibliographiesController < ApplicationController
             if @bib.translated_authors.count == 0
                 @bib.translated_authors.build
             end
-
+=end
             if @bib.bibliography_subjects.count == 0
                 @bib.bibliography_subjects.build
             end
