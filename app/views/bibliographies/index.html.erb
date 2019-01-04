@@ -56,6 +56,10 @@
           if bib.period_suggestions.present?
               out << "<span class='badge badge-info'>#{bib.period_suggestions.count} #{"Century".pluralize(bib.period_suggestions.count)}</span>".html_safe
           end
+
+          if bib.language_suggestions.present?
+              out << "<span class='badge badge-info'>#{bib.language_suggestions.count} #{"Language".pluralize(bib.language_suggestions.count)}</span>".html_safe
+          end
           out
       end
 

@@ -11,6 +11,7 @@ class Bibliography < ApplicationRecord
     has_many :location_suggestions, inverse_of: :bibliography, dependent: :destroy
     has_many :entity_suggestions, inverse_of: :bibliography, dependent: :destroy
     has_many :period_suggestions, inverse_of: :bibliography, dependent: :destroy
+    has_many :language_suggestions, inverse_of: :bibliography, dependent: :destroy
 
     # many-to-many relationship through bibliography_subjects
     has_many :bibliography_subjects, inverse_of: :bibliography, dependent: :destroy
@@ -66,6 +67,7 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :location_suggestions, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :entity_suggestions, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :period_suggestions, allow_destroy: true, reject_if: :all_blank
+    accepts_nested_attributes_for :language_suggestions, allow_destroy: true, reject_if: :all_blank
     accepts_nested_attributes_for :bibliography_subjects, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_periods, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :bibliography_locations, reject_if: :all_blank, allow_destroy: true

@@ -131,6 +131,10 @@ class BibliographiesController < ApplicationController
                 @bib.period_suggestions.build
             end
 
+            if @bib.language_suggestions == 0
+                @bib.language_suggestions.build
+            end
+
             if @bib.isbns.count == 0
                 @bib.isbns.build
             end
@@ -417,6 +421,7 @@ class BibliographiesController < ApplicationController
                 location_suggestions_attributes: [:id, :name, :note, :_destroy],
                 entity_suggestions_attributes: [:id, :name, :note, :_destroy],
                 period_suggestions_attributes: [:id, :name, :note, :_destroy],
+                language_suggestions_attributes: [:id, :name, :note, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],

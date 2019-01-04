@@ -456,6 +456,25 @@
             </div>
         <% end %>
 
+        <% if @bib.language_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Languages</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.language_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% end %>
+
         <% if @bib.isbns.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">ISBN</label>

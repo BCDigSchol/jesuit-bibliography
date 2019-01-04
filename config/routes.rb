@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :location_suggestions
     resources :entity_suggestions
     resources :period_suggestions
+    resources :language_suggestions
   end
 
   # get paths like "/citations/terms/subject/1"

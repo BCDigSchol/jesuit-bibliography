@@ -1,0 +1,2 @@
+class LanguageSuggestionsController < ApplicationController
+end
