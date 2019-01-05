@@ -16,7 +16,7 @@ namespace :importdata do
 
     desc "Destroy all Bibliography records"
     task clear_all: :environment do
-        bar = ProgressBar.new(9)
+        bar = ProgressBar.new(16)
         puts "Clearing all existing Bib records..."
         import_logger.info("Clearing all existing Bibliography records")
         Bibliography.destroy_all
@@ -33,7 +33,21 @@ namespace :importdata do
         bar.increment!
         Entity.destroy_all
         bar.increment!
-        Citation.destroy_all
+        Person.destroy_all
+        bar.increment!
+        Author.destroy_all
+        bar.increment!
+        Editor.destroy_all
+        bar.increment!
+        BookEditor.destroy_all
+        bar.increment!
+        AuthorOfReview.destroy_all
+        bar.increment!
+        Translator.destroy_all
+        bar.increment!
+        Performer.destroy_all
+        bar.increment!
+        TranslatedAuthor.destroy_all
         bar.increment!
         Language.destroy_all
         bar.increment!
@@ -66,7 +80,7 @@ namespace :importdata do
             liberal_parsing: true
         ) do |row|
             item_count += 1
-            # break if item_count >= 300
+            #break if item_count >= 300
 
             # Reference Type,Author,Year,Title,Place Published,Publisher,Volume,Number of Volumes,Number of Pages,Editor,
             # 0              1      2    3     4               5         6      7                 8               9
@@ -1047,7 +1061,8 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author: #{v}")
-                @bib.authors << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.authors << Author.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
@@ -1059,7 +1074,8 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Book Editor: #{v}")
-                @bib.book_editors << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.book_editors << BookEditor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
@@ -1071,7 +1087,8 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author of Review: #{v}")
-                @bib.author_of_reviews << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.author_of_reviews << AuthorOfReview.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
@@ -1112,7 +1129,6 @@ namespace :importdata do
         end
     end
 
-
     # Editors
     def import_add_editors(bib, col)
         if col
@@ -1120,11 +1136,11 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Editor: #{v}")
-                @bib.editors << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.editors << Editor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
-
 
     # Translators
     def import_add_translators(bib, col)
@@ -1133,7 +1149,8 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translator: #{v}")
-                @bib.translators << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.translators << Translator.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
@@ -1145,11 +1162,11 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Performer: #{v}")
-                @bib.performers << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.performers << Performer.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
-
 
     # Universities
     def import_add_dissertation_universities(bib, col)
@@ -1344,7 +1361,8 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translated author: #{v}")
-                @bib.translated_authors << Citation.new(display_name: v)
+                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                @bib.translated_authors << TranslatedAuthor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
     end
