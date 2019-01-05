@@ -4,10 +4,17 @@
             <%= peep.association :person, 
                 label: field_label,
                 collection: Person.order(:name),
-                prompt: 'Choose a Performers',
+                prompt: 'Choose a Performer',
                 form_name: 'peep',
                 input_html: {class: 'performers'}
             %>
+        <% end %>
+    </div>
+    <div id="bibliography_performer_suggestions">
+        <%= form.simple_fields_for :person_suggestions do |suggestion| %>
+            <% if suggestion.object.field_name == 'performer' %>
+                <%= render 'suggest_person_fields', :form => suggestion, fieldname: 'performer' %>
+             <% end %>   
         <% end %>
     </div>
     <div class='links clearfix'>
@@ -25,10 +32,22 @@
                 partial: 'person_fields',
                 render_options:  {
                     locals: { 
-                        prompt_label: 'Choose a Performers', 
+                        prompt_label: 'Choose a Performer', 
                         class_name: 'performers' 
                     }
                 }
+            %>
+            <%= link_to_add_association 'Suggest a new Performer', 
+                form, 
+                :person_suggestions, 
+                class: 'btn btn-warning btn-add', 
+                form_name: 'form',
+                data: {
+                    'association-insertion-node' => '#bibliography_performer_suggestions', 
+                    'association-insertion-method' => 'append'
+                }, 
+                partial: 'suggest_person_fields',
+                render_options: {locals: {fieldname: 'performer'}}
             %>
         </div>
     </div>

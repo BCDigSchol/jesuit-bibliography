@@ -4,10 +4,17 @@
             <%= peep.association :person, 
                 label: field_label,
                 collection: Person.order(:name),
-                prompt: 'Choose a translator',
+                prompt: 'Choose a Translator',
                 form_name: 'peep',
                 input_html: {class: 'translators'}
             %>
+        <% end %>
+    </div>
+    <div id="bibliography_translator_suggestions">
+        <%= form.simple_fields_for :person_suggestions do |suggestion| %>
+            <% if suggestion.object.field_name == 'translator' %>
+                <%= render 'suggest_person_fields', :form => suggestion, fieldname: 'translator' %>
+             <% end %>   
         <% end %>
     </div>
     <div class='links clearfix'>
@@ -29,6 +36,18 @@
                         class_name: 'translators' 
                     }
                 }
+            %>
+            <%= link_to_add_association 'Suggest a new Translator', 
+                form, 
+                :person_suggestions, 
+                class: 'btn btn-warning btn-add', 
+                form_name: 'form',
+                data: {
+                    'association-insertion-node' => '#bibliography_translator_suggestions', 
+                    'association-insertion-method' => 'append'
+                }, 
+                partial: 'suggest_person_fields',
+                render_options: {locals: {fieldname: 'translator'}}
             %>
         </div>
     </div>

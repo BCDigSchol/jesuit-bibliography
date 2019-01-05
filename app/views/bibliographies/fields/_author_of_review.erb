@@ -10,6 +10,13 @@
             %>
         <% end %>
     </div>
+    <div id="bibliography_author_of_review_suggestions">
+        <%= form.simple_fields_for :person_suggestions do |suggestion| %>
+            <% if suggestion.object.field_name == 'author_of_review' %>
+                <%= render 'suggest_person_fields', :form => suggestion, fieldname: 'author_of_review' %>
+             <% end %>   
+        <% end %>
+    </div>
     <div class='links clearfix'>
         <div class="col-sm-2"></div>
         <div class="col-sm-10 btn-add-container">
@@ -29,6 +36,18 @@
                         class_name: 'author_of_reviews' 
                     }
                 }
+            %>
+            <%= link_to_add_association 'Suggest a new Author of Review', 
+                form, 
+                :person_suggestions, 
+                class: 'btn btn-warning btn-add', 
+                form_name: 'form',
+                data: {
+                    'association-insertion-node' => '#bibliography_author_of_review_suggestions', 
+                    'association-insertion-method' => 'append'
+                }, 
+                partial: 'suggest_person_fields',
+                render_options: {locals: {fieldname: 'author_of_review'}}
             %>
         </div>
     </div>

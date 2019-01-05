@@ -10,6 +10,13 @@
             %>
         <% end %>
     </div>
+    <div id="bibliography_editor_suggestions">
+        <%= form.simple_fields_for :person_suggestions do |suggestion| %>
+            <% if suggestion.object.field_name == 'editor' %>
+                <%= render 'suggest_person_fields', :form => suggestion, fieldname: 'editor' %>
+             <% end %>   
+        <% end %>
+    </div>
     <div class='links clearfix'>
         <div class="col-sm-2"></div>
         <div class="col-sm-10 btn-add-container">
@@ -29,6 +36,18 @@
                         class_name: 'editors'
                     }
                 }
+            %>
+            <%= link_to_add_association 'Suggest a new Editor', 
+                form, 
+                :person_suggestions, 
+                class: 'btn btn-warning btn-add', 
+                form_name: 'form',
+                data: {
+                    'association-insertion-node' => '#bibliography_editor_suggestions', 
+                    'association-insertion-method' => 'append'
+                }, 
+                partial: 'suggest_person_fields',
+                render_options: {locals: {fieldname: 'editor'}}
             %>
         </div>
     </div>

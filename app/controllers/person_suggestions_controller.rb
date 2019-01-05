@@ -1,0 +1,2 @@
+class PersonSuggestionsController < ApplicationController
+end

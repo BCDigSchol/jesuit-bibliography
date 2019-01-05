@@ -41,6 +41,11 @@
 
       g.column name: 'Pending Suggestions' do |bib|
           out = "".html_safe
+
+          if bib.person_suggestions.present?
+              out << "<span class='badge badge-info'>#{bib.person_suggestions.count} #{"Person".pluralize(bib.person_suggestions.count)}</span>".html_safe
+          end
+
           if bib.subject_suggestions.present?
               out << "<span class='badge badge-info'>#{bib.subject_suggestions.count} #{"Subject".pluralize(bib.subject_suggestions.count)}</span>".html_safe
           end

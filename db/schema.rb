@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_050445) do
+ActiveRecord::Schema.define(version: 2019_01_05_181848) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -274,6 +274,18 @@ ActiveRecord::Schema.define(version: 2019_01_05_050445) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+  end
+
+  create_table "person_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "field_name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_person_suggestions_on_bibliography_id"
   end
 
   create_table "publish_places", force: :cascade do |t|

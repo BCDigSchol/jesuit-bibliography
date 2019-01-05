@@ -135,6 +135,10 @@ class BibliographiesController < ApplicationController
                 @bib.language_suggestions.build
             end
 
+            if @bib.person_suggestions == 0
+                @bib.person_suggestions.build
+            end
+
             if @bib.isbns.count == 0
                 @bib.isbns.build
             end
@@ -422,6 +426,7 @@ class BibliographiesController < ApplicationController
                 entity_suggestions_attributes: [:id, :name, :note, :_destroy],
                 period_suggestions_attributes: [:id, :name, :note, :_destroy],
                 language_suggestions_attributes: [:id, :name, :note, :_destroy],
+                person_suggestions_attributes: [:id, :name, :note, :field_name, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
@@ -449,7 +454,7 @@ class BibliographiesController < ApplicationController
 
         # depending on the reference_type, select the fields to represent the 
         # display_title and display_author fields used in the discovery layer
-        def set_display_fields           
+        def set_display_fields
             if @bib.reference_type.downcase == "book"
                 if @bib.title.present?
                     @bib.display_title = @bib.title
