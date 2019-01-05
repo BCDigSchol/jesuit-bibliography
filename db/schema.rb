@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_201106) do
+ActiveRecord::Schema.define(version: 2019_01_05_050445) do
+
+  create_table "author_of_reviews", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_author_of_reviews_on_bibliography_id"
+    t.index ["person_id"], name: "index_author_of_reviews_on_person_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_authors_on_bibliography_id"
+    t.index ["person_id"], name: "index_authors_on_person_id"
+  end
 
   create_table "bibliographies", force: :cascade do |t|
     t.text "reference_type"
@@ -99,6 +117,15 @@ ActiveRecord::Schema.define(version: 2019_01_04_201106) do
     t.index ["subject_id"], name: "index_bibliography_subjects_on_subject_id"
   end
 
+  create_table "book_editors", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_book_editors_on_bibliography_id"
+    t.index ["person_id"], name: "index_book_editors_on_person_id"
+  end
+
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
@@ -109,14 +136,6 @@ ActiveRecord::Schema.define(version: 2019_01_04_201106) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
-  end
-
-  create_table "citations", force: :cascade do |t|
-    t.text "name"
-    t.integer "bibliography_id"
-    t.integer "person_id"
-    t.index ["bibliography_id"], name: "index_citations_on_bibliography_id"
-    t.index ["person_id"], name: "index_citations_on_person_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -140,6 +159,15 @@ ActiveRecord::Schema.define(version: 2019_01_04_201106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_dissertation_universities_on_bibliography_id"
+  end
+
+  create_table "editors", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_editors_on_bibliography_id"
+    t.index ["person_id"], name: "index_editors_on_person_id"
   end
 
   create_table "entities", force: :cascade do |t|
@@ -217,6 +245,15 @@ ActiveRecord::Schema.define(version: 2019_01_04_201106) do
     t.text "modified_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "performers", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_performers_on_bibliography_id"
+    t.index ["person_id"], name: "index_performers_on_person_id"
   end
 
   create_table "period_suggestions", force: :cascade do |t|
@@ -327,6 +364,24 @@ ActiveRecord::Schema.define(version: 2019_01_04_201106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_tags_on_bibliography_id"
+  end
+
+  create_table "translated_authors", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_translated_authors_on_bibliography_id"
+    t.index ["person_id"], name: "index_translated_authors_on_person_id"
+  end
+
+  create_table "translators", force: :cascade do |t|
+    t.integer "bibliography_id"
+    t.integer "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_translators_on_bibliography_id"
+    t.index ["person_id"], name: "index_translators_on_person_id"
   end
 
   create_table "urls", force: :cascade do |t|

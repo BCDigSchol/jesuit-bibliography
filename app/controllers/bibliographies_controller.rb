@@ -59,16 +59,13 @@ class BibliographiesController < ApplicationController
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
-
-        @bib.authors = @bib.citations.build
-
-        #@bib.authors.build
-        #@bib.editors.build
-        #@bib.book_editors.build
-        #@bib.author_of_reviews.build
-        #@bib.translators.build
-        #@bib.performers.build
-        #@bib.translated_authors.build
+        @bib.authors.build
+        @bib.editors.build
+        @bib.translators.build
+        @bib.translated_authors.build
+        @bib.book_editors.build
+        @bib.author_of_reviews.build
+        @bib.performers.build
         @bib.bibliography_subjects.build
         @bib.bibliography_periods.build
         @bib.bibliography_locations.build
@@ -149,13 +146,21 @@ class BibliographiesController < ApplicationController
             if @bib.dois.count == 0
                 @bib.dois.build
             end
-=begin
+
             if @bib.authors.count == 0
                 @bib.authors.build
             end
 
             if @bib.editors.count == 0
                 @bib.editors.build
+            end
+
+            if @bib.translators.count == 0
+                @bib.translators.build
+            end
+
+            if @bib.translated_authors.count == 0
+                @bib.translated_authors.build
             end
 
             if @bib.book_editors.count == 0
@@ -166,18 +171,10 @@ class BibliographiesController < ApplicationController
                 @bib.author_of_reviews.build
             end
 
-            if @bib.translators.count == 0
-                @bib.translators.build
-            end
-
             if @bib.performers.count == 0
                 @bib.performers.build
             end
 
-            if @bib.translated_authors.count == 0
-                @bib.translated_authors.build
-            end
-=end
             if @bib.bibliography_subjects.count == 0
                 @bib.bibliography_subjects.build
             end
@@ -434,23 +431,24 @@ class BibliographiesController < ApplicationController
                 isbns_attributes: [:id, :value, :_destroy],
                 issns_attributes: [:id, :value, :_destroy],
                 dois_attributes: [:id, :value, :_destroy],
-                authors_attributes: [:id, :display_name, :_destroy],
-                editors_attributes: [:id, :display_name, :_destroy],
-                book_editors_attributes: [:id, :display_name, :_destroy],
-                author_of_reviews_attributes: [:id, :display_name, :_destroy],
-                translators_attributes: [:id, :display_name, :_destroy],
-                performers_attributes: [:id, :display_name, :_destroy],
-                translated_authors_attributes: [:id, :display_name, :_destroy],
                 worldcat_urls_attributes: [:id, :link, :_destroy],
                 publisher_urls_attributes: [:id, :link, :_destroy],
                 leuven_urls_attributes: [:id, :link, :_destroy],
                 multimedia_urls_attributes: [:id, :link, :_destroy],
                 event_urls_attributes: [:id, :link, :_destroy],
                 dissertation_university_urls_attributes: [:id, :link, :_destroy],
+                authors_attributes: [:id, :person_id, :_destroy],
+                editors_attributes: [:id, :person_id, :_destroy],
+                translators_attributes: [:id, :person_id, :_destroy],
+                translated_authors_attributes: [:id, :person_id, :_destroy],
+                book_editors_attributes: [:id, :person_id, :_destroy],
+                author_of_reviews_attributes: [:id, :person_id, :_destroy],
+                performers_attributes: [:id, :person_id, :_destroy],
             )
         end
 
         def set_display_fields
+=begin            
             if @bib.reference_type.downcase == "book"
                 if @bib.title.present?
                     @bib.display_title = @bib.title
@@ -538,5 +536,6 @@ class BibliographiesController < ApplicationController
                     @bib.display_author = NO_VALUE_FOUND
                 end
             end
+=end
         end
 end

@@ -13,8 +13,26 @@ class Bibliography < ApplicationRecord
     has_many :period_suggestions, inverse_of: :bibliography, dependent: :destroy
     has_many :language_suggestions, inverse_of: :bibliography, dependent: :destroy
 
-    has_many :citations, inverse_of: :bibliography, dependent: :destroy
-    has_many :people, through: :citations
+    has_many :authors, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :authors
+
+    has_many :editors, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :editors
+
+    has_many :translators, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :translators
+
+    has_many :translated_authors, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :translated_authors
+
+    has_many :book_editors, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :book_editors
+
+    has_many :author_of_reviews, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :author_of_reviews
+
+    has_many :performers, inverse_of: :bibliography, dependent: :destroy
+    has_many :people, through: :performers
 
     # many-to-many relationship through bibliography_subjects
     has_many :bibliography_subjects, inverse_of: :bibliography, dependent: :destroy
@@ -40,15 +58,6 @@ class Bibliography < ApplicationRecord
     has_many :isbns, class_name: 'StandardIdentifier', foreign_key: 'isbn_id', inverse_of: 'isbn', dependent: :destroy
     has_many :issns, class_name: 'StandardIdentifier', foreign_key: 'issn_id', inverse_of: 'issn', dependent: :destroy
     has_many :dois,  class_name: 'StandardIdentifier', foreign_key: 'doi_id',  inverse_of: 'doi', dependent: :destroy
-
-    # relationship using class_name and foreign_key atributes
-    #has_many :authors, class_name: 'Citation', foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
-    #has_many :editors, class_name: 'Citation', foreign_key: 'editor_id', inverse_of: 'editor', dependent: :destroy
-    #has_many :book_editors, class_name: 'Citation', foreign_key: 'book_editor_id', inverse_of: 'book_editor', dependent: :destroy
-    #has_many :author_of_reviews, class_name: 'Citation', foreign_key: 'author_of_review_id', inverse_of: 'author_of_review', dependent: :destroy
-    #has_many :translators, class_name: 'Citation', foreign_key: 'translator_id',  inverse_of: 'translator', dependent: :destroy
-    #has_many :performers, class_name: 'Citation', foreign_key: 'performer_id',  inverse_of: 'performer', dependent: :destroy
-    #has_many :translated_authors, class_name: 'Citation', foreign_key: 'translated_author_id', inverse_of: 'translated_author', dependent: :destroy
 
     has_many :worldcat_urls, class_name: 'Url', foreign_key: 'worldcat_url_id', inverse_of: 'worldcat_url', dependent: :destroy
     has_many :publisher_urls, class_name: 'Url', foreign_key: 'publisher_url_id', inverse_of: 'publisher_url', dependent: :destroy
@@ -79,13 +88,14 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :isbns, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :issns, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :dois, reject_if: :all_blank, allow_destroy: true
-    #accepts_nested_attributes_for :authors, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :editors, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :book_editors, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :author_of_reviews, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :translators, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :performers, reject_if: :citations_rejectable?, allow_destroy: true
-    #accepts_nested_attributes_for :translated_authors, reject_if: :citations_rejectable?, allow_destroy: true
+
+    accepts_nested_attributes_for :authors, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :editors, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :translators, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :translated_authors, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :book_editors, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :author_of_reviews, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :performers, reject_if: :all_blank, allow_destroy: true
 
     accepts_nested_attributes_for :worldcat_urls, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :publisher_urls, reject_if: :all_blank, allow_destroy: true
@@ -292,7 +302,7 @@ class Bibliography < ApplicationRecord
         text :paper_title do
             paper_title if self.paper_title.present?
         end
-
+=begin
         text :authors do     # for associations
             authors.map { |author| author.display_name }
         end
@@ -314,6 +324,7 @@ class Bibliography < ApplicationRecord
         text :translated_authors do     # for associations
             translated_authors.map { |translated_author| translated_author.display_name }
         end
+=end
         text :worldcat_urls do     # for associations
             worldcat_urls.map { |worldcat_url| worldcat_url.link }
         end
@@ -496,9 +507,5 @@ class Bibliography < ApplicationRecord
 
         def comments_rejectable?(comment)
             comment['body'].blank?
-        end
-
-        def citations_rejectable?(citation)
-            citation['display_name'].blank?
         end
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CitationTest < ActiveSupport::TestCase
+class TranslatorsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

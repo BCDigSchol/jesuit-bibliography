@@ -34,7 +34,7 @@
 
     <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
 
-    <%#= render 'bibliographies/fields/editor', :form => form, field_label: 'Editor' %>
+    <%= render 'bibliographies/fields/editor', :form => form, field_label: 'Editor' %>
     
     <%= form.input :year_published, 
         label: 'Year', 
@@ -48,7 +48,7 @@
 
     <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
 
-    <%#= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>
+    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>
 
     <%= form.input :volume, 
         label: 'Volume',
@@ -97,7 +97,7 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%#= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author' %>
+    <%= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author' %>
 
     <%= form.input :translated_title, 
         label: 'Translated Title',

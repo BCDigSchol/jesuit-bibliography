@@ -1,0 +1,2 @@
+module BookEditorsHelper
+end

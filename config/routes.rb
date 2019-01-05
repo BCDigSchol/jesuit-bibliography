@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     root to: redirect('/citations/mine')
     resources :comments
     resources :standard_identifiers
-    resources :citations
     #resources :languages
     resources :reviewed_components
     resources :publishers
@@ -30,6 +29,12 @@ Rails.application.routes.draw do
     resources :entity_suggestions
     resources :period_suggestions
     resources :language_suggestions
+    resources :authors
+    resources :editors
+    resources :book_editors
+    resources :author_of_reviews
+    resources :performers
+    resources :translated_authors
   end
 
   # get paths like "/citations/terms/subject/1"

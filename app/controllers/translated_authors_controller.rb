@@ -1,0 +1,2 @@
+class TranslatedAuthorsController < ApplicationController
+end

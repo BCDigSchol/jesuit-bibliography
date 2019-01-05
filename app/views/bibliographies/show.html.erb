@@ -39,6 +39,7 @@
             <div class="field-value col-sm-10"><%= @bib.display_title %></div>
         </div>
 
+        <% if @bib.display_author.present? %>
         <div class="field-pair row">
             <label class="col-sm-2">Display Author</label>
             <div class="field-value col-sm-10"> 
@@ -47,55 +48,82 @@
                 <% end %>
             </div>
         </div>
+        <% end %>
 
         <% if @bib.authors.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Author</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.authors.each do |author| %>
-                    <li><%= author.display_name %></li>
-                <% end %>
-                </ul>
+                <label class="col-sm-2">Authors</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.authors.each do |author| %>
+                        <span class='value-part'><%= author.person.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
 
         <% if @bib.editors.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Editor</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.editors.each do |editor| %>
-                    <li><%= editor.display_name %></li>
-                <% end %>
-                </ul>
+                <label class="col-sm-2">Editors</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.editors.each do |editor| %>
+                        <span class='value-part'><%= editor.person.name %></span>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <% if @bib.translators.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Translators</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.translators.each do |translator| %>
+                        <span class='value-part'><%= translator.person.name %></span>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <% if @bib.translated_authors.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Translated Authors</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.translated_authors.each do |translated_author| %>
+                        <span class='value-part'><%= translated_author.person.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
 
         <% if @bib.book_editors.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Book Editor</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.book_editors.each do |beditor| %>
-                    <li><%= beditor.display_name %></li>
-                <% end %>
-                </ul>
+                <label class="col-sm-2">Book Editors</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.book_editors.each do |book_editor| %>
+                        <span class='value-part'><%= book_editor.person.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
 
         <% if @bib.author_of_reviews.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Author of Review</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.author_of_reviews.each do |aor| %>
-                    <li><%= aor.display_name %></li>
-                <% end %>
-                </ul>
+                <label class="col-sm-2">Authors of Review</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.author_of_reviews.each do |author_of_review| %>
+                        <span class='value-part'><%= author_of_review.person.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
 
-        <% if @bib.year_published.present? %>
+        <% if @bib.performers.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Year Published</label>
-                <div class="field-value col-sm-10"><%= @bib.year_published %></div>
+                <label class="col-sm-2">Performers</label>
+                <div class="field-value col-sm-10"> 
+                    <% @bib.performers.each do |performer| %>
+                        <span class='value-part'><%= performer.person.name %></span>
+                    <% end %>
+                </div>
             </div>
         <% end %>
 
@@ -318,27 +346,7 @@
             </div>
         <% end %>
 
-        <% if @bib.translators.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Translator</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.translators.each do |translator| %>
-                    <li><%= translator.display_name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
 
-        <% if @bib.performers.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Performer</label>
-                <ul>
-                <% @bib.performers.each do |performer| %>
-                    <li><%= performer.display_name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
 
         <% if @bib.reprint_edition.present? %>
             <div class="field-pair row">
@@ -427,16 +435,7 @@
             </div>
         <% end %>
 
-        <% if @bib.translated_authors.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Translated Author</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.translated_authors.each do |ta| %>
-                    <li><%= ta.display_name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
+        
 
         <% if @bib.translated_title.present? %>
             <div class="field-pair row">

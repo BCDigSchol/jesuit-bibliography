@@ -46,7 +46,7 @@ RailsAdmin.config do |config|
 
   config.model 'Subject' do
     navigation_label 'Terms'
-    weight -1
+    weight -3
     list do
       field :id
       field :name
@@ -99,7 +99,7 @@ RailsAdmin.config do |config|
 
   config.model 'Bibliography' do
     navigation_label 'All records'
-    weight -2
+    weight -4
     label 'Citation'
     label_plural 'Citations'
     list do
@@ -108,25 +108,6 @@ RailsAdmin.config do |config|
       #field :display_title
       #field :display_author
       #field :year_published
-    end
-  end
-
-  config.model 'Citation' do
-    parent Bibliography
-    label 'Person'
-    label_plural 'People'
-    list do
-      field :id
-      field :display_name do
-        label "Name"
-      end
-    end
-    edit do
-      field :display_name
-      field :surname
-      field :middlename
-      field :forename
-      field :title
     end
   end
 
@@ -198,8 +179,58 @@ RailsAdmin.config do |config|
     parent Bibliography
   end
 
+  config.model 'Person' do
+    navigation_label 'All People'
+    weight -2
+    label 'Person'
+    label_plural 'People'
+  end
+
+  config.model 'Author' do
+    parent Person
+    label 'Author'
+    label_plural 'Authors'
+  end
+
+  config.model 'Editor' do
+    parent Person
+    label 'Editor'
+    label_plural 'Editors'
+  end
+
+  config.model 'AuthorOfReview' do
+    parent Person
+    label 'Author of Review'
+    label_plural 'Authors of Review'
+  end
+
+  config.model 'BookEditor' do
+    parent Person
+    label 'Book Editor'
+    label_plural 'Book Editors'
+  end
+
+  config.model 'Translator' do
+    parent Person
+    label 'Translator'
+    label_plural 'Translators'
+  end
+
+  config.model 'Performer' do
+    parent Person
+    label 'Performer'
+    label_plural 'Performers'
+  end
+
+  config.model 'TranslatedAuthor' do
+    parent Person
+    label 'Translated Author'
+    label_plural 'Translated Authors'
+  end
+
   config.model 'EntitySuggestion' do
     navigation_label 'Suggestions'
+    weight -1
     label 'Jesuit Suggestion'
     label_plural 'Jesuit Suggestions'
   end
@@ -222,7 +253,16 @@ RailsAdmin.config do |config|
     label_plural 'Century Suggestions'
   end
 
+  config.model 'LanguageSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Language Suggestion'
+    label_plural 'Language Suggestions'
+  end
+
   
+  config.model 'BibliographyLanguage' do
+    visible false
+  end
 
   config.model 'BibliographyEntity' do
     visible false

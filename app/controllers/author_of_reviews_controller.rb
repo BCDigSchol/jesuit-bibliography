@@ -1,0 +1,2 @@
+class AuthorOfReviewsController < ApplicationController
+end

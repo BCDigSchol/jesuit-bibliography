@@ -1,0 +1,18 @@
+<div class='bibliography-person-fields nested-fields form-group row'>
+    <%= form.input :peep, wrapper: :vertical_input_group do %>
+        <%= form.association :person, 
+            label: false,
+            collection: Person.order(:name),
+            prompt: prompt_label,
+            form_name: 'form',
+            input_html: {class: class_name}
+        %>
+        <span class="input-group-btn" id="basic-addon-citation">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form,
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
+</div>

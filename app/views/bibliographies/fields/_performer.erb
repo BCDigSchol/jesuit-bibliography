@@ -1,10 +1,12 @@
-<div id='bibliography_performer' class='repeatable-field'>
+<div id='bibliography_performers' class='repeatable-field'>
     <div class="fields">
-        <%= form.simple_fields_for :performers do |c| %>
-            <%= c.input :display_name, 
+        <%= form.simple_fields_for :performers do |peep| %>
+            <%= peep.association :person, 
                 label: field_label,
-                as: :string,
-                hint: Bibliography::PERSON_FIELD_HINT
+                collection: Person.order(:name),
+                prompt: 'Choose a Performers',
+                form_name: 'peep',
+                input_html: {class: 'performers'}
             %>
         <% end %>
     </div>
@@ -13,15 +15,30 @@
         <div class="col-sm-10 btn-add-container">
             <%= link_to_add_association 'Add ' + field_label, 
                 form, 
-                :performers,
+                :performers, 
                 class: 'btn btn-warning btn-add', 
                 form_name: 'form', 
                 data: {
-                    'association-insertion-node' => '#bibliography_performer .fields', 
+                    'association-insertion-node' => '#bibliography_performers .fields', 
                     'association-insertion-method' => 'append'
-                }, 
-                partial: 'bibliography_citation_fields' 
+                },
+                partial: 'person_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a Performers', 
+                        class_name: 'performers' 
+                    }
+                }
             %>
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.performers').select2();
+    $("#bibliography_performers").on('cocoon:after-insert', function(e, insertedItem){
+        $('.performers').last().select2();
+    });
+});
+</script>
