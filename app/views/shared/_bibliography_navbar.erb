@@ -43,6 +43,11 @@
                             <% if can? :read, Entity %>
                             <li><%= link_to 'Jesuits', citationterms_entities_path %></li>
                             <% end %>
+
+                            <% if can? :read, Language %>
+                            <li role="separator" class="divider"></li>
+                            <li><%= link_to 'Languages', citationterms_languages_path %></li>
+                            <% end %>
                         </ul>
                     </li>
                     <% end %>

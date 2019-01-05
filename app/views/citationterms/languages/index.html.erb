@@ -1,0 +1,46 @@
+<% if can? :read, Language %>
+  <h2>Language index</h2>
+
+  <div class="button-group">
+    <%= link_to 'Add New Language record', new_citationterms_language_path, class: 'btn btn-primary' %>
+  </div>
+
+  <%= grid(@languages_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
+
+    g.column name: 'Name', attribute: 'name' do |language|
+      language.name
+    end
+
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
+      loc.created_at
+    end
+
+    if can? :detroy, Language
+      g.column do |language|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_language_path(language) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_language_path(language) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', citationterms_language_path(language), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Language
+      g.column do |language|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_language_path(language) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_language_path(language) )}</span></div>".html_safe
+      end
+    else
+      g.column do |language|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_language_path(language) )}</span></div>".html_safe
+      end
+    end
+  end -%>
+
+  <div class="button-group">
+    <%= link_to 'Add New Jesuit record', new_citationterms_language_path, class: 'btn btn-primary' %>
+  </div>
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

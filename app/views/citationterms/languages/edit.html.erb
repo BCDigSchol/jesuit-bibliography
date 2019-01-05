@@ -1,0 +1,10 @@
+<% if @language.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Languages index', citationterms_languages_path, class: 'btn btn-info' %>
+<% elsif can? :edit, Language %>
+    <h2 class="edit-label"><span class="header-label">Editing Language:</span> <%= @language.name.present? ? @language.name : @language.id %></h2>
+
+    <%= render 'form', urlpath: citationterms_language_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

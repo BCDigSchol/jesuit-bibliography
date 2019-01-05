@@ -1,5 +1,4 @@
 class Language < ApplicationRecord
-    #belongs_to :bibliography, optional: true
     has_many :bibliography_languages
     has_many :bibliographies, through: :bibliography_languages
 

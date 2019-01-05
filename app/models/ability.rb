@@ -31,6 +31,7 @@ class Ability
       can :manage, Subject          # can manage Subject Term lists
       can :manage, Period           # can manage Period Term lists
       can :manage, Entity           # can manage Entity Term lists
+      can :manage, Language         # can read Language Term lists
       can :manage, Bibliography     # can manage Bib records
       can :manage, Tag              # can manage Bib record Tags
     end
@@ -48,6 +49,7 @@ class Ability
       can :read, Subject                            # can read Subject Term lists
       can :read, Period                             # can read Period Term lists
       can :read, Entity                             # can read Entity Term lists
+      can :read, Language                           # can read Language Term lists
       can [:create, :read, :update], Bibliography   # can create/read/update Bib records
     end
 
