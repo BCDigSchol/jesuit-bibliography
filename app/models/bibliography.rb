@@ -304,29 +304,29 @@ class Bibliography < ApplicationRecord
         text :paper_title do
             paper_title if self.paper_title.present?
         end
-=begin
+
         text :authors do     # for associations
-            authors.map { |author| author.display_name }
+            authors.map { |author| author.person.name }
         end
         text :editors do     # for associations
-            editors.map { |editor| editor.display_name }
+            editors.map { |editor| editor.person.name }
         end
         text :book_editors do     # for associations
-            book_editors.map { |book_editor| book_editor.display_name }
+            book_editors.map { |book_editor| book_editor.person.name }
         end
         text :author_of_reviews do     # for associations
-            author_of_reviews.map { |author_of_review| author_of_review.display_name }
+            author_of_reviews.map { |author_of_review| author_of_review.person.name }
         end
         text :translators do     # for associations
-            translators.map { |translator| translator.display_name }
+            translators.map { |translator| translator.person.name }
         end
         text :performers do     # for associations
-            performers.map { |performer| performer.display_name }
+            performers.map { |performer| performer.person.name }
         end
         text :translated_authors do     # for associations
-            translated_authors.map { |translated_author| translated_author.display_name }
+            translated_authors.map { |translated_author| translated_author.person.name }
         end
-=end
+
         text :worldcat_urls do     # for associations
             worldcat_urls.map { |worldcat_url| worldcat_url.link }
         end
