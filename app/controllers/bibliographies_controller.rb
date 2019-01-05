@@ -447,8 +447,9 @@ class BibliographiesController < ApplicationController
             )
         end
 
-        def set_display_fields
-=begin            
+        # depending on the reference_type, select the fields to represent the 
+        # display_title and display_author fields used in the discovery layer
+        def set_display_fields           
             if @bib.reference_type.downcase == "book"
                 if @bib.title.present?
                     @bib.display_title = @bib.title
@@ -459,13 +460,13 @@ class BibliographiesController < ApplicationController
                 if @bib.authors.present?
                     out = []
                     @bib.authors.each do |author|
-                        out << author.display_name
+                        out << author.person.name
                     end
                     @bib.display_author = out.join('|')
                 elsif @bib.editors.present?
                     out = []
                     @bib.editors.each do |editor|
-                        out << editor.display_name
+                        out << editor.person.name
                     end
                     @bib.display_author = out.join('|')
                 else
@@ -481,7 +482,7 @@ class BibliographiesController < ApplicationController
                 if @bib.authors.present?
                     out = []
                     @bib.authors.each do |author|
-                        out << author.display_name
+                        out << author.person.name
                     end
                     @bib.display_author = out.join('|')
                 else
@@ -497,7 +498,7 @@ class BibliographiesController < ApplicationController
                 if @bib.author_of_reviews.present?
                     out = []
                     @bib.author_of_reviews.each do |author|
-                        out << author.display_name
+                        out << author.person.name
                     end
                     @bib.display_author = out.join('|')
                 else
@@ -513,7 +514,7 @@ class BibliographiesController < ApplicationController
                 if @bib.author_of_reviews.present?
                     out = []
                     @bib.author_of_reviews.each do |author|
-                        out << author.display_name
+                        out << author.person.name
                     end
                     @bib.display_author = out.join('|')
                 else
@@ -529,13 +530,12 @@ class BibliographiesController < ApplicationController
                 if @bib.authors.present?
                     out = []
                     @bib.authors.each do |author|
-                        out << author.display_name
+                        out << author.person.name
                     end
                     @bib.display_author = out.join('|')
                 else
                     @bib.display_author = NO_VALUE_FOUND
                 end
             end
-=end
         end
 end
