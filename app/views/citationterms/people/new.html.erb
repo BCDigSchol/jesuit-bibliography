@@ -1,0 +1,7 @@
+<h2>Add New Person Term</h2>
+
+<% if can? :create, Person %>
+    <%= render 'form', urlpath: citationterms_people_path %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

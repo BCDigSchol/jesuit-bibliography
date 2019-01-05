@@ -19,4 +19,18 @@ class Person < ApplicationRecord
 
     has_many :performers
     has_many :bibliographies, through: :performers
+
+    after_save :reindex_parent!
+
+    # Define form hints here
+    PERSON_FIELD_HINT = 'Last name, First name'.freeze
+
+    def reindex_parent!
+        bibliographies.each do |bs|
+            #puts "\n\nReindexing #{bs.id}..."
+            bs.reindex_me
+        end
+    end
+
+    validates :name, presence: true
 end

@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     resources :periods, path: 'centuries'
     resources :locations, path: 'locations'
     resources :languages, path: 'languages'
+    resources :people, path: 'people'
   end
 
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'

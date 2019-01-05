@@ -1,0 +1,50 @@
+<%= simple_form_for @person, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
+
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
+  </div>
+  
+  <hr/>
+
+  <% if @person.errors.any? %>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@person.errors.count, "error") %> prohibited this person record from being saved:</div>
+    <div class="panel-body">
+      <ul>
+        <% @person.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+
+  <%= form.input :name, 
+      as: :string,
+      hint: Person::PERSON_FIELD_HINT
+  %>
+
+  <%= form.input :surname, 
+      as: :string
+  %>
+
+  <%= form.input :middlename, 
+      as: :string
+  %>
+
+  <%= form.input :forename, 
+      as: :string
+  %>
+
+  <%= form.input :title, 
+      as: :string
+  %>
+
+  <hr/>
+  
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
+  </div>
+<% end %>
