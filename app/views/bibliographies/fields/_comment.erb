@@ -36,10 +36,10 @@
             </div>
         
             <div class='links clearfix'>
-                <%= link_to_add_association 'Add ' + field_label, 
+                <%= link_to_add_association Bibliography::ADD_BUTTON + field_label, 
                     form, 
                     :comments, 
-                    class: 'btn btn-warning', 
+                    class: 'btn btn-warning fa-icon', 
                     form_name: 'form', 
                     data: {
                         'association-insertion-node' => '#bibliography_comments .fields', 

@@ -174,6 +174,19 @@
     .icon-link {
         margin-right: 6px;
     }
+
+    /*a.fa-icon::before {
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+    }
+    a.fa-icon.add_fields::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f067";
+    }*/
     
     .show-link::after {
         content: "\f15c";

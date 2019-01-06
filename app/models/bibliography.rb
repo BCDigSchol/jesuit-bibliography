@@ -448,6 +448,9 @@ class Bibliography < ApplicationRecord
     DEFAULT_STATUS = 'submitted'.freeze
     PUBLISHED_STATUS = 'published'.freeze
 
+    # Define static strings
+    ADD_BUTTON = '<i class="fas fa-plus" title="Add another field" aria-hidden></i> '.html_safe.freeze
+
     private
         def comments_json
             if self.comments.present?

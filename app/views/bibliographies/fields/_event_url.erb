@@ -11,10 +11,10 @@
     <div class='links clearfix'>
         <div class="col-sm-2"></div>
         <div class="col-sm-10 btn-add-container">
-            <%= link_to_add_association 'Add ' + field_label, 
+            <%= link_to_add_association Bibliography::ADD_BUTTON + field_label, 
                 form, 
                 :event_urls,
-                class: 'btn btn-warning btn-add', 
+                class: 'btn btn-warning btn-add fa-icon', 
                 form_name: 'form', 
                 data: {
                     'association-insertion-node' => '#event_urls .fields', 
