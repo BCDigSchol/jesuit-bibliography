@@ -1061,7 +1061,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.authors << Author.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1074,7 +1074,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Book Editor: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.book_editors << BookEditor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1087,7 +1087,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Author of Review: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.author_of_reviews << AuthorOfReview.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1136,7 +1136,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Editor: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.editors << Editor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1149,7 +1149,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translator: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.translators << Translator.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1162,7 +1162,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Performer: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.performers << Performer.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
@@ -1361,7 +1361,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Translated author: #{v}")
-                p = Person.find_or_create_by(name: v, created_by: CREATED_BY_USER)
+                p = Person.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
                 @bib.translated_authors << TranslatedAuthor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
