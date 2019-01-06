@@ -4,6 +4,8 @@
 <% elsif can? :edit, Location %>
     <h2 class="edit-label"><span class="header-label">Editing Location:</span> <%= @location.name %></h2>
 
+    <div class="alert alert-info" role="alert">Updating this record will also update all other records that reference this term. This may take several seconds to complete!</div>
+
     <%= render 'form', urlpath: citationterms_location_path %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

@@ -4,6 +4,8 @@
 <% elsif can? :edit, Person %>
     <h2 class="edit-label"><span class="header-label">Editing Person:</span> <%= @person.name.present? ? @person.name : @person.id %></h2>
 
+    <div class="alert alert-info" role="alert">Updating this record will also update all other records that reference this term. This may take several seconds to complete!</div>
+
     <%= render 'form', urlpath: citationterms_person_path %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
