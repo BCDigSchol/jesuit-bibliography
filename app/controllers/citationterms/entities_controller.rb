@@ -62,9 +62,13 @@ class Citationterms::EntitiesController < ApplicationController
         # update modified_by
         entity_attributes[:modified_by] = current_user
 
-        # fill in sort_name, display_name
-        entity_attributes[:sort_name] = @entity.name
-        entity_attributes[:display_name] = @entity.name
+        # fill in sort_name, display_name if they are empty
+        if entity_attributes[:sort_name].empty?
+            entity_attributes[:sort_name] = @entity.name
+        end
+        if entity_attributes[:display_name].empty?
+            entity_attributes[:display_name] = @entity.name
+        end
 
         if @entity.update!(entity_attributes)
             respond_to do |format|

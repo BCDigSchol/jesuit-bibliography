@@ -61,8 +61,10 @@ class Citationterms::LocationsController < ApplicationController
         # update modified_by
         location_attributes[:modified_by] = current_user
 
-        # fill in sort_name
-        location_attributes[:sort_name] = @location.name
+        # fill in sort_name if it is empty
+        if location_attributes[:sort_name].empty?
+            location_attributes[:sort_name] = @location.name
+        end
 
         if @location.update!(location_attributes)
             respond_to do |format|

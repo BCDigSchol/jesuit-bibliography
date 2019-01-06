@@ -60,8 +60,10 @@ class Citationterms::SubjectsController < ApplicationController
         # update modified_by
         subject_attributes[:modified_by] = current_user
 
-        # fill in sort_name
-        subject_attributes[:sort_name] = @subject.name
+        # fill in sort_name if it is empty
+        if subject_attributes[:sort_name].empty?
+            subject_attributes[:sort_name] = @subject.name
+        end
 
         if @subject.update!(subject_attributes)
             respond_to do |format|

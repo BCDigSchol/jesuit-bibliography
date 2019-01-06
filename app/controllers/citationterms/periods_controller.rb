@@ -60,8 +60,10 @@ class Citationterms::PeriodsController < ApplicationController
         # update modified_by
         period_attributes[:modified_by] = current_user
 
-        # fill in sort_name
-        period_attributes[:sort_name] = @period.name
+        # fill in sort_name if it is empty
+        if period_attributes[:sort_name].empty?
+            period_attributes[:sort_name] = @period.name
+        end
 
         if @period.update!(period_attributes)
             respond_to do |format|
