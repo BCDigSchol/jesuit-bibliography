@@ -2,6 +2,8 @@ class CreatePeople < ActiveRecord::Migration[5.2]
   def change
     create_table :people do |t|
       t.text :name
+      t.text :sort_name
+      t.text :display_name
       t.text :surname
       t.text :middlename
       t.text :forename
