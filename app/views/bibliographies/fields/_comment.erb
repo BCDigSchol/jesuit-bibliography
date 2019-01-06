@@ -5,7 +5,7 @@
             <div class="fields">
                 <%= form.simple_fields_for :comments do |comment| %>
                     <div class="panel bibliography-subject-fields nested-fields <%= c[comment.index.to_i].make_public ? 'panel-success': 'panel-default' %>">
-                        <div class="panel-heading"><%= c[comment.index.to_i].make_public ? 'Public ': 'Private ' %> <%= field_label %></div>
+                        <div class="panel-heading"><%= comment.object.body.blank? ? '' : ( c[comment.index.to_i].make_public ? 'Public ': 'Private ') %> <%= field_label %></div>
                         <div class="panel-body clearfix">
                             <%= comment.input :body,
                                 label: 'Comment text',
@@ -23,6 +23,12 @@
                             <%= comment.input :make_public, 
                                 label: false,
                                 wrapper: :horizontal_boolean_job 
+                            %>
+
+                            <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove comment</btn>".html_safe, 
+                                comment, 
+                                class: 'remove-link', 
+                                form_name: 'form' 
                             %>
                         </div>
                     </div>
