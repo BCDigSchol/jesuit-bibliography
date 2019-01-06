@@ -18,6 +18,16 @@
         </div>
 
         <div class="field-pair row">
+            <label class="col-sm-2">Sort Name</label>
+            <div class="field-value col-sm-10"><%= @person.sort_name %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Display Name</label>
+            <div class="field-value col-sm-10"><%= @person.display_name.html_safe %></div>
+        </div>
+
+        <div class="field-pair row">
             <label class="col-sm-2">Surname</label>
             <div class="field-value col-sm-10"><%= @person.surname %></div>
         </div>

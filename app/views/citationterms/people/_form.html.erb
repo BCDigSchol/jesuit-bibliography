@@ -25,6 +25,18 @@
       hint: Person::PERSON_FIELD_HINT
   %>
 
+  <%= form.input :sort_name, 
+      as: :string,
+      disabled: !@person.name.present?,
+      placeholder: (!@person.name.present? ? Person::NAME_PLACEHOLDER : '') 
+  %>
+
+  <%= form.input :display_name, 
+      as: :string,
+      disabled: !@person.name.present?,
+      placeholder: (!@person.name.present? ? Person::NAME_PLACEHOLDER : '')
+  %>
+
   <%= form.input :surname, 
       as: :string
   %>

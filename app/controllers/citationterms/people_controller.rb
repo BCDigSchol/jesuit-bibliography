@@ -37,6 +37,10 @@ class Citationterms::PeopleController < ApplicationController
 
         @person.created_by = current_user
 
+        @person.sort_name = @person.name
+
+        @person.display_name = @person.name
+
         if @person.save
             respond_to do |format|
                 format.html { redirect_to citationterms_person_path(@person), notice: 'Person was successfully created.' }
@@ -58,6 +62,14 @@ class Citationterms::PeopleController < ApplicationController
 
         # update modified_by
         person_attributes[:modified_by] = current_user
+
+        # fill in sort_name, display_name if they are empty
+        if person_attributes[:sort_name].empty?
+            person_attributes[:sort_name] = @person.name
+        end
+        if person_attributes[:display_name].empty?
+            person_attributes[:display_name] = @person.name
+        end
 
         if @person.update!(person_attributes)
             respond_to do |format|
@@ -94,6 +106,6 @@ class Citationterms::PeopleController < ApplicationController
         end
 
         def person_params
-            params.require(:person).permit(:name, :surname, :middlename, :forename, :title)
+            params.require(:person).permit(:name, :sort_name, :display_name, :surname, :middlename, :forename, :title)
         end
 end

@@ -24,6 +24,7 @@ class Person < ApplicationRecord
 
     # Define form hints here
     PERSON_FIELD_HINT = 'Last name, First name'.freeze
+    NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
 
     def reindex_parent!
         bibliographies.each do |bs|
