@@ -92,7 +92,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20
+    config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20, sort: 'index'
     config.add_facet_field 'locations_facet', label: 'Locations', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'jesuits_facet', label: 'Jesuits', limit: 20, index_range: 'A'..'Z'
     
