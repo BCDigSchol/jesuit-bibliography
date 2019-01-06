@@ -327,6 +327,12 @@ class Bibliography < ApplicationRecord
             translated_authors.map { |translated_author| translated_author.person.name }
         end
 
+        # special facet containing only authors, editors, translators
+        text :authors_faceting, :as => 'authors_facet'
+
+        # special facet containing all people types
+        text :people_faceting, :as => 'people_facet'
+
         text :worldcat_urls do     # for associations
             worldcat_urls.map { |worldcat_url| worldcat_url.link }
         end
@@ -512,5 +518,29 @@ class Bibliography < ApplicationRecord
 
         def comments_rejectable?(comment)
             comment['body'].blank?
+        end
+
+        # we only want authors, editors and translators terms for this facet
+        def authors_faceting
+            authors = self.authors.map { |author| author.person.name }
+            editors = self.editors.map { |editor| editor.person.name }
+            translators = self.translators.map { |translator| translator.person.name }
+
+            # merge all the arrays into authors_facet
+            authors_facet = authors + editors + translators
+        end
+
+        # we want all people terms for people_facet
+        def people_faceting
+            authors = self.authors.map { |author| author.person.name }
+            editors = self.editors.map { |editor| editor.person.name }
+            translators = self.translators.map { |translator| translator.person.name }
+            book_editors = self.book_editors.map { |book_editor| book_editor.person.name }
+            author_of_reviews = self.author_of_reviews.map { |author_of_review| author_of_review.person.name }
+            performers = self.performers.map { |performer| performer.person.name }
+            translated_authors = self.translated_authors.map { |translated_author| translated_author.person.name }
+
+            # merge all the arrays into people_facet
+            people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
         end
 end

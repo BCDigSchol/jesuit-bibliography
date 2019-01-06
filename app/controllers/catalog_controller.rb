@@ -87,6 +87,7 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
     config.add_facet_field 'reference_type_facet', label: 'Format'
+    config.add_facet_field 'people_facet', label: 'People', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
     config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
@@ -185,13 +186,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'publish_places_text', label: 'Places published', link_to_search: :publish_places_facet
     config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
     #config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :make_people_link
-    config.add_show_field 'authors_text', label: 'Authors', :helper_method => :make_people_link
-    config.add_show_field 'editors_text', label: 'Editors', :helper_method => :make_people_link
-    config.add_show_field 'book_editors_text', label: 'Book Editors', :helper_method => :make_people_link
-    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews', :helper_method => :make_people_link
-    config.add_show_field 'translators_text', label: 'Translators', :helper_method => :make_people_link
-    config.add_show_field 'performers_text', label: 'Performers', :helper_method => :make_people_link
-    #config.add_show_field 'translated_authors_text', label: 'Translated Authors', :helper_method => :make_people_link
+    config.add_show_field 'authors_text', label: 'Authors', link_to_search: :people_facet
+    config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet
+    config.add_show_field 'book_editors_text', label: 'Book Editors', link_to_search: :people_facet
+    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews', link_to_search: :people_facet
+    config.add_show_field 'translators_text', label: 'Translators', link_to_search: :people_facet
+    config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
+    config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
 
     config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_in_parts
 
