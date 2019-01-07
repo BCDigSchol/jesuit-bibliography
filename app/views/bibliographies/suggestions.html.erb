@@ -1,0 +1,90 @@
+<h2>Records with pending term suggestions</h2>
+
+<div class="button-group">
+    <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+</div>
+
+<div class="citations-list mine-list">
+    <%= grid(@bibs_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+        ) do |g|
+
+        g.column name: 'ID', attribute: 'id' do |bib|
+            bib.id
+        end
+
+        g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
+
+        g.column name: 'Title', attribute: 'display_title'
+
+        g.column name: 'Author(s)' do |bib|
+            if bib.display_author.present?
+                out = "".html_safe
+                bib.display_author.split('|').each do |author|
+                    out << "<span class='value-part'>#{author}</span>".html_safe
+                end
+                out
+            end
+        end
+
+        g.column name: 'Status', attribute: 'status', custom_filter: :auto do |bib|
+            if bib.status.present?
+                "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+            end
+        end
+
+        g.column name: 'Pending Suggestions' do |bib|
+            out = "".html_safe
+
+            if bib.person_suggestions.present?
+              out << "<span class='badge badge-info'>#{bib.person_suggestions.count} #{"Person".pluralize(bib.person_suggestions.count)}</span>".html_safe
+            end
+
+            if bib.subject_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.subject_suggestions.count} #{"Subject".pluralize(bib.subject_suggestions.count)}</span>".html_safe
+            end
+
+            if bib.location_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.location_suggestions.count} #{"Location".pluralize(bib.location_suggestions.count)}</span>".html_safe
+            end
+
+            if bib.entity_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.entity_suggestions.count} #{"Jesuit".pluralize(bib.entity_suggestions.count)}</span>".html_safe
+            end
+
+            if bib.period_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.period_suggestions.count} #{"Century".pluralize(bib.period_suggestions.count)}</span>".html_safe
+            end
+
+            if bib.language_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.language_suggestions.count} #{"Language".pluralize(bib.language_suggestions.count)}</span>".html_safe
+            end
+            out
+        end
+
+        g.column name: 'Created by', attribute: 'created_by'
+
+        g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
+            bib.created_at.strftime "%b %e, %Y"
+        end
+
+        if can? :destroy, Bibliography
+            g.column do |bib|
+                "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+                "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
+                "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', bibliography_path(bib), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+            end
+        else
+            g.column do |bib|
+                "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+                ( (can? :edit, Bibliography or bib.status != Bibliography::PUBLISHED_STATUS) ?  "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe : ''.html_safe)
+            end
+        end
+    end -%>
+</div>
+
+<div class="button-group">
+    <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+</div>

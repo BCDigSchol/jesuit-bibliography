@@ -23,6 +23,10 @@
                     <% end %>
 
                     <li><%= link_to 'View your submitted records', citations_mine_path %></li>
+
+                    <% if can? :manage, 'Suggestions' %>
+                    <li><%= link_to 'View pending term suggestions', citations_terms_suggestions_path %></li>
+                    <% end %>
                     
                     <% if current_user.admin_role? %>
                     <li><%= link_to 'Update User accounts', rails_admin_path %></li>

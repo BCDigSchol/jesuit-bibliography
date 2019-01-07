@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   # custom path for displaying records created by signed-in user
   get '/citations/mine' => 'bibliographies#mine'
 
+  # custom path for displaying records containing pending suggesitions
+  get '/citations/terms/suggestions' => 'bibliographies#suggestions'
+
   # custom path for displaying all records
   # this is effectively the same as /citations  
   get '/citations/all' => 'bibliographies#index'

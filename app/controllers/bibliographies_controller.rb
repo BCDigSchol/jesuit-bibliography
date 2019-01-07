@@ -348,6 +348,30 @@ class BibliographiesController < ApplicationController
         )
     end
 
+    # TODO find better way of checking for suggestions
+    def suggestions
+        suggestion_tables = [
+            :location_suggestions, 
+            :person_suggestions, 
+            :subject_suggestions, 
+            :entity_suggestions, 
+            :period_suggestions, 
+            :language_suggestions
+        ]
+
+        where_clause = []
+        suggestion_tables.each do |t|
+            where_clause << "#{t.to_s}.name IS NOT NULL"
+        end
+
+        @bibs_grid = initialize_grid(Bibliography, 
+            conditions: [where_clause.join(" OR ")],
+            include: suggestion_tables,
+            order:           'bibliographies.created_at',
+            order_direction: 'desc'
+        )
+    end
+
     private
         # this method checks that one of two conditions is true:
         #   the current user matches the account used to create this record,

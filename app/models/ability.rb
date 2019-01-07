@@ -20,6 +20,9 @@ class Ability
     #   Mark approve Bib records as reviewed
     #   Manage Correspondents
     #   Manage Assistant Editors
+    #   Manage Terms
+    #   Manage Status
+    #   Manage Suggestions
     if user.associate_editor_role?
       can :manage, 'Correspondents' # manage correspondents
       can :manage, 'Assistants'     # manage assistant editors
@@ -27,6 +30,7 @@ class Ability
       can :approve, Bibliography    # can approve record for publication
       can :manage, 'Terms'          # can access Term lists dropdown
       can :manage, 'Status'         # can manage record Status value
+      can :manage, 'Suggestions'    # can manage Suggestions
       can :manage, Location         # can manage Location Term lists
       can :manage, Subject          # can manage Subject Term lists
       can :manage, Period           # can manage Period Term lists
@@ -41,11 +45,14 @@ class Ability
     #   Access Dashboard
     #   Read/Update/Create Bib records (not destroy)
     #   Manage Correspondents
+    #   Manage Terms
+    #   Manage Status
     if user.assistant_editor_role?
       can :manage, 'Correspondents'                 # manage correspondents
       can :read, 'Dashboard'                        # allow access to dashboard
       can :manage, 'Terms'                          # can access Term lists dropdown
       can :manage, 'Status'                         # can manage record Status value
+      #can :manage, 'Suggestions'                    # can manage Suggestions
       can :read, Location                           # can read Location Term lists
       can :read, Subject                            # can read Subject Term lists
       can :read, Period                             # can read Period Term lists
