@@ -1340,8 +1340,11 @@ namespace :importdata do
     def import_add_notes(bib, col)
         if col
             col.unicode_normalize!
-            import_logger.info("  adding Note: #{col}")
-            @bib.comments << Comment.new(body: col, comment_type: 'Note', commenter: 'importer', make_public: false)
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Note: #{v}")
+                @bib.comments << Comment.new(body: v, comment_type: 'Note', commenter: 'importer', make_public: false)
+            end
         end
     end
 
@@ -1349,8 +1352,11 @@ namespace :importdata do
     def import_add_notes_to_editor(bib, col)
         if col
             col.unicode_normalize!
-            import_logger.info("  adding Note: #{col}")
-            @bib.comments << Comment.new(body: col, comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Note: #{v}")
+                @bib.comments << Comment.new(body: v, comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+            end
         end
     end
 
