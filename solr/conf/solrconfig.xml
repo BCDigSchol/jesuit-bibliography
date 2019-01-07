@@ -41,7 +41,7 @@
             those searches. You may also be interested in:
             http://wiki.apache.org/solr/LocalParams
        -->
-        <str name="qf">
+       <str name="qf">
           id
           <!--full_title_tsim
           short_title_tsim
@@ -61,8 +61,13 @@
           year_published_text
           years_published_itm
           authors_text
+          editors_text
+          book_editors_text
           author_of_reviews_text
-          place_published_text
+          translators_text
+          performers_text
+          translated_authors_text
+          publish_places_text
           reviewed_components_text
           languages_text
           isbns_text
@@ -72,39 +77,49 @@
           centuries_text
           locations_text
           jesuits_text
-        </str>
-        <str name="pf">
+       </str>
+       <str name="pf">
           all_text_timv^10
-        </str>
+       </str>
 
        <str name="author_qf">
           <!--author_tsim-->
-          authors_text
-          author_of_reviews_text
+          display_authors_text
        </str>
        <str name="author_pf">
        </str>
+
        <str name="title_qf">
-          <!--title_tsim
-          full_title_tsim
-          short_title_tsim
-          alternative_title_tsim-->
           display_title_text
-          title_text
+          <!--title_text
           chapter_title_text
           title_of_review_text
-          paper_title_text
+          paper_title_text-->
        </str>
        <str name="title_pf">
        </str>
-       <str name="subject_qf">
+
+       <str name="people_qf">
+          <!--author_tsim-->
+          authors_text
+          editors_text
+          book_editors_text
+          author_of_reviews_text
+          translators_text
+          performers_text
+          translated_authors_text
+       </str>
+       <str name="people_pf">
+       </str>
+
+       <str name="terms_qf">
           <!--subject_tsim-->
           subjects_text
           centuries_text
           locations_text
           jesuits_text
        </str>
-       <str name="subject_pf">
+       <str name="terms_pf">
        </str>
 
        <str name="fl">
@@ -220,7 +235,7 @@
   <requestHandler name="/suggest" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
       <str name="suggest">true</str>
-      <str name="suggest.count">5</str>
+      <str name="suggest.count">10</str>
       <str name="suggest.dictionary">mySuggester</str>
     </lst>
     <arr name="components">

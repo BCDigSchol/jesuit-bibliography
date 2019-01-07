@@ -638,6 +638,8 @@
     <field name="subjects_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="centuries_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="locations_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="authors_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="people_facet" type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- unstemmed fields -->
     <copyField source="title_text" dest="title_unstem_search"/>
@@ -649,6 +651,8 @@
     <copyField source="jesuits_facet" dest="subject_unstem_search"/>
     <copyField source="centuries_facet" dest="subject_unstem_search"/>
     <copyField source="locations_facet" dest="subject_unstem_search"/>
+    <copyField source="authors_facet" dest="subject_unstem_search"/>
+    <copyField source="people_facet" dest="subject_unstem_search"/>
 
     <!-- spellcheck fields -->
     <!-- default spell check;  should match fields for default request handler -->
@@ -673,6 +677,8 @@
     <copyField source="jesuits_facet" dest="opensearch_display"/>
     <copyField source="centuries_facet" dest="opensearch_display"/>
     <copyField source="locations_facet" dest="opensearch_display"/>
+    <copyField source="authors_facet" dest="opensearch_display"/>
+    <copyField source="people_facet" dest="opensearch_display"/>
 
     <!-- for suggestions -->
     <!--copyField source="*_text" dest="suggest"/-->
