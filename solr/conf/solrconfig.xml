@@ -20,6 +20,10 @@
   <lib dir="${solr.install.dir:../../../..}/libexec/contrib/analysis-extras/lib" />
   <lib dir="${solr.install.dir:../../../..}/libexec/contrib/analysis-extras/lucene-libs" />
 
+  <!-- for production -->
+  <lib dir="${solr.install.dir}/contrib/analysis-extras/lib" />
+  <lib dir="${solr.install.dir}/contrib/analysis-extras/lucene-libs" />
+
   <dataDir>${solr.data.dir:}</dataDir>
 
   <requestHandler name="search" class="solr.SearchHandler" default="true">
