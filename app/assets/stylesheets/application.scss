@@ -33,3 +33,31 @@
     display: block;
     margin: 0 0 .5rem 0;
 }
+
+.button-group {
+    margin: .5rem 0 2rem 0;
+    &:first-of-type {
+        margin-top: 3rem;
+    }
+}
+
+.form-check {
+    label.form-check-label {
+        margin-left: .5rem;
+    }
+}
+
+.shared-links {
+    margin-top: 4rem;
+    border-top: 1px solid #aaa;
+    padding-top: .5rem;
+    .shared-links-header {
+        margin:0;
+        padding: 0 0 1rem;
+        color: #444;
+    }
+    a {
+        margin: .5rem 0 0 0;
+        display: inline-block;
+    }
+}
