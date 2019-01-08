@@ -19,10 +19,12 @@
 <div id="search-navbar" class="navbar navbar-default navbar-static-top col-sm-10 col-sm-offset-1" role="navigation">
   <div class="search-navbar-job col-sm-8 col-sm-offset-2 <%= container_classes %>">
     <div class="form-wrapper clearfix">
-    <p id="search-title">Search Jesuit Bibliography</p>
-    <%= render_search_bar  %>
-      <p id="search-help"><a href="none">Help</a></p>
-      <p id="advanced-search"><a href="/advanced">Advanced Search</a></p>
+      <p id="search-title">Search Jesuit Bibliography</p>
+      <%= render_search_bar  %>
+      <div class="search-links clearfix">
+        <p id="search-help"><a href="none">Help</a></p>
+        <p id="advanced-search"><a href="/advanced">Advanced Search</a></p>
+      </div>
     </div>
   </div>
 </div>

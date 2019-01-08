@@ -66,7 +66,9 @@ Rails.application.routes.draw do
   mount BlacklightAdvancedSearch::Engine => '/'
 
   Blacklight::Marc.add_routes(self)
-  root to: "catalog#index"
+  # custom action for root
+  # root to: "catalog#index"
+  root to: "catalog#job_home"
   concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do

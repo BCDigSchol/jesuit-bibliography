@@ -23,6 +23,21 @@ h2.page-heading{
     z-index:1;
 }
 
+#search-navbar {
+    form.navbar-form {
+        .input-group {
+            .input-group-addon.for-search-field {
+                border: 0;
+            }
+            .twitter-typeahead {
+                input {
+                    border-radius: unset;
+                }
+            }
+        }
+   }
+}
+
 
 #header-navbar.navbar,
 #header-navbar.navbar-inverse {
@@ -37,7 +52,34 @@ h2.page-heading{
     }
 }
 
-.blacklight-catalog-index {
+.blacklight-catalog,
+.blacklight-sessions {
+    #search-navbar {
+        width: 100%!important;
+        margin-left: 0;
+        padding: 1rem 0;
+        margin-bottom: 3rem;
+        background-color: #fff;
+
+        p#search-title {
+            display:none;
+        }
+        .search-links {
+            p {
+                display: inline-block;
+                margin: 1.5rem 2rem 0 0;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+        form.navbar-form .input-group .input-group-addon.for-search-field {
+            background-color: #ccc;
+        }
+    }
+}
+
+.blacklight-catalog-job_home {
     .col-100 {
         width: 100%;
     }
@@ -45,10 +87,23 @@ h2.page-heading{
         background-image: asset-url("searchbarbox.jpg");
         background-size: cover;
         height: 400px;
-        padding-top: 100px;
-    
+        padding: 100px 0 0 0;
+        margin-bottom: 0;
+        background-color: inherit;
+        p#search-title {
+            display:block;
+        }
+        .search-links {
+            p {
+                display: block;
+                margin: inherit;
+            }
+        }
         .search-query-form {
             width: 100%;
+        }
+        form.navbar-form .input-group .input-group-addon.for-search-field {
+            background-color: #ccc;
         }
         .search-navbar-job {
             .form-wrapper {

@@ -3,10 +3,19 @@ class CatalogController < ApplicationController
 
   include BlacklightRangeLimit::ControllerOverride
   include BlacklightAdvancedSearch::Controller
+  include Blacklight::Controller
 
   include Blacklight::Catalog
   #include Blacklight::Marc::Catalog
 
+  # custom action for homepage
+  # normally, a solr query is made when loading the home page in order to load the facets, but
+  # since we're not showing the facets on the home page we can avoid the query by using a custom action.
+  # likewise, we can use this action name as a classname in the body tag of the Blacklight templates. 
+  def job_home 
+    params[:q] = "" 
+    render :index
+  end
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
