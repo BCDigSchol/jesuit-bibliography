@@ -4,6 +4,6 @@
 
 <div id="pagination_table" class="term-list-container">
   <% @locations.each do |loc| %>
-    <div class="term-list-item"><a href="/?f[locations_facet][]=<%= loc.name %>"><%= loc.name %></a></div>
+    <div class="term-list-item"><a href="/catalog?f[locations_facet][]=<%= loc.name %>"><%= loc.name %></a></div>
   <% end %>
 </div>
