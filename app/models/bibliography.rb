@@ -385,7 +385,24 @@ class Bibliography < ApplicationRecord
         text :comments_public
 
         text :reviewed_components do     # for associations
-            reviewed_components.map { |rc| "#{rc.reviewed_author}||#{rc.reviewed_title}" }
+            rc_array = []
+            reviewed_components.each do |rc|
+                rc_array << "<div class='rc-block'>"
+                if rc.reviewed_author.present?
+                    rc_array << "<div class='rc-item'><span class='rc-label'>Author:</span> #{rc.reviewed_author}</div>"
+                end
+                if rc.reviewed_editor.present?
+                    rc_array << "<div class='rc-item'><span class='rc-label'>Editor:</span> #{rc.reviewed_editor}</div>"
+                end
+                if rc.reviewed_translator.present?
+                    rc_array << "<div class='rc-item'><span class='rc-label'>Translator:</span> #{rc.reviewed_translator}</div>"
+                end
+                if rc.reviewed_title.present?
+                    rc_array << "<div class='rc-item'><span class='rc-label'>Title:</span> #{rc.reviewed_title}</div>"
+                end
+                rc_array << "</div>"
+            end
+            rc_array
         end
 
         text :isbns do     # for associations

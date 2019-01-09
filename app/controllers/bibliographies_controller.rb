@@ -451,7 +451,7 @@ class BibliographiesController < ApplicationController
                 period_suggestions_attributes: [:id, :name, :note, :_destroy],
                 language_suggestions_attributes: [:id, :name, :note, :_destroy],
                 person_suggestions_attributes: [:id, :name, :note, :field_name, :_destroy],
-                reviewed_components_attributes: [:id, :reviewed_author, :reviewed_title, :_destroy],
+                reviewed_components_attributes: [:id, :reviewed_author, :reviewed_editor, :reviewed_translator, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],

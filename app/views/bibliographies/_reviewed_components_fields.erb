@@ -1,8 +1,14 @@
 <div class="panel panel-default bibliography-reviewed_components-fields nested-fields">
-    <div class="panel-heading">Reviewed Author/Title</div>
+    <div class="panel-heading">Reviewed Component</div>
     <div class="panel-body clearfix">
         <%= form.input :reviewed_author,
             label: 'Reviewed Author' 
+        %>
+        <%= form.input :reviewed_editor,
+            label: 'Reviewed Editor' 
+        %>
+        <%= form.input :reviewed_translator,
+            label: 'Reviewed Trnslator' 
         %>
         <%= form.input :reviewed_title, 
             label: 'Reviewed Title' 

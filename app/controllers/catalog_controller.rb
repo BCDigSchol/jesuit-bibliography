@@ -203,7 +203,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
     config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
 
-    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_in_parts
+    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_reviewed_component
 
     config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
     config.add_show_field 'centuries_text', label: 'Centuries', link_to_search: :periods_facet

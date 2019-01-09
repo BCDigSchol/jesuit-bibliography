@@ -229,6 +229,18 @@ h2.page-heading{
             margin-bottom: 0px;
         }
     }
+    .rc-block {
+        margin-bottom: 1.5rem;
+        .rc-item {
+            margin-bottom: .25rem;
+            .rc-label {
+                font-weight: 600;
+            }
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 #pagination_table {

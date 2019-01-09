@@ -70,4 +70,20 @@ module ApplicationHelper
         end
         out
     end
+
+    # split field value into parts with html element wrappers.
+    # this method allow for single or double (or more) pipes as a delimiter.
+    # can be extended to allow other delimiters
+    def display_reviewed_component args
+        out = "".html_safe
+        args[:document][args[:field]].each do |part|
+            components = part.split(/[|]+/)
+            if !components.empty?
+                components.each do |c|
+                    out << "#{c}".html_safe
+                end
+            end
+        end
+        out
+    end
 end

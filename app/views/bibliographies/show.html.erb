@@ -305,11 +305,13 @@
 
         <% if @bib.reviewed_components.present? %>
             <div class="field-pair row">
-                <label class="col-sm-2">Reviewed Author/Title</label>
+                <label class="col-sm-2">Reviewed Component</label>
                 <ul class="field-value col-sm-10">
                 <% @bib.reviewed_components.each do |rc| %>
                     <li>
                         <div>Author: <span><%= rc.reviewed_author %></span></div>
+                        <div>Editor: <span><%= rc.reviewed_editor %></span></div>
+                        <div>Translator: <span><%= rc.reviewed_translator %></span></div>
                         <div>Title: <span><%= rc.reviewed_title %></span></div>
                     </li>
                 <% end %>
