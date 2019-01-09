@@ -53,7 +53,14 @@ h2.page-heading{
 }
 
 .blacklight-catalog,
-.blacklight-sessions {
+.blacklight-sessions,
+.blacklight-subjects,
+.blacklight-locations,
+.blacklight-entities,
+.blacklight-periods,
+.blacklight-search_history,
+.blacklight-saved_searches,
+.blacklight-bookmarks {
     #search-navbar {
         width: 100%!important;
         margin-left: 0;
