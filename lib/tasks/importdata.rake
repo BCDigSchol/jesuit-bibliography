@@ -65,16 +65,14 @@ namespace :importdata do
         puts "Starting #{@format}s import"
         import_logger.info("Starting #{@format}s import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/books.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'books.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/books.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -222,16 +220,14 @@ namespace :importdata do
         puts "Starting #{@format} import"
         import_logger.info("Starting #{@format} import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/book_chapters.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'book_chapters.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/book_chapters.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -382,16 +378,14 @@ namespace :importdata do
         puts "Starting #{@format}s import"
         import_logger.info("Starting #{@format}s import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/book_reviews.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'book_reviews.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/book_reviews.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -531,16 +525,14 @@ namespace :importdata do
         puts "Starting #{@format}s import"
         import_logger.info("Starting #{@format}s import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/journal_articles.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'journal_articles.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/journal_articles.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -672,16 +664,14 @@ namespace :importdata do
         puts "Starting #{@format}s import"
         import_logger.info("Starting #{@format}s import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/dissertations.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'dissertations.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/dissertations.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -807,16 +797,14 @@ namespace :importdata do
         puts "Starting #{@format} import"
         import_logger.info("Starting #{@format} import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/conference_papers.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'conference_papers.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/conference_papers.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -922,16 +910,14 @@ namespace :importdata do
         puts "Starting #{@format}s import"
         import_logger.info("Starting #{@format} import")
 
-        # invoke destroy_all_bibs task to remove existing Bibliography records
-        # Rake::Task["importdata:clear_all"].invoke
-
         item_count = 0
         start = Time.now
-        total_lines = CSV.read('db/imports/multimedia.csv', headers: true, liberal_parsing: true).length
+        file = select_import_home_path + 'multimedia.csv'
+        total_lines = CSV.read(file, headers: true, liberal_parsing: true).length
         puts "Total rows in import file: #{total_lines}"
         bar = ProgressBar.new(total_lines)
 
-        CSV.foreach('db/imports/multimedia.csv', 
+        CSV.foreach(file, 
             headers: true,
             encoding: Encoding::UTF_8,
             liberal_parsing: true
@@ -1053,6 +1039,30 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
+    # look at the RAILS_ENV variable and select the appropriate import file location
+    def select_import_home_path
+        # default path for RAILS_ENV=development
+        path = "db/imports/"
+
+        rails_env = ENV['RAILS_ENV'] || nil
+
+        # check if RAILS_ENV is set
+        if rails_env.nil?
+            puts "\n\nRAILS_ENV is not set in this shell. Defaulting to 'production'.\n\n"
+        end
+
+        puts "Found RAILS_ENV=#{rails_env}"
+
+        # if this is the production server then look for the import files
+        # in the rails user's home directory
+        if rails_env == "production"
+            path = "~/imports"
+        end
+
+        puts "Using import file path: '#{path}'"
+
+        path
+    end
 
     # Authors
     def import_add_authors(bib, col)
