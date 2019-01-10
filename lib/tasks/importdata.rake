@@ -1056,7 +1056,7 @@ namespace :importdata do
         # if this is the production server then look for the import files
         # in the rails user's home directory
         if rails_env == "production"
-            path = "~/imports"
+            path = "~/imports/"
         end
 
         puts "Using import file path: '#{path}'"
