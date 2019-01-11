@@ -129,23 +129,18 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    #config.add_index_field 'title_display', label: 'Title'
-    #config.add_index_field 'title_vern_display', label: 'Title'
-    #config.add_index_field 'author_display', label: 'Author'
-    #config.add_index_field 'author_vern_display', label: 'Author'
-    #config.add_index_field 'format', label: 'Format'
-    #config.add_index_field 'language_facet', label: 'Language'
-    #config.add_index_field 'published_display', label: 'Published'
-    #config.add_index_field 'published_vern_display', label: 'Published'
-    #config.add_index_field 'lc_callnum_display', label: 'Call number'
+    config.add_index_field 'display_author_text', label: 'Author', :helper_method => :display_in_parts
+    config.add_index_field 'reference_type_text', label: 'Format'
+    config.add_index_field 'year_published_text', label: 'Year Published'
+    config.add_index_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
+    #config.add_index_field 'title_display', label: 'Title'
     #config.add_index_field 'id_i', label: 'Bib ID'
     #config.add_index_field 'title_text', label: 'Title'
     #config.add_index_field 'display_title_text', label: 'Display Title'
     #config.add_index_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_index_field 'title_of_review_text', label: 'Title of Review'
     #config.add_index_field 'paper_title_text', label: 'Paper Title'
-    
     #config.add_index_field 'authors_text', label: 'Author', :helper_method => :display_in_parts
     #config.add_index_field 'editors_text', label: 'Editor', :helper_method => :display_in_parts
     #config.add_index_field 'book_editors_text', label: 'Book Editor', :helper_method => :display_in_parts
@@ -157,101 +152,82 @@ class CatalogController < ApplicationController
     #config.add_index_field 'centuries_text', label: 'Centuries'
     #config.add_index_field 'locations_text', label: 'Locations'
     #config.add_index_field 'jesuits_text', label: 'Jesuits'
-    
-    config.add_index_field 'display_author_text', label: 'Author', :helper_method => :display_in_parts
-    config.add_index_field 'reference_type_text', label: 'Format'
-    config.add_index_field 'year_published_text', label: 'Year Published'
-    config.add_index_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
-    
-
-    #config.add_index_field 'author_display', label: 'Author'
-    #config.add_index_field 'author_vern_display', label: 'Author'
-    #config.add_index_field 'format', label: 'Format'
-    #config.add_index_field 'language_facet', label: 'Language'
-    #config.add_index_field 'published_display', label: 'Published'
-    #config.add_index_field 'published_vern_display', label: 'Published'
-    #config.add_index_field 'lc_callnum_display', label: 'Call number'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    #config.add_show_field 'title_display', label: 'Title'
-    #config.add_show_field 'title_vern_display', label: 'Title'
-    #config.add_show_field 'subtitle_display', label: 'Subtitle'
-    #config.add_show_field 'subtitle_vern_display', label: 'Subtitle'
-    #config.add_show_field 'author_display', label: 'Author'
-    #config.add_show_field 'author_vern_display', label: 'Author'
-    #config.add_show_field 'format', label: 'Format'
-    #config.add_show_field 'url_fulltext_display', label: 'URL'
-    #config.add_show_field 'url_suppl_display', label: 'More Information'
-    #config.add_show_field 'language_facet', label: 'Language'
-    #config.add_show_field 'published_display', label: 'Published'
-    #config.add_show_field 'published_vern_display', label: 'Published'
-    #config.add_show_field 'lc_callnum_display', label: 'Call number'
+    config.add_show_field 'authors_text', label: 'Authors', link_to_search: :people_facet
+    config.add_show_field 'book_title_text', label: 'Book Title'
+    config.add_show_field 'book_editors_text', label: 'Book Editors', link_to_search: :people_facet
+    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews', link_to_search: :people_facet
+    config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet
+    config.add_show_field 'translators_text', label: 'Translators', link_to_search: :people_facet
+    config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
+    config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
+    config.add_show_field 'year_published_text', label: 'Year', link_to_search: :year_published_text
+
+    config.add_show_field 'dissertation_universities_text', label: 'Universities', :helper_method => :display_in_parts
+    config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
+    config.add_show_field 'publish_places_text', label: 'Places published', link_to_search: :publish_places_facet
+
+    config.add_show_field 'title_of_review_text', label: 'Title of Review'
+    config.add_show_field 'journals_text', label: 'Journal Title'
+    config.add_show_field 'volume_text', label: 'Volume'
+    config.add_show_field 'issue_text', label: 'Issue'
+
+    config.add_show_field 'event_panel_title_text', label: 'Panel Title'
+    config.add_show_field 'event_title_text', label: 'Conference Title'
+    config.add_show_field 'event_location_text', label: 'Conference Location'
+
+    config.add_show_field 'series_multimedium_text', label: 'Multimedia Series', :helper_method => :display_in_parts
+
+    config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
+    config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
+
+    # reviews field goes here
+
+    config.add_show_field 'jesuits_text', label: 'Who (Jesuits)', link_to_search: :entities_facet
+    config.add_show_field 'subjects_text', label: 'What (Subjects)', link_to_search: :subjects_facet
+    config.add_show_field 'locations_text', label: 'Where (Locations)', link_to_search: :locations_facet
+    config.add_show_field 'centuries_text', label: 'When (Centuries)', link_to_search: :periods_facet
+
+    config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
+    config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
+    config.add_show_field 'leuven_urls_text', label: 'Other links', :helper_method => :make_link
+    config.add_show_field 'event_urls_text', label: 'Conference URL', :helper_method => :make_link
+    config.add_show_field 'multimedia_urls_text', label: 'Multimedia URL', :helper_method => :make_link
+    
+    config.add_show_field 'page_range_text', label: 'Page Range'
+    config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
+    config.add_show_field 'isbns_text', label: 'ISBN', :helper_method => :display_in_parts
+    config.add_show_field 'issns_text', label: 'ISSN', :helper_method => :display_in_parts
+    config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
+
+    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :display_in_parts
 
     #config.add_show_field 'title_text', label: 'Title'
     #config.add_show_field 'display_title_text', label: 'Display Title'
     #config.add_show_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_show_field 'title_of_review_text', label: 'Title of Review'
     #config.add_show_field 'paper_title_text', label: 'Paper Title'
-    config.add_show_field 'year_published_text', label: 'Year Published', link_to_search: :year_published_text
-    config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
-    config.add_show_field 'publish_places_text', label: 'Places published', link_to_search: :publish_places_facet
-    config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
     #config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :make_people_link
-    config.add_show_field 'authors_text', label: 'Authors', link_to_search: :people_facet
-    config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet
-    config.add_show_field 'book_editors_text', label: 'Book Editors', link_to_search: :people_facet
-    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews', link_to_search: :people_facet
-    config.add_show_field 'translators_text', label: 'Translators', link_to_search: :people_facet
-    config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
-    config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
-
-    config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_reviewed_component
-
-    config.add_show_field 'subjects_text', label: 'Subjects', link_to_search: :subjects_facet
-    config.add_show_field 'centuries_text', label: 'Centuries', link_to_search: :periods_facet
-    config.add_show_field 'locations_text', label: 'Locations', link_to_search: :locations_facet
-    config.add_show_field 'jesuits_text', label: 'Jesuits', link_to_search: :entities_facet
-    
-    config.add_show_field 'isbns_text', label: 'ISBN', :helper_method => :display_in_parts
-    config.add_show_field 'issns_text', label: 'ISSN', :helper_method => :display_in_parts
-    config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
-
-    config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
-    config.add_show_field 'volume_text', label: 'Volume'
-    config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
-    config.add_show_field 'edition_text', label: 'Edition'
-    config.add_show_field 'date_text', label: 'Date'
-    config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
-    config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
-    config.add_show_field 'translated_title_text', label: 'Translated Title'
-    config.add_show_field 'volume_number_text', label: 'Volume Number'
-    config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
-    config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
-    config.add_show_field 'leuven_urls_text', label: 'Other links', :helper_method => :make_link
-    config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
-    config.add_show_field 'series_multimedium_text', label: 'Multimedia Series', :helper_method => :display_in_parts
-    config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
-    config.add_show_field 'multimedia_urls_text', label: 'Multimedia URL', :helper_method => :make_link
-    config.add_show_field 'event_title_text', label: 'Event Title'
-    config.add_show_field 'event_location_text', label: 'Event Location'
-    config.add_show_field 'event_institution_text', label: 'Event Institution'
-    config.add_show_field 'event_date_text', label: 'Event Date'
-    config.add_show_field 'event_panel_title_text', label: 'Event Panel Title'
-    config.add_show_field 'event_urls_text', label: 'Event URL', :helper_method => :make_link
-    config.add_show_field 'dissertation_universities_text', label: 'Universities', :helper_method => :display_in_parts
-    config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
-    config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
-    config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
+    #config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
+    #config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
+    #config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_reviewed_component
+    #config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
+    #config.add_show_field 'edition_text', label: 'Edition'
+    #config.add_show_field 'date_text', label: 'Date'
+    #config.add_show_field 'reprint_edition_text', label: 'Reprint Edition'
+    #config.add_show_field 'translated_title_text', label: 'Translated Title'
+    #config.add_show_field 'volume_number_text', label: 'Volume Number'
+    #config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
+    #config.add_show_field 'event_institution_text', label: 'Event Institution'
+    #config.add_show_field 'event_date_text', label: 'Event Date'
+    #config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     #config.add_show_field 'journal_title_text', label: 'Journal Title'
-    config.add_show_field 'journals_text', label: 'Journal Title'
-    config.add_show_field 'issue_text', label: 'Issue'
-    config.add_show_field 'page_range_text', label: 'Page Range'
-    config.add_show_field 'epub_date_text', label: 'Epub Date'
-    config.add_show_field 'chapter_number_text', label: 'Chapter Number'
-    config.add_show_field 'book_title_text', label: 'Book Title'
-
-    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :display_in_parts
+    #config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
+    #config.add_show_field 'epub_date_text', label: 'Epub Date'
+    #config.add_show_field 'chapter_number_text', label: 'Chapter Number'
+    
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
