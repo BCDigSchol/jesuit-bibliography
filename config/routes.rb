@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :entity_suggestions
     resources :period_suggestions
     resources :language_suggestions
+    resources :journal_suggestions
     resources :authors
     resources :editors
     resources :book_editors
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
     resources :locations, path: 'locations'
     resources :languages, path: 'languages'
     resources :people, path: 'people'
+    resources :journals, path: 'journals'
   end
 
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'

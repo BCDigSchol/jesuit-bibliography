@@ -1,0 +1,61 @@
+<% if @journal.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Journal Titles index', citationterms_journal_path %>
+<% elsif can? :read, Journal %>
+    <h2><%= @journal.name.present? ? @journal.name : @journal.id %></h2>
+
+    <div class="record-view">
+        <% if can? :update, Journal %>
+        <%= link_to 'Edit this record', edit_citationterms_journal_path(@journal), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
+
+        <hr/>
+        
+        <div class="field-pair row">
+            <label class="col-sm-2">Journal Title</label>
+            <div class="field-value col-sm-10"><%= @journal.name %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Journal Sort Title</label>
+            <div class="field-value col-sm-10"><%= @journal.sort_name %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Journal Display Title</label>
+            <div class="field-value col-sm-10"><%= @journal.display_name.html_safe %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Created At</label>
+            <div class="field-value col-sm-10"><%= @journal.created_at %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Updated At</label>
+            <div class="field-value col-sm-10"><%= @journal.updated_at %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">Created By</label>
+            <div class="field-value col-sm-10"><%= @journal.created_by %></div>
+        </div>
+
+        <% if @journal.modified_by.present? %>
+        <div class="field-pair row">
+            <label class="col-sm-2">Last Modified By</label>
+            <div class="field-value col-sm-10"><%= @journal.modified_by %></div>
+        </div>
+        <% end %>
+
+        <hr/>
+
+        <% if can? :update, Journal %>
+        <%= link_to 'Edit this record', edit_citationterms_journal_path(@journal), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Go Back to Jesuits index', citationterms_journals_path, class: 'btn btn-info' %>
+    </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

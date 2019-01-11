@@ -225,6 +225,36 @@
             </div>
         <% end %>
 
+        <% if @bib.journals.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Title of Journal</label>
+                <ul class="field-value col-sm-10">
+                <% @bib.journals.each do |journal| %>
+                    <li><%= journal.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
+        <% if @bib.journal_suggestions.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-2">Suggested Journal Titles</label>
+                <div class="field-value col-sm-10">
+                    <table class="table table-bordered">
+                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <% @bib.journal_suggestions.each do |suggestion| %>
+                            <tr>
+                                <td><%= suggestion.name %></td>
+                                <td><%= suggestion.note %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% end %>
+
         <% if @bib.publishers.present? %>
             <div class="field-pair row">
                 <label class="col-sm-2">Publishers</label>
@@ -456,8 +486,6 @@
                 <div class="field-value col-sm-10"><%= @bib.abstract.html_safe %></div>
             </div>
         <% end %>
-
-        
 
         <% if @bib.translated_title.present? %>
             <div class="field-pair row">

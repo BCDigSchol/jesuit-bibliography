@@ -1,0 +1,45 @@
+<%= simple_form_for @journal, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
+
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
+  </div>
+
+  <hr/>
+
+  <% if @journal.errors.any? %>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@journal.errors.count, "error") %> prohibited this Journal Title record from being saved:</div>
+    <div class="panel-body">
+      <ul>
+        <% @journal.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+
+  <%= form.input :name, 
+      as: :string
+  %>
+
+  <%= form.input :sort_name, 
+      as: :string,
+      disabled: !@journal.name.present?,
+      placeholder: (!@journal.name.present? ? BibliographyJournal::NAME_PLACEHOLDER : '')
+  %>
+
+  <%= form.input :display_name, 
+      as: :string,
+      disabled: !@journal.name.present?,
+      placeholder: (!@journal.name.present? ? BibliographyJournal::NAME_PLACEHOLDER : '')
+  %>
+
+  <hr/>
+  
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to Jesuits index', citationterms_languages_path, class: 'btn btn-info' %>
+  </div>
+<% end %>

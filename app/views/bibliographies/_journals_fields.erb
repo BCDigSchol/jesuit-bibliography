@@ -1,0 +1,19 @@
+<div class='bibliography-journals-fields nested-fields form-group row'>
+    <%= form.input :name, wrapper: :vertical_input_group do %>
+        <%= form.association :journal, 
+            label: false,
+            collection: Journal.order(:name),
+            prompt: 'Choose a Journal Title', 
+            form_name: 'form',
+            label_html: { class: 'invisible' },
+            input_html: {class: 'journals'}
+        %>
+        <span class="input-group-btn" id="basic-addon-journals">
+            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
+                form,
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
+</div>

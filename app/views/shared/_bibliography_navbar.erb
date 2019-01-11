@@ -49,6 +49,10 @@
                             <li><%= link_to 'Languages', citationterms_languages_path %></li>
                             <% end %>
 
+                            <% if can? :read, Journal %>
+                            <li><%= link_to 'Journal Titles', citationterms_journals_path %></li>
+                            <% end %>
+
                             <% if can? :read, Person %>
                             <li><%= link_to 'People', citationterms_people_path %></li>
                             <% end %>

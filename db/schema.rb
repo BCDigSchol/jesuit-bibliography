@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_09_012039) do
+ActiveRecord::Schema.define(version: 2019_01_11_023646) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2019_01_09_012039) do
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_entities_on_bibliography_id"
     t.index ["entity_id"], name: "index_bibliography_entities_on_entity_id"
+  end
+
+  create_table "bibliography_journals", force: :cascade do |t|
+    t.integer "journal_id"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_journals_on_bibliography_id"
+    t.index ["journal_id"], name: "index_bibliography_journals_on_journal_id"
   end
 
   create_table "bibliography_languages", force: :cascade do |t|
@@ -191,6 +200,29 @@ ActiveRecord::Schema.define(version: 2019_01_09_012039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_entity_suggestions_on_bibliography_id"
+  end
+
+  create_table "journal_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_journal_suggestions_on_bibliography_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.text "name"
+    t.text "sort_name"
+    t.text "display_name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.integer "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_journals_on_bibliography_id"
   end
 
   create_table "language_suggestions", force: :cascade do |t|

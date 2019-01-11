@@ -56,6 +56,7 @@ class BibliographiesController < ApplicationController
         #@bib.location_suggestions.build
         #@bib.entity_suggestions.build
         #@bib.period_suggestions.build
+        #@bib.journal_suggestions.build
         @bib.isbns.build
         @bib.issns.build
         @bib.dois.build
@@ -71,6 +72,7 @@ class BibliographiesController < ApplicationController
         @bib.bibliography_locations.build
         @bib.bibliography_entities.build
         @bib.bibliography_languages.build
+        @bib.bibliography_journals.build
         @bib.worldcat_urls.build
         @bib.publisher_urls.build
         @bib.leuven_urls.build
@@ -139,6 +141,10 @@ class BibliographiesController < ApplicationController
                 @bib.person_suggestions.build
             end
 
+            if @bib.journal_suggestions == 0
+                @bib.journal_suggestions.build
+            end
+
             if @bib.isbns.count == 0
                 @bib.isbns.build
             end
@@ -197,6 +203,10 @@ class BibliographiesController < ApplicationController
 
             if @bib.bibliography_languages.count == 0
                 @bib.bibliography_languages.build
+            end
+
+            if @bib.bibliography_journals.count == 0
+                @bib.bibliography_journals.build
             end
 
             if @bib.worldcat_urls.count == 0
@@ -356,7 +366,8 @@ class BibliographiesController < ApplicationController
             :subject_suggestions, 
             :entity_suggestions, 
             :period_suggestions, 
-            :language_suggestions
+            :language_suggestions,
+            :journal_suggestions
         ]
 
         where_clause = []
@@ -451,12 +462,14 @@ class BibliographiesController < ApplicationController
                 period_suggestions_attributes: [:id, :name, :note, :_destroy],
                 language_suggestions_attributes: [:id, :name, :note, :_destroy],
                 person_suggestions_attributes: [:id, :name, :note, :field_name, :_destroy],
+                journal_suggestions_attributes: [:id, :name, :note, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_editor, :reviewed_translator, :reviewed_title, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
                 bibliography_locations_attributes: [:id, :location_id, :_destroy],
                 bibliography_entities_attributes: [:id, :entity_id, :_destroy],
                 bibliography_languages_attributes: [:id, :language_id, :_destroy],
+                bibliography_journals_attributes: [:id, :journal_id, :_destroy],
                 isbns_attributes: [:id, :value, :_destroy],
                 issns_attributes: [:id, :value, :_destroy],
                 dois_attributes: [:id, :value, :_destroy],

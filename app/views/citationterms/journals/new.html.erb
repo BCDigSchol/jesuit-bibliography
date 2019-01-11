@@ -1,0 +1,7 @@
+<h2>Add New Journal Title record</h2>
+
+<% if can? :create, Journal %>
+    <%= render 'form', urlpath: citationterms_journals_path %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

@@ -1,0 +1,2 @@
+class JournalSuggestionsController < ApplicationController
+end
