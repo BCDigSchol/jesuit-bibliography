@@ -240,7 +240,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
     config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     config.add_show_field 'number_of_pages_text', label: 'Number of Pages'
-    config.add_show_field 'journal_title_text', label: 'Journal Title'
+    #config.add_show_field 'journal_title_text', label: 'Journal Title'
+    config.add_show_field 'journals_text', label: 'Journal Title'
     config.add_show_field 'issue_text', label: 'Issue'
     config.add_show_field 'page_range_text', label: 'Page Range'
     config.add_show_field 'epub_date_text', label: 'Epub Date'
