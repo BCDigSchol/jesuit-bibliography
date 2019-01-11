@@ -67,7 +67,6 @@
     <field name="dissertation_university_urls_text" type="text_general"/>
     <field name="dissertation_thesis_type_text" type="text_general"/>
     <field name="number_of_pages_text" type="text_general"/>
-    <field name="journal_title_text" type="text_general"/>
     <field name="issue_text" type="text_general"/>
     <field name="page_range_text" type="text_general"/>
     <field name="epub_date_text" type="text_general"/>
@@ -606,7 +605,6 @@
     <copyField source="dissertation_university_urls_text" dest="dissertation_university_urls_text_str" maxChars="256"/>
     <copyField source="dissertation_thesis_type_text" dest="dissertation_thesis_type_text_str" maxChars="256"/>
     <copyField source="number_of_pages_text" dest="number_of_pages_text_str" maxChars="256"/>
-    <copyField source="journal_title_text" dest="journal_title_text_str" maxChars="256"/>
     <copyField source="issue_text" dest="issue_text_str" maxChars="256"/>
     <copyField source="page_range_text" dest="page_range_text_str" maxChars="256"/>
     <copyField source="epub_date_text" dest="epub_date_text_str" maxChars="256"/>

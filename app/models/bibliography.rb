@@ -284,9 +284,9 @@ class Bibliography < ApplicationRecord
             number_of_pages if self.number_of_pages.present?
         end
 
-        text :journal_title do
-            journal_title if self.journal_title.present?
-        end
+        #text :journal_title do
+        #    journal_title if self.journal_title.present?
+        #end
 
         text :issue do
             issue if self.issue.present?

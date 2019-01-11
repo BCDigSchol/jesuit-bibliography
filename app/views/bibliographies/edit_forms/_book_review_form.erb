@@ -44,10 +44,12 @@
         as: :string
     %>
 
-    <%= form.input :journal_title,
+    <%#= form.input :journal_title,
         label: 'Journal title', 
         as: :string
     %>
+
+    <%= render 'bibliographies/fields/journal', :form => form, field_label: 'Journal Title' %>
 
     <%= form.input :volume, 
         label: 'Volume',
