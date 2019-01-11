@@ -96,7 +96,7 @@ class CatalogController < ApplicationController
     #config.add_facet_field 'subject_era_facet', label: 'Era'
 
     config.add_facet_field 'reference_type_facet', label: 'Format'
-    config.add_facet_field 'people_facet', label: 'People', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'people_facet', label: 'Authors', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
     config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
