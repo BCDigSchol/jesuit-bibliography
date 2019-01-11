@@ -139,26 +139,29 @@ class CatalogController < ApplicationController
     #config.add_index_field 'published_vern_display', label: 'Published'
     #config.add_index_field 'lc_callnum_display', label: 'Call number'
 
-    config.add_index_field 'id_i', label: 'Bib ID'
+    #config.add_index_field 'id_i', label: 'Bib ID'
     #config.add_index_field 'title_text', label: 'Title'
     #config.add_index_field 'display_title_text', label: 'Display Title'
     #config.add_index_field 'chapter_title_text', label: 'Chapter Title'
     #config.add_index_field 'title_of_review_text', label: 'Title of Review'
     #config.add_index_field 'paper_title_text', label: 'Paper Title'
-    #config.add_index_field 'display_author_text', label: 'Display Author', :helper_method => :display_in_parts
-    config.add_index_field 'authors_text', label: 'Author', :helper_method => :display_in_parts
-    config.add_index_field 'editors_text', label: 'Editor', :helper_method => :display_in_parts
-    config.add_index_field 'book_editors_text', label: 'Book Editor', :helper_method => :display_in_parts
-    config.add_index_field 'author_of_reviews_text', label: 'Author of Review', :helper_method => :display_in_parts
-    config.add_index_field 'translators_text', label: 'Author of Review', :helper_method => :display_in_parts
+    
+    #config.add_index_field 'authors_text', label: 'Author', :helper_method => :display_in_parts
+    #config.add_index_field 'editors_text', label: 'Editor', :helper_method => :display_in_parts
+    #config.add_index_field 'book_editors_text', label: 'Book Editor', :helper_method => :display_in_parts
+    #config.add_index_field 'author_of_reviews_text', label: 'Author of Review', :helper_method => :display_in_parts
+    #config.add_index_field 'translators_text', label: 'Author of Review', :helper_method => :display_in_parts
+    #config.add_index_field 'publish_places_text', label: 'Place published', :helper_method => :display_in_parts
+    #config.add_index_field 'languages_text', label: 'Languages', :helper_method => :display_in_parts
+    #config.add_index_field 'subjects_text', label: 'Subjects'
+    #config.add_index_field 'centuries_text', label: 'Centuries'
+    #config.add_index_field 'locations_text', label: 'Locations'
+    #config.add_index_field 'jesuits_text', label: 'Jesuits'
+    
+    config.add_index_field 'display_author_text', label: 'Author', :helper_method => :display_in_parts
     config.add_index_field 'reference_type_text', label: 'Format'
     config.add_index_field 'year_published_text', label: 'Year Published'
-    config.add_index_field 'publish_places_text', label: 'Place published', :helper_method => :display_in_parts
-    config.add_index_field 'languages_text', label: 'Languages', :helper_method => :display_in_parts
-    config.add_index_field 'subjects_text', label: 'Subjects'
-    config.add_index_field 'centuries_text', label: 'Centuries'
-    config.add_index_field 'locations_text', label: 'Locations'
-    config.add_index_field 'jesuits_text', label: 'Jesuits'
+    config.add_index_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
     
 
     #config.add_index_field 'author_display', label: 'Author'
