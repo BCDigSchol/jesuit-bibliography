@@ -415,7 +415,7 @@ namespace :importdata do
             @bib.display_year = row[2]
             @bib.title_of_review = row[3]
             @bib.display_title = row[3]
-            @bib.journal_title = row[4]
+            #@bib.journal_title = row[4]
             @bib.volume = row[5]
             @bib.issue = row[6]
             @bib.page_range = row[7]
@@ -459,6 +459,9 @@ namespace :importdata do
             
             # Author of Reviews
             import_author_of_reviews(@bib, row[1])
+
+            # Journal title
+            import_add_journal_title(@bib, row[4])
 
             # Reviewed Title/Author
             # combine both fields into Reviewed_component record object
