@@ -563,7 +563,7 @@ namespace :importdata do
             @bib.display_year = row[2]
             @bib.title = row[3]
             @bib.display_title = row[3]
-            @bib.journal_title = row[4]
+            #@bib.journal_title = row[4]
             @bib.volume = row[5]
             @bib.issue = row[6]
             @bib.page_range = row[7]
@@ -604,6 +604,9 @@ namespace :importdata do
             
             # Authors
             import_add_authors(@bib, row[1])
+
+            # Journal title
+            import_add_journal_title(@bib, row[4])
 
             # ISSNs
             import_add_issns(@bib, row[10])
@@ -1111,6 +1114,18 @@ namespace :importdata do
             values.each do |v|
                 import_logger.info("  adding Multimedia Series: #{v}")
                 @bib.series_multimedium << SeriesMultimedium.new(name: v)
+            end
+        end
+    end
+
+    # Journal Title
+    def import_add_journal_title(bib, col)
+        if col
+            col.unicode_normalize!
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Journal Title: #{v}")
+                @bib.journals << Journal.find_or_create_by(name: v, sort_name: v, display_name: v, created_by: CREATED_BY_USER)
             end
         end
     end

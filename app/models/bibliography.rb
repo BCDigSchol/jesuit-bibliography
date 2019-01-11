@@ -364,6 +364,11 @@ class Bibliography < ApplicationRecord
         end
         text :languages_faceting, :as => 'languages_facet'
 
+        text :journals do     # for associations
+            journals.map { |journal| journal.name }
+        end
+        text :journals_faceting, :as => 'journals_facet'
+
         text :publishers do     # for associations
             publishers.map { |publisher| publisher.name }
         end
@@ -522,6 +527,10 @@ class Bibliography < ApplicationRecord
 
         def languages_faceting
             languages.map { |language| language.name }
+        end
+
+        def journals_faceting
+            journals.map { |journal| journal.name }
         end
 
         def centuries_faceting
