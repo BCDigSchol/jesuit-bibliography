@@ -11,27 +11,52 @@
         </div>
 
         <div class="contaniner">
-            <div class="">
+            <div class="dashboard">
                 <p>Here are some actions for you:</p>
-                <ul class="tasks">
-                    <% if can? :create, Bibliography %>
-                    <li><%= link_to 'Add new Citation', new_bibliography_path %></li>
-                    <% end %>
 
-                    <% if can? :read, Bibliography %>
-                    <li><%= link_to 'Review all Citations', citations_all_path %></li>
-                    <% end %>
+                <div class="dashboard-link-container clearfix">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Manage Citation records</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='dashboard-link'><%= link_to 'View your submitted records', citations_mine_path %></div>
+                                <% if can? :read, Bibliography %>
+                                <div class='dashboard-link'><%= link_to 'Review all Citations', citations_all_path %></div>
+                                <% end %>
+                                <% if can? :create, Bibliography %>
+                                <div class='dashboard-link'><%= link_to 'Add new Citation', new_bibliography_path %></div>
+                                <% end %>
+                            </div>
+                        </div>
+                        
 
-                    <li><%= link_to 'View your submitted records', citations_mine_path %></li>
+                        <% if can? :manage, 'Suggestions' %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Manage Term Suggestions</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='dashboard-link'><%= link_to 'View pending term suggestions', citations_terms_suggestions_path %></div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
 
-                    <% if can? :manage, 'Suggestions' %>
-                    <li><%= link_to 'View pending term suggestions', citations_terms_suggestions_path %></li>
-                    <% end %>
-                    
-                    <% if current_user.admin_role? %>
-                    <li><%= link_to 'Update User accounts', rails_admin.index_path('user') %></li>
-                    <% end %>
-                </ul>
+                    <div class="col-md-6 col-sm-12">
+                        <% if current_user.admin_role? %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Manage All User accounts</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='dashboard-link'><%= link_to 'Update User accounts', rails_admin.index_path('user') %></div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
             </div>
         </div>
     <% else %>
