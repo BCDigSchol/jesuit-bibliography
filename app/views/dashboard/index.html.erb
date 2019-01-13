@@ -29,7 +29,7 @@
                     <% end %>
                     
                     <% if current_user.admin_role? %>
-                    <li><%= link_to 'Update User accounts', rails_admin_path %></li>
+                    <li><%= link_to 'Update User accounts', rails_admin.index_path('user') %></li>
                     <% end %>
                 </ul>
             </div>
