@@ -97,6 +97,20 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Journal' do
+    navigation_label 'Terms'
+    label 'Journal'
+    label_plural 'Journals'
+    list do
+      field :id
+      field :name
+    end
+    edit do
+      field :name
+      field :sort_name
+    end
+  end
+
   config.model 'Bibliography' do
     navigation_label 'All records'
     weight -4
@@ -259,6 +273,18 @@ RailsAdmin.config do |config|
     label_plural 'Language Suggestions'
   end
 
+  config.model 'JournalSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Journal Suggestion'
+    label_plural 'Journal Suggestions'
+  end
+
+  config.model 'PersonSuggestion' do
+    navigation_label 'Suggestions'
+    label 'Person Suggestion'
+    label_plural 'People Suggestions'
+  end
+
   
   config.model 'BibliographyLanguage' do
     visible false
@@ -281,6 +307,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'BibliographyLocation' do
+    visible false
+  end
+
+  config.model 'BibliographyJournal' do
     visible false
   end
 
