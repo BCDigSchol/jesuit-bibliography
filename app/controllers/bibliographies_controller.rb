@@ -360,6 +360,8 @@ class BibliographiesController < ApplicationController
 
     # TODO find better way of checking for suggestions
     def suggestions
+        authorize! :manage, 'Suggestions', :message => "Unable to load this page."
+
         suggestion_tables = [
             :location_suggestions, 
             :person_suggestions, 
