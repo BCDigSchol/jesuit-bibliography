@@ -16,6 +16,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <% if user_signed_in? %>
+                    <li><%= link_to 'Search', root_path %></li>
                     <li><%= link_to 'Dashboard', dashboard_path %></li>
                     <li><%= link_to 'My Citations', citations_mine_path %></li>
                     <% end %>
