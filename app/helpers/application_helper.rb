@@ -1,7 +1,7 @@
 module ApplicationHelper
     # sample method
     def make_upcase args
-        args[:document][args[:field]].map { |v| v.upcase }.join(", ")
+        args[:document][args[:field]].map {|v| v.upcase}.join(", ")
     end
 
     # make field value into a link
@@ -85,5 +85,24 @@ module ApplicationHelper
             end
         end
         out
+    end
+
+    # Returns a title string for a browsing page title.
+    def browse_page_title letter:, browse_by:
+        return build_page_title(page_name: "Browse all #{browse_by}", lookup_value: letter)
+    end
+
+    def build_page_title page_name: nil, lookup_value: nil
+        title_parts = [application_name]
+
+        if page_name
+            title_parts.unshift(page_name)
+        end
+
+        if lookup_value
+            title_parts.unshift(lookup_value)
+        end
+
+        return title_parts.join(' - ')
     end
 end
