@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   get "/dashboard/" => "dashboard#index"
+
+  resources :manage_users, only: [:index, :show, :edit, :update], path: '/dashboard/users'
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -78,7 +80,7 @@ Rails.application.routes.draw do
     concerns :range_searchable
 
   end
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do

@@ -31,7 +31,6 @@
                             </div>
                         </div>
                         
-
                         <% if can? :manage, 'Suggestions' %>
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -45,13 +44,17 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <% if current_user.admin_role? %>
+                        <% if can? :read, 'ManageUsers' %>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Manage All User accounts</h3>
+                                <h3 class="panel-title">Manage User accounts</h3>
                             </div>
                             <div class="panel-body">
-                                <div class='dashboard-link'><%= link_to 'Update User accounts', rails_admin.index_path('user') %></div>
+                                <% if current_user.admin_role? %>
+                                <div class='dashboard-link'><%= link_to 'Manage all User accounts (admin)', rails_admin.index_path('user') %></div>
+                                <% end %>
+                                
+                                <div class='dashboard-link'><%= link_to 'Manage User accounts', manage_users_path %></div>
                             </div>
                         </div>
                         <% end %>

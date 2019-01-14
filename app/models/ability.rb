@@ -24,6 +24,7 @@ class Ability
     #   Manage Status
     #   Manage Suggestions
     if user.associate_editor_role?
+      can :read, 'ManageUsers'      # manage users
       can :manage, 'Correspondents' # manage correspondents
       can :manage, 'Assistants'     # manage assistant editors
       can :read, 'Dashboard'        # allow access to dashboard
@@ -49,6 +50,7 @@ class Ability
     #   Manage Terms
     #   Manage Status
     if user.assistant_editor_role?
+      can :read, 'ManageUsers'                      # manage users
       can :manage, 'Correspondents'                 # manage correspondents
       can :read, 'Dashboard'                        # allow access to dashboard
       can :manage, 'Terms'                          # can access Term lists dropdown

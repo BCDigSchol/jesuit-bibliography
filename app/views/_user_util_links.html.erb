@@ -18,9 +18,11 @@
           <li><%= link_to 'Who (Jesuits)', terms_entities_path %></li>
       </ul>
     </li>
+    <% if can? :read, 'Dashboard' %>
     <li>
       <%= link_to 'Dashboard', dashboard_path %>
     </li>
+    <% end %>
     <%= render_nav_actions do |config, action|%>
       <li><%= action %></li>
     <% end %>

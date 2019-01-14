@@ -1,0 +1,48 @@
+<div id="dashboard-users">
+    <% if current_user.nil? %>
+        <p>Sign in to access this portal.</p>
+        <%= link_to new_user_session_path, class: 'login-button btn btn-primary' do %>Sign in<% end %>
+        <%= link_to new_user_registration_path , class: 'login-button btn btn-primary' do %>Register<% end %>
+    <% elsif can? :read, 'ManageUsers' %>
+        <h1>User Management</h1>
+        <p><%= @role_message %></p>
+        <p><%= @foo %></p>
+
+        <div class="citations-list mine-list">
+            <%= grid(@users_grid,
+                show_filters: :when_filtered,
+                allow_showing_all_records: false, 
+                upper_pagination_panel: true
+                ) do |user|
+
+                user.column name: 'ID', attribute: 'id' do |u|
+                    u.id
+                end
+
+                user.column name: 'Email', attribute: 'email' do |u|
+                    u.email
+                end
+
+                user.column name: 'Name', attribute: 'name' do |u|
+                    u.name
+                end
+
+                user.column name: 'Created At' do |u|
+                    u.created_at
+                end
+
+                user.column name: 'Role', custom_filter: :auto  do |u|
+                    u.get_role_name
+                end
+
+                user.column do |u|
+                    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', manage_user_path(u) )}</span></div>".html_safe + 
+                    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_manage_user_path(u) )}</span></div>".html_safe
+                end
+
+            end -%>
+
+    <% else %>
+        <%= render 'bibliographies/not_permitted' %>
+    <% end %>
+</div>

@@ -7,13 +7,15 @@
     <div class="form-inputs">
       <%= f.input :email, required: true, autofocus: true %>
 
+      <%= f.input :name, as: :string %>
+
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
       <%= f.input :password,
                   hint: "leave it blank if you don't want to change it",
-                  required: false
+                  required: false,
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :password_confirmation,
                   required: false,
@@ -30,8 +32,13 @@
   <% end %>
 </div>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<div class="col-md-6 col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Cancel my account</h3></div>
+    <div class="panel-body">
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      <%= link_to "Back", :back %>
+    </div>
+  </div>
+</div>

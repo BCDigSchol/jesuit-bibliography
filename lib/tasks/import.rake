@@ -6,12 +6,16 @@ namespace :import do
 
     desc "Import test Users"
     task users: :environment do
+        puts "Deleting existing users prior to import"
+        User.destroy_all
+
         puts "Starting Users import..."
         item_count = 0
         start = Time.now
         CSV.foreach('db/imports/users.csv', 
             headers: true,
             encoding: Encoding::UTF_8,
+            liberal_parsing: true
         ) do |row|
             #puts row
             item_count += 1
