@@ -1,0 +1,40 @@
+<%= simple_form_for @user, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
+
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to User index', manage_users_path, class: 'btn btn-info' %>
+  </div>
+
+  <hr/>
+
+  <% if @user.errors.any? %>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@user.errors.count, "error") %> prohibited this User record from being saved:</div>
+    <div class="panel-body">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+
+  <p>User email: <%= @user.email %></p>
+  <p>User name: <%= @user.name %></p>
+  <p>Current User role: <%= @user.get_role_name %></p>
+
+  <%= form.input :role, 
+      label: "New Role",
+      collection: @select_roles,
+      prompt: "Select the new user role",
+      hint: "(↓) indicates a lower ranked role for the user, and (↑) indicates a higher ranked role"
+  %>
+
+  <hr/>
+  
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to Users index', manage_users_path, class: 'btn btn-info' %>
+  </div>
+<% end %>

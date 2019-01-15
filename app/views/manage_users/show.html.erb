@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Dashboard', dashboard_path %>
 <% elsif can? :read, 'ManageUsers' %>
-    <h2><%= @user.email.present? ? @user.email : @user.id %></h2>
+    <h2><%= @user.name.present? ? @user.name : @user.email %></h2>
     <div class="record-view">
         <div class="button-group">
             <%= link_to 'Edit this record', edit_manage_user_path(@user), class: 'btn btn-primary' %>
@@ -14,6 +14,11 @@
         <div class="field-pair row">
             <label class="col-sm-2">User ID</label>
             <div class="field-value col-sm-10"><%= @user.id %></div>
+        </div>
+
+        <div class="field-pair row">
+            <label class="col-sm-2">User name</label>
+            <div class="field-value col-sm-10"><%= @user.name %></div>
         </div>
 
         <div class="field-pair row">
@@ -32,6 +37,5 @@
             <%= link_to 'Edit this record', edit_manage_user_path(@user), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Users list', manage_users_path, class: 'btn btn-info' %>
         </div>
-
     </div>
 <% end %>

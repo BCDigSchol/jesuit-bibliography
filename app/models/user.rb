@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  before_create :set_default_role
+
+  # role is defined as an int
+  #             0       1                  2                  3               4          5
+  USER_ROLES = [:admin, :associate_editor, :assistant_editor, :correspondent, :standard, :guest].freeze
+
+  enum role: USER_ROLES
 
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :email, :name, :password, :password_confirmation
@@ -18,23 +25,24 @@ class User < ApplicationRecord
   end
 
   def get_role_name
-    role_name = ""
-
-    # role_name is determined by the highest role assigned
-    if self.admin_role?
-      role_name = "Administator"
-    elsif self.associate_editor_role?
-      role_name =  "Associate Editor"
-    elsif self.assistant_editor_role?
-      role_name =  "Assistant Editor"
-    elsif self.correspondent_role?
-      role_name = "Correspondent"
-    elsif self.guest?
-      role_name = "Guest"
-    else
-      role_name = "None"
-    end
-
-    role_name
+    self.role.sub("_", " ").capitalize
   end
+
+  def admin_role?
+    self.is_role? "admin"
+  end
+
+  def is_role? (role_given)
+    self.role == role_given
+  end
+
+  private
+    def set_default_role
+      # if our "guest" flag is set to 'true' then assign a role of 'guest'
+      if self.guest == true
+        self.role = :guest
+      else
+        self.role ||= :standard
+      end
+    end
 end

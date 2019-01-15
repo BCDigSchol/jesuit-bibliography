@@ -1,6 +1,6 @@
-email,password,name,admin_role,associate_editor_role,assistant_editor_role,correspondent_role,guest
-admin@test.com,password,Jimmy Admin,true,,,,
-associate_editor@test.com,password,Kimberly Associate-Ed,,true,,,
-assistant_editor@test.com,password,Sammy Assistant-Ed,,,true,,
-correspondent@test.com,password,Nancy Correspondent,,,,true,
-user@test.com,password,Joe User,,,,,
+email,password,name,role
+admin@test.com,password,Jimmy Admin,admin
+associate_editor@test.com,password,Kimberly Associate-Ed,associate_editor
+assistant_editor@test.com,password,Sammy Assistant-Ed,assistant_editor
+correspondent@test.com,password,Nancy Correspondent,correspondent
+user@test.com,password,Joe User,standard

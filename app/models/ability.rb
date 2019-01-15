@@ -8,7 +8,8 @@ class Ability
 
     # Role can:
     #   Everything
-    if user.admin_role?
+    #if user.admin_role?
+    if user.is_role? "admin"
       can :manage, :all
       can :access, :rails_admin     # only allow admin users to access Rails Admin
     end
@@ -18,15 +19,18 @@ class Ability
     #   Manage all Bib records
     #   Manage all term records
     #   Mark approve Bib records as reviewed
-    #   Manage Correspondents
-    #   Manage Assistant Editors
+    #   Manage Assistant Editor user accounts
+    #   Manage Correspondent user accounts
+    #   Manage Standard user accounts
     #   Manage Terms
     #   Manage Status
     #   Manage Suggestions
-    if user.associate_editor_role?
+    #if user.associate_editor_role?
+    if user.is_role? "associate_editor"
       can :read, 'ManageUsers'      # manage users
-      can :manage, 'Correspondents' # manage correspondents
-      can :manage, 'Assistants'     # manage assistant editors
+      can :manage, 'Assistants'     # manage assistant editors user accounts
+      can :manage, 'Correspondents' # manage correspondent user accounts
+      can :manage, 'Standards'      # manage stanard user accounts
       can :read, 'Dashboard'        # allow access to dashboard
       can :approve, Bibliography    # can approve record for publication
       can :manage, 'Terms'          # can access Term lists dropdown
@@ -49,9 +53,11 @@ class Ability
     #   Manage Correspondents
     #   Manage Terms
     #   Manage Status
-    if user.assistant_editor_role?
+    #if user.assistant_editor_role?
+    if user.is_role? "assistant_editor"
       can :read, 'ManageUsers'                      # manage users
-      can :manage, 'Correspondents'                 # manage correspondents
+      can :manage, 'Correspondents'                 # manage correspondent user accounts
+      can :manage, 'Standards'                      # manage stanard user accounts
       can :read, 'Dashboard'                        # allow access to dashboard
       can :manage, 'Terms'                          # can access Term lists dropdown
       can :manage, 'Status'                         # can manage record Status value
@@ -69,7 +75,8 @@ class Ability
     # Role can:
     #   Access Dashboard
     #   Create Bib records
-    if user.correspondent_role?
+    #if user.correspondent_role?
+    if user.is_role? "correspondent"
       can :read, 'Dashboard'        # allow access to dashboard
       can :create, Bibliography     # can create a new Bib record
     end

@@ -19,20 +19,20 @@
                     u.id
                 end
 
-                user.column name: 'Email', attribute: 'email' do |u|
-                    u.email
-                end
-
                 user.column name: 'Name', attribute: 'name' do |u|
                     u.name
                 end
 
-                user.column name: 'Created At' do |u|
-                    u.created_at
+                user.column name: 'Email', attribute: 'email' do |u|
+                    u.email
                 end
 
-                user.column name: 'Role', custom_filter: :auto  do |u|
+                user.column name: 'Role', attribute: 'role'  do |u|
                     u.get_role_name
+                end
+
+                user.column name: 'Created At' do |u|
+                    u.created_at
                 end
 
                 user.column do |u|

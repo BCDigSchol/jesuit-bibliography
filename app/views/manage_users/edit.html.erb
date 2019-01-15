@@ -1,5 +1,19 @@
-<p>Not yet coded</p>
+<% if @user.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Dashboard', dashboard_path %>
+<% elsif can? :read, 'ManageUsers' %>
 
-<div class="button-group">
-    <%= link_to 'Go Back to Users list', manage_users_path, class: 'btn btn-info' %>
-</div>
+    <h2 class="edit-label"><span class="header-label">Editing User:</span> <%= @user.name.present? ? @user.name : @user.email %></h2>
+
+    <%# Adding notice flash div so redirects will display some error message since @user.messages isn't passed along %>
+    <% if notice.present? %>
+        <div class="panel panel-danger" id="error_explanation">
+            <div class="panel-heading">An error prohibited this User record from being saved:</div>
+            <div class="panel-body">
+                <%= notice %>
+            </div>
+        </div>
+    <% end %>
+
+    <%= render 'form', urlpath: manage_user_path %>
+<% end %>
