@@ -29,35 +29,11 @@ class ManageUsersController < ApplicationController
     def edit
         @select_roles = []
         if !@user.nil?
-
-            # get the index of the user's role from USER_ROLES
-            user_role_index = User::USER_ROLES.index(@user.role.to_sym)
-
-            # For each of the roles the current_user can manage, collect the roles for the view dropdown
-            if can? :manage, 'Associates'
-                my_role_index = User::USER_ROLES.index(:associate_editor) #1
-                label = "Associate Editor #{get_role_rank_string(user_role_index, my_role_index)}"
-                @select_roles << [label, :associate_editor]
-            end
-            if can? :manage, 'Assistants'
-                my_role_index = User::USER_ROLES.index(:assistant_editor) #2
-                label = "Assistant Editor #{get_role_rank_string(user_role_index, my_role_index)}"
-                @select_roles << [label, :assistant_editor]
-            end
-            if can? :manage, 'Correspondents'
-                my_role_index = User::USER_ROLES.index(:correspondent) #3
-                label = "Correspondent #{get_role_rank_string(user_role_index, my_role_index)}"
-                @select_roles << [label, :correspondent]
-            end
-            if can? :manage, 'Standards'
-                my_role_index = User::USER_ROLES.index(:standard) #4
-                label = "Standard #{get_role_rank_string(user_role_index, my_role_index)}"
-                @select_roles << [label, :standard]
-            end
-
-            my_role_index = User::USER_ROLES.index(:guest) #5
-            label = "Guest #{get_role_rank_string(user_role_index, my_role_index)}"
-            @select_roles << [label, :guest]
+            puts "\n\nHERE! user is NOT nil\n\n"
+            @select_roles = generate_selected_roles
+        else 
+            puts "\n\nHERE! user is nil\n\n"
+            @select_roles << "foo"
         end
 
         @select_roles
@@ -69,37 +45,25 @@ class ManageUsersController < ApplicationController
 
         select_from_roles = selectable_roles
 
+        #@user.check_if_can_alter_role(select_from_roles, "foo".to_sym)
+
         # check that the new role submitted is inside the list of roles this user can manage
         # TODO move validation logic into model
-        if !select_from_roles.include? user_attributes[:role].to_sym
+      
+        if @user.update(user_attributes)
             respond_to do |format|
-                #@user.errors.add(:role, "must be selected from the dropdown")
-                #format.html { render :edit }
-
-                flash[:notice] = 'User Role value must be selected from the dropdown'
-                format.html { redirect_to edit_manage_user_path }
-                format.json { render json: @user.errors, status: :unprocessable_user }
+                format.html { redirect_to manage_user_path(@user), notice: 'User was successfully updated.' }
+                format.json { render :show, status: :ok, location: @user }
             end
-        elsif user_attributes[:role].empty?
+        else
+            puts "\n\nSomething wasn't right\n\n"
             respond_to do |format|
-                #@user.errors.add(:role, "cannot be empty!")
-                #format.html { render :edit }
-
-                flash[:notice] = 'User Role cannot be empty'
-                format.html { redirect_to edit_manage_user_path }
+                # reset all values for re-rendering
+                set_user
+                @select_roles = generate_selected_roles
+                
+                format.html { render :edit }
                 format.json { render json: @user.errors, status: :unprocessable_user }
-            end 
-        else 
-            if @user.update(user_attributes)
-                respond_to do |format|
-                    format.html { redirect_to manage_user_path(@user), notice: 'User was successfully updated.' }
-                    format.json { render :show, status: :ok, location: @user }
-                end
-            else
-                respond_to do |format|
-                    format.html { render :edit }
-                    format.json { render json: @user.errors, status: :unprocessable_user }
-                end
             end
         end
     end
@@ -124,6 +88,40 @@ class ManageUsersController < ApplicationController
             rescue ActiveRecord::RecordNotFound => e
                 @user = nil
             end
+        end
+
+        def generate_selected_roles
+            select_roles = []
+            # get the index of the user's role from USER_ROLES
+            user_role_index = User::USER_ROLES.index(@user.role.to_sym)
+
+            # For each of the roles the current_user can manage, collect the roles for the view dropdown
+            if can? :manage, 'Associates'
+                my_role_index = User::USER_ROLES.index(:associate_editor) #1
+                label = "Associate Editor #{get_role_rank_string(user_role_index, my_role_index)}"
+                select_roles << [label, :associate_editor]
+            end
+            if can? :manage, 'Assistants'
+                my_role_index = User::USER_ROLES.index(:assistant_editor) #2
+                label = "Assistant Editor #{get_role_rank_string(user_role_index, my_role_index)}"
+                select_roles << [label, :assistant_editor]
+            end
+            if can? :manage, 'Correspondents'
+                my_role_index = User::USER_ROLES.index(:correspondent) #3
+                label = "Correspondent #{get_role_rank_string(user_role_index, my_role_index)}"
+                select_roles << [label, :correspondent]
+            end
+            if can? :manage, 'Standards'
+                my_role_index = User::USER_ROLES.index(:standard) #4
+                label = "Standard #{get_role_rank_string(user_role_index, my_role_index)}"
+                select_roles << [label, :standard]
+            end
+
+            my_role_index = User::USER_ROLES.index(:guest) #5
+            label = "Guest #{get_role_rank_string(user_role_index, my_role_index)}"
+            select_roles << [label, :guest]
+
+            select_roles
         end
 
         def selectable_roles 

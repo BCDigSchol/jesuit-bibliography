@@ -1,5 +1,10 @@
 class User < ApplicationRecord
+  #delegate :can?, :cannot?, to: :ability
   before_create :set_default_role
+
+  validates :role, presence: true
+  validates :email, presence: true
+  validate :uses_known_user_roles
 
   # role is defined as an int
   #             0       1                  2                  3               4          5
@@ -25,7 +30,11 @@ class User < ApplicationRecord
   end
 
   def get_role_name
-    self.role.sub("_", " ").capitalize
+    if self.role.present?
+      self.role.sub("_", " ").capitalize
+    else
+      ""
+    end
   end
 
   def admin_role?
@@ -36,7 +45,17 @@ class User < ApplicationRecord
     self.role == role_given
   end
 
+  def check_if_can_alter_role(good_roles, given_role)
+    puts "\n\n#{good_roles}"
+    puts "#{given_role.to_sym}\n\n"
+    errors.add(:role, "is not a role that is valid") unless good_roles.include?(given_role.to_sym)
+  end
+
   private
+    #def ability
+    #  @ability ||= Ability.new(self)
+    #end
+
     def set_default_role
       # if our "guest" flag is set to 'true' then assign a role of 'guest'
       if self.guest == true
@@ -44,5 +63,9 @@ class User < ApplicationRecord
       else
         self.role ||= :standard
       end
+    end
+
+    def uses_known_user_roles
+      errors.add(:role, "is not a valid choice") unless USER_ROLES.include?(self.role)
     end
 end
