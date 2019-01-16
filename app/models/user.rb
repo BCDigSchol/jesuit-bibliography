@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create :set_default_role
+  before_validation :set_default_role
 
   validates :role, presence: true
   validates :email, presence: true
@@ -8,6 +8,13 @@ class User < ApplicationRecord
   # role is defined as an int
   #             0       1                  2                  3               4          5
   USER_ROLES = [:admin, :associate_editor, :assistant_editor, :correspondent, :standard, :guest].freeze
+
+  # descriptions of role types
+  ADMIN_ROLE_DESCRIPTION = "The admin role can manage all aspects of the site.".freeze
+  ASSOCIATE_EDITOR_ROLE_DESCRIPTION = "The Associate editor role can create, edit and publish any records. This role can also manage internal term lists, including suggested terms".freeze
+  ASSISTANT_EDITOR_ROLE_DESCRIPTION = "The Assistant editor role can create and edit all citation records, but not publish any records. This role can also view internal term lists.".freeze
+  CORRESPONDENT_ROLE_DESCRIPTION = "The Correspondent role can create citation records, and can edit their own records until an editor sets the record to a 'published' status.".freeze
+  STANDARD_ROLE_DESCRIPTION = "The standard role can only use the BlackLight interface and does not have access to submit or edit citation records.".freeze
 
   enum role: USER_ROLES
 
@@ -44,6 +51,7 @@ class User < ApplicationRecord
     self.role == role_given
   end
 
+  # not implemented
   def check_if_can_alter_role(good_roles, given_role)
     errors.add(:role, "is not a role that is valid") unless good_roles.include?(given_role.to_sym)
   end

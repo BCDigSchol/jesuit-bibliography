@@ -24,6 +24,7 @@ class Ability
     #   Manage Standard user accounts
     #   Manage Terms
     #   Manage Status
+    #   Manage setting a record to 'Publish' status
     #   Manage Suggestions
     #if user.associate_editor_role?
     if user.is_role? "associate_editor"
@@ -35,6 +36,7 @@ class Ability
       can :approve, Bibliography    # can approve record for publication
       can :manage, 'Terms'          # can access Term lists dropdown
       can :manage, 'Status'         # can manage record Status value
+      can :manage, 'Publish'        # can set a record to 'published' status
       can :manage, 'Suggestions'    # can manage Suggestions
       can :manage, Location         # can manage Location Term lists
       can :manage, Subject          # can manage Subject Term lists

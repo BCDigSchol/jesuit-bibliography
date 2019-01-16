@@ -1,51 +1,61 @@
-<%= simple_form_for @user, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
+<div id="user-role-form" class="col-md-8">
+  <%= simple_form_for @user, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
 
-  <div class="button-group">
-    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
-    <%= link_to 'Go Back to User index', manage_users_path, class: 'btn btn-info' %>
-  </div>
-
-  <hr/>
-
-  <% if @user.errors.any? %>
-  <div class="panel panel-danger" id="error_explanation">
-    <div class="panel-heading"><%= pluralize(@user.errors.count, "error") %> prohibited this User record from being updated:</div>
-    <div class="panel-body">
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="button-group">
+      <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+      <%= link_to 'Go Back to User index', manage_users_path, class: 'btn btn-info' %>
     </div>
-  </div>
+
+    <hr/>
+
+    <% if @user.errors.any? %>
+    <div class="panel panel-danger" id="error_explanation">
+      <div class="panel-heading"><%= pluralize(@user.errors.count, "error") %> prohibited this User record from being updated:</div>
+      <div class="panel-body">
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="form-group row string optional bibliography_year_published form-group-valid">
+      <div class="col-sm-2 col-form-label-static">User email</div>
+      <div class="col-sm-10 static-value"><%= @user.email %></div>
+    </div>
+
+    <div class="form-group row string optional bibliography_year_published form-group-valid">
+      <div class="col-sm-2 col-form-label-static">User name</div>
+      <div class="col-sm-10 static-value"><%= @user.name %></div>
+    </div>
+
+    <div class="form-group row string optional bibliography_year_published form-group-valid">
+      <div class="col-sm-2 col-form-label-static">Current User role</div>
+      <div class="col-sm-10 static-value"><%= @user.get_role_name %></div>
+    </div>
+
+    <%= form.input :role, 
+        label: "New Role",
+        collection: @role_options,
+        prompt: "Select the new user role",
+        hint: "(↓) indicates a lower ranked role for the user, and (↑) indicates a higher ranked role"
+    %>
+
+    <hr/>
+    
+    <div class="button-group">
+      <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+      <%= link_to 'Go Back to Users index', manage_users_path, class: 'btn btn-info' %>
+    </div>
   <% end %>
+</div>
 
-  <div class="form-group row string optional bibliography_year_published form-group-valid">
-    <div class="col-sm-2 col-form-label-static">User email</div>
-    <div class="col-sm-10 static-value"><%= @user.email %></div>
-  </div>
-
-  <div class="form-group row string optional bibliography_year_published form-group-valid">
-    <div class="col-sm-2 col-form-label-static">User name</div>
-    <div class="col-sm-10 static-value"><%= @user.name %></div>
-  </div>
-
-  <div class="form-group row string optional bibliography_year_published form-group-valid">
-    <div class="col-sm-2 col-form-label-static">Current User role</div>
-    <div class="col-sm-10 static-value"><%= @user.get_role_name %></div>
-  </div>
-
-  <%= form.input :role, 
-      label: "New Role",
-      collection: @role_options,
-      prompt: "Select the new user role",
-      hint: "(↓) indicates a lower ranked role for the user, and (↑) indicates a higher ranked role"
-  %>
-
-  <hr/>
-  
-  <div class="button-group">
-    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
-    <%= link_to 'Go Back to Users index', manage_users_path, class: 'btn btn-info' %>
-  </div>
-<% end %>
+<div id="user-role-descriptions" class="col-md-4">
+  <h3>Role descriptions</h3>
+  <% @roles_current_user_can_manage.each do |role| %>
+    <h4><%= role_pretty_display(role) %></h4>
+    <p class="role-description"><%= @role_descriptions[role] %></p>
+  <% end %>
+</div>

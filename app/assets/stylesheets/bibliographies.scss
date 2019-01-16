@@ -212,6 +212,23 @@
         }
     }
 
+    .top-message {
+        margin: 3rem 0;
+        .list {
+            margin-bottom: 2rem;
+        }
+    }
+
+    #user-role-descriptions {
+        h3 {
+            padding-bottom: .75rem;
+            border-bottom: 1px solid #aaa;
+        }
+        h3, h4 {
+            padding-top: 1rem;
+        }
+    }
+
     .footer-old {
         width: 100%;
         height: 60px;

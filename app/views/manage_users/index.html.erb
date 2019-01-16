@@ -5,7 +5,17 @@
         <%= link_to new_user_registration_path , class: 'login-button btn btn-primary' do %>Register<% end %>
     <% elsif can? :read, 'ManageUsers' %>
         <h2>User Management</h2>
+        <h3>Update Users' roles</h3>
 
+        <div class="top-message">
+            <p>Your account allows you to manage users with the following role types:<p>
+            <ul class="list">
+            <% @roles_current_user_can_manage.each do |role| %>
+                <li><%= role_pretty_display(role) %></li>
+            <% end %>
+            </ul>
+        </div>
+        
         <div class="button-group">
             <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
         </div>
