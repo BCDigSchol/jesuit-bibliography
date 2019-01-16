@@ -459,8 +459,6 @@ class BibliographiesController < ApplicationController
                 @status_list = Bibliography::STATUS_LIST - ['published']
             end
 
-            puts "\n\nstatus list: #{@status_list}\n\n"
-
             @status_list
         end
 
