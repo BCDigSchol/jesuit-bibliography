@@ -5,6 +5,7 @@ class BibliographiesController < ApplicationController
     before_action :require_login
     before_action :authenticate_user!
     before_action :set_bib, only: [:show, :edit, :update, :destroy]
+    #after_action :generate_record_status_list, only: [:new, :edit, :update, :form_partial]
     before_action :get_current_user
 
     layout 'bibliography'
@@ -81,6 +82,7 @@ class BibliographiesController < ApplicationController
         @bib.dissertation_university_urls.build
 
         @reference_type = nil
+        generate_record_status_list
     end
 
     def edit
@@ -234,6 +236,7 @@ class BibliographiesController < ApplicationController
             end
 
             @reference_type = @bib.reference_type
+            generate_record_status_list
         end
     end
 
@@ -295,6 +298,8 @@ class BibliographiesController < ApplicationController
 
         @bib.modified_by = current_user
 
+        generate_record_status_list
+
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
         @bib.comments.each do |comment|
@@ -343,6 +348,8 @@ class BibliographiesController < ApplicationController
             set_bib
             edit
         end
+        
+        generate_record_status_list
 
         @form_partial = params[:reference_type]
         respond_to do |format|
@@ -440,6 +447,21 @@ class BibliographiesController < ApplicationController
 
         def get_current_user
             @this_user = current_user
+        end
+
+        def generate_record_status_list
+            @status_list = []
+            if can? :manage, 'Publish'
+                @status_list = Bibliography::STATUS_LIST
+            elsif @bib.status == 'published'
+                @status_list = Bibliography::STATUS_LIST
+            else
+                @status_list = Bibliography::STATUS_LIST - ['published']
+            end
+
+            puts "\n\nstatus list: #{@status_list}\n\n"
+
+            @status_list
         end
 
         def bib_params

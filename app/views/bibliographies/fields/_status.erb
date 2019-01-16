@@ -1,6 +1,7 @@
 <%= form.input :status, 
     label: 'Status',
-    collection: Bibliography::STATUS_LIST,
+    #collection: Bibliography::STATUS_LIST,
+    collection: @status_list,
     include_blank: 'Select a status',
     hint: Bibliography::STATUS_FIELD_HINT
 %>
