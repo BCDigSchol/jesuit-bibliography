@@ -4,9 +4,11 @@
         <%= link_to new_user_session_path, class: 'login-button btn btn-primary' do %>Sign in<% end %>
         <%= link_to new_user_registration_path , class: 'login-button btn btn-primary' do %>Register<% end %>
     <% elsif can? :read, 'ManageUsers' %>
-        <h1>User Management</h1>
-        <p><%= @role_message %></p>
-        <p><%= @foo %></p>
+        <h2>User Management</h2>
+
+        <div class="button-group">
+            <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+        </div>
 
         <div class="citations-list mine-list">
             <%= grid(@users_grid,
@@ -41,6 +43,10 @@
                 end
 
             end -%>
+
+        <div class="button-group">
+            <%= link_to 'Go Back to Dashboard', dashboard_path, class: 'btn btn-info' %>
+        </div>
 
     <% else %>
         <%= render 'bibliographies/not_permitted' %>
