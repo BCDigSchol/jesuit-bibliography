@@ -11,12 +11,13 @@ class ManageUsersController < ApplicationController
     def index
         authorize! :read, 'ManageUsers', :message => "Unable to load this page."
 
-        conditional_roles = selectable_roles
+        # check current_user's permissions and select the roles that are available to set
+        @roles_current_user_can_manage = generate_roles_current_user_can_manage
 
-        if !conditional_roles.empty?
+        if !@roles_current_user_can_manage.empty?
             @role_message = "current user role: #{current_user.role}"
             @users_grid = initialize_grid(User,
-                conditions:      {role: conditional_roles},
+                conditions:      {role: @roles_current_user_can_manage},
                 order:           'users.name',
                 order_direction: 'asc'
             )
@@ -27,44 +28,51 @@ class ManageUsersController < ApplicationController
     end
 
     def edit
-        @select_roles = []
+        @role_options = []
         if !@user.nil?
-            puts "\n\nHERE! user is NOT nil\n\n"
-            @select_roles = generate_selected_roles
-        else 
-            puts "\n\nHERE! user is nil\n\n"
-            @select_roles << "foo"
+            # generate the array of roles for the edit screen options list
+            @role_options = generate_role_options
         end
 
-        @select_roles
+        @role_options
     end
 
     def update
         # copy over user_params into user_attributes so we can alter it
         user_attributes = user_params
 
-        select_from_roles = selectable_roles
+        # HACK check that the new role submitted is included in @roles_current_user_can_manage
+        if is_selected_role_valid?(@roles_current_user_can_manage, user_attributes[:role])
+            if @user.update(user_attributes)
+                respond_to do |format|
+                    format.html { redirect_to manage_user_path(@user), notice: 'User was successfully updated.' }
+                    format.json { render :show, status: :ok, location: @user }
+                end
+            else
+                respond_to do |format|
+                    # HACK reset all values for re-rendering
+                    @old_user = @user.clone
+                    set_user
+                    @user.errors.merge!(@old_user.errors)
 
-        #@user.check_if_can_alter_role(select_from_roles, "foo".to_sym)
-
-        # check that the new role submitted is inside the list of roles this user can manage
-        # TODO move validation logic into model
-      
-        if @user.update(user_attributes)
-            respond_to do |format|
-                format.html { redirect_to manage_user_path(@user), notice: 'User was successfully updated.' }
-                format.json { render :show, status: :ok, location: @user }
+                    @role_options = generate_role_options
+                    
+                    format.html { render :edit }
+                    format.json { render json: @user.errors, status: :unprocessable_user }
+                end
             end
         else
-            puts "\n\nSomething wasn't right\n\n"
-            respond_to do |format|
-                # reset all values for re-rendering
-                set_user
-                @select_roles = generate_selected_roles
-                
-                format.html { render :edit }
-                format.json { render json: @user.errors, status: :unprocessable_user }
-            end
+             # TODO move this logic into model if possible
+             # HACK reset all values for re-rendering
+             @old_user = @user.clone
+             set_user
+             @user.errors.merge!(@old_user.errors)
+ 
+             @role_options = generate_role_options
+             respond_to do |format|
+                 format.html { render :edit }
+                 format.json { render json: @user.errors, status: :unprocessable_user }
+             end
         end
     end
 
@@ -72,8 +80,11 @@ class ManageUsersController < ApplicationController
         def set_user
             begin
                 authorize! :read, 'ManageUsers', :message => "Unable to load this page."
+
                 grab_user = User.find(params[:id])
 
+                # make sure we can access the selected user account.
+                # this is based on cancancan ability settings.
                 if can? :manage, 'Associates' and grab_user.is_role? "associate_editor"
                     @user = grab_user
                 elsif can? :manage, 'Assistants' and grab_user.is_role? "assistant_editor"
@@ -88,71 +99,54 @@ class ManageUsersController < ApplicationController
             rescue ActiveRecord::RecordNotFound => e
                 @user = nil
             end
+
+            # create an array of roles the current_user can manage
+            @roles_current_user_can_manage = generate_roles_current_user_can_manage
         end
 
-        def generate_selected_roles
-            select_roles = []
-            # get the index of the user's role from USER_ROLES
+        def generate_role_options
+            # first, check that @roles_current_user_can_manage exists.
+            # this method is called in the set_user before_action callback so it should already be active
+            @roles_current_user_can_manage ||= generate_roles_current_user_can_manage
+
             user_role_index = User::USER_ROLES.index(@user.role.to_sym)
 
-            # For each of the roles the current_user can manage, collect the roles for the view dropdown
-            if can? :manage, 'Associates'
-                my_role_index = User::USER_ROLES.index(:associate_editor) #1
-                label = "Associate Editor #{get_role_rank_string(user_role_index, my_role_index)}"
-                select_roles << [label, :associate_editor]
-            end
-            if can? :manage, 'Assistants'
-                my_role_index = User::USER_ROLES.index(:assistant_editor) #2
-                label = "Assistant Editor #{get_role_rank_string(user_role_index, my_role_index)}"
-                select_roles << [label, :assistant_editor]
-            end
-            if can? :manage, 'Correspondents'
-                my_role_index = User::USER_ROLES.index(:correspondent) #3
-                label = "Correspondent #{get_role_rank_string(user_role_index, my_role_index)}"
-                select_roles << [label, :correspondent]
-            end
-            if can? :manage, 'Standards'
-                my_role_index = User::USER_ROLES.index(:standard) #4
-                label = "Standard #{get_role_rank_string(user_role_index, my_role_index)}"
-                select_roles << [label, :standard]
-            end
+            select_roles = []
 
-            my_role_index = User::USER_ROLES.index(:guest) #5
-            label = "Guest #{get_role_rank_string(user_role_index, my_role_index)}"
-            select_roles << [label, :guest]
+            # loop through list of roles the current_user can manage and generate an options list for the edit form
+            @roles_current_user_can_manage.each do |role|
+                my_role_index = User::USER_ROLES.index(role)
+                label = "#{role.to_s.sub("_", " ").capitalize} #{get_role_rank_string(user_role_index, my_role_index)}"
+                select_roles << [label, role]
+            end
 
             select_roles
         end
 
-        def selectable_roles 
-            # check cancancan abilitites to determine which user accounts to grab
-            select_from_roles = []
+        # check cancancan abilitites to determine which roles the current_user can access
+        def generate_roles_current_user_can_manage 
+            roles = []
             if can? :manage, 'Associates'
-                select_from_roles << :associate_editor
+                roles << :associate_editor
             end
             if can? :manage, 'Assistants'
-                select_from_roles << :assistant_editor
+                roles << :assistant_editor
             end
             if can? :manage, 'Correspondents'
-                select_from_roles << :correspondent
+                roles << :correspondent
             end
             if can? :manage, 'Standards'
-                select_from_roles << :standard
+                roles << :standard
             end
+            #if can? :manage, 'Guests'
+            #    roles << :guest
+            #end
 
-            select_from_roles
+            roles
         end
 
-        def check_user_role_permission
-            # get a list of roles that the current_user can manage
-            select_from_roles = selectable_roles
-
-            # check that the new role submitted is inside the list of roles this user can manage
-            if !select_from_roles.include? :role
-                errors.add(:role, :not_valid, message: "This is not a valid role for this user")
-            end
-        end
-
+        # generate string that displays up or down arrows to indicate the rank of all other roles  
+        # relative to the selected user's role
         def get_role_rank_string(user_role_index, given_role_index)
             unless user_role_index.is_a? Integer and user_role_index >= 0 and given_role_index.is_a? Integer and given_role_index >= 0
                 return nil
@@ -172,6 +166,17 @@ class ManageUsersController < ApplicationController
             end
 
             rank_string
+        end
+
+        # check if the role selected by the user is within the list of possible roles allowed
+        def is_selected_role_valid?(managed_roles, selected_role)
+            # TODO sanity check params
+            if managed_roles.include?(selected_role.to_sym) 
+                return true
+            else
+                @user.errors.add(:role, "must be selected from the options given")
+                return false
+            end
         end
 
         def user_params

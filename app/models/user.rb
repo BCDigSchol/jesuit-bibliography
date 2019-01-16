@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  #delegate :can?, :cannot?, to: :ability
   before_create :set_default_role
 
   validates :role, presence: true
@@ -46,16 +45,10 @@ class User < ApplicationRecord
   end
 
   def check_if_can_alter_role(good_roles, given_role)
-    puts "\n\n#{good_roles}"
-    puts "#{given_role.to_sym}\n\n"
     errors.add(:role, "is not a role that is valid") unless good_roles.include?(given_role.to_sym)
   end
 
   private
-    #def ability
-    #  @ability ||= Ability.new(self)
-    #end
-
     def set_default_role
       # if our "guest" flag is set to 'true' then assign a role of 'guest'
       if self.guest == true
@@ -65,7 +58,8 @@ class User < ApplicationRecord
       end
     end
 
+    # sanity check to make sure we're not assigning roles to an arbitrary string
     def uses_known_user_roles
-      errors.add(:role, "is not a valid choice") unless USER_ROLES.include?(self.role)
+      errors.add(:role, "is not a valid choice") unless USER_ROLES.include?(self.role.to_sym)
     end
 end
