@@ -1,5 +1,5 @@
 <div id="book_chapter_form" class="bib_form">
-<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
+<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true do |form| %>
 
     <h3 class="edit-label"><span class="header-label">Reference Type:</span> Book chapter</h3>
 

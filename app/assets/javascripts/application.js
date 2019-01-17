@@ -28,6 +28,9 @@
 //= require bootstrap-datepicker/core
 //= require select2
 //= require tinymce
+//= require rails.validations
+//= require rails.validations.simple_form
+//= require rails.validations.nested_form
 //= require_tree .
 
 // For blacklight_range_limit built-in JS, if you don't want it you don't need

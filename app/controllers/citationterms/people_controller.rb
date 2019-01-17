@@ -71,7 +71,7 @@ class Citationterms::PeopleController < ApplicationController
             person_attributes[:display_name] = @person.name
         end
 
-        if @person.update!(person_attributes)
+        if @person.update(person_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_person_path(@person), notice: 'Person was successfully updated.' }
                 format.json { render :show, status: :ok, location: @person }

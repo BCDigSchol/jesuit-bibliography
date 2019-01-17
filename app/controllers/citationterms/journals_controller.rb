@@ -70,7 +70,7 @@ class Citationterms::JournalsController < ApplicationController
             journal_attributes[:display_name] = @journal.name
         end
 
-        if @journal.update!(journal_attributes)
+        if @journal.update(journal_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_journal_path(@journal), notice: 'Journal was successfully updated.' }
                 format.json { render :show, status: :ok, location: @journal }

@@ -115,7 +115,7 @@ class Bibliography < ApplicationRecord
 
     validates :reference_type, presence: true
     # some records will not have a title
-    # validates :title, presence: true
+    validates :title, presence: true
 
     searchable :if => :published do
         integer :id

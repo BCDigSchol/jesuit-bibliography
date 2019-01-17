@@ -1,4 +1,4 @@
-<%= simple_form_for @journal, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
+<%= simple_form_for @journal, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true  do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save record", class: "btn btn-primary" %>

@@ -70,7 +70,7 @@ class Citationterms::EntitiesController < ApplicationController
             entity_attributes[:display_name] = @entity.name
         end
 
-        if @entity.update!(entity_attributes)
+        if @entity.update(entity_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_entity_path(@entity), notice: 'Entity was successfully updated.' }
                 format.json { render :show, status: :ok, location: @entity }

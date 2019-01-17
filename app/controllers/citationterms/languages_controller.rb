@@ -58,7 +58,7 @@ class Citationterms::LanguagesController < ApplicationController
         # update modified_by
         language_attributes[:modified_by] = current_user
 
-        if @language.update!(language_attributes)
+        if @language.update(language_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_language_path(@language), notice: 'Language was successfully updated.' }
                 format.json { render :show, status: :ok, location: @language }

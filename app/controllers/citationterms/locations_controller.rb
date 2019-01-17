@@ -66,7 +66,7 @@ class Citationterms::LocationsController < ApplicationController
             location_attributes[:sort_name] = @location.name
         end
 
-        if @location.update!(location_attributes)
+        if @location.update(location_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_location_path(@location), notice: 'Location was successfully updated.' }
                 format.json { render :show, status: :ok, location: @location }

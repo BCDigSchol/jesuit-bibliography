@@ -65,7 +65,7 @@ class Citationterms::SubjectsController < ApplicationController
             subject_attributes[:sort_name] = @subject.name
         end
 
-        if @subject.update!(subject_attributes)
+        if @subject.update(subject_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_subject_path(@subject), notice: 'Subject was successfully updated.' }
                 format.json { render :show, status: :ok, location: @subject }

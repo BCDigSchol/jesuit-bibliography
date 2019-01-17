@@ -65,7 +65,7 @@ class Citationterms::PeriodsController < ApplicationController
             period_attributes[:sort_name] = @period.name
         end
 
-        if @period.update!(period_attributes)
+        if @period.update(period_attributes)
             respond_to do |format|
                 format.html { redirect_to citationterms_period_path(@period), notice: 'Period was successfully updated.' }
                 format.json { render :show, status: :ok, location: @period }
