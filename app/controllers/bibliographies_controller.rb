@@ -278,6 +278,10 @@ class BibliographiesController < ApplicationController
             end
         else
             respond_to do |format|
+                # reload reference_type and list of valid status terms for current_user
+                @reference_type = @bib.reference_type
+                generate_record_status_list
+
                 format.html { render :new }
                 format.json { render json: @bib.errors, status: :unprocessable_entity }
             end
@@ -318,13 +322,17 @@ class BibliographiesController < ApplicationController
             end
         end
 
-        if @bib.save!(bib_params)
+        if @bib.save(bib_params)
             respond_to do |format|
                 format.html { redirect_to @bib, notice: 'Bibliography was successfully updated.' }
                 format.json { render :show, status: :ok, location: @bib }
             end
         else
             respond_to do |format|
+                # reload reference_type and list of valid status terms for current_user
+                @reference_type = @bib.reference_type
+                generate_record_status_list
+
                 format.html { render :edit }
                 format.json { render json: @bib.errors, status: :unprocessable_entity }
             end
@@ -348,8 +356,6 @@ class BibliographiesController < ApplicationController
             set_bib
             edit
         end
-        
-        generate_record_status_list
 
         @form_partial = params[:reference_type]
         respond_to do |format|

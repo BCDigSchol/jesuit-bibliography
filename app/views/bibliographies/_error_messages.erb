@@ -1,0 +1,12 @@
+<% if @bib.errors.any? %>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@bib.errors.count, "error") %> prohibited this record from being saved:</div>
+    <div class="panel-body">
+      <ul>
+        <% @bib.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

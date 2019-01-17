@@ -4,6 +4,8 @@
 <% elsif can? :edit, Bibliography or (creator_match? @this_user.email, @bib.created_by and @bib.status != Bibliography::PUBLISHED_STATUS) %>
     <h2 class="edit-label"><span class="header-label">Editing:</span> <%= @bib.display_title %></h2>
 
+    <%= render 'bibliographies/error_messages' %>
+
     <%= render 'form' %>
 <% else %>
     <%= render 'not_permitted' %>

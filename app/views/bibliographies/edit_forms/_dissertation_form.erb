@@ -3,20 +3,6 @@
 
     <h3 class="edit-label"><span class="header-label">Reference Type:</span> Dissertation</h3>
 
-    <% if @bib.errors.any? %>
-        <div id="error_explanation">
-        <h4>
-            <%= pluralize(@bib.errors.count, "error") %> prohibited
-            this article from being saved:
-        </h4>
-        <ul>
-            <% @bib.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-        </ul>
-        </div>
-    <% end %>
-
     <div class="button-group">
         <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
         <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
