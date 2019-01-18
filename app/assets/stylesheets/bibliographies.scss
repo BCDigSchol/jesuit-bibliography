@@ -32,6 +32,19 @@
     .header-label {
         color: #000;
     }
+    .error-panel {
+        margin-top: 3rem;
+    }
+    .record-loading-message {
+        font-size: 30px;
+        padding: 4rem 0 0 0;
+        margin: .5rem 0;
+        line-height: 1;
+        p {
+            width: 200px;
+            margin: 0 auto;
+        }
+    }
 
     #bib_form_container {
         h3.edit-label {
@@ -40,6 +53,9 @@
         }
         .dashboard-btn {
             margin-top: 3rem;
+        }
+        .is-invalid {
+            border: 2px solid red;
         }
     }
 

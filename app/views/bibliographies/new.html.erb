@@ -1,7 +1,11 @@
 <h1>Add New Citation</h1>
 
 <% if can? :create, Bibliography %>
+    <%= render 'bibliographies/error_messages' %>
+
     <%= render 'form' %>
+
+    <%= render 'bibliographies/error_messages' %>
 <% else %>
   <%= render 'not_permitted' %>
 <% end %>

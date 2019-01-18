@@ -1,5 +1,6 @@
+<%# backend-based validation error details %>
 <% if @bib.errors.any? %>
-  <div class="panel panel-danger" id="error_explanation">
+  <div class="panel panel-danger error-panel" id="error_explanation">
     <div class="panel-heading"><%= pluralize(@bib.errors.count, "error") %> prohibited this record from being saved:</div>
     <div class="panel-body">
       <ul>
@@ -10,3 +11,10 @@
     </div>
   </div>
 <% end %>
+
+<%# clientside-based form validation error details %>
+<div class="panel panel-danger error-panel error-panel-clientside" id="error_explanation_clientside" style="display:none;">
+  <div class="panel-heading">An error prohibited this record from being saved:</div>
+  <div class="panel-body">
+  </div>
+</div>

@@ -12,7 +12,13 @@
 </div>
 
 <div id="bib_form_container">
-  <p><%= link_to 'Go Back to Dashboard', dashboard_path, class: "dashboard-btn btn btn-info" %></p>
+  <div class="button-group">
+    <%= link_to 'Go Back to Dashboard', dashboard_path, class: "dashboard-btn btn btn-info" %>
+  </div>
+</div>
+
+<div class="record-loading-message" style="display:none;">
+    <p>Loading... <i class="fa fa-compact-disc fa-spin"></i></p>
 </div>
 
 <script>
@@ -23,8 +29,26 @@
       bib_id = "new";
     }
 
+    function hide_controls() {
+      // remove dropdown on non-new record views
+      if (bib_id != "new") {
+        $("#select_form").hide();
+      }
+      $('.button-group').hide();
+      $('.bib_form').hide();
+      toggle_message();
+    }
+
+    function toggle_message() {
+      $('.record-loading-message').toggle();
+    }
+
     function get_partial(bib_id, bib_type) {
-      $.ajax({ url: '/form_partial/' + bib_id + '/' + bib_type});
+      $.ajax({ 
+        url: '/form_partial/' + bib_id + '/' + bib_type, 
+        beforeSend: hide_controls
+      })
+      .done(toggle_message);
     }
 
     // check if this record has a reference type
@@ -32,9 +56,6 @@
     var bib_name = "<%= @reference_type %>";
 
     if (bib_name && bib_name.length) {
-      // remove dropdown
-      $("#select_form").remove();
-
       // convert reference_type to bib_type format
       // e.g. "Book review" => "book_review_form"
       var bib_type = bib_name.replace(/\s+/g, '_').toLowerCase() +  "_form";
