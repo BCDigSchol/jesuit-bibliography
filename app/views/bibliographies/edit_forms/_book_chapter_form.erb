@@ -27,7 +27,9 @@
     
     <%= form.input :chapter_title, 
         label: 'Chapter Title', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= render 'bibliographies/fields/book_editor', :form => form, field_label: 'Book Editor' %>

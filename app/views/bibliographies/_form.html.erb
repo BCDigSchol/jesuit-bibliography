@@ -23,8 +23,6 @@
       bib_id = "new";
     }
 
-    console.log("bib_id: " + bib_id);
-
     function get_partial(bib_id, bib_type) {
       $.ajax({ url: '/form_partial/' + bib_id + '/' + bib_type});
     }
@@ -33,12 +31,7 @@
     // and display the proper form partial
     var bib_name = "<%= @reference_type %>";
 
-    console.log("bib_name: " + bib_name);
-
     if (bib_name && bib_name.length) {
-
-      console.log("updating template");
-
       // remove dropdown
       $("#select_form").remove();
 

@@ -114,8 +114,12 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :dissertation_university_urls, reject_if: :all_blank, allow_destroy: true
 
     validates :reference_type, presence: true
-    # some records will not have a title
-    validates :title, presence: true
+   
+    # validate various title fields depending on reference_type
+    validates :title, presence: true, if: :has_title_field?
+    validates :chapter_title, presence: true, if: :has_chapter_title_field?
+    #validates :title_of_review, presence: true, if: :has_title_of_review_field?
+    validates :paper_title, presence: true, if: :has_paper_title_field?
 
     searchable :if => :published do
         integer :id
@@ -575,5 +579,37 @@ class Bibliography < ApplicationRecord
 
             # merge all the arrays into people_facet
             people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
+        end
+
+        def has_title_field?
+            if reference_type.present?
+                reference_type.downcase == "book" or reference_type.downcase == "journal article" or reference_type.downcase == "dissertation" or reference_type.downcase == "multimedia"
+            else
+                true
+            end
+        end
+
+        def has_chapter_title_field?
+            if reference_type.present?
+                reference_type.downcase == "book chapter"
+            else
+                true
+            end
+        end
+
+        def has_title_of_review_field?
+            if reference_type.present?
+                reference_type.downcase == "book review"
+            else
+                true
+            end
+        end
+
+        def has_paper_title_field?
+            if reference_type.present?
+                reference_type.downcase == "conference paper"
+            else
+                true
+            end
         end
 end

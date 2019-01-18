@@ -27,7 +27,9 @@
 
     <%= form.input :paper_title, 
         label: 'Paper Title', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= form.input :event_title, 

@@ -27,7 +27,9 @@
 
     <%= form.input :title, 
         label: 'Title', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%#= form.input :journal_title, 

@@ -27,7 +27,9 @@
 
     <%= form.input :title, 
         label: 'Title', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= render 'bibliographies/fields/series_multimedia', :form => form, field_label: 'Series' %>
