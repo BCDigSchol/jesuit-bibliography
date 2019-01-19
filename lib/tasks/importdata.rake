@@ -393,14 +393,14 @@ namespace :importdata do
             item_count += 1
             # break if item_count >= 300
 
-            # Reference Type,Author of Review,Year,Title of Review,Title of Journal,Volume,Issue,Page Range,Reviewed Author,Reviewed Title,
+            # Reference Type,Author of Review,Year,Title of Review,Title of Journal,Volume,Issue,Page Range,Reviewed Author,Reviewed Editor,
             # 0              1                2    3               4                5      6     7          8               9
             #
-            # Epub Date,Date,ISSN,DOI,WorldCat URL,Publisher URL,Leuven URL,When,What,Where,
-            # 10        11   12  13   14           15            16         17   18   19
+            # Reviewed Translator,Reviewed Title,Epub Date,Date,ISSN,DOI,WorldCat URL,Publisher URL,Leuven URL,When,
+            # 10                  11             12        13   14   15  16           17            18         19
             #
-            # Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language,Editing Tags
-            # 20  21       22    23               24                25               26       27
+            # What,Where,Who,Abstract,Notes,Notes to Editors,Translated Author,Translated Title,Language,Editing Tags
+            # 20  21     22  23       24    25               26                27               28       29
 
             @bib = Bibliography.new
 
@@ -420,25 +420,27 @@ namespace :importdata do
             @bib.issue = row[6]
             @bib.page_range = row[7]
             #@bib.reviewed_author = row[8]
-            #@bib.reviewed_title = row[9]
-            @bib.epub_date = row[10]
-            @bib.date = row[11]
-            #@bib.issn = row[12]
-            #@bib.doi = row[13]
-            #@bib.worldcat_url = row[14]
-            #@bib.publisher_url = row[15]
-            #@bib.leuven_url = row[16]
-            #@bib.when_subject = row[17]
-            #@bib.what_subject = row[18]
-            #@bib.where_subject = row[19]
-            #@bib.who_subject = row[20]
-            #@bib.abstract = row[21]
-            #@bib.notes = row[22]
-            #@bib.notes_to_editor = row[23]
-            #@bib.translated_author = row[24]
-            @bib.translated_title = row[25]
-            #@bib.languages = row[26]
-            #@bib.tags = row[27]
+            #@bib.reviewed_editor = row[9]
+            #@bib.reviewed_translator = row[10]
+            #@bib.reviewed_title = row[11]
+            @bib.epub_date = row[12]
+            @bib.date = row[13]
+            #@bib.issn = row[14]
+            #@bib.doi = row[15]
+            #@bib.worldcat_url = row[16]
+            #@bib.publisher_url = row[17]
+            #@bib.leuven_url = row[18]
+            #@bib.when_subject = row[19]
+            #@bib.what_subject = row[20]
+            #@bib.where_subject = row[21]
+            #@bib.who_subject = row[22]
+            #@bib.abstract = row[23]
+            #@bib.notes = row[24]
+            #@bib.notes_to_editor = row[25]
+            #@bib.translated_author = row[26]
+            @bib.translated_title = row[27]
+            #@bib.languages = row[28]
+            #@bib.tags = row[29]
 
             # Display Authors
             if row[1]
@@ -446,7 +448,7 @@ namespace :importdata do
             end
 
             # Abstract
-            import_add_abstract(@bib, row[21])
+            import_add_abstract(@bib, row[23])
 
             @bib.save!
 
@@ -463,53 +465,53 @@ namespace :importdata do
             # Journal title
             import_add_journal_title(@bib, row[4])
 
-            # Reviewed Title/Author
+            # Reviewed Title/Author/Editor/Translator
             # combine both fields into Reviewed_component record object
-            if row[8] or row[9]
-                @bib.reviewed_components << ReviewedComponent.new(reviewed_author: row[8], reviewed_title: row[9])
+            if row[8] or row[9] or row[10] or row[11]
+                @bib.reviewed_components << ReviewedComponent.new(reviewed_author: row[8], reviewed_editor: row[9], reviewed_translator: row[10], reviewed_title: row[11])
             end
 
             # ISSNs
-            import_add_issns(@bib, row[12])
+            import_add_issns(@bib, row[14])
 
             # DOIs
-            import_add_dois(@bib, row[13])
+            import_add_dois(@bib, row[15])
 
             # Worldcat URLs
-            import_add_worldcat_urls(@bib, row[14])
+            import_add_worldcat_urls(@bib, row[16])
 
             # Publisher URLs
-            import_add_publisher_urls(@bib, row[15])
+            import_add_publisher_urls(@bib, row[17])
 
             # Leuven URLs/Other Links
-            import_add_leuven_urls(@bib, row[16])
+            import_add_leuven_urls(@bib, row[18])
 
             # Periods/Centuries
-            import_add_periods(@bib, row[17])
+            import_add_periods(@bib, row[19])
 
             # Subjects
-            import_add_subjects(@bib, row[18])
+            import_add_subjects(@bib, row[20])
 
             # Locations
-            import_add_locations(@bib, row[19])
+            import_add_locations(@bib, row[21])
 
             # Entities/Jesuits
-            import_add_jesuits(@bib, row[20])
+            import_add_jesuits(@bib, row[22])
 
             # Notes -- Note
-            import_add_notes(@bib, row[22])
+            import_add_notes(@bib, row[24])
 
             # Notes -- Note to editor
-            import_add_notes_to_editor(@bib, row[23])
+            import_add_notes_to_editor(@bib, row[25])
 
             # Translated Authors
-            import_add_translated_authors(@bib, row[24])
+            import_add_translated_authors(@bib, row[26])
 
             # Languages
-            import_add_languages(@bib, row[26])
+            import_add_languages(@bib, row[28])
 
             # Tags
-            import_add_tags(@bib, row[27])
+            import_add_tags(@bib, row[29])
 
             bar.increment!
         end
