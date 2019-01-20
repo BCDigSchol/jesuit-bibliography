@@ -14,7 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    #redirect_to dashboard_url, :alert => exception.message
-    render template: "bibliographies/_not_permitted", locals: {alert: exception.message}
+    respond_to do |format|
+      format.json { head :forbidden, content_type: 'text/html' }
+      format.html { render template: "bibliographies/_not_permitted", status: :forbidden, locals: {alert: exception.message} }
+      format.js   { head :forbidden, content_type: 'text/html' }
+    end
   end
 end

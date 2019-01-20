@@ -19,6 +19,12 @@
                             <%= rc.input :reviewed_title, 
                                 label: 'Reviewed Title' 
                             %>
+
+                            <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
+                                form, 
+                                class: 'remove-link', 
+                                form_name: 'form' 
+                            %>
                         </div>
                     </div>
                 <% end %>
@@ -33,7 +39,12 @@
                         'association-insertion-node' => '#bibliography_reviewed_components .fields', 
                         'association-insertion-method' => 'append'
                     }, 
-                    partial: 'reviewed_components_fields'
+                    partial: 'reviewed_components_fields',
+                    render_options:  {
+                        locals: { 
+                            field_label: field_label
+                        }
+                    }
                 %>
             </div>
         </div>

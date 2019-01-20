@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :bibliography_locations do |location| %>
             <%= location.association :location, 
                 label: field_label,
-                collection: Location.order(:sort_name), 
+                collection: [Location.find_by_id(location.object.location_id)],
                 prompt: 'Choose a ' + field_label, 
                 form_name: 'location',
-                input_html: {class: 'locations'}
+                input_html: {
+                    class: 'locations', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -27,7 +30,13 @@
                     'association-insertion-node' => '#bibliography_locations .fields', 
                     'association-insertion-method' => 'append'
                 }, 
-                partial: 'bibliography_location_fields'
+                partial: 'bibliography_location_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a ' + field_label, 
+                        class_name: 'location' 
+                    }
+                }
             %>
 
             <%= link_to_add_association 'Suggest a new Location term', 
@@ -48,9 +57,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.locations').select2();
+    $('.locations').select2( select2_config(".locations", "locations") );
     $("#bibliography_locations").on('cocoon:after-insert', function(e, insertedItem){
-        $('.locations').last().select2();
+        $('.locations').last().select2( select2_config(".locations", "locations") );
     });
 });
 </script>

@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :bibliography_journals do |journal| %>
             <%= journal.association :journal, 
                 label: field_label,
-                collection: Journal.order(:name),
+                collection: [Journal.find_by_id(journal.object.journal_id)],
                 prompt: 'Choose a Journal Title',
                 form_name: 'journal',
-                input_html: {class: 'journals'}
+                input_html: {
+                    class: 'journals', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -28,7 +31,13 @@
                     'association-insertion-node' => '#bibliography_journals .fields', 
                     'association-insertion-method' => 'append'
                 },
-                partial: 'journals_fields'
+                partial: 'journals_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a Journal Title', 
+                        class_name: 'journal' 
+                    }
+                }
             %>
 
             <%= link_to_add_association 'Suggest a new Journal Title', 
@@ -49,9 +58,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.journals').select2();
+    $('.journals').select2( select2_config(".journals", "journals") );
     $("#bibliography_journals").on('cocoon:after-insert', function(e, insertedItem){
-        $('.journals').last().select2();
+        $('.journals').last().select2( select2_config(".journals", "journals") );
     });
 });
 </script>

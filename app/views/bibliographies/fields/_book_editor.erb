@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :book_editors do |peep| %>
             <%= peep.association :person, 
                 label: field_label,
-                collection: Person.order(:name),
-                prompt: 'Choose a Book Editor',
+                collection: [Person.find_by_id(peep.object.person_id)],
+                prompt: 'Choose a ' + field_label,
                 form_name: 'peep',
-                input_html: {class: 'book_editors'}
+                input_html: {
+                    class: 'book_editors', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -32,12 +35,12 @@
                 partial: 'person_fields',
                 render_options:  {
                     locals: { 
-                        prompt_label: 'Choose a Book Editor', 
+                        prompt_label: 'Choose a ' + field_label, 
                         class_name: 'book_editors' 
                     }
                 }
             %>
-            <%= link_to_add_association 'Suggest a new Book Editor', 
+            <%= link_to_add_association 'Suggest a new ' + field_label, 
                 form, 
                 :person_suggestions, 
                 class: 'btn btn-warning btn-add', 
@@ -55,9 +58,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.book_editors').select2();
+    $('.book_editors').select2( select2_config(".book_editors", "people") );
     $("#bibliography_book_editors").on('cocoon:after-insert', function(e, insertedItem){
-        $('.book_editors').last().select2();
+        $('.book_editors').last().select2( select2_config(".book_editors", "people") );
     });
 });
 </script>

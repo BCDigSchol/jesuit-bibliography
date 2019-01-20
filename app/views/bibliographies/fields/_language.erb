@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :bibliography_languages do |language| %>
             <%= language.association :language, 
                 label: field_label,
-                collection: Language.order(:name),
+                collection: [Language.find_by_id(language.object.language_id)],
                 prompt: 'Choose a Language',
                 form_name: 'language',
-                input_html: {class: 'languages'}
+                input_html: {
+                    class: 'languages', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -27,7 +30,13 @@
                     'association-insertion-node' => '#bibliography_languages .fields', 
                     'association-insertion-method' => 'append'
                 },
-                partial: 'languages_fields'
+                partial: 'languages_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a ' + field_label, 
+                        class_name: 'language' 
+                    }
+                }
             %>
 
             <%= link_to_add_association 'Suggest a new Language term', 
@@ -48,9 +57,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.languages').select2();
+    $('.languages').select2( select2_config(".languages", "languages") );
     $("#bibliography_languages").on('cocoon:after-insert', function(e, insertedItem){
-        $('.languages').last().select2();
+        $('.languages').last().select2( select2_config(".languages", "languages") );
     });
 });
 </script>

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     resources :languages, path: 'languages'
     resources :people, path: 'people'
     resources :journals, path: 'journals'
+    get 'search' => 'term_search#index'
   end
 
   get '/form_partial/:id/:reference_type' => 'bibliographies#form_partial'
