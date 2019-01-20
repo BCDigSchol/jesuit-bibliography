@@ -4,7 +4,8 @@ function select2_config(field_selector, record_type) {
             data: function (params) {
                 return {
                     term: params.term,
-                    type: record_type
+                    type: record_type,
+                    format: 'json'
                 };
             },
             dataType: "json",
@@ -16,6 +17,11 @@ function select2_config(field_selector, record_type) {
                 }
             }
         },
-        minimumInputLength: 2
+        minimumInputLength: 1,
+        language: {
+            inputTooShort: function () {
+              return "Please enter 1 or more characters. To display all possible values, type the wildcard character `*`";
+            }
+        }
     }
 };

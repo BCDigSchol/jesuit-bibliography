@@ -11,8 +11,13 @@ class Citationterms::TermSearchController < ApplicationController
         # TODO allow blank terms?
         term = params[:term]
 
-        # TODO handle special chars like in 'Marszał'
-        default_where_clause = "name LIKE ? or sort_name LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%"
+        # allow for wildcard searches.
+        if term == '*'
+            default_where_clause = "true = true"
+        else
+            # TODO handle special chars like in 'Marszał'
+            default_where_clause = "name LIKE ? OR sort_name LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%"
+        end
 
         case params[:type]
         when "subjects"
