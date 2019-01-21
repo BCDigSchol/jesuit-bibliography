@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :bibliography_entities do |entity| %>
             <%= entity.association :entity, 
                 label: field_label,
-                collection: Entity.all.order(:display_name), 
+                collection: [Entity.find_by_id(entity.object.entity_id)],
                 prompt: 'Choose an ' + field_label, 
                 form_name: 'entity',
-                input_html: {class: 'entities'}
+                input_html: {
+                    class: 'entities', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -27,7 +30,13 @@
                     'association-insertion-node' => '#bibliography_entities .fields', 
                     'association-insertion-method' => 'append'
                 }, 
-                partial: 'bibliography_entity_fields'
+                partial: 'bibliography_entity_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a ' + field_label, 
+                        class_name: 'entities' 
+                    }
+                }
             %>
 
             <%= link_to_add_association 'Suggest a new Jesuit term', 
@@ -48,9 +57,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.entities').select2();
+    $('.entities').select2( select2_config(".entities", "jesuits") );
     $("#bibliography_entities").on('cocoon:after-insert', function(e, insertedItem){
-        $('.entities').last().select2();
+        $('.entities').last().select2( select2_config(".entities", "jesuits") );
     });
 });
 </script>

@@ -14,7 +14,7 @@
             wrapper: :horizontal_boolean_job 
         %>
         
-        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove comment</btn>".html_safe, 
+        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
             form, 
             class: 'remove-link', 
             form_name: 'form' 

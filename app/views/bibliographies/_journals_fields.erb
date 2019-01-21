@@ -2,11 +2,14 @@
     <%= form.input :name, wrapper: :vertical_input_group do %>
         <%= form.association :journal, 
             label: false,
-            collection: Journal.order(:name),
-            prompt: 'Choose a Journal Title', 
+            collection: [Journal.find_by_id(form.object.journal_id)], 
+            prompt: prompt_label, 
             form_name: 'form',
             label_html: { class: 'invisible' },
-            input_html: {class: 'journals'}
+            input_html: {
+                class: class_name,
+                "data-url": citationterms_search_path
+            }
         %>
         <span class="input-group-btn" id="basic-addon-journals">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

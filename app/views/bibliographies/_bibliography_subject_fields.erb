@@ -2,10 +2,13 @@
     <%= form.input :subject, wrapper: :vertical_input_group do %>
         <%= form.association :subject, 
             label: false,
-            collection: Subject.order(:name), 
-            prompt: 'Choose a subject', 
+            collection: [Subject.find_by_id(form.object.subject_id)], 
+            prompt: prompt_label, 
             form_name: 'form',
-            input_html: {class: 'subjects'}
+            input_html: {
+                class: class_name,
+                "data-url": citationterms_search_path
+            }
         %>
         <span class="input-group-btn" id="basic-addon-subject">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

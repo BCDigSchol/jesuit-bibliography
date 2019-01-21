@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :translated_authors do |peep| %>
             <%= peep.association :person, 
                 label: field_label,
-                collection: Person.order(:name),
-                prompt: 'Choose a Translated Author',
+                collection: [Person.find_by_id(peep.object.person_id)],
+                prompt: 'Choose a ' + field_label,
                 form_name: 'peep',
-                input_html: {class: 'translated_authors'}
+                input_html: {
+                    class: 'translated_authors', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -32,12 +35,12 @@
                 partial: 'person_fields',
                 render_options:  {
                     locals: { 
-                        prompt_label: 'Choose a Translated Author', 
+                        prompt_label: 'Choose a ' + field_label, 
                         class_name: 'translated_authors' 
                     }
                 }
             %>
-            <%= link_to_add_association 'Suggest a new Translated Author', 
+            <%= link_to_add_association 'Suggest a new ' + field_label, 
                 form, 
                 :person_suggestions, 
                 class: 'btn btn-warning btn-add', 
@@ -55,9 +58,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.translated_authors').select2();
+    $('.translated_authors').select2( select2_config(".translated_authors", "people") );
     $("#bibliography_translated_authors").on('cocoon:after-insert', function(e, insertedItem){
-        $('.translated_authors').last().select2();
+        $('.translated_authors').last().select2( select2_config(".translated_authors", "people") );
     });
 });
 </script>

@@ -2,11 +2,14 @@
     <%= form.input :name, wrapper: :vertical_input_group do %>
         <%= form.association :language, 
             label: false,
-            collection: Language.order(:name),
-            prompt: 'Choose a Language', 
+            collection: [Language.find_by_id(form.object.language_id)],
+            prompt: prompt_label, 
             form_name: 'form',
             label_html: { class: 'invisible' },
-            input_html: {class: 'languages'}
+            input_html: {
+                class: class_name,
+                "data-url": citationterms_search_path
+            }
         %>
         <span class="input-group-btn" id="basic-addon-languages">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

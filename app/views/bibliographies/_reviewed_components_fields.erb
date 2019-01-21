@@ -1,5 +1,5 @@
 <div class="panel panel-default bibliography-reviewed_components-fields nested-fields">
-    <div class="panel-heading">Reviewed Component</div>
+    <div class="panel-heading"><%= field_label %></div>
     <div class="panel-body clearfix">
         <%= form.input :reviewed_author,
             label: 'Reviewed Author' 
@@ -14,7 +14,7 @@
             label: 'Reviewed Title' 
         %>
         
-        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove Reviewed Author/Title</btn>".html_safe, 
+        <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
             form, 
             class: 'remove-link', 
             form_name: 'form' 

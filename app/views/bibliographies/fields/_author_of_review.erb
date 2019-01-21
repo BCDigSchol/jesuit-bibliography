@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :author_of_reviews do |peep| %>
             <%= peep.association :person, 
                 label: field_label,
-                collection: Person.order(:name),
-                prompt: 'Choose an Author of Review',
+                collection: [Person.find_by_id(peep.object.person_id)],
+                prompt: 'Choose an ' + field_label,
                 form_name: 'peep',
-                input_html: {class: 'author_of_reviews'}
+                input_html: {
+                    class: 'author_of_reviews', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -32,12 +35,12 @@
                 partial: 'person_fields',
                 render_options:  {
                     locals: { 
-                        prompt_label: 'Choose an Author of Review', 
+                        prompt_label: 'Choose an ' + field_label, 
                         class_name: 'author_of_reviews' 
                     }
                 }
             %>
-            <%= link_to_add_association 'Suggest a new Author of Review', 
+            <%= link_to_add_association 'Suggest a new ' + field_label, 
                 form, 
                 :person_suggestions, 
                 class: 'btn btn-warning btn-add', 
@@ -55,9 +58,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.author_of_reviews').select2();
+    $('.author_of_reviews').select2( select2_config(".author_of_reviews", "people") );
     $("#bibliography_author_of_reviews").on('cocoon:after-insert', function(e, insertedItem){
-        $('.author_of_reviews').last().select2();
+        $('.author_of_reviews').last().select2( select2_config(".author_of_reviews", "people") );
     });
 });
 </script>

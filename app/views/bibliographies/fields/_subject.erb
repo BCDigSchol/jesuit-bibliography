@@ -3,10 +3,13 @@
         <%= form.simple_fields_for :bibliography_subjects do |subject| %>
             <%= subject.association :subject, 
                 label: field_label,
-                collection: Subject.order(:name), 
+                collection: [Subject.find_by_id(subject.object.subject_id)],
                 prompt: 'Choose a ' + field_label, 
                 form_name: 'subject',
-                input_html: {class: 'subjects'}
+                input_html: {
+                    class: 'subjects', 
+                    "data-url": citationterms_search_path
+                }
             %>
         <% end %>
     </div>
@@ -27,10 +30,16 @@
                     'association-insertion-node' => '#bibliography_subjects .fields', 
                     'association-insertion-method' => 'append'
                 }, 
-                partial: 'bibliography_subject_fields'
+                partial: 'bibliography_subject_fields',
+                render_options:  {
+                    locals: { 
+                        prompt_label: 'Choose a ' + field_label, 
+                        class_name: 'subject' 
+                    }
+                }
             %>
 
-            <%= link_to_add_association 'Suggest a new Subject term', 
+            <%= link_to_add_association 'Suggest a new ' + field_label + ' term', 
                 form, 
                 :subject_suggestions, 
                 class: 'btn btn-warning btn-add', 
@@ -48,9 +57,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.subjects').select2();
+    $('.subjects').select2( select2_config(".subjects", "subjects") );
     $("#bibliography_subjects").on('cocoon:after-insert', function(e, insertedItem){
-        $('.subjects').last().select2();
+        $('.subjects').last().select2( select2_config(".subjects", "subjects") );
     });
 });
 </script>
