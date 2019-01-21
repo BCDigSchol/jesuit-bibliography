@@ -1,11 +1,14 @@
-<div class='bibliography-period-fields nested-fields form-group row'>
-    <%= form.input :period, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :period, wrapper: :vertical_input_group_job do %>
         <%= form.association :period, 
             label: false,
             collection: Period.order(:sort_name), 
-            prompt: 'Choose a Century', 
+            prompt: prompt_label, 
             form_name: 'form',
-            input_html: {class: 'periods'}
+            input_html: {
+                class: class_name,
+                "data-url": citationterms_search_path
+            }
         %>
         <span class="input-group-btn" id="basic-addon-period">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 

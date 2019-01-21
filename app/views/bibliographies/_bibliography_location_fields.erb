@@ -1,5 +1,5 @@
-<div class='bibliography-location-fields nested-fields form-group row'>
-    <%= form.input :location, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :location, wrapper: :vertical_input_group_job do %>
         <%= form.association :location, 
             label: false,
             collection: [Location.find_by_id(form.object.location_id)],

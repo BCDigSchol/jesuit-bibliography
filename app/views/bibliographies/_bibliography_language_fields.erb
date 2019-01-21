@@ -1,5 +1,5 @@
-<div class='bibliography-languages-fields nested-fields form-group row'>
-    <%= form.input :name, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :name, wrapper: :vertical_input_group_job do %>
         <%= form.association :language, 
             label: false,
             collection: [Language.find_by_id(form.object.language_id)],

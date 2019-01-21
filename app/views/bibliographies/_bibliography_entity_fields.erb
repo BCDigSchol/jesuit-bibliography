@@ -1,5 +1,5 @@
-<div class='bibliography-entity-fields nested-fields form-group row'>
-    <%= form.input :entity, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :entity, wrapper: :vertical_input_group_job do %>
         <%= form.association :entity, 
             label: false,
             collection: [Entity.find_by_id(form.object.entity_id)],
@@ -16,6 +16,6 @@
                 class: 'remove-link', 
                 form_name: 'form' 
             %>
-        </div>
+        </span>
     <% end %>
 </div>

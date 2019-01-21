@@ -1,17 +1,17 @@
 <div id='bibliography_locations' class='repeatable-field'>
-    <div class="fields">
-        <%= form.simple_fields_for :bibliography_locations do |location| %>
-            <%= location.association :location, 
-                label: field_label,
-                collection: [Location.find_by_id(location.object.location_id)],
-                prompt: 'Choose a ' + field_label, 
-                form_name: 'location',
-                input_html: {
-                    class: 'locations', 
-                    "data-url": citationterms_search_path
-                }
-            %>
-        <% end %>
+    <div class="row string optional bibliography-entity-fields">
+        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %></label>
+        <div class="col-sm-10">
+            <div class="fields">
+                <%= form.simple_fields_for :bibliography_locations do |location| %>
+                    <%= render 'bibliography_location_fields', 
+                        form: location,
+                        class_name: 'locations', 
+                        prompt_label: 'Choose a ' + field_label 
+                    %>
+                <% end %>
+            </div>
+        </div>
     </div>
     <div id="bibliography_location_suggestions">
         <%= form.simple_fields_for :location_suggestions do |suggestion| %>

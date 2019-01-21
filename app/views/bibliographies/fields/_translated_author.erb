@@ -1,17 +1,17 @@
 <div id='bibliography_translated_authors' class='repeatable-field'>
-    <div class="fields">
-        <%= form.simple_fields_for :translated_authors do |peep| %>
-            <%= peep.association :person, 
-                label: field_label,
-                collection: [Person.find_by_id(peep.object.person_id)],
-                prompt: 'Choose a ' + field_label,
-                form_name: 'peep',
-                input_html: {
-                    class: 'translated_authors', 
-                    "data-url": citationterms_search_path
-                }
-            %>
-        <% end %>
+    <div class="row string optional bibliography-person-fields">
+        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %></label>
+        <div class="col-sm-10">
+            <div class="fields">
+                <%= form.simple_fields_for :translated_authors do |peep| %>
+                    <%= render 'bibliography_person_fields', 
+                        form: peep,
+                        class_name: 'translated_authors', 
+                        prompt_label: 'Choose a ' + field_label 
+                    %>
+                <% end %>
+            </div>
+        </div>
     </div>
     <div id="bibliography_translated_author_suggestions">
         <%= form.simple_fields_for :person_suggestions do |suggestion| %>
@@ -32,7 +32,7 @@
                     'association-insertion-node' => '#bibliography_translated_authors .fields', 
                     'association-insertion-method' => 'append'
                 },
-                partial: 'person_fields',
+                partial: 'bibliography_person_fields',
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a ' + field_label, 

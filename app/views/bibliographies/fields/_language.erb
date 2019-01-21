@@ -1,17 +1,17 @@
 <div id='bibliography_languages' class='repeatable-field'>
-    <div class="fields">
-        <%= form.simple_fields_for :bibliography_languages do |language| %>
-            <%= language.association :language, 
-                label: field_label,
-                collection: [Language.find_by_id(language.object.language_id)],
-                prompt: 'Choose a Language',
-                form_name: 'language',
-                input_html: {
-                    class: 'languages', 
-                    "data-url": citationterms_search_path
-                }
-            %>
-        <% end %>
+    <div class="row string optional bibliography-entity-fields">
+        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %></label>
+        <div class="col-sm-10">
+            <div class="fields">
+                <%= form.simple_fields_for :bibliography_languages do |language| %>
+                    <%= render 'bibliography_language_fields', 
+                        form: language,
+                        class_name: 'languages', 
+                        prompt_label: 'Choose a ' + field_label 
+                    %>
+                <% end %>
+            </div>
+        </div>
     </div>
     <div id="bibliography_language_suggestions">
         <%= form.simple_fields_for :language_suggestions do |suggestion| %>
@@ -30,11 +30,11 @@
                     'association-insertion-node' => '#bibliography_languages .fields', 
                     'association-insertion-method' => 'append'
                 },
-                partial: 'languages_fields',
+                partial: 'bibliography_language_fields',
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a ' + field_label, 
-                        class_name: 'language' 
+                        class_name: 'languages' 
                     }
                 }
             %>

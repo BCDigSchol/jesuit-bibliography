@@ -1,5 +1,5 @@
-<div class='bibliography-subject-fields nested-fields form-group row'>
-    <%= form.input :subject, wrapper: :vertical_input_group do %>
+<div class='nested-fields'>
+    <%= form.input :subject, wrapper: :vertical_input_group_job do %>
         <%= form.association :subject, 
             label: false,
             collection: [Subject.find_by_id(form.object.subject_id)], 

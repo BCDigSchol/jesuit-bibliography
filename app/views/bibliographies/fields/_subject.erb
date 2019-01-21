@@ -1,17 +1,17 @@
 <div id='bibliography_subjects' class='repeatable-field'>
-    <div class="fields">
-        <%= form.simple_fields_for :bibliography_subjects do |subject| %>
-            <%= subject.association :subject, 
-                label: field_label,
-                collection: [Subject.find_by_id(subject.object.subject_id)],
-                prompt: 'Choose a ' + field_label, 
-                form_name: 'subject',
-                input_html: {
-                    class: 'subjects', 
-                    "data-url": citationterms_search_path
-                }
-            %>
-        <% end %>
+    <div class="row string optional bibliography-subject-fields">
+        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %></label>
+        <div class="col-sm-10">
+            <div class="fields">
+                <%= form.simple_fields_for :bibliography_subjects do |subject| %>
+                    <%= render 'bibliography_subject_fields', 
+                        form: subject,
+                        class_name: 'subjects', 
+                        prompt_label: 'Choose a ' + field_label 
+                    %>
+                <% end %>
+            </div>
+        </div>
     </div>
     <div id="bibliography_subject_suggestions">
         <%= form.simple_fields_for :subject_suggestions do |suggestion| %>
@@ -34,7 +34,7 @@
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a ' + field_label, 
-                        class_name: 'subject' 
+                        class_name: 'subjects' 
                     }
                 }
             %>

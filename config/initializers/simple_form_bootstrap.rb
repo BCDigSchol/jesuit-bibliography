@@ -151,6 +151,20 @@ SimpleForm.setup do |config|
     end
   end
 
+  # vertical job input group
+  config.wrappers :vertical_input_group_job, tag: 'div', class: 'form-group-wrapper', error_class: 'has-error' do |b|
+    b.use :html5
+    b.use :placeholder
+    #b.use :label, class: 'invisible col-form-label col-sm-2'
+
+    b.wrapper tag: 'div', class: 'form-group-old row-old' do |ba|
+      ba.wrapper tag: 'div', class: 'input-group' do |append|
+        append.use :input, class: 'form-control-old'
+      end
+      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
 
   # horizontal forms
   #
