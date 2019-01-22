@@ -165,11 +165,12 @@ h2.page-heading{
     .collaborators-static {
         list-style-type: none;
         margin: 20px 0;
+        
         padding: 50px;
         text-align: center;
         li {
             display: inline-block;
-            padding: 0 40px;
+            padding: 25px 30px;
             line-height: 1;
         }
     }
@@ -184,7 +185,7 @@ h2.page-heading{
             text-align: center;
             li {
                 display: inline-block;
-                padding: 0 20px;
+                padding: 20px 40px;
                 line-height: 1;
             }
     
@@ -192,6 +193,26 @@ h2.page-heading{
     }
 
 }
+
+div.scrollmenu {
+    background-color: #cccc;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0 20%;
+  }
+  
+  div.scrollmenu a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 30px 40px;
+    text-decoration: none;
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+
 
 .home-featured {
     background: rgba(236, 226, 212, 0.8);
