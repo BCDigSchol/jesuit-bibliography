@@ -184,6 +184,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
     # reviews field goes here
+    config.add_show_field 'reviewed_components_text', label: 'Reviewed Component', :helper_method => :display_reviewed_component
 
     config.add_show_field 'jesuits_text', label: 'Who (Jesuits)', link_to_search: :entities_facet
     config.add_show_field 'subjects_text', label: 'What (Subjects)', link_to_search: :subjects_facet
