@@ -35,6 +35,8 @@
                     out << "<span class='value-part'>#{author}</span>".html_safe
                 end
                 out
+            else
+                Bibliography::NO_DISPLAY_AUTHOR
             end
         end
 

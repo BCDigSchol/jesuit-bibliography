@@ -31,11 +31,13 @@
 
       g.column name: 'Author(s)' do |bib|
         if bib.display_author.present?
-            out = "".html_safe
-            bib.display_author.split('|').each do |author|
-                out << "<span class='value-part'>#{author}</span>".html_safe
-            end
-            out
+          out = "".html_safe
+          bib.display_author.split('|').each do |author|
+              out << "<span class='value-part'>#{author}</span>".html_safe
+          end
+          out
+        else
+          Bibliography::NO_DISPLAY_AUTHOR
         end
       end
 
