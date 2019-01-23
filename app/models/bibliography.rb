@@ -489,6 +489,7 @@ class Bibliography < ApplicationRecord
 
     # Define static strings
     ADD_BUTTON = '<i class="fas fa-plus" title="Add another field" aria-hidden></i> '.html_safe.freeze
+    NO_DISPLAY_TITLE = '<em>No Title</em>'.html_safe.freeze
 
     private
         def comments_json

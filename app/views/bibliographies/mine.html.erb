@@ -20,7 +20,13 @@
 
         g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
 
-        g.column name: 'Title', attribute: 'display_title'
+        g.column name: 'Title', attribute: 'display_title' do |bib|
+            if bib.display_title.present?
+                bib.display_title
+            else
+                Bibliography::NO_DISPLAY_TITLE
+            end
+        end
 
         g.column name: 'Author(s)' do |bib|
             if bib.display_author.present?
