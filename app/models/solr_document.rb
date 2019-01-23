@@ -15,7 +15,14 @@ class SolrDocument
                          :format => "reference_type_text"
                          )
 
+  def export_as_mla_citation_txt
+    CitationExporter.export_as_html record: @_source
+  end
 
+  def export_as_chicago_citation_txt
+    CitationExporter.export_as_html record: @_source, style: :chicago
+
+  end
 
   self.unique_key = 'id_i'
 
