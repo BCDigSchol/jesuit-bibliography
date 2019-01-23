@@ -138,7 +138,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[22])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -296,7 +302,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[24])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -450,7 +462,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[23])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -599,7 +617,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[19])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -735,7 +759,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[16])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -802,8 +832,8 @@ namespace :importdata do
 
         @format = "Conference Paper"
 
-        puts "Starting #{@format} import"
-        import_logger.info("Starting #{@format} import")
+        puts "Starting #{@format}s import"
+        import_logger.info("Starting #{@format}s import")
 
         item_count = 0
         start = Time.now
@@ -863,7 +893,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[14])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -915,7 +951,7 @@ namespace :importdata do
 
         @format = "Multimedia"
 
-        puts "Starting #{@format}s import"
+        puts "Starting #{@format} import"
         import_logger.info("Starting #{@format} import")
 
         item_count = 0
@@ -982,7 +1018,13 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[17])
 
-            @bib.save!
+            begin
+                @bib.save!(validate: false)
+            rescue 
+                import_logger.info("Error saving #{@format} bib with item_count ##{item_count} and title '#{row[3]}'")
+                import_logger.info("Error message: #{$!.to_s}")
+                next
+            end
 
             import_logger.info("Saved bib with ID# #{@bib.id}")
             import_logger.info("  type: #{@format}")
@@ -1373,7 +1415,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Note: #{v}")
-                @bib.comments << Comment.new(body: v, comment_type: 'Note', commenter: 'importer', make_public: false)
+                @bib.comments << Comment.new(body: v, comment_type: 'Note', commenter: CREATED_BY_USER, make_public: false)
             end
         end
     end
@@ -1385,7 +1427,7 @@ namespace :importdata do
             values = col.split(PIPE_DELIMITER_REGEX)
             values.each do |v|
                 import_logger.info("  adding Note: #{v}")
-                @bib.comments << Comment.new(body: v, comment_type: 'Note to editor', commenter: 'importer', make_public: false)
+                @bib.comments << Comment.new(body: v, comment_type: 'Note to editor', commenter: CREATED_BY_USER, make_public: false)
             end
         end
     end
