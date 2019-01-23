@@ -71,6 +71,40 @@ module ApplicationHelper
         out
     end
 
+    # display facet linked terms as a list instead
+    # of a ruby sentance
+    def display_in_parts_subjects args
+        display_in_parts_facet(args, "subjects_facet")
+    end
+
+    def display_in_parts_locations args
+        display_in_parts_facet(args, "locations_facet")
+    end
+
+    def display_in_parts_periods args
+        display_in_parts_facet(args, "centuries_facet")
+    end
+
+    def display_in_parts_entities args
+        display_in_parts_facet(args, "jesuits_facet")
+    end
+
+    # split field value into parts with html element wrappers.
+    # this method allow for single or double (or more) pipes as a delimiter.
+    # can be extended to allow other delimiters
+    def display_in_parts_facet(args, facet_name)
+        out = "".html_safe
+        args[:document][args[:field]].each do |part|
+            components = part.split(/[|]+/)
+            if !components.empty?
+                components.each do |c|
+                    out << "<div class='dd-part'><a class='bl-view-link' href='/catalog?f[#{facet_name}][]=#{c}' target='_blank'>#{c}</a></div>".html_safe
+                end
+            end
+        end
+        out
+    end
+
     # split field value into parts with html element wrappers.
     # this method allow for single or double (or more) pipes as a delimiter.
     # can be extended to allow other delimiters

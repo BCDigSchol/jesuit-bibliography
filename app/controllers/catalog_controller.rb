@@ -186,10 +186,10 @@ class CatalogController < ApplicationController
     # reviews field goes here
     config.add_show_field 'reviewed_components_text', label: 'Reviewed Component', :helper_method => :display_reviewed_component
 
-    config.add_show_field 'jesuits_text', label: 'Who (Jesuits)', link_to_search: :entities_facet
-    config.add_show_field 'subjects_text', label: 'What (Subjects)', link_to_search: :subjects_facet
-    config.add_show_field 'locations_text', label: 'Where (Locations)', link_to_search: :locations_facet
-    config.add_show_field 'centuries_text', label: 'When (Centuries)', link_to_search: :periods_facet
+    config.add_show_field 'jesuits_text', label: 'Who (Jesuits)', :helper_method => :display_in_parts_entities
+    config.add_show_field 'subjects_text', label: 'What (Subjects)', :helper_method => :display_in_parts_subjects
+    config.add_show_field 'locations_text', label: 'Where (Locations)', :helper_method => :display_in_parts_locations
+    config.add_show_field 'centuries_text', label: 'When (Centuries)', :helper_method => :display_in_parts_periods
 
     config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
     config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
