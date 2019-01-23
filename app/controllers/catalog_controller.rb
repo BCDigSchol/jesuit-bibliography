@@ -98,7 +98,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'reference_type_facet', label: 'Format'
     config.add_facet_field 'people_facet', label: 'Authors', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
-    config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
+    #config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
     config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20, sort: 'index'
@@ -113,13 +113,13 @@ class CatalogController < ApplicationController
     #   :years_25 => { label: 'within 25 Years', fq: "pub_date:[#{Time.zone.now.year - 25 } TO *]" }
     #}
 
-    config.add_facet_field 'example_query_facet_field', label: 'Publication Year range', :query => {
-         :years_5 => { label: 'within 5 Years', fq: "year_published_text:[#{Time.zone.now.year - 5 } TO *]" },
-         :years_10 => { label: 'within 10 Years', fq: "year_published_text:[#{Time.zone.now.year - 10 } TO *]" },
-         :years_25 => { label: 'within 25 Years', fq: "year_published_text:[#{Time.zone.now.year - 25 } TO *]" },
-         :years_50 => { label: 'within 50 Years', fq: "year_published_text:[#{Time.zone.now.year - 50 } TO *]" },
-         :years_100 => { label: 'within 100 Years', fq: "year_published_text:[#{Time.zone.now.year - 100 } TO *]" },
-    }
+    #config.add_facet_field 'example_query_facet_field', label: 'Publication Year range', :query => {
+    #     :years_5 => { label: 'within 5 Years', fq: "year_published_text:[#{Time.zone.now.year - 5 } TO *]" },
+    #     :years_10 => { label: 'within 10 Years', fq: "year_published_text:[#{Time.zone.now.year - 10 } TO *]" },
+    #     :years_25 => { label: 'within 25 Years', fq: "year_published_text:[#{Time.zone.now.year - 25 } TO *]" },
+    #     :years_50 => { label: 'within 50 Years', fq: "year_published_text:[#{Time.zone.now.year - 50 } TO *]" },
+    #     :years_100 => { label: 'within 100 Years', fq: "year_published_text:[#{Time.zone.now.year - 100 } TO *]" },
+    #}
 
 
     # Have BL send all facet field names to Solr, which has been the default
@@ -167,7 +167,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'dissertation_universities_text', label: 'Universities', :helper_method => :display_in_parts
     config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
-    config.add_show_field 'publish_places_text', label: 'Places published', link_to_search: :publish_places_facet
+    config.add_show_field 'publish_places_text', label: 'Places published'
 
     config.add_show_field 'title_of_review_text', label: 'Title of Review'
     config.add_show_field 'journals_text', label: 'Journal Title'
