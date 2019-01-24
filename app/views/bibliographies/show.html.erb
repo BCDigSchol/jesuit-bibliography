@@ -753,6 +753,15 @@
         </div>
         <% end %>
 
+        <% if current_user.admin_role? %>
+            <% if @bib.bib_text.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">BibText</label>
+                    <div class="field-value col-sm-10"><%= @bib.bib_text %></div>
+                </div>
+            <% end %>
+        <% end %>
+
         <hr/>
 
         <div class="button-group">

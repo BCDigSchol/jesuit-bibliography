@@ -1,4 +1,5 @@
 class BibliographiesController < ApplicationController
+
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
@@ -255,6 +256,9 @@ class BibliographiesController < ApplicationController
         # set the display_* fields for Blacklight views
         set_display_fields
 
+        # generate the bibtex string for this record
+        generate_bib
+
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
         @bib.comments.each do |comment|
@@ -299,6 +303,9 @@ class BibliographiesController < ApplicationController
 
         # set the display_* fields for Blacklight views
         set_display_fields
+
+        # generate the bibtex string for this record
+        generate_bib
 
         @bib.modified_by = current_user
 
@@ -611,5 +618,79 @@ class BibliographiesController < ApplicationController
                     @bib.display_author = NO_VALUE_FOUND
                 end
             end
+        end
+
+        def generate_bib_old
+            out = ""
+
+            if @bib.reference_type.present? 
+                case @bib.reference_type.downcase
+                when 'book'
+                    out << "@book{citationrecord"
+                when 'book chapter'
+                    out << "@inbook{citationrecord"
+                when 'book review'
+                    out << "@article{citationrecord"
+                when 'journal article'
+                    out << "@inproceedings{citationrecord"
+                when 'dissertation'
+                    out << "@masterthesis{citationrecord"
+                when 'conference paper'
+                    out << "@conference{citationrecord"
+                when 'multimedia'
+                    out << "@misc{citationrecord"
+                end
+
+                if @bib.display_author.present?
+                    a = []
+                    @bib.display_author.split('|').each do |author|
+                        a << author
+                    end
+                    out << ", author = '#{a.join(" and ")}'"
+                end
+                if @bib.display_title.present?
+                    out << ", title = '#{@bib.display_title}'"
+                end
+                if @bib.year_published.present?
+                    out << ", year = '#{@bib.year_published}'"
+                end
+                if @bib.publishers.present?
+                    p = []
+                    @bib.publishers.each do  |publisher|
+                        p << publisher.name
+                    end
+                    out << ", publisher = '#{p.join(" and ")}'"
+                end
+                out << "}"
+            
+            end
+
+            @bib.bib_text = out
+        end
+
+        def generate_bib
+            b = BibTeX::Entry.new({
+                :bibtex_type => :book,
+                :key => 'citationrecord',
+                :address => 'Raleigh, North Carolina',
+                :author => 'Ruby, Sam and Thomas, Dave, and Hansson, David Heinemeier',
+                :booktitle => 'Agile Web Development with Rails',
+                :edition => 'third',
+                :keywords => 'ruby, rails',
+                :publisher => 'The Pragmatic Bookshelf',
+                :series => 'The Facets of Ruby',
+                :title => 'Agile Web Development with Rails',
+                :year => '2009'
+              })
+
+              @bib.bib_text = b
+
+              cp = CiteProc::Processor.new style: 'apa', format: 'text'
+              cp.import b.to_citeproc
+              
+
+              puts "\n\nCitation APA: #{cp.render :bibliography}\n\n"
+
+              puts "\n\nCitation APA: #{cp.process}\n\n"
         end
 end
