@@ -5,6 +5,7 @@
     <h1><%= @bib.display_title.present? ? @bib.display_title : Bibliography::NO_DISPLAY_TITLE %></h1>
 
     <div class="record-view">
+        <div class="button-group">
         <% if can? :edit, Bibliography %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
@@ -14,6 +15,10 @@
         <% else %>
             <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% end %>
+        <% if @bib.published? %>
+            <%= link_to 'View public record', solr_document_path(@bib.id), class: 'btn btn-warning', target: :_blank %>
+        <% end %>
+        </div>
         
         <hr/>
 
@@ -750,6 +755,7 @@
 
         <hr/>
 
+        <div class="button-group">
         <% if can? :edit, Bibliography %>
             <%= link_to 'Edit this Record', edit_bibliography_path(@bib), class: 'btn btn-primary' %>
             <%= link_to 'Go Back to Citations index', citations_all_path, class: 'btn btn-info' %>
@@ -759,6 +765,10 @@
         <% else %>
             <%= link_to 'Go Back to Citations index', citations_mine_path, class: 'btn btn-info' %>
         <% end %>
+         <% if @bib.published? %>
+            <%= link_to 'View public record', solr_document_path(@bib.id), class: 'btn btn-warning', target: :_blank %>
+        <% end %>
+        </div>
     </div>
 <% else %>
     <%= render 'not_permitted' %>

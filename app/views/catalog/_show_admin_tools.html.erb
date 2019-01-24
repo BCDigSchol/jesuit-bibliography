@@ -1,0 +1,11 @@
+<% if current_user and current_user.admin? %>
+  <div class="panel panel-default show-tools">
+    <div class="panel-heading">
+      Admin actions
+    </div>
+
+    <div class="panel-body">
+      <%= link_to 'Edit this record', edit_bibliography_path(@document.id.to_s), target: :_blank %>
+    </div>
+  </div>
+<% end %>
