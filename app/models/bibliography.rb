@@ -1,4 +1,6 @@
 class Bibliography < ApplicationRecord
+    attr_accessor :skip_validation
+    
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     #has_many :languages, inverse_of: :bibliography, dependent: :destroy
     has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy
@@ -113,13 +115,45 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :event_urls, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :dissertation_university_urls, reject_if: :all_blank, allow_destroy: true
 
+    # validates across all record types
     validates :reference_type, presence: true
-   
-    # validate various title fields depending on reference_type
-    validates :title, presence: true, if: :has_title_field?
-    validates :chapter_title, presence: true, if: :has_chapter_title_field?
-    #validates :title_of_review, presence: true, if: :has_title_of_review_field?
-    validates :paper_title, presence: true, if: :has_paper_title_field?
+
+    #
+    # validate based on reference type
+    #
+
+    # books
+    validates :title, presence: true, if: :is_ref_type_book?
+    validates_associated :publishers, if: :is_ref_type_book?
+    validates_associated :authors, if: :is_ref_type_book?
+    validates_associated :publish_places, if: :is_ref_type_book?
+
+    # book chapters
+    validates :chapter_title, presence: true, if: :is_ref_type_book_chapter?
+    validates :page_range, presence: true, if: :is_ref_type_book_chapter?
+    validates_associated :publishers, if: :is_ref_type_book_chapter?
+    validates_associated :authors, if: :is_ref_type_book_chapter?
+    validates_associated :book_editors, if: :is_ref_type_book_chapter?
+    validates_associated :publish_places, if: :is_ref_type_book_chapter?
+
+    # book reviews
+    validates :title_of_review, presence: true, if: :is_ref_type_book_review?
+
+    # journal articles
+    validates :title, presence: true, if: :is_ref_type_journal_article?
+    validates_associated :authors, if: :is_ref_type_journal_article?
+
+    # dissertations
+    validates :title, presence: true, if: :is_ref_type_dissertation?
+    validates_associated :publish_places, if: :is_ref_type_dissertation?
+
+    # conference papers
+    validates :paper_title, presence: true, if: :is_ref_type_conference_paper?
+
+    # multimedia
+    validates :title, presence: true, if: :is_ref_type_multimedia?
+    validates_associated :authors, if: :is_ref_type_multimedia?
+
 
     searchable :if => :published do
         integer :id
@@ -583,35 +617,44 @@ class Bibliography < ApplicationRecord
             people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
         end
 
-        def has_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book" or reference_type.downcase == "journal article" or reference_type.downcase == "dissertation" or reference_type.downcase == "multimedia"
-            else
-                true
-            end
+
+        #
+        # the following validate depending on reference type
+        #
+
+        def is_ref_type_book?
+            is_of_reference_type?('book')
         end
 
-        def has_chapter_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book chapter"
-            else
-                true
-            end
+        def is_ref_type_book_chapter?
+            is_of_reference_type?('book chapter')
         end
 
-        def has_title_of_review_field?
-            if reference_type.present?
-                reference_type.downcase == "book review"
-            else
-                true
-            end
+        def is_ref_type_book_review?
+            is_of_reference_type?('book review')
         end
 
-        def has_paper_title_field?
+        def is_ref_type_journal_article?
+            is_of_reference_type?('journal article')
+        end
+
+        def is_ref_type_dissertation?
+            is_of_reference_type?('dissertation')
+        end
+
+        def is_ref_type_conference_paper?
+            is_of_reference_type?('conference paper')
+        end
+
+        def is_ref_type_multimedia?
+            is_of_reference_type?('multimedia')
+        end
+
+        def is_of_reference_type?(type)
             if reference_type.present?
-                reference_type.downcase == "conference paper"
+                reference_type.downcase == type
             else
-                true
+                false
             end
         end
 end

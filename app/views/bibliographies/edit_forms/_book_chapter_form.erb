@@ -27,7 +27,7 @@
         label: 'Chapter Title', 
         as: :string,
         required: true,
-        validate: true
+        validate: { presence: true }
     %>
 
     <%= render 'bibliographies/fields/book_editor', :form => form, field_label: 'Book Editor' %>
