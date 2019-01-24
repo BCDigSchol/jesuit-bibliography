@@ -10,26 +10,17 @@ module CitationExporter
     }
 
     def self.convert_to_bibtex(record)
-        # puts record.pretty_inspect
+        puts record.pretty_inspect
         record_type = record[:reference_type_text][0]
         template = Factory.get_template type: record_type
-        bib = BibTeX::Bibliography.new
-        entry = BibTeX::Entry.new
 
-        entry.type = template.bibtex_type
-        entry.key = :entry
+        entry_attributes = {
+            :bibtex_type => template.bibtex_type,
+            :bibtex_key => :entry
+        }
+        entry_attributes = template.populate from: record, to: entry_attributes
 
-        template.normal_fields.each do |bibtex_field, solr_field|
-            entry[bibtex_field] = record[solr_field] if record[solr_field]
-        end
-
-        template.name_fields.each do |bibtex_field, solr_field|
-            names = record[solr_field].join(' and ')
-            entry[bibtex_field] = names if record[solr_field]
-        end
-
-        bib << entry
-        bib
+        BibTeX::Bibliography.new << BibTeX::Entry.new(entry_attributes)
     end
 
     def export_to_refworks(record)
