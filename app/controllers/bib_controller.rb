@@ -1,63 +1,32 @@
 class BibController < ApplicationController
-    before_action :set_bib, only: [:index]
+    before_action :set_bib
 
-    def index
+    def raw
         respond_to do |format|
-            format.html { render body: generate_bib }
-            format.json  { render body: generate_bib }
+            format.html { render body: @bib.bib_text_raw }
+            format.json  { render body: @bib.bib_text_raw }
+        end
+    end
+    def mla
+        respond_to do |format|
+            format.html { render body: @bib.bib_text_mla }
+            format.json  { render body: @bib.bib_text_mla }
+        end
+    end
+    def chicago
+        respond_to do |format|
+            format.html { render body: @bib.bib_text_chicago }
+            format.json  { render body: @bib.bib_text_chicago }
+        end
+    end
+    def turabian
+        respond_to do |format|
+            format.html { render body: @bib.bib_text_turabian }
+            format.json  { render body: @bib.bib_text_turabian }
         end
     end
 
     private
-
-        def generate_bib
-            out = ""
-
-            if !@bib.nil? and @bib.reference_type.present? and @bib.published? 
-                case @bib.reference_type.downcase
-                when 'book'
-                    out << "@book{citationrecord"
-                when 'book chapter'
-                    out << "@inbook{citationrecord"
-                when 'book review'
-                    out << "@article{citationrecord"
-                when 'journal article'
-                    out << "@inproceedings{citationrecord"
-                when 'dissertation'
-                    out << "@masterthesis{citationrecord"
-                when 'conference paper'
-                    out << "@conference{citationrecord"
-                when 'multimedia'
-                    out << "@misc{citationrecord"
-                end
-
-                if @bib.display_author.present?
-                    a = []
-                    @bib.display_author.split('|').each do |author|
-                        a << author
-                    end
-                    out << ", author = '#{a.join(" and ")}'"
-                end
-                if @bib.display_title.present?
-                    out << ", title = '#{@bib.display_title}'"
-                end
-                if @bib.year_published.present?
-                    out << ", year = '#{@bib.year_published}'"
-                end
-                if @bib.publishers.present?
-                    p = []
-                    @bib.publishers.each do  |publisher|
-                        p << publisher.name
-                    end
-                    out << ", publisher = '#{p.join(" and ")}'"
-                end
-                out << "}"
-            
-            end
-
-            out
-        end
-
         def set_bib
             begin
                 @bib = Bibliography.find(params[:bibliography_id])

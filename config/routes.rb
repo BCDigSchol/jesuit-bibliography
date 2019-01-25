@@ -41,7 +41,10 @@ Rails.application.routes.draw do
     resources :author_of_reviews
     resources :performers
     resources :translated_authors
-    resources :bib, only: [:index]
+    resources :bib, only: [:index], controller: "bib", action: "raw"
+    resources :mla, only: [:index], controller: "bib", action: "mla"
+    resources :chicago, only: [:index], controller: "bib", action: "chicago"
+    resources :turabian, only: [:index], controller: "bib", action: "turabian"
   end
 
   # get paths like "/citations/terms/subject/1"

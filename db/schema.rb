@@ -70,7 +70,10 @@ ActiveRecord::Schema.define(version: 2019_01_24_203210) do
     t.text "status"
     t.text "created_by"
     t.text "modified_by"
-    t.text "bib_text"
+    t.text "bib_text_raw"
+    t.text "bib_text_mla"
+    t.text "bib_text_chicago"
+    t.text "bib_text_turabian"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

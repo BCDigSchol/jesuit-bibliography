@@ -754,10 +754,28 @@
         <% end %>
 
         <% if current_user.admin_role? %>
-            <% if @bib.bib_text.present? %>
+            <% if @bib.bib_text_raw.present? %>
                 <div class="field-pair row">
-                    <label class="col-sm-2">BibText</label>
-                    <div class="field-value col-sm-10"><%= @bib.bib_text %></div>
+                    <label class="col-sm-2">BibText Raw</label>
+                    <div class="field-value col-sm-10"><code><%= @bib.bib_text_raw %></code></div>
+                </div>
+            <% end %>
+            <% if @bib.bib_text_mla.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">MLA citation</label>
+                    <div class="field-value col-sm-10"><%= @bib.bib_text_mla.html_safe %></div>
+                </div>
+            <% end %>
+            <% if @bib.bib_text_chicago.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Chicago citation</label>
+                    <div class="field-value col-sm-10"><%= @bib.bib_text_chicago.html_safe %></div>
+                </div>
+            <% end %>
+            <% if @bib.bib_text_turabian.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Turabian Citation</label>
+                    <div class="field-value col-sm-10"><%= @bib.bib_text_turabian.html_safe %></div>
                 </div>
             <% end %>
         <% end %>

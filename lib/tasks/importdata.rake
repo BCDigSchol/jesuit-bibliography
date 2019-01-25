@@ -138,6 +138,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[22])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -302,6 +305,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[24])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -462,6 +468,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[23])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -617,6 +626,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[19])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -759,6 +771,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[16])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -893,6 +908,9 @@ namespace :importdata do
             # Abstract
             import_add_abstract(@bib, row[14])
 
+            # generate citations
+            @bib.generate_citations
+
             begin
                 @bib.save!(validate: false)
             rescue 
@@ -1017,6 +1035,9 @@ namespace :importdata do
 
             # Abstract
             import_add_abstract(@bib, row[17])
+
+            # generate citations
+            @bib.generate_citations
 
             begin
                 @bib.save!(validate: false)
