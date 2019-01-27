@@ -373,7 +373,7 @@ class BibliographiesController < ApplicationController
     end
 
     def mine
-        authorize! :read, Bibliography, :message => "Unable to load this page."
+        authorize! :create, Bibliography, :message => "Unable to load this page."
 
         @bibs_grid = initialize_grid(Bibliography, 
             conditions: {created_by: current_user.email},
