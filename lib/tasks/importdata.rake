@@ -54,8 +54,8 @@ namespace :importdata do
         puts "Task completed.\n\n"
     end
 
-    desc "Run all importdata tasks"
-    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers, :multimedia]
+    desc "Run all importdata tasks and generate citations for all imported records"
+    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers, :multimedia, :generate_citations]
 
     desc "Import test books"
     task books: :environment do
@@ -1088,6 +1088,30 @@ namespace :importdata do
         puts "Created #{item_count} #{@format} records in #{diff} seconds\n\n"
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
+
+    desc "Generate Citations for all records"
+    task generate_citations: :environment do
+        puts "Starting citation generation"
+        import_logger.info("Starting citation generation")
+
+        start = Time.now
+        all_bibs = Bibliography.all
+        record_count = all_bibs.length
+        puts "Total Bibliography records to process: #{record_count}"
+        bar = ProgressBar.new(record_count)
+
+        all_bibs.each do |bib|
+            bib.generate_citations
+            bib.save
+            bar.increment!
+        end
+
+        finish = Time.now
+        diff = finish - start
+        puts "Updated #{record_count} Bibliography records in #{diff} seconds\n\n"
+        import_logger.info("Updated #{record_count} Bibliography records in #{diff} seconds")
+    end
+
 
     # look at the RAILS_ENV variable and select the appropriate import file location
     def select_import_home_path

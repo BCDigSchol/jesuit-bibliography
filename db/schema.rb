@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_195305) do
+ActiveRecord::Schema.define(version: 2019_01_24_203210) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(version: 2019_01_14_195305) do
     t.text "status"
     t.text "created_by"
     t.text "modified_by"
+    t.text "bib_text_raw"
+    t.text "bib_text_mla"
+    t.text "bib_text_chicago"
+    t.text "bib_text_turabian"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|

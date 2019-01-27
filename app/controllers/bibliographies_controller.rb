@@ -1,4 +1,5 @@
 class BibliographiesController < ApplicationController
+
     protect_from_forgery with: :exception
     #load_and_authorize_resource
  
@@ -255,6 +256,9 @@ class BibliographiesController < ApplicationController
         # set the display_* fields for Blacklight views
         set_display_fields
 
+        # generate the various citations for this record
+        @bib.generate_citations
+
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
         @bib.comments.each do |comment|
@@ -299,6 +303,9 @@ class BibliographiesController < ApplicationController
 
         # set the display_* fields for Blacklight views
         set_display_fields
+
+        # generate the various citations for this record
+        @bib.generate_citations
 
         @bib.modified_by = current_user
 
@@ -612,4 +619,5 @@ class BibliographiesController < ApplicationController
                 end
             end
         end
+
 end

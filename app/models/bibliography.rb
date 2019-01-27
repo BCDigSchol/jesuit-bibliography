@@ -1,4 +1,6 @@
 class Bibliography < ApplicationRecord
+    include CitationsGenerator
+
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     #has_many :languages, inverse_of: :bibliography, dependent: :destroy
     has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy
@@ -491,6 +493,10 @@ class Bibliography < ApplicationRecord
     ADD_BUTTON = '<i class="fas fa-plus" title="Add another field" aria-hidden></i> '.html_safe.freeze
     NO_DISPLAY_TITLE = '<em>No Title</em>'.html_safe.freeze
     NO_DISPLAY_AUTHOR = '<em>No Author</em>'.html_safe.freeze
+
+    def generate_citations
+        generate_all_citations
+    end
 
     private
         def comments_json
