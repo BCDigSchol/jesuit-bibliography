@@ -177,7 +177,7 @@ module CitationsGenerator
             bibliography = BibTeX::Bibliography.new
             bibliography << @b
     
-            self.bib_text_raw = bibliography.to_s
+            self.bibtex = bibliography.to_s
     
             #
             # process various citation formats
@@ -189,7 +189,7 @@ module CitationsGenerator
             processor = CiteProc::Processor.new(style: 'modern-language-association', format: 'html', local: 'en')
             processor.import citeproc
             mla_citation = processor.render :bibliography, id: :citationrecord
-            self.bib_text_mla = mla_citation[0]
+            self.bibtex_mla = mla_citation[0]
 
             # process Chicago citation style
             #processor = CiteProc::Processor.new(style: 'chicago-fullnote-bibliography', format: 'html', local: 'en')
@@ -197,7 +197,7 @@ module CitationsGenerator
             processor.engine.style = 'chicago-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
             chicago_citation = processor.render :bibliography, id: :citationrecord
-            self.bib_text_chicago = chicago_citation[0]
+            self.bibtex_chicago = chicago_citation[0]
     
             # process Turabian citation style
             #processor = CiteProc::Processor.new(style: 'turabian-fullnote-bibliography', format: 'html', local: 'en')
@@ -205,7 +205,7 @@ module CitationsGenerator
             processor.engine.style = 'turabian-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
             turabian_citation = processor.render :bibliography, id: :citationrecord
-            self.bib_text_turabian = turabian_citation[0]
+            self.bibtex_turabian = turabian_citation[0]
         end
 
         private 

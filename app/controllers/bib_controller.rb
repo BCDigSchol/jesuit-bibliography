@@ -3,26 +3,26 @@ class BibController < ApplicationController
 
     def raw
         respond_to do |format|
-            format.html { render body: @bib.bib_text_raw }
-            format.json  { render body: @bib.bib_text_raw }
+            format.html { render body: @bib.bibtex }
+            format.json  { render body: @bib.bibtex }
         end
     end
     def mla
         respond_to do |format|
-            format.html { render body: @bib.bib_text_mla }
-            format.json  { render body: @bib.bib_text_mla }
+            format.html { render body: @bib.bibtex_mla }
+            format.json  { render body: @bib.bibtex_mla }
         end
     end
     def chicago
         respond_to do |format|
-            format.html { render body: @bib.bib_text_chicago }
-            format.json  { render body: @bib.bib_text_chicago }
+            format.html { render body: @bib.bibtex_chicago }
+            format.json  { render body: @bib.bibtex_chicago }
         end
     end
     def turabian
         respond_to do |format|
-            format.html { render body: @bib.bib_text_turabian }
-            format.json  { render body: @bib.bib_text_turabian }
+            format.html { render body: @bib.bibtex_turabian }
+            format.json  { render body: @bib.bibtex_turabian }
         end
     end
 

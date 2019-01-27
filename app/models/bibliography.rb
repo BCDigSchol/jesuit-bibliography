@@ -464,6 +464,22 @@ class Bibliography < ApplicationRecord
             end
         end
 
+        text :bibtex do
+            bibtex if self.bibtex.present?
+        end
+
+        text :bibtex_mla do
+            bibtex_mla if self.bibtex_mla.present?
+        end
+
+        text :bibtex_chicago do
+            bibtex_chicago if self.bibtex_chicago.present?
+        end
+
+        text :bibtex_turabian do
+            bibtex_turabian if self.bibtex_turabian.present?
+        end
+
         time :created_at
         time :updated_at
     end

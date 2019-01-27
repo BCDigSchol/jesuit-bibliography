@@ -96,6 +96,11 @@
     <field name="created_by_text" type="text_general"/>
     <field name="modified_by_text" type="text_general"/>
 
+    <field name="bibtex_text" type="text_general"/>
+    <field name="bibtex_mla_text" type="text_general"/>
+    <field name="bibtex_chicago_text" type="text_general"/>
+    <field name="bibtex_turabian_text" type="text_general"/>
+
     <field name="created_at_d" type="date"/>
     <field name="updated_at_d" type="date"/>
     <field name="published_b" type="boolean"/>
@@ -631,6 +636,12 @@
     <copyField source="jesuits_text" dest="jesuits_text_str" maxChars="256"/>
     <copyField source="centuries_text" dest="centuries_text_str" maxChars="256"/>
     <copyField source="tags_text" dest="tags_text_str" maxChars="256"/>
+
+    <copyField source="bibtex_text" dest="bibtex_text_str" maxChars="256"/>
+    <copyField source="bibtex_mla_text" dest="bibtex_mla_text_str" maxChars="256"/>
+    <copyField source="bibtex_chicago_text" dest="bibtex_chicago_text_str" maxChars="256"/>
+    <copyField source="bibtex_turabian_text" dest="bibtex_turabian_text_str" maxChars="256"/>
+
 
     <!-- these fields are also used for display, so they must be stored -->
     <field name="reference_type_facet" type="string" indexed="true" stored="true" multiValued="true" />
