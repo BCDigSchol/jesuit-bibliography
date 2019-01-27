@@ -34,10 +34,10 @@ module CitationsGenerator
                 # Required fields: author/editor, title, chapter/pages, publisher, year
                 # Optional fields: volume/number, series, type, address, edition, month, note, key
                 @b.type = :inbook
-                @b.keywords = "hello and goodbye"
                 generate_address
                 generate_author
                 generate_bookeditor # called as @b.editor
+                generate_booktitle
                 generate_chapter
                 generate_doi
                 generate_edition

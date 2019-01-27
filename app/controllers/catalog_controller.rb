@@ -51,6 +51,19 @@ class CatalogController < ApplicationController
       q: '{!term f=id_i v=$id}'
     }
 
+    # config for fields displayed in the BL 'Cite' tool
+    # somehow, we can hide these fields from displaying in the record view by setting the lambda function to return 'false'
+    # but this will still appear in the 'Cite' panel
+    config.add_show_field 'bibtex_mla_text', label: 'MLA', :helper_method => :display_in_parts, if: lambda {|context, field_config, document|
+      false
+    }
+    config.add_show_field 'bibtex_chicago_text', label: 'Chicago', :helper_method => :display_in_parts, if: lambda {|context, field_config, document|
+      false
+    }
+    config.add_show_field 'bibtex_turabian_text', label: 'Turabian', :helper_method => :display_in_parts, if: lambda {|context, field_config, document|
+      false
+    }
+
     # solr field configuration for search results/index views
     # use display_title_text as the generic title_field for index views
     config.index.title_field = 'display_title_text'
