@@ -357,7 +357,7 @@ class BibliographiesController < ApplicationController
     end
 
     def form_partial
-        authorize! :read, Bibliography, :message => "Unable to load this template."
+        authorize! :create, Bibliography, :message => "Unable to load this template."
 
         if params[:id] == "new"
             new
