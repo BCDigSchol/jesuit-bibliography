@@ -19,6 +19,12 @@
                             <%= rc.input :reviewed_title, 
                                 label: 'Reviewed Title' 
                             %>
+                            <% if can? :manage, 'RecordLinking '%>
+                            <%= rc.input :reviewed_title_record_ref, 
+                                label: 'Reviewed Title ID' ,
+                                hint: 'Add in the ID of the Book record you want to link. Make sure the linked Book record is \'Published\''
+                            %>
+                            <% end %>
 
                             <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
                                 form, 

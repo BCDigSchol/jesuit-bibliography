@@ -314,6 +314,10 @@ class Bibliography < ApplicationRecord
             book_title if self.book_title.present?
         end
 
+        text :book_chapter_record_ref do
+            book_chapter_record_ref if self.book_chapter_record_ref.present?
+        end
+
         text :paper_title do
             paper_title if self.paper_title.present?
         end
@@ -417,6 +421,9 @@ class Bibliography < ApplicationRecord
                 end
                 if rc.reviewed_title.present?
                     rc_array << "<div class='rc-item'><span class='rc-label'>Title:</span> #{rc.reviewed_title}</div>"
+                end
+                if rc.reviewed_title_record_ref.present?
+                    rc_array << "<div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(rc.reviewed_title_record_ref)}'>Go to reviewed item</a></span></div>"
                 end
                 rc_array << "</div>"
             end

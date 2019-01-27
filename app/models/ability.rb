@@ -38,6 +38,7 @@ class Ability
       can :manage, 'Status'         # can manage record Status value
       can :manage, 'Publish'        # can set a record to 'published' status
       can :manage, 'Suggestions'    # can manage Suggestions
+      can :manage, 'RecordLinking'  # can manage linking records together
       can :manage, Location         # can manage Location Term lists
       can :manage, Subject          # can manage Subject Term lists
       can :manage, Period           # can manage Period Term lists
@@ -63,6 +64,7 @@ class Ability
       can :read, 'Dashboard'                        # allow access to dashboard
       can :manage, 'Terms'                          # can access Term lists dropdown
       can :manage, 'Status'                         # can manage record Status value
+      can :manage, 'RecordLinking'                  # can manage linking records together
       #can :manage, 'Suggestions'                    # can manage Suggestions
       can :read, Location                           # can read Location Term lists
       can :read, Subject                            # can read Subject Term lists

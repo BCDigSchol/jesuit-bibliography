@@ -21,6 +21,16 @@ module ApplicationHelper
         out
     end
 
+    # make field value into a link to a book record
+    # assumes value is an ID to a published record
+    def link_to_book_record args
+        out = "".html_safe
+        args[:document][args[:field]].each do |id|
+            out << "<div class='dd-part'><a class='bl-view-link' href='#{solr_document_path(id)}' target='_blank'>Go to linked item</a></div>".html_safe
+        end
+        out
+    end
+
     # make field value into a link
     # for now, this method uses a single pipe "|" as the delimiter;
     # assumes value is a valid url

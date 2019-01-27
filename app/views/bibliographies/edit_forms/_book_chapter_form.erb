@@ -37,6 +37,13 @@
         as: :string 
     %>
 
+    <% if can? :manage, 'RecordLinking '%>
+    <%= form.input :book_chapter_record_ref, 
+        label: 'Linked Book ID',
+        hint: 'Add in the ID of the Book record you want to link. Make sure the linked Book record is \'Published\''
+    %>
+    <% end %>
+
     <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
 
     <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>

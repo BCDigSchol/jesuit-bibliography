@@ -190,6 +190,13 @@
                     </div>
                 <% end %>
 
+                 <% if @bib.book_chapter_record_ref.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Linked Book ID</label>
+                        <div class="field-value col-sm-10"><%= @bib.book_chapter_record_ref %></div>
+                    </div>
+                <% end %>
+
                 <% if @bib.event_title.present? %>
                     <div class="field-pair row">
                         <label class="col-sm-2">Event Title</label>
@@ -358,6 +365,7 @@
                                 <div>Editor: <span><%= rc.reviewed_editor %></span></div>
                                 <div>Translator: <span><%= rc.reviewed_translator %></span></div>
                                 <div>Title: <span><%= rc.reviewed_title %></span></div>
+                                <div>Book ID: <span><%= rc.reviewed_title_record_ref %></span></div>
                             </li>
                         <% end %>
                         </ul>

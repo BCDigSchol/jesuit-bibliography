@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_27_033524) do
+ActiveRecord::Schema.define(version: 2019_01_27_194658) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_033524) do
     t.text "bibtex_mla"
     t.text "bibtex_chicago"
     t.text "bibtex_turabian"
+    t.integer "book_chapter_record_ref"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
@@ -354,6 +355,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_033524) do
     t.datetime "updated_at", null: false
     t.text "reviewed_translator"
     t.text "reviewed_editor"
+    t.integer "reviewed_title_record_ref"
     t.index ["bibliography_id"], name: "index_reviewed_components_on_bibliography_id"
   end
 
