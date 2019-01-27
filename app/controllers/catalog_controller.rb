@@ -169,7 +169,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
     config.add_show_field 'publish_places_text', label: 'Places published'
 
-    config.add_show_field 'title_of_review_text', label: 'Title of Review'
+    #config.add_show_field 'title_of_review_text', label: 'Title of Review'
     config.add_show_field 'journals_text', label: 'Journal Title'
     config.add_show_field 'volume_text', label: 'Volume'
     config.add_show_field 'issue_text', label: 'Issue'
