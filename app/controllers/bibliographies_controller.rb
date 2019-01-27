@@ -585,9 +585,9 @@ class BibliographiesController < ApplicationController
                     @bib.display_title = NO_VALUE_FOUND
                 end
 
-                if @bib.author_of_reviews.present?
+                if @bib.authors.present?
                     out = []
-                    @bib.author_of_reviews.each do |author|
+                    @bib.authors.each do |author|
                         out << author.person.name
                     end
                     @bib.display_author = out.join('|')
