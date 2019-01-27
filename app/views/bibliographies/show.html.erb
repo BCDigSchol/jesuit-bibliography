@@ -22,763 +22,783 @@
         
         <hr/>
 
-        <% if current_user.admin_role? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Is published?</label>
-                <div class="field-value col-sm-10"><%= @bib.published? ? 'yes' : 'no' %></div>
-            </div>
-        <% end %>
-
-         <div class="field-pair row">
-            <label class="col-sm-2">Record Status</label>
-            <div class="field-value col-sm-10"><%= @bib.status %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Reference Type</label>
-            <div class="field-value col-sm-10"><%= @bib.reference_type %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Display Title</label>
-            <div class="field-value col-sm-10"><%= @bib.display_title %></div>
-        </div>
-
-        <% if @bib.display_author.present? %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Display Author</label>
-            <div class="field-value col-sm-10"> 
-                <% @bib.display_author.split('|').each do |author| %>
-                    <span class='value-part'><%= author %></span>
+        <div class="clearfix">
+            <div class="fields-list col-sm-12">
+                <h4>Fields</h4>
+                <% if current_user.admin_role? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Is published?</label>
+                        <div class="field-value col-sm-10"><%= @bib.published? ? 'yes' : 'no' %></div>
+                    </div>
                 <% end %>
-            </div>
-        </div>
-        <% end %>
 
-        <% if @bib.authors.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Authors</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.authors.each do |author| %>
-                        <span class='value-part'><%= author.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.person_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested People</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th><th>Person Field</th></tr></thead>
-                        <tbody>
-                        <% @bib.person_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                                <td><%= suggestion.field_name.capitalize %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.editors.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Editors</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.editors.each do |editor| %>
-                        <span class='value-part'><%= editor.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.translators.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Translators</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.translators.each do |translator| %>
-                        <span class='value-part'><%= translator.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.translated_authors.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Translated Authors</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.translated_authors.each do |translated_author| %>
-                        <span class='value-part'><%= translated_author.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.book_editors.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Book Editors</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.book_editors.each do |book_editor| %>
-                        <span class='value-part'><%= book_editor.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.author_of_reviews.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Authors of Review</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.author_of_reviews.each do |author_of_review| %>
-                        <span class='value-part'><%= author_of_review.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.performers.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Performers</label>
-                <div class="field-value col-sm-10"> 
-                    <% @bib.performers.each do |performer| %>
-                        <span class='value-part'><%= performer.person.name %></span>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Title</label>
-                <div class="field-value col-sm-10"><%= @bib.title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.chapter_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Chapter Title</label>
-                <div class="field-value col-sm-10"><%= @bib.chapter_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.title_of_review.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Title of Review</label>
-                <div class="field-value col-sm-10"><%= @bib.title_of_review %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.book_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Book title</label>
-                <div class="field-value col-sm-10"><%= @bib.book_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.event_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event Title</label>
-                <div class="field-value col-sm-10"><%= @bib.event_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.paper_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Paper Title</label>
-                <div class="field-value col-sm-10"><%= @bib.paper_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.series_multimedium.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Series</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.series_multimedium.each do |s| %>
-                    <li><%= s.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.publish_places.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Places Published</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.publish_places.each do |p| %>
-                    <li><%= p.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.event_location.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event Location</label>
-                <div class="field-value col-sm-10"><%= @bib.event_location %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.journal_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Title of Journal</label>
-                <div class="field-value col-sm-10"><%= @bib.journal_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.journals.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Title of Journal</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.journals.each do |journal| %>
-                    <li><%= journal.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.journal_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Journal Titles</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.journal_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.publishers.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Publishers</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.publishers.each do |p| %>
-                    <li><%= p.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.event_institution.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event Institution</label>
-                <div class="field-value col-sm-10"><%= @bib.event_institution %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.dissertation_universities.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Publishers</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.dissertation_universities.each do |u| %>
-                    <li><%= u.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.volume.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Volume</label>
-                <div class="field-value col-sm-10"><%= @bib.volume %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.number_of_volumes.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Number of Volumes</label>
-                <div class="field-value col-sm-10"><%= @bib.number_of_volumes %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.issue.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Issue</label>
-                <div class="field-value col-sm-10"><%= @bib.issue %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.event_date.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event Date</label>
-                <div class="field-value col-sm-10"><%= @bib.event_date %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.volume_number.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Volumes Number</label>
-                <div class="field-value col-sm-10"><%= @bib.volume_number %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.number_of_pages.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Number of pages</label>
-                <div class="field-value col-sm-10"><%= @bib.number_of_pages %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.page_range.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Page range</label>
-                <div class="field-value col-sm-10"><%= @bib.page_range %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.reviewed_components.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Reviewed Component</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.reviewed_components.each do |rc| %>
-                    <li>
-                        <div>Author: <span><%= rc.reviewed_author %></span></div>
-                        <div>Editor: <span><%= rc.reviewed_editor %></span></div>
-                        <div>Translator: <span><%= rc.reviewed_translator %></span></div>
-                        <div>Title: <span><%= rc.reviewed_title %></span></div>
-                    </li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.chapter_number.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Chapter number</label>
-                <div class="field-value col-sm-10"><%= @bib.chapter_number %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.event_panel_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event Panel Title</label>
-                <div class="field-value col-sm-10"><%= @bib.event_panel_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.edition.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Edition</label>
-                <div class="field-value col-sm-10"><%= @bib.edition %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.epub_date.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Epub Date</label>
-                <div class="field-value col-sm-10"><%= @bib.epub_date %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.date.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Date</label>
-                <div class="field-value col-sm-10"><%= @bib.date %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.multimedia_type.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Multimedia Type</label>
-                <div class="field-value col-sm-10"><%= @bib.multimedia_type %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.dissertation_thesis_type.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Thesis type</label>
-                <div class="field-value col-sm-10"><%= @bib.dissertation_thesis_type %></div>
-            </div>
-        <% end %>
-
-
-
-        <% if @bib.reprint_edition.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Reprint Edition</label>
-                <div class="field-value col-sm-10"><%= @bib.reprint_edition %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.worldcat_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Worldcat URL</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.worldcat_urls.each do |worldcat_url| %>
-                    <li><%= worldcat_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.publisher_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Publisher URL</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.publisher_urls.each do |publisher_url| %>
-                    <li><%= publisher_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.multimedia_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Multimedia URL</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.multimedia_urls.each do |multimedia_url| %>
-                    <li><%= multimedia_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.event_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Event URL</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.event_urls.each do |event_url| %>
-                    <li><%= event_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.dissertation_university_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">University URL</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.dissertation_university_urls.each do |dissertation_university_url| %>
-                    <li><%= dissertation_university_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.leuven_urls.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Other links</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.leuven_urls.each do |leuven_url| %>
-                    <li><%= leuven_url.link %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.multimedia_dimensions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Multimedia Dimensions</label>
-                <div class="field-value col-sm-10"><%= @bib.multimedia_dimensions %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.abstract.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Abstract</label>
-                <div class="field-value col-sm-10"><%= @bib.abstract.html_safe %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.translated_title.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Translated Title</label>
-                <div class="field-value col-sm-10"><%= @bib.translated_title %></div>
-            </div>
-        <% end %>
-
-        <% if @bib.languages.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Languages</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.languages.each do |lang| %>
-                    <li><%= lang.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.language_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Languages</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.language_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.isbns.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">ISBN</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.isbns.each do |isbn| %>
-                    <li><%= isbn.value %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.issns.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">ISSN</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.issns.each do |issn| %>
-                    <li><%= issn.value %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.dois.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">DOI</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.dois.each do |doi| %>
-                    <li><%= doi.value %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.subjects.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Subjects</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.subjects.each do |subject| %>
-                    <li><%= subject.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.subject_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Subjects</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.subject_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.periods.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Centuries</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.periods.each do |period| %>
-                    <li><%= period.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.period_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Centuries</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.period_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.locations.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Locations</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.locations.each do |location| %>
-                    <li><%= location.name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.location_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Locations</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.location_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.entities.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Jesuits</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.entities.each do |entity| %>
-                    <li><%= entity.display_name %></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <% if @bib.entity_suggestions.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Suggested Jesuits</label>
-                <div class="field-value col-sm-10">
-                    <table class="table table-bordered">
-                        <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
-                        <tbody>
-                        <% @bib.entity_suggestions.each do |suggestion| %>
-                            <tr>
-                                <td><%= suggestion.name %></td>
-                                <td><%= suggestion.note %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        <% end %>
-
-        <% if @bib.comments.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Comments</label>
-                <ol class="field-value col-sm-10">
-                    <% @bib.comments.each do |comment| %>
-                        <li>
-                            <div class="panel <%= comment.make_public ? 'panel-success' : 'panel-default' %>">
-                                <div class="panel-heading"><%= comment.make_public ? 'Public ' : 'Private ' %> Comment</div>
-                                <div class="panel-body clearfix">
-                                    <div class="row">
-                                        <label class="col-sm-2">Comment:</label>
-                                        <div class="field-value col-sm-10"><%= comment.body %></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2">Type:</label>
-                                        <div class="field-value col-sm-10"><%= comment.comment_type %></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2">Commenter:</label>
-                                        <div class="field-value col-sm-10"><%= comment.commenter %></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-2">Make Public?:</label>
-                                        <div class="field-value col-sm-10"><%= comment.make_public %></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    <% end %>
-                </ol>
-            </div>
-        <% end %>
-
-        <% if can? :read, Tag and @bib.tags.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-2">Tags</label>
-                <ul class="field-value col-sm-10">
-                <% @bib.tags.each do |tag| %>
-                    <li><span class="badge"><%= tag.name %></span></li>
-                <% end %>
-                </ul>
-            </div>
-        <% end %>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created At</label>
-            <div class="field-value col-sm-10"><%= @bib.created_at %></div>
-        </div>
-
-        <% if @bib.modified_by.present? and can? :read, Bibliography %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Updated At</label>
-            <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
-        </div>
-        <% end %>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created By</label>
-            <div class="field-value col-sm-10"><%= @bib.created_by %></div>
-        </div>
-
-        <% if @bib.modified_by.present? and can? :read, Bibliography %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Last Modified By</label>
-            <div class="field-value col-sm-10"><%= @bib.modified_by %></div>
-        </div>
-        <% end %>
-
-        <% if current_user.admin_role? %>
-            <% if @bib.bib_text_raw.present? %>
                 <div class="field-pair row">
-                    <label class="col-sm-2">BibText Raw</label>
-                    <div class="field-value col-sm-10"><code><%= @bib.bib_text_raw %></code></div>
+                    <label class="col-sm-2">Record Status</label>
+                    <div class="field-value col-sm-10"><%= @bib.status %></div>
                 </div>
-            <% end %>
-            <% if @bib.bib_text_mla.present? %>
+
                 <div class="field-pair row">
-                    <label class="col-sm-2">MLA citation</label>
-                    <div class="field-value col-sm-10"><%= @bib.bib_text_mla.html_safe %></div>
+                    <label class="col-sm-2">Reference Type</label>
+                    <div class="field-value col-sm-10"><%= @bib.reference_type %></div>
                 </div>
-            <% end %>
-            <% if @bib.bib_text_chicago.present? %>
+
                 <div class="field-pair row">
-                    <label class="col-sm-2">Chicago citation</label>
-                    <div class="field-value col-sm-10"><%= @bib.bib_text_chicago.html_safe %></div>
+                    <label class="col-sm-2">Display Title</label>
+                    <div class="field-value col-sm-10"><%= @bib.display_title %></div>
                 </div>
-            <% end %>
-            <% if @bib.bib_text_turabian.present? %>
+
+                <% if @bib.display_author.present? %>
                 <div class="field-pair row">
-                    <label class="col-sm-2">Turabian Citation</label>
-                    <div class="field-value col-sm-10"><%= @bib.bib_text_turabian.html_safe %></div>
+                    <label class="col-sm-2">Display Author</label>
+                    <div class="field-value col-sm-10"> 
+                        <% @bib.display_author.split('|').each do |author| %>
+                            <span class='value-part'><%= author %></span>
+                        <% end %>
+                    </div>
                 </div>
-            <% end %>
-        <% end %>
+                <% end %>
+
+                <% if @bib.year_published.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Year Published</label>
+                        <div class="field-value col-sm-10"><%= @bib.year_published %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.authors.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Authors</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.authors.each do |author| %>
+                                <span class='value-part'><%= author.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.person_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested People</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th><th>Person Field</th></tr></thead>
+                                <tbody>
+                                <% @bib.person_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                        <td><%= suggestion.field_name.capitalize %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.editors.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Editors</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.editors.each do |editor| %>
+                                <span class='value-part'><%= editor.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.translators.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Translators</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.translators.each do |translator| %>
+                                <span class='value-part'><%= translator.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.translated_authors.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Translated Authors</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.translated_authors.each do |translated_author| %>
+                                <span class='value-part'><%= translated_author.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.book_editors.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Book Editors</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.book_editors.each do |book_editor| %>
+                                <span class='value-part'><%= book_editor.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.author_of_reviews.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Authors of Review</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.author_of_reviews.each do |author_of_review| %>
+                                <span class='value-part'><%= author_of_review.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.performers.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Performers</label>
+                        <div class="field-value col-sm-10"> 
+                            <% @bib.performers.each do |performer| %>
+                                <span class='value-part'><%= performer.person.name %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.chapter_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Chapter Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.chapter_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.title_of_review.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Title of Review</label>
+                        <div class="field-value col-sm-10"><%= @bib.title_of_review %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.book_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Book title</label>
+                        <div class="field-value col-sm-10"><%= @bib.book_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.event_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.paper_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Paper Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.paper_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.series_multimedium.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Series</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.series_multimedium.each do |s| %>
+                            <li><%= s.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.publish_places.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Places Published</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.publish_places.each do |p| %>
+                            <li><%= p.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_location.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event Location</label>
+                        <div class="field-value col-sm-10"><%= @bib.event_location %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.journal_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Title of Journal</label>
+                        <div class="field-value col-sm-10"><%= @bib.journal_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.journals.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Title of Journal</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.journals.each do |journal| %>
+                            <li><%= journal.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.journal_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Journal Titles</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.journal_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.publishers.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Publishers</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.publishers.each do |p| %>
+                            <li><%= p.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_institution.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event Institution</label>
+                        <div class="field-value col-sm-10"><%= @bib.event_institution %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.dissertation_universities.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Publishers</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.dissertation_universities.each do |u| %>
+                            <li><%= u.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.volume.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Volume</label>
+                        <div class="field-value col-sm-10"><%= @bib.volume %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.number_of_volumes.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Number of Volumes</label>
+                        <div class="field-value col-sm-10"><%= @bib.number_of_volumes %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.issue.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Issue</label>
+                        <div class="field-value col-sm-10"><%= @bib.issue %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_date.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event Date</label>
+                        <div class="field-value col-sm-10"><%= @bib.event_date %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.volume_number.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Volumes Number</label>
+                        <div class="field-value col-sm-10"><%= @bib.volume_number %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.number_of_pages.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Number of pages</label>
+                        <div class="field-value col-sm-10"><%= @bib.number_of_pages %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.page_range.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Page range</label>
+                        <div class="field-value col-sm-10"><%= @bib.page_range %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.reviewed_components.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Reviewed Component</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.reviewed_components.each do |rc| %>
+                            <li>
+                                <div>Author: <span><%= rc.reviewed_author %></span></div>
+                                <div>Editor: <span><%= rc.reviewed_editor %></span></div>
+                                <div>Translator: <span><%= rc.reviewed_translator %></span></div>
+                                <div>Title: <span><%= rc.reviewed_title %></span></div>
+                            </li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.chapter_number.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Chapter number</label>
+                        <div class="field-value col-sm-10"><%= @bib.chapter_number %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_panel_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event Panel Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.event_panel_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.edition.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Edition</label>
+                        <div class="field-value col-sm-10"><%= @bib.edition %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.epub_date.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Epub Date</label>
+                        <div class="field-value col-sm-10"><%= @bib.epub_date %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.date.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Date</label>
+                        <div class="field-value col-sm-10"><%= @bib.date %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.multimedia_type.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Multimedia Type</label>
+                        <div class="field-value col-sm-10"><%= @bib.multimedia_type %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.dissertation_thesis_type.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Thesis type</label>
+                        <div class="field-value col-sm-10"><%= @bib.dissertation_thesis_type %></div>
+                    </div>
+                <% end %>
+
+
+
+                <% if @bib.reprint_edition.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Reprint Edition</label>
+                        <div class="field-value col-sm-10"><%= @bib.reprint_edition %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.worldcat_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Worldcat URL</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.worldcat_urls.each do |worldcat_url| %>
+                            <li><%= worldcat_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.publisher_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Publisher URL</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.publisher_urls.each do |publisher_url| %>
+                            <li><%= publisher_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.multimedia_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Multimedia URL</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.multimedia_urls.each do |multimedia_url| %>
+                            <li><%= multimedia_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.event_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Event URL</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.event_urls.each do |event_url| %>
+                            <li><%= event_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.dissertation_university_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">University URL</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.dissertation_university_urls.each do |dissertation_university_url| %>
+                            <li><%= dissertation_university_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.leuven_urls.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Other links</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.leuven_urls.each do |leuven_url| %>
+                            <li><%= leuven_url.link %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.multimedia_dimensions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Multimedia Dimensions</label>
+                        <div class="field-value col-sm-10"><%= @bib.multimedia_dimensions %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.abstract.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Abstract</label>
+                        <div class="field-value col-sm-10"><%= @bib.abstract.html_safe %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.translated_title.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Translated Title</label>
+                        <div class="field-value col-sm-10"><%= @bib.translated_title %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.languages.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Languages</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.languages.each do |lang| %>
+                            <li><%= lang.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.language_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Languages</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.language_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.isbns.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">ISBN</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.isbns.each do |isbn| %>
+                            <li><%= isbn.value %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.issns.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">ISSN</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.issns.each do |issn| %>
+                            <li><%= issn.value %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.dois.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">DOI</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.dois.each do |doi| %>
+                            <li><%= doi.value %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.subjects.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Subjects</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.subjects.each do |subject| %>
+                            <li><%= subject.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.subject_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Subjects</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.subject_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.periods.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Centuries</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.periods.each do |period| %>
+                            <li><%= period.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.period_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Centuries</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.period_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.locations.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Locations</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.locations.each do |location| %>
+                            <li><%= location.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.location_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Locations</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.location_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.entities.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Jesuits</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.entities.each do |entity| %>
+                            <li><%= entity.display_name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <% if @bib.entity_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Jesuits</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.entity_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if @bib.comments.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Comments</label>
+                        <ol class="field-value col-sm-10">
+                            <% @bib.comments.each do |comment| %>
+                                <li>
+                                    <div class="panel <%= comment.make_public ? 'panel-success' : 'panel-default' %>">
+                                        <div class="panel-heading"><%= comment.make_public ? 'Public ' : 'Private ' %> Comment</div>
+                                        <div class="panel-body clearfix">
+                                            <div class="row">
+                                                <label class="col-sm-2">Comment:</label>
+                                                <div class="field-value col-sm-10"><%= comment.body %></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class="col-sm-2">Type:</label>
+                                                <div class="field-value col-sm-10"><%= comment.comment_type %></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class="col-sm-2">Commenter:</label>
+                                                <div class="field-value col-sm-10"><%= comment.commenter %></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class="col-sm-2">Make Public?:</label>
+                                                <div class="field-value col-sm-10"><%= comment.make_public %></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <% end %>
+                        </ol>
+                    </div>
+                <% end %>
+
+                <% if can? :read, Tag and @bib.tags.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Tags</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.tags.each do |tag| %>
+                            <li><span class="badge"><%= tag.name %></span></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Created At</label>
+                    <div class="field-value col-sm-10"><%= @bib.created_at %></div>
+                </div>
+
+                <% if @bib.modified_by.present? and can? :read, Bibliography %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Updated At</label>
+                    <div class="field-value col-sm-10"><%= @bib.updated_at %></div>
+                </div>
+                <% end %>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Created By</label>
+                    <div class="field-value col-sm-10"><%= @bib.created_by %></div>
+                </div>
+
+                <% if @bib.modified_by.present? and can? :read, Bibliography %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Last Modified By</label>
+                    <div class="field-value col-sm-10"><%= @bib.modified_by %></div>
+                </div>
+                <% end %>
+            </div>
+
+            <div class="citations-list col-sm-12">
+                
+                <hr/>
+
+                <h4>Citations (autogenerated)</h4>
+
+                <% if current_user.admin_role? %>
+                    <% if @bib.bib_text_raw.present? %>
+                        <div class="field-pair row">
+                            <label class="col-sm-2">BibText Raw</label>
+                            <div class="field-value col-sm-10"><code><%= @bib.bib_text_raw %></code></div>
+                        </div>
+                    <% end %>
+                <% end %>
+                <% if @bib.bib_text_mla.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">MLA citation</label>
+                        <div class="field-value col-sm-10"><%= @bib.bib_text_mla.html_safe %></div>
+                    </div>
+                <% end %>
+                <% if @bib.bib_text_chicago.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Chicago citation</label>
+                        <div class="field-value col-sm-10"><%= @bib.bib_text_chicago.html_safe %></div>
+                    </div>
+                <% end %>
+                <% if @bib.bib_text_turabian.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Turabian Citation</label>
+                        <div class="field-value col-sm-10"><%= @bib.bib_text_turabian.html_safe %></div>
+                    </div>
+                <% end %>
+            
+            </div>
+        </div>
 
         <hr/>
 
