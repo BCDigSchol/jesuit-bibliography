@@ -144,6 +144,10 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'display_author_text', label: 'Author', :helper_method => :display_in_parts
     config.add_index_field 'reference_type_text', label: 'Format'
+    config.add_index_field 'book_title_text', label: 'Book Title'
+    config.add_index_field 'journals_text', label: 'Journal Title'
+    config.add_index_field 'dissertation_universities_text', label: 'University', :helper_method => :display_in_parts
+    config.add_index_field 'multimedia_type_text', label: 'Type of Media'
     config.add_index_field 'year_published_text', label: 'Year Published'
     config.add_index_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
