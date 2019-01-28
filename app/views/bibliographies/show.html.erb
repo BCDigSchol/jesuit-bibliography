@@ -2,7 +2,7 @@
     <p>This record doesn't exist.</p>
     <%= link_to 'Go Back to Dashboard', dashboard_path %>
 <% elsif can? :read, Bibliography or creator_match? @bib.created_by, @this_user.email %>
-    <h1><%= @bib.display_title.present? ? @bib.display_title : Bibliography::NO_DISPLAY_TITLE %></h1>
+    <h1><%= @bib.display_title.present? ? @bib.display_title.html_safe : Bibliography::NO_DISPLAY_TITLE %></h1>
 
     <div class="record-view">
         <div class="button-group">
@@ -44,7 +44,7 @@
 
                 <div class="field-pair row">
                     <label class="col-sm-2">Display Title</label>
-                    <div class="field-value col-sm-10"><%= @bib.display_title %></div>
+                    <div class="field-value col-sm-10"><%= @bib.display_title.html_safe %></div>
                 </div>
 
                 <% if @bib.display_author.present? %>

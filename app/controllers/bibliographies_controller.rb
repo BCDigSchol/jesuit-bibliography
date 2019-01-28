@@ -301,8 +301,10 @@ class BibliographiesController < ApplicationController
         # check that this record has a status assigned
         check_record_status
 
-        # set the display_* fields for Blacklight views
-        set_display_fields
+        # set the display_* fields for Blacklight views ONLY if display_title is empty (if the user somehow deleted it)
+        unless @bib.display_title.present?
+            set_display_fields
+        end
 
         # generate the various citations for this record
         @bib.generate_citations

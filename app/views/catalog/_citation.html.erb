@@ -19,7 +19,7 @@
     <% if document[:bibtex_chicago_text].present? and document[:bibtex_chicago_text].length %>
       <h3>Chicago</h3>
       <%#= document[:bibtex_chicago_text][0].html_safe %>
-      <%= doc_presenter.field_value("bibtex_chicago_text").html_safe %>
+      <%= doc_presenter.field_value("bibtex_chicago_text") %>
     <% end %>
 
     <% if document[:bibtex_turabian_text].present? and document[:bibtex_turabian_text].length %>

@@ -1,3 +1,10 @@
-toolbar:
-  - bold italic | undo redo
-menubar: false
+default:
+  toolbar:
+    - bold italic | undo redo
+  menubar: false
+
+displaytitle:
+  toolbar:
+    - italic | undo redo
+  menubar: false
+  forced_root_block: false

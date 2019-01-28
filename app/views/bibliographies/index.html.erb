@@ -23,7 +23,7 @@
 
       g.column name: 'Title', attribute: 'display_title' do |bib|
         if bib.display_title.present?
-          bib.display_title
+          bib.display_title.html_safe
         else
           Bibliography::NO_DISPLAY_TITLE
         end

@@ -1,7 +1,10 @@
 <div class="form-group row string optional bibliography_publisher form-group-valid">
   <label class="col-sm-2 col-form-label select required">Abstract</label>
   <div class="col-sm-10">
-    <%= form.text_area :abstract, :class => "tinymce" %>
+    <%= form.text_area :abstract,
+      class: "tinymce" 
+      # has id: 'bibliography_abstract'
+    %>
   </div>
 </div>
-<%= tinymce %>
+<%= tinymce :default, selector: "#bibliography_abstract" %>
