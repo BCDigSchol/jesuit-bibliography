@@ -341,5 +341,8 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
+
+    # Hide SMS.
+    config.show.document_actions.delete(:sms)
   end
 end
