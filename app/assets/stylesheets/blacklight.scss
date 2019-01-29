@@ -10,7 +10,7 @@ h2.page-heading{
 }
 
 .button-container {
-    padding-bottom: 20px;
+    padding-bottom: 5%;
     text-align: center;
 }
 .record-button {
@@ -18,6 +18,14 @@ h2.page-heading{
     padding: 10px;
     font-size: 20px;
 }
+
+#login-button a {
+    display: inline-block;
+    float: right;
+    text-transform: none;
+    color: black;
+}
+
 
 .navbar-static-top {
     z-index:1;
@@ -98,7 +106,7 @@ h2.page-heading{
         width: 100%;
     }
     #search-navbar {
-        background-image: asset-url("searchbarbox.jpg");
+        background-image: asset-url("Woodstock_update.png");
         background-size: cover;
         height: 400px;
         padding: 100px 0 0 0;
@@ -121,7 +129,7 @@ h2.page-heading{
         }
         .search-navbar-job {
             .form-wrapper {
-                background-color: rgba(255, 255, 255, 0.35);
+                background-color: rgba(255, 255, 255, 0.25);
                 padding: 25px;
                 padding-bottom: 20px;
                 color: white;
@@ -134,7 +142,7 @@ h2.page-heading{
                 float: right;
                 padding-top: 15px;
                 margin-right: 15px;
-                font-size: 15px;
+                font-size: 18px;
                 text-transform: none;
             }
             
@@ -149,6 +157,8 @@ h2.page-heading{
 
 .home-text {
     border-bottom: 5px solid #872334;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 #learn-more {
@@ -233,7 +243,7 @@ div.scrollmenu {
 }
 
 .navbar {
-    background-color: #8c8a89;
+    background-color: #69635f;
     li a:link {
         color: white;
     }
@@ -301,6 +311,13 @@ footer.bcfooter {
             }
             .footer-text {
                 padding-top: 20px;
+                .footer-title {
+                    font-size: 25px;
+                    font-weight: 700;
+                }
+                a {
+                    text-decoration: underline;
+                }
                 .address {
                 padding-top:20px;
                 }
@@ -312,13 +329,15 @@ footer.bcfooter {
                 text-align: center;
                 li {
                     display: inline-block;
-                    color: #872334;
                     padding: 0 20px;
                     line-height: 1;
                     border-right: 1px solid;
                     text-transform: uppercase;
                     &:last-child {
                         border-right: 0px;
+                    }
+                    a {
+                        color: #872334;
                     }
                 }
             }
