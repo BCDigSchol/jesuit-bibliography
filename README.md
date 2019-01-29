@@ -68,12 +68,24 @@ Add `SOLR_CONF_HOME`
 ### Import test users:
 ```rake import:users```
 
+### Import default static pages
+To load all the static 'About' pages into the app.
+
+| **Warning** |
+| -------- |
+| This task will create the pages if they do not already exist and will not overwrite existing pages. |
+
+```rake import:pages```
+
+### Import test users and default static pages
+```rake import:all```
+
 ### Import set of sample records
 ```rake importdata:books```
 
 ```rake importdata:book_chapters```
 
-### Import all sample records
+### Import all sample records (and create their citations)
 ```rake importdata:all```
 
 ### Clear all Bibliograhy records
@@ -90,6 +102,15 @@ Use the Rails [sunspot](https://github.com/sunspot/sunspot) gem to index all the
 
 ```rake sunspot:reindex```
 
+## Rebuild citations
+We have a separate task to (re)build the citations for all citation records in the database.
+
+| **Warning** |
+| -------- |
+| This task will take a while to complete! |
+
+```rake importdata:generate_citations```
+
 ## Going NUCLEAR
 
 Want to completely clear out and restart your local development database? Run the following commands in succession:
@@ -99,7 +120,7 @@ rake solr_config:update
 solr restart
 rake db:drop
 rake db:migrate
-rake import:users
+rake import:all
 rake importdata:all
 rake sunspot:reindex
 ```
