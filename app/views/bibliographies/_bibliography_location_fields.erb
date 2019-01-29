@@ -5,6 +5,7 @@
             collection: [Location.find_by_id(form.object.location_id)],
             prompt: prompt_label, 
             form_name: 'form',
+            hint: Bibliography::TERM_FIELD_HINT,
             input_html: {
                 class: class_name,
                 "data-url": citationterms_search_path

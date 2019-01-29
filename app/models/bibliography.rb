@@ -505,7 +505,8 @@ class Bibliography < ApplicationRecord
     PERSON_FIELD_HINT = 'Last name, First name'.freeze
     URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
     STATUS_FIELD_HINT = "Only 'published' records will be made public".freeze
-    DISPLPLAY_NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
+    DISPLAY_NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
+    TERM_FIELD_HINT = 'The following fields are strongly recommended'.freeze
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
