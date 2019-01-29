@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :staticpages
 
   namespace :about, path: '/about' do
-    #root to: redirect('/citations/mine')
+    # root goes to dedicated home page record
     get "/" => '/staticpages#load_page', slug: :home, as: 'home_page'
     get "/:slug" => '/staticpages#load_page', as: 'page'
   end

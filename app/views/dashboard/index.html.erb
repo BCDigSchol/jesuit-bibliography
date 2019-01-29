@@ -58,6 +58,17 @@
                             </div>
                         </div>
                         <% end %>
+
+                        <% if can? :manage, Staticpage %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Manage Static pages</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='dashboard-link'><%= link_to 'Manage all static pages', staticpages_path %></div>
+                            </div>
+                        </div>
+                        <% end %>
                     </div>
                 </div>
             </div>
