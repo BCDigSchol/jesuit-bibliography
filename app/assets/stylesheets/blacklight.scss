@@ -52,6 +52,10 @@ h2.page-heading{
     }
 }
 
+.blacklight-staticpages {
+    font-size: 16px;
+}
+
 .blacklight-catalog,
 .blacklight-sessions,
 .blacklight-subjects,
@@ -62,6 +66,7 @@ h2.page-heading{
 .blacklight-manage_users,
 .blacklight-registrations,
 .blacklight-saved_searches,
+.blacklight-staticpages,
 .blacklight-bookmarks {
     #search-navbar {
         width: 100%!important;

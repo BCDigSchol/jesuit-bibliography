@@ -1,0 +1,10 @@
+<% if @page.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Static Pages index', staticpages_path, class: 'btn btn-info' %>
+<% elsif can? :edit, Staticpage %>
+    <h2 class="edit-label"><span class="header-label">Editing Page:</span> <%= @page.name.present? ? @page.name : @page.id %></h2>
+
+    <%= render 'form', urlpath: staticpage_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

@@ -1,0 +1,13 @@
+name:
+  Project Team
+route:
+  about
+slug:
+  team
+description:
+  The Project Team page
+rank:
+  60
+body:
+  <p>Learn More about the <strong>Jesuit Online Bibliography</strong> project.<p>
+  <p>There is <em>more</em> content to come!</p>

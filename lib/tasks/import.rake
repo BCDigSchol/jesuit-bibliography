@@ -1,8 +1,9 @@
 require 'csv'
+require 'yaml'
 
 namespace :import do
     desc "Run all import tasks"
-    task :all => [:users, :periods, :locations, :subjects, :entities]
+    task :all => [:users, :pages]
 
     desc "Import test Users"
     task users: :environment do
@@ -26,92 +27,61 @@ namespace :import do
         puts "Created #{item_count} User records in #{diff} seconds\n\n"
     end
 
-    desc "Import test Periods"
-    task periods: :environment do
-=begin
-        puts "Starting Periods import..."
-        item_count = 0
-        start = Time.now
-        CSV.foreach('db/imports/periods.csv', 
-            headers: true,
-            encoding: Encoding::UTF_8,
-        ) do |row|
-            #puts row
-            item_count += 1
-            Period.create!(row.to_h)
-        end
-        finish = Time.now
-        diff = finish - start
-        puts "Created #{item_count} Period records in #{diff} seconds\n\n"
-=end
-    end
+    desc "Import Static Pages"
+    task pages: :environment do
+        path = "db/imports/staticpages"
+        file_type_regex = "*.yml"
+        all_files = "#{path}/#{file_type_regex}"
 
-    desc "Import test Locations"
-    task locations: :environment do
-=begin
-        puts "Starting Locations import..."
-        item_count = 0
-        start = Time.now
-        CSV.foreach(
-            'db/imports/locations.csv',
-            headers: true, 
-            col_sep: ';;',
-            encoding: Encoding::UTF_8, 
-            liberal_parsing: true
-        ) do |row|
-            #puts row
-            item_count += 1
-            Location.create!(row.to_h)
-        end
-        finish = Time.now
-        diff = finish - start
-        puts "Created #{item_count} Location records in #{diff} seconds\n\n"
-=end
-    end
+        page_keys = ['name', 'route', 'description', 'slug', 'rank', 'body']
 
-    desc "Import test Subjects"
-    task subjects: :environment do
-=begin
-        puts "Starting Subjects import..."
-        item_count = 0
-        start = Time.now
-        CSV.foreach(
-            'db/imports/subjects.csv',
-            headers: true, 
-            col_sep: ';;',
-            encoding: Encoding::UTF_8, 
-            liberal_parsing: true
-        ) do |row|
-            #puts row
-            item_count += 1
-            Subject.create!(row.to_h)
-        end
-        finish = Time.now
-        diff = finish - start
-        puts "Created #{item_count} Subject records in #{diff} seconds\n\n"
-=end
-    end
+        begin
+            # first, check that this directory exists
+            yml_files = Dir.entries(path).select {|f| File.file? f}
+        rescue Errno::ENOENT => ex
+            puts "ERROR: #{ex}"
+        else
+            # next, grab all the files matching file_type_regex 
+            yml_files = Dir.glob(all_files)
+            puts "I found the following yml files: #{yml_files}\n\n"
 
-    desc "Import test Entities"
-    task entities: :environment do
-=begin
-        puts "Starting Entities import..."
-        item_count = 0
-        start = Time.now
-        CSV.foreach(
-            'db/imports/entities.csv',
-            headers: true, 
-            col_sep: ';;',
-            encoding: Encoding::UTF_8, 
-            liberal_parsing: true
-        ) do |row|
-            #puts row
-            item_count += 1
-            Entity.create!(row.to_h)
+            # next, parse each file
+            yml_files.each do |file|
+                page_array = YAML.load(File.read(file))
+
+                puts "Reading in file \"#{file}\" and checking that all required fields are present"
+
+                # check that we are finding all the elements we need for the Staticpage model
+                if page_array.present?
+                    ignore_this_file = false
+                    page_keys.each do |key|
+                        if page_array.include? key and page_array[key].present?
+                            #puts "Great! I found \"#{key}\" in this file"
+                        else
+                            puts "ERROR: couldn't find \"#{key}\" in this file. Skipping this file\n\n"
+                            ignore_this_file = true
+                            break
+                        end
+                    end
+
+                    # we are satisfied that we have all the components
+                    unless ignore_this_file
+                        puts "Success! All required fields are present"
+                        
+                        page = Staticpage.find_or_create_by(
+                            name: page_array['name'], 
+                            slug: page_array['slug'], 
+                            description: page_array['description'],
+                            rank: page_array['rank'],
+                            body: page_array['body']
+                        )
+
+                        puts "Created/updated Staticpage \"#{page.name}\"\n\n"
+                    end
+                end
+            end
+
+            puts "Task complete."
         end
-        finish = Time.now
-        diff = finish - start
-        puts "Created #{item_count} Entity records in #{diff} seconds\n\n"
-=end
     end
 end

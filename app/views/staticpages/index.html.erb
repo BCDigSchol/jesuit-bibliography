@@ -1,0 +1,57 @@
+<% if can? :read, Entity %>
+  <h2>Static Pages index</h2>
+
+  <%# don't allow the user to add new static pages from this view %>
+  <!--div class="button-group">
+    <%#= link_to 'Add New Static Page', new_staticpage_path, class: 'btn btn-primary' %>
+  </div-->
+
+  <%= grid(@pages_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
+
+    g.column name: 'Name', attribute: 'name'
+
+    g.column name: 'Slug', attribute: 'slug' do |page|
+      (page.slug == 'home' ? "/about/" : "/about/#{page.slug}")
+    end
+
+    g.column name: 'Description', filter: false do |page|
+      page.description
+    end
+
+    #g.column name: 'List Rank', attribute: 'rank'
+
+    g.column name: 'Created At', attribute: 'created_at', filter: false do |page|
+      page.created_at
+    end
+
+    if can? :detroy, Staticpage
+      g.column do |page|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', staticpage_path(page) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_staticpage_path(page) )}</span></div>".html_safe
+        # don't allow the user to delete static pages from this view
+        #"<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', staticpage_path(page), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Staticpage
+      g.column do |page|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', staticpage_path(page) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_staticpage_path(page) )}</span></div>".html_safe
+      end
+    else
+      g.column do |page|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', staticpage_path(page) )}</span></div>".html_safe
+      end
+    end
+  end -%>
+
+  <%# don't allow the user to add new static pages from this view %>
+  <!--div class="button-group">
+    <%#= link_to 'Add New Static Page', new_staticpage_path, class: 'btn btn-primary' %>
+  </div-->
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

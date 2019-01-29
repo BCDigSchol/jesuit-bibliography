@@ -1,0 +1,15 @@
+<% if @page.nil? %>
+    <p>This record doesn't exist.</p>
+<% else %>
+
+    <div class="blacklight-staticpages container">
+        <h2>About <%= @page.name %></h2>
+
+        <hr/>
+
+        <div class="about-body">
+            <%= @page.body.html_safe %>
+        </div>
+    </div>
+
+<% end %>

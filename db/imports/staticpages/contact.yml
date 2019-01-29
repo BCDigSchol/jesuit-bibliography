@@ -1,0 +1,13 @@
+name:
+  Contact Us
+route:
+  about
+slug:
+  contact
+description:
+  The contact us page
+rank:
+  50
+body:
+  <p>Learn More about the <strong>Jesuit Online Bibliography</strong> project.<p>
+  <p>There is <em>more</em> content to come!</p>

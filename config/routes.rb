@@ -17,6 +17,15 @@ Rails.application.routes.draw do
   # this is effectively the same as /citations  
   get '/citations/all' => 'bibliographies#index'
 
+
+  resources :staticpages
+
+  namespace :about, path: '/about' do
+    #root to: redirect('/citations/mine')
+    get "/" => '/staticpages#load_page', slug: :home, as: 'home_page'
+    get "/:slug" => '/staticpages#load_page', as: 'page'
+  end
+
   # get paths like "/citations/1"
   resources :bibliographies, path: '/citations' do
     root to: redirect('/citations/mine')

@@ -1,0 +1,31 @@
+<% if @page.nil? %>
+    <p>This page doesn't exist.</p>
+    <%= link_to 'Go Back to Static Pages index', staticpages_path %>
+<% elsif can? :read, Staticpage %>
+    <div class="record-view">
+        <div class="alert alert-info" role="alert">
+            This is how the page <strong><%= @page.name %></strong> appears to the public.
+        </div>
+
+        <div class="blacklight-staticpages container">
+            <h2>About <%= @page.name %></h2>
+
+            <hr/>
+
+            <div class="about-body">
+                <%= @page.body.html_safe %>
+            </div>
+        </div>
+        
+        <hr/>
+
+        <div class="button-group">
+        <% if can? :update, Staticpage %>
+            <%= link_to 'Edit this Page', edit_staticpage_path(@page), class: 'btn btn-primary' %>
+        <% end %>
+            <%= link_to 'Go Back to Static Pages index', staticpages_path, class: 'btn btn-info' %>
+        </div>
+    </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_27_194658) do
+ActiveRecord::Schema.define(version: 2019_01_29_003843) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -388,6 +388,18 @@ ActiveRecord::Schema.define(version: 2019_01_27_194658) do
     t.index ["doi_id"], name: "index_standard_identifiers_on_doi_id"
     t.index ["isbn_id"], name: "index_standard_identifiers_on_isbn_id"
     t.index ["issn_id"], name: "index_standard_identifiers_on_issn_id"
+  end
+
+  create_table "staticpages", force: :cascade do |t|
+    t.text "name"
+    t.text "slug"
+    t.text "description"
+    t.integer "rank"
+    t.text "body"
+    t.text "created_by"
+    t.text "modified_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subject_suggestions", force: :cascade do |t|

@@ -3,10 +3,13 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
       <ul class="dropdown-menu">
-          <li><a href="#">Institutional Partners</li>
-          <li><a href="#">Correspondent Network</a></li>
-          <li><a href="#">Add Your Records</a></li>
-          <li><a href="#">Learn More</a></li>
+          <li><%= link_to 'Institutional Partners', about_page_path(:partners) %></li>
+          <li><%= link_to 'Correspondent Network', about_page_path(:network) %></li>
+          <li><%= link_to 'Add Your Records', user_session_path %></li>
+          <li><%= link_to 'Learn More', about_home_page_path %></li>
+          <li><%= link_to 'Project Team', about_page_path(:team) %></li>
+          <li><%= link_to 'Contact Us', about_page_path(:contact) %></li>
+          <li><%= link_to 'Search Tips', about_page_path(:help) %></li>
       </ul>
     </li>
     <li class="dropdown">

@@ -1,0 +1,13 @@
+name:
+  Learn More
+route:
+  about
+slug:
+  home
+description:
+  The About home page
+rank:
+  70
+body:
+  <p>Learn More about the <strong>Jesuit Online Bibliography</strong> project.<p>
+  <p>There is <em>more</em> content to come!</p>
