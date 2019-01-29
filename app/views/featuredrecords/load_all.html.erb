@@ -1,0 +1,7 @@
+<div id="all-featured-records">
+<% @records.each do |record| %>
+    <div class="featured-record-body" id="<%= record.id %>">
+        <%= record.body.html_safe %>
+    </div>
+<% end %>
+</div>

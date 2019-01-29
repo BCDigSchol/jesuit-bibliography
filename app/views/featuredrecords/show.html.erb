@@ -1,0 +1,44 @@
+<% if @record.nil? %>
+    <p>This page doesn't exist.</p>
+    <%= link_to 'Go Back to Featured Records index', featuredrecords_path %>
+<% elsif can? :read, Featuredrecord %>
+    <div class="record-view">
+        
+        <% if @record.name.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-4">Featured Record</label>
+                <div class="field-value col-sm-8"><%= @record.name %></div>
+            </div>
+        <% end %>
+
+        <% if @record.rank.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-4">Featured Record rank</label>
+                <div class="field-value col-sm-8"><%= @record.rank %></div>
+            </div>
+        <% end %>
+
+        <% if @record.published.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-4">Publish in the Featured Record box?</label>
+                <div class="field-value col-sm-8"><%= @record.published %></div>
+            </div>
+        <% end %>
+
+        <div class="field-pair row">
+            <label class="col-sm-4">Body</label>
+            <div class="field-value col-sm-8"><%= @record.body.html_safe %></div>
+        </div>
+
+        <hr/>
+
+        <div class="button-group">
+        <% if can? :update, Featuredrecord %>
+            <%= link_to 'Edit this Featured Record', edit_featuredrecord_path(@record), class: 'btn btn-primary' %>
+        <% end %>
+            <%= link_to 'Go Back to Featured Record index', featuredrecords_path, class: 'btn btn-info' %>
+        </div>
+    </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

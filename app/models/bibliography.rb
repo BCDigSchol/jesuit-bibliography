@@ -1,6 +1,8 @@
 class Bibliography < ApplicationRecord
     include CitationsGenerator
 
+    belongs_to :featuredrecords
+
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     #has_many :languages, inverse_of: :bibliography, dependent: :destroy
     has_many :reviewed_components, inverse_of: :bibliography, dependent: :destroy

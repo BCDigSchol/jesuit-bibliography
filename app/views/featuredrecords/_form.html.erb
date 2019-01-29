@@ -1,0 +1,56 @@
+<%= simple_form_for @record, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true  do |form| %>
+
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to Featured records index', featuredrecords_path, class: 'btn btn-info' %>
+  </div>
+
+  <hr/>
+
+  <% if @record.errors.any? %>
+  <div class="panel panel-danger" id="error_explanation">
+    <div class="panel-heading"><%= pluralize(@record.errors.count, "error") %> prohibited this page from being saved:</div>
+    <div class="panel-body">
+      <ul>
+        <% @record.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+
+  <%= form.input :name, 
+      as: :string,
+      hint: 'Give a name for this featured record. This is used for internal management'
+  %>
+
+  <%= form.input :rank, 
+      as: :string,
+      hint: 'How this record will be sorted in the Featured Record box. A rank of 100 will appear higher on the list than a rank of 10. A rank of 0 will not appear in the list'
+  %>
+
+  <%= form.input :published,
+      as: :boolean
+  %>
+
+  <div class="form-group row string optional featuredrecord_body form-group-valid">
+        <label class="col-sm-2 col-form-label select">Body</label>
+        <div class="col-sm-10">
+            <%= form.text_area :body, 
+                label: 'body', 
+                class: "tinymce",
+                rows: 20
+                # has id: 'featuredrecord_body'
+            %>
+            <%= tinymce :pages, selector: "#featuredrecord_body" %>
+        </div>
+    </div>
+
+  <hr/>
+  
+  <div class="button-group">
+    <%= form.button :submit, "Save record", class: "btn btn-primary" %>
+    <%= link_to 'Go Back to Static Pages index', staticpages_path, class: 'btn btn-info' %>
+  </div>
+<% end %>
