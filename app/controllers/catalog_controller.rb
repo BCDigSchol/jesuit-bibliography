@@ -201,8 +201,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
     config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
-    # reviews field goes here
-    config.add_show_field 'reviewed_components_text', label: 'Reviewed Component', :helper_method => :display_reviewed_component
+    # reviewed components in HTML
+    config.add_show_field 'reviewed_components_html_text', label: 'Reviewed Component', :helper_method => :display_reviewed_component
 
     config.add_show_field 'jesuits_text', label: 'Who (Jesuits)', :helper_method => :display_in_parts_entities
     config.add_show_field 'subjects_text', label: 'What (Subjects)', :helper_method => :display_in_parts_subjects

@@ -408,7 +408,13 @@ class Bibliography < ApplicationRecord
         text :comments_json
         text :comments_public
 
-        text :reviewed_components do     # for associations
+        text :reviewed_author
+        text :reviewed_editor
+        text :reviewed_translator
+        text :reviewed_title
+
+        # combine all the reviewed components into an html structure for easy rendering
+        text :reviewed_components_html do
             rc_array = []
             reviewed_components.each do |rc|
                 rc_array << "<div class='rc-block'>"
@@ -645,6 +651,66 @@ class Bibliography < ApplicationRecord
                 reference_type.downcase == "conference paper"
             else
                 true
+            end
+        end
+
+        def reviewed_author
+            if reviewed_components.present?
+                authors = []
+                reviewed_components.each do |rc|
+                    if rc.reviewed_author.present?
+                        authors << rc.reviewed_author
+                    end
+                end
+                if authors.empty?
+                    return nil
+                end
+                authors
+            end
+        end
+
+        def reviewed_editor
+            if reviewed_components.present?
+                editors = []
+                reviewed_components.each do |rc|
+                    if rc.reviewed_editor.present?
+                        editors << rc.reviewed_editor
+                    end
+                end
+                if editors.empty?
+                    return nil
+                end
+                editors
+            end
+        end
+
+        def reviewed_translator
+            if reviewed_components.present?
+                translators = []
+                reviewed_components.each do |rc|
+                    if rc.reviewed_translator.present?
+                        translators << rc.reviewed_translator
+                    end
+                end
+                if translators.empty?
+                    return nil
+                end
+                translators
+            end
+        end
+
+        def reviewed_title
+            if reviewed_components.present?
+                titles = []
+                reviewed_components.each do |rc|
+                    if rc.reviewed_title.present?
+                        titles << rc.reviewed_title
+                    end
+                end
+                if titles.empty?
+                    return nil
+                end
+                titles
             end
         end
 end

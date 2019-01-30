@@ -98,8 +98,10 @@
           multimedia_type_text
           
           <!-- reviewed components -->
-          <!-- need to break this up into individual fields -->
-          reviewed_components_text
+          reviewed_author_text
+          reviewed_editor_text
+          reviewed_translator_text
+          reviewed_title_text
 
           <!-- languages -->
           languages_text
@@ -132,6 +134,10 @@
           <!-- book_title_text should be represented in display_title_text -->
           <!-- but we'll add it here in the rare case it's not -->
           book_title_text
+
+          <!-- reviewed_title_text should be represented in display_title_text -->
+          <!-- but we'll add it here in the rare case it's not -->
+          reviewed_title_text
        </str>
        <str name="title_pf">
        </str>
