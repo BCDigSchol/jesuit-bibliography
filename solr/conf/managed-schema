@@ -84,7 +84,11 @@
     <field name="comments_text" type="text_general"/>
     <field name="comments_json_text" type="text_general"/>
     <field name="comments_public_text" type="text_general"/>
-    <field name="reviewed_components_text" type="text_general"/>
+    <field name="reviewed_components_html_text" type="text_general"/>
+    <field name="reviewed_author_text" type="text_general"/>
+    <field name="reviewed_editor_text" type="text_general"/>
+    <field name="reviewed_translator_text" type="text_general"/>
+    <field name="reviewed_title_text" type="text_general"/>
     <field name="isbns_text" type="text_general"/>
     <field name="issns_text" type="text_general"/>
     <field name="dois_text" type="text_general"/>
@@ -629,7 +633,11 @@
     <copyField source="comments_text" dest="comments_text_str" maxChars="256"/>
     <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
     <copyField source="comments_public_text" dest="comments_public_text_str" maxChars="256"/>
-    <copyField source="reviewed_components_text" dest="reviewed_components_text_str" maxChars="256"/>
+    <copyField source="reviewed_components_html_text" dest="reviewed_components_html_text_str" maxChars="256"/>
+    <copyField source="reviewed_author_text" dest="reviewed_author_text_str" maxChars="256"/>
+    <copyField source="reviewed_editor_text" dest="reviewed_editor_text_str" maxChars="256"/>
+    <copyField source="reviewed_translator_text" dest="reviewed_translator_text_str" maxChars="256"/>
+    <copyField source="reviewed_title_text" dest="reviewed_title_text_str" maxChars="256"/>
     <copyField source="isbns_text" dest="isbns_text_str" maxChars="256"/>
     <copyField source="dois_text" dest="dois_text_str" maxChars="256"/>
     <copyField source="issns_text" dest="issns_text_str" maxChars="256"/>

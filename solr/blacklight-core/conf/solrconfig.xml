@@ -54,12 +54,12 @@
           reference_type_text
 
           <!-- titles -->
-          display_title_text
-          book_title_text
+          display_title_text^9
+          book_title_text^7
           journals_text
 
           <!-- author -->
-          display_authors_text
+          display_authors_text^8
 
           <!-- people -->
           editors_text
@@ -79,10 +79,10 @@
           publishers_text
 
           <!-- abstract -->
-          abstract_text
+          abstract_text^7
 
           <!-- comments/notes -->
-          comments_public_text
+          comments_public_text^6
 
           <!-- Dissertation reference type fields -->
           dissertation_universities_text
@@ -98,10 +98,10 @@
           multimedia_type_text
           
           <!-- reviewed components -->
-          reviewed_author_text
+          reviewed_author_text^6
           reviewed_editor_text
           reviewed_translator_text
-          reviewed_title_text
+          reviewed_title_text^6
 
           <!-- languages -->
           languages_text
@@ -112,10 +112,10 @@
           dois_text
 
           <!-- terms -->
-          subjects_text
-          centuries_text
-          locations_text
-          jesuits_text
+          subjects_text^10
+          centuries_text^10
+          locations_text^10
+          jesuits_text^10
        </str>
        <str name="pf">
           <!-- all_text_timv^10 -->
