@@ -28,10 +28,11 @@ class FeaturedrecordsController < ApplicationController
         out_html = "<div id='all-featured-records'>"
         out_json = []
         @records.each do |record|
-            out_html << "<div class='featured-record' data-record-rank='#{record.rank}' id='#{record.id}'>#{record.body}</div>"
+            out_html << "<div class='featured-record' data-record-rank='#{record.rank}' data-bibliography-id='#{record.bibliography_id}' id='#{record.id}'>#{record.body}</div>"
             out_json << {
                 id: record.id, 
                 rank: record.rank, 
+                bib_id: record.bibliography_id,
                 body: record.body
             }
         end
@@ -111,10 +112,23 @@ class FeaturedrecordsController < ApplicationController
                 authorize! :read, @record, :message => "Unable to read this Page record."
             rescue ActiveRecord::RecordNotFound => e
                 @record = nil
+            else
+                # pull in referenced Bibliography record
+                fetch_related_record
             end
         end
 
         def featuredrecord_params
-            params.require(:featuredrecord).permit(:name, :rank, :published, :body)
+            params.require(:featuredrecord).permit(:name, :rank, :published, :body, :bibliography_id)
+        end
+
+        def fetch_related_record
+            if @record.bibliography_id.present?
+                begin
+                    @bib = @record.bibliography
+                rescue ActiveRecord::RecordNotFound => e
+                    @bib.nil
+                end
+            end
         end
 end

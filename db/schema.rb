@@ -75,8 +75,6 @@ ActiveRecord::Schema.define(version: 2019_01_29_191554) do
     t.text "bibtex_chicago"
     t.text "bibtex_turabian"
     t.integer "book_chapter_record_ref"
-    t.integer "featuredrecords_id"
-    t.index ["featuredrecords_id"], name: "index_bibliographies_on_featuredrecords_id"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
@@ -216,8 +214,10 @@ ActiveRecord::Schema.define(version: 2019_01_29_191554) do
     t.boolean "published"
     t.text "created_by"
     t.text "modified_by"
+    t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_featuredrecords_on_bibliography_id"
   end
 
   create_table "journal_suggestions", force: :cascade do |t|

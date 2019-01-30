@@ -25,6 +25,17 @@
             </div>
         <% end %>
 
+        <% if @record.bibliography_id.present? and @bib.present? %>
+            <div class="field-pair row">
+                <label class="col-sm-4">Related Record ID</label>
+                <div class="field-value col-sm-8"><%= @record.bibliography_id %></div>
+            </div>
+             <div class="field-pair row">
+                <label class="col-sm-4">Related Record name (read only)</label>
+                <div class="field-value col-sm-8"><%= @bib.display_title %></div>
+            </div>
+        <% end %>
+
         <div class="field-pair row">
             <label class="col-sm-4">Body</label>
             <div class="field-value col-sm-8"><%= @record.body.html_safe %></div>

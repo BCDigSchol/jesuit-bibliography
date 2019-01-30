@@ -18,8 +18,21 @@
 
     g.column name: 'Published', attribute: 'published'
 
-    g.column name: 'Updated At', attribute: 'updated_at', filter: false do |page|
-      page.updated_at
+    g.column name: 'Linked record', attribute: 'bibliography_id' do |record|
+      if record.bibliography_id.present?
+        linked_record = Bibliography.find_by_id(record.bibliography_id)
+        if linked_record.present?
+          link_to linked_record.display_title, bibliography_path(record.bibliography_id), target: '_blank'
+        else
+          "<em>Can't find record with ID ##{record.bibliography_id}</em>".html_safe
+        end
+      else
+        "<em>none</em>".html_safe
+      end
+    end
+
+    g.column name: 'Updated At', attribute: 'updated_at', filter: false do |record|
+      record.updated_at
     end
 
     if can? :destroy, Featuredrecord

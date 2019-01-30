@@ -9,9 +9,9 @@ class CreateFeaturedrecords < ActiveRecord::Migration[5.2]
       t.text :created_by
       t.text :modified_by
 
+      t.references :bibliography, foreign_key: true
+
       t.timestamps
     end
-
-    add_reference :bibliographies, :featuredrecords, index: true
   end
 end

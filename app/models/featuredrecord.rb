@@ -1,5 +1,5 @@
 class Featuredrecord < ApplicationRecord
-    has_one :bibliography
+    belongs_to :bibliography, optional: true
 
     validates :name, presence: true
     validates :rank, presence: true
