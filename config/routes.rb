@@ -17,8 +17,13 @@ Rails.application.routes.draw do
   # this is effectively the same as /citations  
   get '/citations/all' => 'bibliographies#index'
 
+  # piggybacking on citationterms search controller for citation records
+  get '/citations/search' => 'term_search#index'
 
   resources :staticpages
+
+  get "/featuredrecords/all" => 'featuredrecords#load_all', as: 'featuredrecords_all'
+  resources :featuredrecords
 
   namespace :about, path: '/about' do
     # root goes to dedicated home page record

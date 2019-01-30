@@ -46,78 +46,117 @@
             http://wiki.apache.org/solr/LocalParams
        -->
        <str name="qf">
+          <!-- ids -->
           id
-          <!--full_title_tsim
-          short_title_tsim
-          alternative_title_tsim
-          active_fedora_model_ssi
-          title_tsim
-          author_tsimesim
-          subject_tsim
-          all_text_timv-->
           id_i
-          display_title_text
-          title_text
-          chapter_title_text
-          title_of_review_text
-          paper_title_text
+
+          <!-- reference type -->
           reference_type_text
-          year_published_text
-          years_published_itm
-          authors_text
+
+          <!-- titles -->
+          display_title_text^9
+          book_title_text^7
+          journals_text
+
+          <!-- author -->
+          display_authors_text^8
+
+          <!-- people -->
           editors_text
           book_editors_text
-          author_of_reviews_text
           translators_text
           performers_text
-          translated_authors_text
+          translators_text
+
+          <!-- year -->
+          year_published_text
+          years_published_itm
+
+          <!-- place published -->
           publish_places_text
-          reviewed_components_text
+          
+          <!-- publisher -->
+          publishers_text
+
+          <!-- abstract -->
+          abstract_text^7
+
+          <!-- comments/notes -->
+          comments_public_text^6
+
+          <!-- Dissertation reference type fields -->
+          dissertation_universities_text
+
+          <!-- Conference Paper reference type fields -->
+          event_title_text
+          event_location_text
+          event_institution_text
+          event_panel_title_text
+
+          <!-- Multimedia reference type fields -->
+          series_multimedium_text
+          multimedia_type_text
+          
+          <!-- reviewed components -->
+          reviewed_author_text^6
+          reviewed_editor_text
+          reviewed_translator_text
+          reviewed_title_text^6
+
+          <!-- languages -->
           languages_text
+
+          <!-- standard identifiers -->
           isbns_text
           issns_text
           dois_text
-          subjects_text
-          centuries_text
-          locations_text
-          jesuits_text
+
+          <!-- terms -->
+          subjects_text^10
+          centuries_text^10
+          locations_text^10
+          jesuits_text^10
        </str>
        <str name="pf">
-          all_text_timv^10
+          <!-- all_text_timv^10 -->
        </str>
 
        <str name="author_qf">
-          <!--author_tsim-->
           display_authors_text
        </str>
        <str name="author_pf">
        </str>
 
+       <!-- title-only searching -->
        <str name="title_qf">
           display_title_text
-          <!--title_text
-          chapter_title_text
-          title_of_review_text
-          paper_title_text-->
+
+          <!-- book_title_text should be represented in display_title_text -->
+          <!-- but we'll add it here in the rare case it's not -->
+          book_title_text
+
+          <!-- reviewed_title_text should be represented in display_title_text -->
+          <!-- but we'll add it here in the rare case it's not -->
+          reviewed_title_text
        </str>
        <str name="title_pf">
        </str>
 
+       <!-- people-only searching -->
        <str name="people_qf">
-          <!--author_tsim-->
           authors_text
           editors_text
           book_editors_text
           author_of_reviews_text
           translators_text
           performers_text
-          translated_authors_text
+          <!-- translated_authors_text -->
        </str>
        <str name="people_pf">
        </str>
 
+       <!-- terms-only searching -->
        <str name="terms_qf">
-          <!--subject_tsim-->
           subjects_text
           centuries_text
           locations_text
@@ -134,9 +173,9 @@
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
        <str name="facet.limit">10</str>
-       <str name="facet.field">active_fedora_model_ssi</str>
+       <!--str name="facet.field">active_fedora_model_ssi</str>
        <str name="facet.field">subject_ssim</str>
-       <str name="facet.field">years_published_tisim</str>
+       <str name="facet.field">years_published_tisim</str-->
 
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

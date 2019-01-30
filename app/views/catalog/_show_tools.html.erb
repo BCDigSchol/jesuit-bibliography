@@ -16,11 +16,11 @@
     <div class="panel-body">
       <ul class="nav">
         <%= render_show_doc_actions @document do |config, inner| %>
-          <%# dumb, hacky way to remove SMS from tools list... sigh %>
-          <% unless config.key.to_s == "sms" %>
-          <li class="<%= config.key %>">
-            <%= inner %>
-          </li>
+          <%# dumb, hacky way to remove non logged-in email from tools list... sigh %>
+          <% unless config.key.to_s == "email" && !current_user %>
+            <li class="<%= config.key %>">
+              <%= inner %>
+            </li>
           <% end %>
         <% end %>
       </ul>

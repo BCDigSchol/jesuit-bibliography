@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  body: MyText
+  rank: 1
+  published: false
+  book_ref: 1
+
+two:
+  name: MyText
+  body: MyText
+  rank: 1
+  published: false
+  book_ref: 1

@@ -69,6 +69,17 @@
                             </div>
                         </div>
                         <% end %>
+
+                        <% if can? :manage, Featuredrecord %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Manage Featured Records</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class='dashboard-link'><%= link_to 'Manage all featured records', featuredrecords_path %></div>
+                            </div>
+                        </div>
+                        <% end %>
                     </div>
                 </div>
             </div>

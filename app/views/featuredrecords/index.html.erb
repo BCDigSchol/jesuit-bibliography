@@ -1,0 +1,63 @@
+<% if can? :read, Featuredrecord %>
+  <h2>Featured Records index</h2>
+
+  <%# don't allow the user to add new static pages from this view %>
+  <div class="button-group">
+    <%= link_to 'Add New Featured Record', new_featuredrecord_path, class: 'btn btn-primary' %>
+  </div>
+
+  <%= grid(@records_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
+
+    g.column name: 'Name', attribute: 'name'
+
+    g.column name: 'List Rank', attribute: 'rank'
+
+    g.column name: 'Published', attribute: 'published'
+
+    g.column name: 'Linked record', attribute: 'bibliography_id' do |record|
+      if record.bibliography_id.present?
+        linked_record = Bibliography.find_by_id(record.bibliography_id)
+        if linked_record.present?
+          link_to linked_record.display_title, bibliography_path(record.bibliography_id), target: '_blank'
+        else
+          "<em>Can't find record with ID ##{record.bibliography_id}</em>".html_safe
+        end
+      else
+        "<em>none</em>".html_safe
+      end
+    end
+
+    g.column name: 'Updated At', attribute: 'updated_at', filter: false do |record|
+      record.updated_at
+    end
+
+    if can? :destroy, Featuredrecord
+      g.column do |record|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', featuredrecord_path(record) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_featuredrecord_path(record) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', featuredrecord_path(record), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, Featuredrecord
+      g.column do |record|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', featuredrecord_path(record) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_featuredrecord_path(record) )}</span></div>".html_safe
+      end
+    else
+      g.column do |record|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', featuredrecord_path(record) )}</span></div>".html_safe
+      end
+    end
+  end -%>
+
+  <%# don't allow the user to add new static pages from this view %>
+  <div class="button-group">
+    <%= link_to 'Add New Featured Record', new_featuredrecord_path, class: 'btn btn-primary' %>
+  </div>
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>
