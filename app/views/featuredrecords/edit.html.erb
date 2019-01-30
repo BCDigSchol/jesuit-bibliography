@@ -1,0 +1,10 @@
+<% if @record.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Featured Records index', staticpages_path, class: 'btn btn-info' %>
+<% elsif can? :edit, Featuredrecord %>
+    <h2 class="edit-label"><span class="header-label">Editing Featured Record:</span> <%= @record.name.present? ? @record.name : @record.id %></h2>
+
+    <%= render 'form', urlpath: featuredrecord_path %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

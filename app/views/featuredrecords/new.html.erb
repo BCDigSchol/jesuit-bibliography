@@ -1,0 +1,7 @@
+<h2>Add New Featured Record</h2>
+
+<% if can? :create, Featuredrecord %>
+    <%= render 'form', urlpath: featuredrecords_path %>
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

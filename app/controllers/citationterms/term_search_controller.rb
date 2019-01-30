@@ -48,6 +48,11 @@ class Citationterms::TermSearchController < ApplicationController
             @items = Person.where(default_where_clause)
                         .order(:name)
                         .map{|item| {id: item.id, text: item.name}}
+        when "bibliographies"
+            citation_where_clause = "display_title LIKE ?", "%#{params[:term]}%"
+            @items = Bibliography.where(citation_where_clause)
+                        .order(:display_title)
+                        .map{|item| {id: item.id, text: item.display_title + " (ID: #{item.id})"}}
         else
             @items = []
         end
