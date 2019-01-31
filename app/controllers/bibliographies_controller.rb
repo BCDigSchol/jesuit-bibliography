@@ -301,10 +301,8 @@ class BibliographiesController < ApplicationController
         # check that this record has a status assigned
         check_record_status
 
-        # set the display_* fields for Blacklight views ONLY if display_title is empty (if the user somehow deleted it)
-        unless @bib.display_title.present?
-            set_display_fields
-        end
+        # set the display_* fields for Blacklight views
+        set_display_fields
 
         # generate the various citations for this record
         @bib.generate_citations
@@ -535,7 +533,9 @@ class BibliographiesController < ApplicationController
         def set_display_fields
             if @bib.reference_type.downcase == "book"
                 if @bib.title.present?
-                    @bib.display_title = @bib.title
+                    if @bib.title == @bib.display_title
+                        @bib.display_title = @bib.title
+                    end
                 else
                     @bib.display_title = NO_VALUE_FOUND
                 end
@@ -557,7 +557,9 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "book chapter"
                 if @bib.chapter_title.present?
-                    @bib.display_title = @bib.chapter_title
+                    if @bib.chapter_title == @bib.display_title
+                        @bib.display_title = @bib.chapter_title
+                    end
                 else
                     @bib.display_title = NO_VALUE_FOUND
                 end
@@ -573,7 +575,9 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "book review"
                 if @bib.title_of_review.present?
-                    @bib.display_title = @bib.title_of_review
+                    if @bib.title_of_review == @bib.display_title
+                        @bib.display_title = @bib.title_of_review
+                    end
                 else
                     @bib.display_title = NO_VALUE_FOUND
                 end
@@ -589,7 +593,9 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "conference paper"
                 if @bib.paper_title.present?
-                    @bib.display_title = @bib.paper_title
+                    if @bib.paper_title == @bib.display_title
+                        @bib.display_title = @bib.paper_title
+                    end
                 else
                     @bib.display_title = NO_VALUE_FOUND
                 end
@@ -605,7 +611,9 @@ class BibliographiesController < ApplicationController
                 end
             else # dissertation, journal article, multimedia
                 if @bib.title.present?
-                    @bib.display_title = @bib.title
+                    if @bib.title == @bib.display_title
+                        @bib.display_title = @bib.title
+                    end
                 else
                     @bib.display_title = NO_VALUE_FOUND
                 end
