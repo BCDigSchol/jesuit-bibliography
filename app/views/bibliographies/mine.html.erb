@@ -79,6 +79,16 @@
             out
         end
 
+        g.column name: 'Tags', attribute: 'name', assoc: :tags, custom_filter: :auto, ordering: false do |bib|
+            if bib.tags.present?
+                out = "".html_safe
+                bib.tags.each do |tag|
+                    out << "<span class='badge'>#{tag.name}</span>".html_safe
+                end
+                out
+            end
+        end
+
         #g.column name: 'Created by', attribute: 'created_by'
 
         g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
