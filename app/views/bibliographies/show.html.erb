@@ -358,14 +358,28 @@
                 <% if @bib.reviewed_components.present? %>
                     <div class="field-pair row">
                         <label class="col-sm-2">Reviewed Component</label>
-                        <ul class="field-value col-sm-10">
+                        <ul class="rc-block field-value col-sm-10">
                         <% @bib.reviewed_components.each do |rc| %>
                             <li>
-                                <div>Author: <span><%= rc.reviewed_author %></span></div>
-                                <div>Editor: <span><%= rc.reviewed_editor %></span></div>
-                                <div>Translator: <span><%= rc.reviewed_translator %></span></div>
-                                <div>Title: <span><%= rc.reviewed_title %></span></div>
-                                <div>Book ID: <span><%= rc.reviewed_title_record_ref %></span></div>
+                                <% if rc.reviewed_author.present? %>
+                                    <div class="rc-item"><span class='rc-label'>Author:</span> <span><%= rc.reviewed_author %></span></div>
+                                <% end %>
+
+                                <% if rc.reviewed_editor.present? %>
+                                    <div class="rc-item"><span class='rc-label'>Editor:</span> <span><%= rc.reviewed_editor %></span></div>
+                                <% end %>
+
+                                <% if rc.reviewed_translator.present? %>
+                                    <div class="rc-item"><span class='rc-label'>Translator:</span> <span><%= rc.reviewed_translator %></span></div>
+                                <% end %>
+
+                                <% if rc.reviewed_title.present? %>
+                                    <div class="rc-item"><span class='rc-label'>Title:</span> <span><%= rc.reviewed_title %></span></div>
+                                <% end %>
+
+                                <% if rc.reviewed_title_record_ref.present? %>
+                                    <div class="rc-item"><span class='rc-label'>Referenced Title ID:</span> <span><%= rc.reviewed_title_record_ref %></span></div>
+                                <% end %>
                             </li>
                         <% end %>
                         </ul>
