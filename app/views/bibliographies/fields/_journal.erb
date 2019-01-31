@@ -7,6 +7,7 @@
                     <%= render 'bibliography_journal_fields', 
                         form: journal,
                         class_name: 'journals', 
+                        required_status: required_status,
                         prompt_label: 'Choose a ' + field_label 
                     %>
                 <% end %>
@@ -35,7 +36,8 @@
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a Journal Title', 
-                        class_name: 'journals' 
+                        class_name: 'journals',
+                        required_status: required_status, 
                     }
                 }
             %>

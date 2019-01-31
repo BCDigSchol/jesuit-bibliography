@@ -6,8 +6,9 @@
                 <%= form.simple_fields_for :bibliography_languages do |language| %>
                     <%= render 'bibliography_language_fields', 
                         form: language,
-                        class_name: 'languages', 
-                        prompt_label: 'Choose a ' + field_label 
+                        class_name: 'languages',
+                        required_status: required_status,
+                        prompt_label: 'Choose a ' + field_label
                     %>
                 <% end %>
             </div>
@@ -34,7 +35,8 @@
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a ' + field_label, 
-                        class_name: 'languages' 
+                        class_name: 'languages',
+                        required_status: required_status
                     }
                 }
             %>

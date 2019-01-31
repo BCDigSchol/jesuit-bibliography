@@ -16,11 +16,13 @@
         :input_html => { :value => "Dissertation" } 
     %>
 
-    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
+    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author', required_status: true %>
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= form.input :title, 
@@ -32,9 +34,9 @@
 
     <%= render 'bibliographies/fields/display_title', :form => form, field_label: 'Display Title' %>
 
-    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published', required_status: true %>
 
-    <%= render 'bibliographies/fields/dissertation_university', :form => form, field_label: 'University' %>
+    <%= render 'bibliographies/fields/dissertation_university', :form => form, field_label: 'University', required_status: true %>
 
     <%= form.input :number_of_pages, 
         label: 'Number of pages',
@@ -64,7 +66,7 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
+    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language', required_status: true %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 

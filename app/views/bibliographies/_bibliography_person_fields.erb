@@ -5,6 +5,8 @@
             collection: [Person.find_by_id(form.object.person_id)], 
             prompt: prompt_label,
             form_name: 'form',
+            required: required_status,
+            validate: required_status,
             input_html: {
                 class: class_name, 
                 "data-url": citationterms_search_path
