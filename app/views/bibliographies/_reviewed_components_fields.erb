@@ -13,6 +13,18 @@
         <%= form.input :reviewed_title, 
             label: 'Reviewed Title' 
         %>
+
+        <% if can? :manage, 'RecordLinking '%>
+            <%= form.input :reviewed_title_record_ref, 
+                label: 'Referenced Reviewed Title record',
+                collection: [Bibliography.find_by_id(form.object.reviewed_title_record_ref.to_s)], 
+                hint: 'Search for the Citation record you want to link. Make sure the linked Book record is \'Published\'',
+                input_html: {
+                    class: class_name,
+                    "data-url": citationterms_search_path
+                }
+            %>
+        <% end %>
         
         <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
             form, 

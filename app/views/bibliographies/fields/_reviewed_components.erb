@@ -4,35 +4,12 @@
         <div id="bibliography_reviewed_components" class='repeatable-field'>
             <div class="fields">
                 <%= form.simple_fields_for :reviewed_components do |rc| %>
-                    <div class="panel panel-default bibliography-subject-fields nested-fields">
-                        <div class="panel-heading"><%= field_label %></div>
-                        <div class="panel-body clearfix">
-                            <%= rc.input :reviewed_author,
-                                label: 'Reviewed Author' 
-                            %>
-                            <%= rc.input :reviewed_editor,
-                                label: 'Reviewed Editor' 
-                            %>
-                            <%= rc.input :reviewed_translator,
-                                label: 'Reviewed Translator' 
-                            %>
-                            <%= rc.input :reviewed_title, 
-                                label: 'Reviewed Title' 
-                            %>
-                            <% if can? :manage, 'RecordLinking '%>
-                            <%= rc.input :reviewed_title_record_ref, 
-                                label: 'Reviewed Title ID' ,
-                                hint: 'Add in the ID of the Book record you want to link. Make sure the linked Book record is \'Published\''
-                            %>
-                            <% end %>
-
-                            <%= link_to_remove_association "<btn class='btn btn-danger btn-comment-remove'>Remove #{field_label}</btn>".html_safe, 
-                                form, 
-                                class: 'remove-link', 
-                                form_name: 'form' 
-                            %>
-                        </div>
-                    </div>
+                    <%= render 'reviewed_components_fields', 
+                        form: rc,
+                        class_name: 'reviewed_component', 
+                        #prompt_label: 'Choose a ' + field_label,
+                        field_label: field_label
+                    %>
                 <% end %>
             </div>
             <div class='links clearfix'>
@@ -48,7 +25,8 @@
                     partial: 'reviewed_components_fields',
                     render_options:  {
                         locals: { 
-                            field_label: field_label
+                            field_label: field_label,
+                            class_name: 'reviewed_component'
                         }
                     }
                 %>
@@ -56,3 +34,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.reviewed_component').select2( select2_config(".reviewed_component", "bibliographies") );
+    $("#bibliography_reviewed_components").on('cocoon:after-insert', function(e, insertedItem){
+        $('.reviewed_component').last().select2( select2_config(".reviewed_component", "bibliographies") );
+    });
+});
+</script>
