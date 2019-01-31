@@ -1,5 +1,5 @@
 <%# Only allow editing the display_title field once the record has been saved, and the title field is non-empty %>
-<% if @bib.title.present? %>
+<% if @bib.title.present? or @bib.book_title.present? or @bib.title_of_review.present? or @bib.chapter_title.present? or @bib.paper_title.present? %>
     <div class="form-group row string optional bibliography_display_title form-group-valid">
         <label class="col-sm-2 col-form-label select"><%= field_label %></label>
         <div class="col-sm-10">
