@@ -503,9 +503,9 @@ class Bibliography < ApplicationRecord
         object_label_method { :display_title }
     end
 
-    # public method called from associated models to initiate a Solr reindex of this Bib record
+    # public method called to update display_fields and trigger reindex
     def reindex_me
-        puts "\n\nBibliography ##{self.id} is reindexed\n\n"
+        # puts "\n\nBibliography ##{self.id} is reindexed\n\n"
         self.set_display_fields
         self.save
         #Sunspot.index! [self]
