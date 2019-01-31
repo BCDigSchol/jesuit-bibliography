@@ -27,9 +27,39 @@ class Person < ApplicationRecord
     NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
 
     def reindex_parent!
-        bibliographies.each do |bs|
-            #puts "\n\nReindexing #{bs.id}..."
-            bs.reindex_me
+        self.author_of_reviews.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.authors.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.editors.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.translators.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.translated_authors.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.book_editors.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
+        end
+
+        self.performers.each do |bs|
+            puts "\n\nReindexing #{bs.bibliography.id}..."
+            bs.bibliography.reindex_me
         end
     end
 

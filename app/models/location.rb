@@ -7,7 +7,7 @@ class Location < ApplicationRecord
 
     def reindex_parent!
         bibliographies.each do |bs|
-            #puts "\n\nReindexing #{bs.id}..."
+            puts "\n\nReindexing #{bs.id}..."
             bs.reindex_me
         end
     end

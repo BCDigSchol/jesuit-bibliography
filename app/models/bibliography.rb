@@ -505,8 +505,10 @@ class Bibliography < ApplicationRecord
 
     # public method called from associated models to initiate a Solr reindex of this Bib record
     def reindex_me
-        #puts "Bibliography ##{self.id} is reindexed\n\n"
-        Sunspot.index! [self]
+        puts "\n\nBibliography ##{self.id} is reindexed\n\n"
+        self.set_display_fields
+        self.save
+        #Sunspot.index! [self]
     end
 
     # Define form hints here
@@ -529,6 +531,110 @@ class Bibliography < ApplicationRecord
 
     def generate_citations
         generate_all_citations
+    end
+
+    # depending on the reference_type, select the fields to represent the 
+    # display_title and display_author fields used in the discovery layer
+    NO_VALUE_FOUND = "n/a"
+    
+    def set_display_fields
+        if self.reference_type.downcase == "book"
+            if self.title.present?
+                unless self.display_title.present?
+                    self.display_title = self.title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+            
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            elsif self.editors.present?
+                out = []
+                self.editors.each do |editor|
+                    out << editor.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "book chapter"
+            if self.chapter_title.present?
+                unless self.display_title.present?
+                    self.display_title = self.chapter_title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+            
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "book review"
+            if self.title_of_review.present?
+                unless self.display_title.present?
+                    self.display_title = self.title_of_review
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.author_of_reviews.present?
+                out = []
+                self.author_of_reviews.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "conference paper"
+            if self.paper_title.present?
+                unless self.display_title.present?
+                    self.display_title = self.paper_title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        else # dissertation, journal article, multimedia
+            if self.title.present?
+                unless self.display_title.present?
+                    self.display_title = self.title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        end
     end
 
     private
