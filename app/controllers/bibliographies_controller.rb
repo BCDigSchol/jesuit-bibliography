@@ -533,7 +533,7 @@ class BibliographiesController < ApplicationController
         def set_display_fields
             if @bib.reference_type.downcase == "book"
                 if @bib.title.present?
-                    if @bib.title == @bib.display_title
+                    unless @bib.display_title.present?
                         @bib.display_title = @bib.title
                     end
                 else
@@ -557,7 +557,7 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "book chapter"
                 if @bib.chapter_title.present?
-                    if @bib.chapter_title == @bib.display_title
+                    unless @bib.display_title.present?
                         @bib.display_title = @bib.chapter_title
                     end
                 else
@@ -575,7 +575,7 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "book review"
                 if @bib.title_of_review.present?
-                    if @bib.title_of_review == @bib.display_title
+                    unless @bib.display_title.present?
                         @bib.display_title = @bib.title_of_review
                     end
                 else
@@ -593,7 +593,7 @@ class BibliographiesController < ApplicationController
                 end
             elsif @bib.reference_type.downcase == "conference paper"
                 if @bib.paper_title.present?
-                    if @bib.paper_title == @bib.display_title
+                    unless @bib.display_title.present?
                         @bib.display_title = @bib.paper_title
                     end
                 else
@@ -611,7 +611,7 @@ class BibliographiesController < ApplicationController
                 end
             else # dissertation, journal article, multimedia
                 if @bib.title.present?
-                    if @bib.title == @bib.display_title
+                    unless @bib.display_title.present?
                         @bib.display_title = @bib.title
                     end
                 else
