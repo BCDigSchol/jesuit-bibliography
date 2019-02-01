@@ -447,6 +447,16 @@ footer.bcfooter {
     text-transform: none;
 }
 
+.heading-container {
+    h2 {
+        font-size: 25px;
+        color: #872334;
+    }
+}
+
+.about-body{
+    border-left: solid #bc9b6a 3px;
+}
 
 /* Abstracts can have <p> elements in them, which messes up spacing. */
 .blacklight-abstract_text {
