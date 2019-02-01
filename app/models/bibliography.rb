@@ -1,7 +1,7 @@
 class Bibliography < ApplicationRecord
     include CitationsGenerator
 
-    has_one :featuredrecords
+    has_one :featuredrecord
 
     has_many :comments, inverse_of: :bibliography, dependent: :destroy
     #has_many :languages, inverse_of: :bibliography, dependent: :destroy
@@ -503,10 +503,12 @@ class Bibliography < ApplicationRecord
         object_label_method { :display_title }
     end
 
-    # public method called from associated models to initiate a Solr reindex of this Bib record
+    # public method called to update display_fields and trigger reindex
     def reindex_me
-        #puts "Bibliography ##{self.id} is reindexed\n\n"
-        Sunspot.index! [self]
+        # puts "\n\nBibliography ##{self.id} is reindexed\n\n"
+        self.set_display_fields
+        self.save
+        #Sunspot.index! [self]
     end
 
     # Define form hints here
@@ -514,7 +516,9 @@ class Bibliography < ApplicationRecord
     URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
     STATUS_FIELD_HINT = "Only 'published' records will be made public".freeze
     DISPLAY_NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
-    TERM_FIELD_HINT = 'The following fields are strongly recommended'.freeze
+    TERM_FIELD_HINT = 'This field is strongly recommended'.freeze
+    AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
+    EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
@@ -529,6 +533,129 @@ class Bibliography < ApplicationRecord
 
     def generate_citations
         generate_all_citations
+    end
+
+    # depending on the reference_type, select the fields to represent the 
+    # display_title and display_author fields used in the discovery layer
+    NO_VALUE_FOUND = "n/a"
+    
+    def set_display_fields
+        if self.reference_type.downcase == "book"
+            if self.title.present?
+                unless self.display_title.present?
+                    self.display_title = self.title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+            
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            elsif self.editors.present?
+                out = []
+                self.editors.each do |editor|
+                    out << editor.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "book chapter"
+            if self.chapter_title.present?
+                unless self.display_title.present?
+                    self.display_title = self.chapter_title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+            
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "book review"
+            if self.title_of_review.present?
+                unless self.display_title.present?
+                    self.display_title = self.title_of_review
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.author_of_reviews.present?
+                out = []
+                self.author_of_reviews.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        elsif self.reference_type.downcase == "conference paper"
+            if self.paper_title.present?
+                unless self.display_title.present?
+                    self.display_title = self.paper_title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        else # dissertation, journal article, multimedia
+            if self.title.present?
+                unless self.display_title.present?
+                    self.display_title = self.title
+                end
+            else
+                self.display_title = NO_VALUE_FOUND
+            end
+
+            if self.authors.present?
+                out = []
+                self.authors.each do |author|
+                    out << author.person.name
+                end
+                self.display_author = out.join('|')
+            else
+                self.display_author = NO_VALUE_FOUND
+            end
+        end
+    end
+
+    # set the record status if it is not already set.
+    # if the status value is blank then assign to DEFAULT_STATUS
+    # TODO make sure a contributor can't somehow force their record to be 'published'
+    def check_record_status
+        if self.status.blank?
+            self.status = DEFAULT_STATUS
+        end
+
+        # also make sure that if the record has a status of PUBLISHED_STATUS 
+        # that we also set the @bib.published field to be 'true'. 
+        # otherwise, set @bib.published field to 'false'
+        # TODO remove/hide the @bib.published field as it duplicates the status field
+        if self.status == PUBLISHED_STATUS
+            self.published = true
+        else
+            self.published = false
+        end
     end
 
     private

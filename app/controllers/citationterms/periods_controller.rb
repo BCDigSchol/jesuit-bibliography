@@ -27,6 +27,7 @@ class Citationterms::PeriodsController < ApplicationController
     end
 
     def edit
+        @bibs = @period.bibliographies
     end
 
     def create

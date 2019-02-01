@@ -32,6 +32,22 @@ h2.page-heading{
     z-index:1;
 }
 
+.bc-top-nav.navbar-nav {
+    float:right;
+    li {
+        .nav-item {
+            display: inline-block;
+            margin: 0 2rem;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        .nav-item.user-email a {
+            text-transform: lowercase;
+        }
+    }
+}
+
 #search-navbar {
     form.navbar-form {
         .input-group {

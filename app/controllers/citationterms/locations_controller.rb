@@ -27,6 +27,7 @@ class Citationterms::LocationsController < ApplicationController
     end
 
     def edit
+        @bibs = @location.bibliographies
     end
 
     def create

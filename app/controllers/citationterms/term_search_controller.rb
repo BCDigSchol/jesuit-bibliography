@@ -16,7 +16,7 @@ class Citationterms::TermSearchController < ApplicationController
             default_where_clause = "true = true"
         else
             # TODO handle special chars like in 'Marszał'
-            default_where_clause = "name LIKE ? OR sort_name LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%"
+            default_where_clause = "LOWER(name) LIKE LOWER(?) OR LOWER(sort_name) LIKE LOWER(?)", "%#{params[:term]}%", "%#{params[:term]}%"
         end
 
         case params[:type]
@@ -49,7 +49,7 @@ class Citationterms::TermSearchController < ApplicationController
                         .order(:name)
                         .map{|item| {id: item.id, text: item.name}}
         when "bibliographies"
-            citation_where_clause = "display_title LIKE ?", "%#{params[:term]}%"
+            citation_where_clause = "LOWER(display_title) LIKE LOWER(?)", "%#{params[:term]}%"
             @items = Bibliography.where(citation_where_clause)
                         .order(:display_title)
                         .map{|item| {id: item.id, text: item.display_title + " (ID: #{item.id})"}}

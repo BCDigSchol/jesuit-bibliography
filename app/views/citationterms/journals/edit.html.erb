@@ -4,7 +4,7 @@
 <% elsif can? :edit, Journal %>
     <h2 class="edit-label"><span class="header-label">Editing Journal Title:</span> <%= @journal.name.present? ? @journal.name : @journal.id %></h2>
 
-    <div class="alert alert-info" role="alert">Updating this record will also update all other records that reference this term. This may take several seconds to complete!</div>
+    <%= render 'citationterms/update_alert', model_type: 'journal', record_id: @journal.id %>
 
     <%= render 'form', urlpath: citationterms_journal_path %>
 <% else %>

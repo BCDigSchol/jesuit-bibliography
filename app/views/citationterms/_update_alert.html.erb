@@ -1,0 +1,5 @@
+<div class="alert alert-info" role="alert">Updating this record will also update <strong><%= pluralize(@bibs.count, 'record') %></strong> that reference this term. This may take several seconds to complete!</div>
+
+<% if current_user.admin_role? %>
+<div class="alert alert-success" role="alert"><strong>Admin Only:</strong> <%= link_to 'See all referenced records', rails_admin.show_path(model_name: model_type, id: record_id), target: :_blank %></div>
+<% end %>

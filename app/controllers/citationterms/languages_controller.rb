@@ -27,6 +27,7 @@ class Citationterms::LanguagesController < ApplicationController
     end
 
     def edit
+        @bibs = @language.bibliographies
     end
 
     def create

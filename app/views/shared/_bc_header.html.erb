@@ -3,8 +3,26 @@
 <div class="hidden-xs">
             <div class="row">
               <div class="top-menu">
-                <span class="upper"><a href="http://www.jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
-                <span id="login-button"><a href="/users/sign_in">Sign In</a></span>
+                <span class="upper"><a href="https://www.jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
+                <ul class="nav navbar-nav bc-top-nav">
+                  <% if has_user_authentication_provider? %>
+                    <% if current_user %>
+                      <li>
+                        <div class='nav-item'><%= link_to 'Sign out', destroy_user_session_path %></div>
+                      </li>
+                      <% unless current_user.to_s.blank? -%>
+                        <li>
+                          <div class='nav-item user-email'><%= link_to current_user, edit_user_registration_path %></div>
+                        </li>
+                      <% end %>
+                    <% else %>
+                      <li>
+                        <div class='nav-item'><%= link_to 'Sign in', new_user_session_path %></div>
+                      </li>
+                    <% end %>
+                  <% end %>
+                  
+                </ul>
               </div>
             </div>
             <a href="/">

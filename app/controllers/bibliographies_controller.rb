@@ -10,8 +10,6 @@ class BibliographiesController < ApplicationController
     before_action :get_current_user
 
     layout 'bibliography'
-
-    NO_VALUE_FOUND = "n/a"
     
     def index
         authorize! :read, Bibliography, :message => "Unable to load this page."
@@ -251,10 +249,10 @@ class BibliographiesController < ApplicationController
         #authorize! :create, Bibliography, :message => "Unable to create this Bibliography record."
 
         # check that this record has a status assigned
-        check_record_status
+        @bib.check_record_status
 
         # set the display_* fields for Blacklight views
-        set_display_fields
+        @bib.set_display_fields
 
         # generate the various citations for this record
         @bib.generate_citations
@@ -299,10 +297,10 @@ class BibliographiesController < ApplicationController
         @bib.attributes = bib_params
 
         # check that this record has a status assigned
-        check_record_status
+        @bib.check_record_status
 
         # set the display_* fields for Blacklight views
-        set_display_fields
+        @bib.set_display_fields
 
         # generate the various citations for this record
         @bib.generate_citations
@@ -434,25 +432,6 @@ class BibliographiesController < ApplicationController
             end
         end
 
-        # set the record status if it is not already set.
-        # if the status value is blank then assign to Bibliography::DEFAULT_STATUS
-        # TODO make sure a contributor can't somehow force their record to be 'published'
-        def check_record_status
-            if @bib.status.blank?
-                @bib.status = Bibliography::DEFAULT_STATUS
-            end
-
-            # also make sure that if the record has a status of Bibliography::PUBLISHED_STATUS 
-            # that we also set the @bib.published field to be 'true'. 
-            # otherwise, set @bib.published field to 'false'
-            # TODO remove/hide the @bib.published field as it duplicates the status field
-            if @bib.status == Bibliography::PUBLISHED_STATUS
-                @bib.published = true
-            else
-                @bib.published = false
-            end
-        end
-
         def set_bib
             begin
                 @bib = Bibliography.find(params[:id])
@@ -526,108 +505,6 @@ class BibliographiesController < ApplicationController
                 author_of_reviews_attributes: [:id, :person_id, :_destroy],
                 performers_attributes: [:id, :person_id, :_destroy],
             )
-        end
-
-        # depending on the reference_type, select the fields to represent the 
-        # display_title and display_author fields used in the discovery layer
-        def set_display_fields
-            if @bib.reference_type.downcase == "book"
-                if @bib.title.present?
-                    unless @bib.display_title.present?
-                        @bib.display_title = @bib.title
-                    end
-                else
-                    @bib.display_title = NO_VALUE_FOUND
-                end
-                
-                if @bib.authors.present?
-                    out = []
-                    @bib.authors.each do |author|
-                        out << author.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                elsif @bib.editors.present?
-                    out = []
-                    @bib.editors.each do |editor|
-                        out << editor.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                else
-                    @bib.display_author = NO_VALUE_FOUND
-                end
-            elsif @bib.reference_type.downcase == "book chapter"
-                if @bib.chapter_title.present?
-                    unless @bib.display_title.present?
-                        @bib.display_title = @bib.chapter_title
-                    end
-                else
-                    @bib.display_title = NO_VALUE_FOUND
-                end
-                
-                if @bib.authors.present?
-                    out = []
-                    @bib.authors.each do |author|
-                        out << author.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                else
-                    @bib.display_author = NO_VALUE_FOUND
-                end
-            elsif @bib.reference_type.downcase == "book review"
-                if @bib.title_of_review.present?
-                    unless @bib.display_title.present?
-                        @bib.display_title = @bib.title_of_review
-                    end
-                else
-                    @bib.display_title = NO_VALUE_FOUND
-                end
-
-                if @bib.author_of_reviews.present?
-                    out = []
-                    @bib.author_of_reviews.each do |author|
-                        out << author.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                else
-                    @bib.display_author = NO_VALUE_FOUND
-                end
-            elsif @bib.reference_type.downcase == "conference paper"
-                if @bib.paper_title.present?
-                    unless @bib.display_title.present?
-                        @bib.display_title = @bib.paper_title
-                    end
-                else
-                    @bib.display_title = NO_VALUE_FOUND
-                end
-
-                if @bib.authors.present?
-                    out = []
-                    @bib.authors.each do |author|
-                        out << author.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                else
-                    @bib.display_author = NO_VALUE_FOUND
-                end
-            else # dissertation, journal article, multimedia
-                if @bib.title.present?
-                    unless @bib.display_title.present?
-                        @bib.display_title = @bib.title
-                    end
-                else
-                    @bib.display_title = NO_VALUE_FOUND
-                end
-
-                if @bib.authors.present?
-                    out = []
-                    @bib.authors.each do |author|
-                        out << author.person.name
-                    end
-                    @bib.display_author = out.join('|')
-                else
-                    @bib.display_author = NO_VALUE_FOUND
-                end
-            end
         end
 
 end

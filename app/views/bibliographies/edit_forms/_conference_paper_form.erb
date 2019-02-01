@@ -44,7 +44,8 @@
     
     <%= form.input :event_institution, 
         label: 'Event Institution',
-        as: :string
+        as: :string,
+        hint: Bibliography::EVENT_INSTITUTION_HINT
     %>
 
     <%= form.input :event_date, 
@@ -59,13 +60,13 @@
 
     <%= render 'bibliographies/fields/event_url', :form => form, field_label: 'Event URL' %>
 
-    <%= render 'bibliographies/fields/subject', :form => form, field_label: 'Subject' %>
+    <%= render 'bibliographies/fields/subject', :form => form, field_label: 'What (Subjects)', short_field_label: 'Subject' %>
 
-    <%= render 'bibliographies/fields/period', :form => form, field_label: 'Century' %>
+    <%= render 'bibliographies/fields/period', :form => form, field_label: 'When (Centuries)', short_field_label: 'Century' %>
 
-    <%= render 'bibliographies/fields/location', :form => form, field_label: 'Location' %>
+    <%= render 'bibliographies/fields/location', :form => form, field_label: 'Where (Locations)', short_field_label: 'Location' %>
 
-    <%= render 'bibliographies/fields/entity', :form => form, field_label: 'Jesuit' %>
+    <%= render 'bibliographies/fields/entity', :form => form, field_label: 'Who (Jesuits)', short_field_label: 'Jesuit' %>
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 

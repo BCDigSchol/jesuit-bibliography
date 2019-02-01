@@ -2,6 +2,8 @@
 
 <h2>Browse all Centuries</h2>
 
+<p>Below you can browse the centuries examined in the project's records (the 'when' of the records). When selected, the category it will display all results associated with the specific term.</p>
+
 <div id="pagination_table" class="term-list-container">
   <% @periods.each do |per| %>
     <div class="term-list-item"><a href="/catalog?f[centuries_facet][]=<%= per.name %>"><%= per.name %></a></div>

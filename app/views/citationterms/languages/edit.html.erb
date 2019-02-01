@@ -3,8 +3,8 @@
     <%= link_to 'Go Back to Languages index', citationterms_languages_path, class: 'btn btn-info' %>
 <% elsif can? :edit, Language %>
     <h2 class="edit-label"><span class="header-label">Editing Language:</span> <%= @language.name.present? ? @language.name : @language.id %></h2>
-
-    <div class="alert alert-info" role="alert">Updating this record will also update all other records that reference this term. This may take several seconds to complete!</div>
+    
+    <%= render 'citationterms/update_alert', model_type: 'language', record_id: @language.id %>
 
     <%= render 'form', urlpath: citationterms_language_path %>
 <% else %>

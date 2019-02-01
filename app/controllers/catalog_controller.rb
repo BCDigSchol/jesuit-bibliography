@@ -172,20 +172,20 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'authors_text', label: 'Authors', link_to_search: :people_facet
+    config.add_show_field 'authors_text', label: 'Author', link_to_search: :people_facet
     config.add_show_field 'book_title_text', label: 'Book Title'
     config.add_show_field 'book_chapter_record_ref_text', label: 'Book Link', :helper_method => :link_to_book_record
-    config.add_show_field 'book_editors_text', label: 'Book Editors', link_to_search: :people_facet
-    config.add_show_field 'author_of_reviews_text', label: 'Author of Reviews', link_to_search: :people_facet
+    config.add_show_field 'book_editors_text', label: 'Book Editor', link_to_search: :people_facet
+    config.add_show_field 'author_of_reviews_text', label: 'Author of Review', link_to_search: :people_facet
     config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet
-    config.add_show_field 'translators_text', label: 'Translators', link_to_search: :people_facet
+    config.add_show_field 'translators_text', label: 'Translator', link_to_search: :people_facet
     config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
     config.add_show_field 'year_published_text', label: 'Year', link_to_search: :year_published_text
 
-    config.add_show_field 'dissertation_universities_text', label: 'Universities', :helper_method => :display_in_parts
-    config.add_show_field 'publishers_text', label: 'Publishers', :helper_method => :display_in_parts
-    config.add_show_field 'publish_places_text', label: 'Places published'
+    config.add_show_field 'dissertation_universities_text', label: 'University', :helper_method => :display_in_parts
+    config.add_show_field 'publishers_text', label: 'Publisher', :helper_method => :display_in_parts
+    config.add_show_field 'publish_places_text', label: 'Place published'
 
     #config.add_show_field 'title_of_review_text', label: 'Title of Review'
     config.add_show_field 'journals_text', label: 'Journal Title'
@@ -198,7 +198,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'series_multimedium_text', label: 'Multimedia Series', :helper_method => :display_in_parts
 
-    config.add_show_field 'languages_text', label: 'Languages', link_to_search: :languages_facet
+    config.add_show_field 'languages_text', label: 'Language', link_to_search: :languages_facet
     config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
     # reviewed components in HTML
@@ -211,7 +211,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'worldcat_urls_text', label: 'Worldcat URL', :helper_method => :make_link
     config.add_show_field 'publisher_urls_text', label: 'Publisher URL', :helper_method => :make_link
-    config.add_show_field 'leuven_urls_text', label: 'Other links', :helper_method => :make_link
+    config.add_show_field 'leuven_urls_text', label: 'Other link', :helper_method => :make_link
     config.add_show_field 'event_urls_text', label: 'Conference URL', :helper_method => :make_link
     config.add_show_field 'multimedia_urls_text', label: 'Multimedia URL', :helper_method => :make_link
     
@@ -221,7 +221,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'issns_text', label: 'ISSN', :helper_method => :display_in_parts
     config.add_show_field 'dois_text', label: 'DOI', :helper_method => :make_doi_link
 
-    config.add_show_field 'comments_public_text', label: 'Comments', :helper_method => :display_in_parts
+    config.add_show_field 'comments_public_text', label: 'Comment', :helper_method => :display_in_parts
 
     #config.add_show_field 'title_text', label: 'Title'
     #config.add_show_field 'display_title_text', label: 'Display Title'

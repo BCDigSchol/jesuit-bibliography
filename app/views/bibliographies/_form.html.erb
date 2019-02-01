@@ -1,5 +1,5 @@
 <div id="select_form" class="dropdown">
-    <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_text">Select a document type</span> <span class="caret"></span></button>
+    <button type="button" class="btn btn-default btn-lg dropdown-toggle btn-reference-types" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_text">Select a document type</span> <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="#" data="book_form">Book</a></li>
       <li><a href="#" data="book_chapter_form">Book chapter</a></li>
@@ -76,6 +76,7 @@
 
       // update dropdown text
       $("#select_form .button_text").html("Selected: <strong>" + bib_name + "</strong>");
+      $('#select_form button.btn-reference-types').addClass('disabled');
     });
   });
  </script>

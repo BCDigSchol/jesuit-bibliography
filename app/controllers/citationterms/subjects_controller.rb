@@ -27,6 +27,7 @@ class Citationterms::SubjectsController < ApplicationController
     end
 
     def edit
+        @bibs = @subject.bibliographies
     end
 
     def create

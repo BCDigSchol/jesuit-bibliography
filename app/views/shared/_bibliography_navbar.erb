@@ -29,19 +29,19 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Term lists <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <% if can? :read, Location %>
-                            <li><%= link_to 'Locations', citationterms_locations_path %></li>
+                            <li><%= link_to 'Where (Locations)', citationterms_locations_path %></li>
                             <% end %>
 
                             <% if can? :read, Period %>
-                            <li><%= link_to 'Centuries', citationterms_periods_path %></li>
+                            <li><%= link_to 'When (Centuries)', citationterms_periods_path %></li>
                             <% end %>
 
                             <% if can? :read, Subject %>
-                            <li><%= link_to 'Subjects', citationterms_subjects_path %></li>
+                            <li><%= link_to 'What (Subjects)', citationterms_subjects_path %></li>
                             <% end %>
 
                             <% if can? :read, Entity %>
-                            <li><%= link_to 'Jesuits', citationterms_entities_path %></li>
+                            <li><%= link_to 'Who (Jesuits)', citationterms_entities_path %></li>
                             <% end %>
 
                             <% if can? :read, Language %>
