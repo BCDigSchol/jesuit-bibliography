@@ -249,7 +249,7 @@ class BibliographiesController < ApplicationController
         #authorize! :create, Bibliography, :message => "Unable to create this Bibliography record."
 
         # check that this record has a status assigned
-        check_record_status
+        @bib.check_record_status
 
         # set the display_* fields for Blacklight views
         @bib.set_display_fields
@@ -297,7 +297,7 @@ class BibliographiesController < ApplicationController
         @bib.attributes = bib_params
 
         # check that this record has a status assigned
-        check_record_status
+        @bib.check_record_status
 
         # set the display_* fields for Blacklight views
         @bib.set_display_fields
@@ -429,25 +429,6 @@ class BibliographiesController < ApplicationController
                 when :destroy
                     authorize! :destroy, Bibliography, :message => msg
                 end
-            end
-        end
-
-        # set the record status if it is not already set.
-        # if the status value is blank then assign to Bibliography::DEFAULT_STATUS
-        # TODO make sure a contributor can't somehow force their record to be 'published'
-        def check_record_status
-            if @bib.status.blank?
-                @bib.status = Bibliography::DEFAULT_STATUS
-            end
-
-            # also make sure that if the record has a status of Bibliography::PUBLISHED_STATUS 
-            # that we also set the @bib.published field to be 'true'. 
-            # otherwise, set @bib.published field to 'false'
-            # TODO remove/hide the @bib.published field as it duplicates the status field
-            if @bib.status == Bibliography::PUBLISHED_STATUS
-                @bib.published = true
-            else
-                @bib.published = false
             end
         end
 

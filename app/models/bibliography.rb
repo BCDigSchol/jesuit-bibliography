@@ -637,6 +637,25 @@ class Bibliography < ApplicationRecord
         end
     end
 
+    # set the record status if it is not already set.
+    # if the status value is blank then assign to DEFAULT_STATUS
+    # TODO make sure a contributor can't somehow force their record to be 'published'
+    def check_record_status
+        if self.status.blank?
+            self.status = DEFAULT_STATUS
+        end
+
+        # also make sure that if the record has a status of PUBLISHED_STATUS 
+        # that we also set the @bib.published field to be 'true'. 
+        # otherwise, set @bib.published field to 'false'
+        # TODO remove/hide the @bib.published field as it duplicates the status field
+        if self.status == PUBLISHED_STATUS
+            self.published = true
+        else
+            self.published = false
+        end
+    end
+
     private
         def comments_json
             if self.comments.present?
