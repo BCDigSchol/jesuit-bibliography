@@ -46,6 +46,8 @@ RailsAdmin.config do |config|
 
   config.model 'Subject' do
     navigation_label 'Terms'
+    label 'What (Subject)'
+    label_plural 'What (Subjects)'
     weight -3
     list do
       field :id
@@ -59,6 +61,8 @@ RailsAdmin.config do |config|
 
   config.model 'Location' do
     navigation_label 'Terms'
+    label 'Where (Location)'
+    label_plural 'Where (Locations)'
     list do
       field :id
       field :name
@@ -71,8 +75,8 @@ RailsAdmin.config do |config|
 
   config.model 'Entity' do
     navigation_label 'Terms'
-    label 'Jesuit'
-    label_plural 'Jesuits'
+    label 'Who (Jesuit)'
+    label_plural 'Who (Jesuits)'
     list do
       field :id
       field :name
@@ -85,8 +89,8 @@ RailsAdmin.config do |config|
 
   config.model 'Period' do
     navigation_label 'Terms'
-    label 'Century'
-    label_plural 'Centuries'
+    label 'When (Century)'
+    label_plural 'When (Centuries)'
     list do
       field :id
       field :name
