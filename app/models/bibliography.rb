@@ -516,7 +516,7 @@ class Bibliography < ApplicationRecord
     URL_FIELD_HINT = 'URL must start with http:// or https://'.freeze
     STATUS_FIELD_HINT = "Only 'published' records will be made public".freeze
     DISPLAY_NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
-    TERM_FIELD_HINT = 'The following fields are strongly recommended'.freeze
+    TERM_FIELD_HINT = 'This field is strongly recommended'.freeze
     AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
 
