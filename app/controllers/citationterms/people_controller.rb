@@ -28,6 +28,7 @@ class Citationterms::PeopleController < ApplicationController
     end
 
     def edit
+        @bibs = get_people_records
     end
 
     def create
@@ -103,6 +104,19 @@ class Citationterms::PeopleController < ApplicationController
             rescue ActiveRecord::RecordNotFound => e
                 @person = nil
             end
+        end
+
+        def get_people_records
+            people = []
+            people << @person.authors
+            people << @person.editors
+            people << @person.book_editors
+            people << @person.performers
+            people << @person.author_of_reviews
+            people << @person.translated_authors
+            people << @person.translators
+
+            people
         end
 
         def person_params

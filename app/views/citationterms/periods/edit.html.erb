@@ -4,7 +4,7 @@
 <% elsif can? :edit, Period %>
     <h2 class="edit-label"><span class="header-label">Editing Century:</span> <%= @period.name.present? ? @period.name : @period.id %></h2>
 
-    <div class="alert alert-info" role="alert">Updating this record will also update all other records that reference this term. This may take several seconds to complete!</div>
+    <div class="alert alert-info" role="alert">Updating this record will also update <strong><%= pluralize(@bibs.count, 'record') %></strong> that reference this term. This may take several seconds to complete!</div>
 
     <%= render 'form', urlpath: citationterms_period_path %>
 <% else %>

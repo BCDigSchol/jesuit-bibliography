@@ -27,6 +27,7 @@ class Citationterms::EntitiesController < ApplicationController
     end
 
     def edit
+        @bibs = @entity.bibliographies
     end
 
     def create
