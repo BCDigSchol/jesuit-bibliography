@@ -1,0 +1,13 @@
+name:
+  Add your record
+route:
+  about
+slug:
+  add-record
+description:
+  Instructions on how to add a record to the collection
+rank:
+  50
+body:
+  <p>Learn More about the <strong>Jesuit Online Bibliography</strong> project.<p>
+  <p>There is <em>more</em> content to come!</p>
