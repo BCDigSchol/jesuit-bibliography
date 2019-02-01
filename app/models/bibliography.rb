@@ -517,6 +517,8 @@ class Bibliography < ApplicationRecord
     STATUS_FIELD_HINT = "Only 'published' records will be made public".freeze
     DISPLAY_NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
     TERM_FIELD_HINT = 'The following fields are strongly recommended'.freeze
+    AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
+    EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
