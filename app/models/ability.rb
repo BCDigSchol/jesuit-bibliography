@@ -74,6 +74,7 @@ class Ability
       can :read, Person                             # can read Person Term lists
       can :read, Journal                            # can read Journal Term lists
       can [:create, :read, :update], Bibliography   # can create/read/update Bib records
+      can :manage, Tag                              # can manage Bib record Tags
     end
 
     # Role can:
