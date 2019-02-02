@@ -10,7 +10,8 @@ h2.page-heading{
 }
 
 .button-container {
-    padding-bottom: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     text-align: center;
 }
 .record-button {
@@ -145,7 +146,7 @@ h2.page-heading{
             }
         }
         .search-query-form {
-            width: 100%;
+            width: auto;
         }
         form.navbar-form .input-group .input-group-addon.for-search-field {
             background-color: #ccc;
@@ -171,11 +172,6 @@ h2.page-heading{
             
         }
     }
-}
-
-.page-header {
-    border-bottom: none;
-    margin: none;
 }
 
 .home-text {
@@ -253,12 +249,18 @@ h2.page-heading{
     float: left;
     margin: 0;
     padding: 0;
-    width: 500px;
+    width: 700px;
+    min-width: 300px;
     height: 300px;
     background: #ccc;
     text-align: center;
     line-height: 300px;
+        a{
+            padding: 3%;
+            margin: 3%;
+        }
   }
+
   
   a.control_prev, a.control_next {
     position: absolute;
@@ -279,7 +281,7 @@ h2.page-heading{
   
   a.control_prev:hover, a.control_next:hover {
     opacity: 1;
-    -webkit-transition: all 0.2s ease;
+    -webkit-transition: all 0.5s ease;
   }
   
   a.control_prev {
@@ -297,27 +299,6 @@ h2.page-heading{
     width: 160px;
     font-size: 18px;
   }
-  
-
-div.scrollmenu {
-    background-color: #cccc;
-    overflow: auto;
-    white-space: nowrap;
-    margin: 0 20%;
-  }
-  
-  div.scrollmenu a {
-    display: inline-block;
-    color: black;
-    text-align: center;
-    padding: 30px 40px;
-    text-decoration: none;
-  }
-  
-  div.scrollmenu a:hover {
-    background-color: #777;
-  }
-
 
 .home-featured {
     background: rgba(236, 226, 212, 0.8);
@@ -393,36 +374,44 @@ div.scrollmenu {
 footer.bcfooter {
     .footer {
         background-color: white;
+        margin-top: 5%;
+        .row {
+            margin-left: auto;
+            margin-right: auto;
+        }
         .inner {
             font-size: 16px;
             .logo {
-                padding-left: 10px;
+                padding-left: 0px;
             }
             .pagebreak {
                 border-bottom: solid 5px #872334;
                 padding-bottom: 10px;
+                p {
+                    margin: 0 0 5px;
+                    padding-top: 3%;
+                }
             }
             .footer-text {
-                padding-top: 5px;
+                padding-top: 3%;
+                padding-left: 0px;
                 .footer-title {
-                    font-size: 25px;
+                    font-size: 20px;
                     font-weight: 700;
                 }
                 a {
                     text-decoration: underline;
                 }
-                .address {
-                padding-top:20px;
-                }
             }
             .site-links {
                 list-style-type: none;
-                margin: 20px 0;
+                margin: 3% 0;
                 padding: 0px;
                 text-align: center;
                 li {
                     display: inline-block;
-                    padding: 0 20px;
+                    font-size: 14px;
+                    padding: 0 3%;
                     line-height: 1;
                     border-right: 1px solid;
                     text-transform: uppercase;
@@ -458,6 +447,16 @@ footer.bcfooter {
     text-transform: none;
 }
 
+.heading-container {
+    h2 {
+        font-size: 25px;
+        color: #872334;
+    }
+}
+
+.about-body{
+    border-left: solid #bc9b6a 3px;
+}
 
 /* Abstracts can have <p> elements in them, which messes up spacing. */
 .blacklight-abstract_text {

@@ -1,22 +1,16 @@
-<div class="page-header row">
-</div>
-
-<div class="button-container"><p><button class="record-button"><a href="#">Add Your Records</a></button></div>
+<div class="button-container"><p><button class="record-button"><a href="/about/add-record">Add Your Records</a></button></div>
 
 <div class="home-text">
-  <p>The Jesuit Online Bibliography is a free, collaborative, multilingual, and fully searchable database of bibliographic records for the field of Jesuit Studies produced in the 21st century.</p>
-  <p>In the <a href="none">bibliographic tradition</a> of the Society of Jesus, this database provides the records, abstracts, subject categories, and direct links to books, book chapters, journal articles and book reviews related to the study of Jesuit history, spirituality, educational heritage, and pedagogy.</p>
-  <p>The editorial staff for the Jesuit Online Bibliography is a collaborative effort between Jesuit institutions -- <a href="http://www.sjweb.info/arsi/">Archivum Romanum Societatis Iesu</a>, the <a href="https://www.jesuitica.be/homepage/">Jesuitica Project at KU/Leuven</a>, and the <a href="https://www.bc.edu/centers/iajs/">Institute for Advanced Jesuit Studies</a> at Boston College.</p>
-  <p>A network of voluntary correspondents and individual scholars and publishers contribute to the Jesuit Online Bibliography, which consists of more than 13,000 records in nearly 50 languages.</p>
-  <p>With the support of the project's <a href="/about/institutionalpartners">collaborating institutions</a>, this resource is available in Open Access. Users also have the option to create a free account to save searches and to bookmark results.</p>
-  <p>The bibliographic records are aggregated within the search capabilities of the <a href="https://jesuitportal.bc.edu/">Portal to Jesuit Studies</a>.</p>
+  <p>The Jesuit Online Bibliography is a free, collaborative, multilingual, and fully searchable database of bibliographic records of Jesuit Studies scholarship produced in the 21st century. This project provides the citations, abstracts, subject categories, and direct links to books, book chapters, journal articles, book reviews, and other works related to the study of Jesuit history, spirituality, educational heritage, and pedagogy.</p>
+  <p>The editorial oversight of the Jesuit Online Bibliography is a collaborative effort by Jesuit institutions -- the <a href="http://www.sjweb.info/arsi/">Archivum Romanum Societatis Iesu</a>, the <a href="https://www.jesuitica.be/homepage/">Jesuitica Project at KU/Leuven</a>, and the <a href="https://www.bc.edu/centers/iajs/">Institute for Advanced Jesuit Studies</a> at Boston College. Additional contributions are made by <a href="/about/network">voluntary correspondents</a>and individual scholars and publishers. Thanks to the project's <a href="/about/partners">institutional partners</a>, this resource is available in Open Access.Users also have the option to create a free account to save searches and to bookmark results.</p>
+  <p>All the records of the Jesuit Online Bibliography are aggregated within the search capabilities of the <a href="https://jesuitportal.bc.edu/">Portal to Jesuit Studies</a>.</p>
   <p id="learn-more"> <a href="/about">Learn More</a></p>
 </div>
 
 <div class="home-collaborators">
-  <h3 class="home-heading">Visit the Collaborative Partners</h3>
+  <h3 class="home-heading">Visit the Institutional Partners</h3>
   <ul class="collaborators-static">
-    <li><a href="http://www.sjweb.info/arsi/en/archivum-romanum-societatis-iesu/"><%= image_tag('Archivumlogo.png', height:200, alt:'Archivum Romanum Societatus vliesu')%></a></li>
+    <li><a href="http://www.sjweb.info/arsi/en/archivum-romanum-societatis-iesu/"><%= image_tag('Archivumlogo.png', height:200, alt:'Archivum Romanum Societatus Iesu')%></a></li>
     <li><a href="https://www.bc.edu/centers/iajs/"><%= image_tag('newIAJS.png', height:200, alt:'Institue for Advanced Jesuit Studies')%></a></li>
     <li><a href="https://www.jesuitica.be/homepage/"><%= image_tag('jesuiticanew.png', height:200, alt:'Ku Leuven')%></a></li>
   </ul>
@@ -25,17 +19,13 @@
   <a href="#" class="control_next">></a>
   <a href="#" class="control_prev"><</a>
   <ul>
-    <li><a href="https://www.jhia.ac.ke/"><%= image_tag('JHIA.png', width:150, alt:'JHIA')%></a></li>
-    <li><a href="https://www.facebook.com/xchr.goa/"><%= image_tag('XCHR.png', width:150, alt:'XCHR')%></a></li>
-    <li><a href="http://www.broteria.pt/"><%= image_tag('Broteria.png', width:150, alt:'Broteria')%></a></li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;">OTHER COLLABORATOR</li>
-    <li style="background: #aaa;"><a href="/about/partners">Click here for more partners and to learn more</a></li>
-  </ul>
+    <li><a href="https://www.jhia.ac.ke/"><%= image_tag('JHIA.png', width:100, alt:'JHIA')%></a><a href="https://www.facebook.com/xchr.goa/"><%= image_tag('XCHR.png', width:100, alt:'XCHR')%></a><a href="http://www.broteria.pt/"><%= image_tag('Broteria.png', width:100, alt:'Broteria')%></a></li></li>
+    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
+    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
+    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
+    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
+    <li><a href="/about/partners">Click here for more partners and to learn more</a></li>
+  </ul>  
 </div>
 
 </div>
@@ -51,17 +41,17 @@ jQuery(document).ready(function ($) {
 
     setInterval(function () {
         moveRight();
-    }, 3000);
-
+    }, 7000);
+  
 	var slideCount = $('#slider ul li').length;
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
 	var sliderUlWidth = slideCount * slideWidth;
-
+	
 	$('#slider').css({ width: slideWidth, height: slideHeight });
-
+	
 	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-
+	
     $('#slider ul li:last-child').prependTo('#slider ul');
 
     function moveLeft() {
@@ -90,7 +80,7 @@ jQuery(document).ready(function ($) {
         moveRight(); return false
     });
 
-});
+});  
 
  $(function() {
     $('#about a').on('click', function(e) {
