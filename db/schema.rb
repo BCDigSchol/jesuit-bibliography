@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_191554) do
+ActiveRecord::Schema.define(version: 2019_02_01_222810) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_01_29_191554) do
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image"
     t.index ["bibliography_id"], name: "index_featuredrecords_on_bibliography_id"
   end
 

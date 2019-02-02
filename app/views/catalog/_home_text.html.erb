@@ -5,8 +5,8 @@
 
 <div class="home-text">
   <p>The Jesuit Online Bibliography is a free, collaborative, multilingual, and fully searchable database of bibliographic records for the field of Jesuit Studies produced in the 21st century.</p>
-  <p>In the <a href="none">bibliographic tradition</a> of the Society of Jesus, this database provides the records, abstracts, subject categories, and direct links to books, book chapters, journal articles and book reviews related to the study of Jesuit history, spirituality, educational heritage, and pedagogy.</p> 
-  <p>The editorial staff for the Jesuit Online Bibliography is a collaborative effort between Jesuit institutions -- <a href="http://www.sjweb.info/arsi/">Archivum Romanum Societatis Iesu</a>, the <a href="https://www.jesuitica.be/homepage/">Jesuitica Project at KU/Leuven</a>, and the <a href="https://www.bc.edu/centers/iajs/">Institute for Advanced Jesuit Studies</a> at Boston College.</p> 
+  <p>In the <a href="none">bibliographic tradition</a> of the Society of Jesus, this database provides the records, abstracts, subject categories, and direct links to books, book chapters, journal articles and book reviews related to the study of Jesuit history, spirituality, educational heritage, and pedagogy.</p>
+  <p>The editorial staff for the Jesuit Online Bibliography is a collaborative effort between Jesuit institutions -- <a href="http://www.sjweb.info/arsi/">Archivum Romanum Societatis Iesu</a>, the <a href="https://www.jesuitica.be/homepage/">Jesuitica Project at KU/Leuven</a>, and the <a href="https://www.bc.edu/centers/iajs/">Institute for Advanced Jesuit Studies</a> at Boston College.</p>
   <p>A network of voluntary correspondents and individual scholars and publishers contribute to the Jesuit Online Bibliography, which consists of more than 13,000 records in nearly 50 languages.</p>
   <p>With the support of the project's <a href="/about/institutionalpartners">collaborating institutions</a>, this resource is available in Open Access. Users also have the option to create a free account to save searches and to bookmark results.</p>
   <p>The bibliographic records are aggregated within the search capabilities of the <a href="https://jesuitportal.bc.edu/">Portal to Jesuit Studies</a>.</p>
@@ -35,11 +35,15 @@
     <li style="background: #aaa;">OTHER COLLABORATOR</li>
     <li style="background: #aaa;">OTHER COLLABORATOR</li>
     <li style="background: #aaa;"><a href="/about/partners">Click here for more partners and to learn more</a></li>
-  </ul>  
+  </ul>
 </div>
 
 </div>
 
+<% featured_records = get_featured_records %>
+<% unless featured_records.count < 2 %>
+  <%= render 'featured_records', :featured_records => featured_records %>
+<%end %>
 
 <script>
 
@@ -48,16 +52,16 @@ jQuery(document).ready(function ($) {
     setInterval(function () {
         moveRight();
     }, 3000);
-  
+
 	var slideCount = $('#slider ul li').length;
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
 	var sliderUlWidth = slideCount * slideWidth;
-	
+
 	$('#slider').css({ width: slideWidth, height: slideHeight });
-	
+
 	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
+
     $('#slider ul li:last-child').prependTo('#slider ul');
 
     function moveLeft() {
@@ -78,15 +82,15 @@ jQuery(document).ready(function ($) {
         });
     };
 
-    $('a.control_prev').click(function () {
+    $('#slider a.control_prev').click(function () {
         moveLeft(); return false
     });
 
-    $('a.control_next').click(function () {
+    $('#slider a.control_next').click(function () {
         moveRight(); return false
     });
 
-});  
+});
 
  $(function() {
     $('#about a').on('click', function(e) {

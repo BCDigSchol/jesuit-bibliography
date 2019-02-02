@@ -658,6 +658,22 @@ class Bibliography < ApplicationRecord
         end
     end
 
+    def first_isbn
+        first_isbn = nil
+        unless isbns.empty?
+            first_isbn = isbns[0].value
+        end
+        first_isbn
+    end
+
+    def first_issn
+        first_issn = nil
+        unless isbns.empty?
+            first_issn = isbns[0].value
+        end
+        first_issn
+    end
+
     private
         def comments_json
             if self.comments.present?
