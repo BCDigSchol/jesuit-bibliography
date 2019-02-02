@@ -15,7 +15,13 @@
               <% end %>
             </div>
             <div class="record-display-col">
-              <a href="/catalog/<%= record.bibliography.id %>"><h3><%= record.name %></h3></a>
+              <h3>
+              <% if record.bibliography.present? %>
+                <%= link_to record.name, solr_document_path(record.bibliography.id) %>
+              <% else %>
+                <%= record.name %>
+              <% end %>
+              </h3>
               <div><%= record.body.html_safe %></div>
             </div>
           </div>

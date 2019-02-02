@@ -5,15 +5,19 @@ class Featuredrecord < ApplicationRecord
     validates :rank, presence: true
 
     def isbns
-        unless bibliography.isbns.empty?
-            return bibliography.isbns.map {|isbn| isbn.value}
+        if bibliography.present?
+            unless bibliography.isbns.empty?
+                return bibliography.isbns.map {|isbn| isbn.value}
+            end
         end
         []
     end
 
     def issns
-        unless bibliography.isbns.empty?
-            return bibliography.isbns.map {|issn| issn.value}
+        if bibliography.present?
+            unless bibliography.isbns.empty?
+                return bibliography.isbns.map {|issn| issn.value}
+            end
         end
         []
     end

@@ -117,6 +117,7 @@ class FeaturedrecordsController < ApplicationController
                 authorize! :read, @record, :message => "Unable to read this Page record."
             rescue ActiveRecord::RecordNotFound => e
                 @record = nil
+                @bib = nil
             else
                 # pull in referenced Bibliography record
                 fetch_related_record
@@ -134,6 +135,8 @@ class FeaturedrecordsController < ApplicationController
                 rescue ActiveRecord::RecordNotFound => e
                     @bib.nil
                 end
+            else
+                @bib = nil
             end
         end
 
@@ -147,6 +150,7 @@ class FeaturedrecordsController < ApplicationController
             end
 
             @record.issns.each do |issn|
+                url = book_cover_url(issn: issn)
                 if valid_cover_image?(url)
                     return url
                 end
