@@ -16,11 +16,11 @@
 
         <% if can? :manage, 'RecordLinking '%>
             <%= form.input :reviewed_title_record_ref, 
-                label: 'Referenced Reviewed Title record',
+                label: 'Link to Referenced Title',
                 # make sure that we pull the display_title field as the collection label
                 label_method: Proc.new { |b| b.display_title if b.present? },
                 collection: [Bibliography.find_by_id(form.object.reviewed_title_record_ref.to_s)], 
-                hint: 'Search for the Citation record you want to link. Make sure the linked Book record is \'Published\'',
+                hint: Bibliography::LINK_TO_BOOK_RECORD_HINT,
                 input_html: {
                     class: class_name,
                     "data-url": citationterms_search_path
