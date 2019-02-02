@@ -40,10 +40,23 @@
     %>
 
     <% if can? :manage, 'RecordLinking '%>
-    <%= form.input :book_chapter_record_ref, 
-        label: 'Linked Book ID',
-        hint: 'Add in the ID of the Book record you want to link. Make sure the linked Book record is \'Published\''
-    %>
+        <%= form.input :book_chapter_record_ref, 
+            label: 'Link to Book Title',
+            # make sure that we pull the display_title field as the collection label
+            label_method: Proc.new { |b| b.display_title if b.present? },
+            collection: [Bibliography.find_by_id(form.object.book_chapter_record_ref.to_s)], 
+            hint: Bibliography::LINK_TO_BOOK_RECORD_HINT,
+            input_html: {
+                class: 'book_ref',
+                "data-url": citationterms_search_path
+            }
+        %>
+
+        <script>
+        $(document).ready(function() {
+            $('.book_ref').select2( select2_config(".book_ref", "bibliographies") );
+        });
+        </script>
     <% end %>
 
     <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
