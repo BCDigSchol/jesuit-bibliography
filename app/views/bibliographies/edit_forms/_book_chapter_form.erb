@@ -16,7 +16,7 @@
         :input_html => { :value => "Book Chapter" } 
     %>
     
-    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
+    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author', required_status: true %>
     
     <%= form.input :year_published, 
         label: 'Year', 
@@ -32,11 +32,13 @@
 
     <%= render 'bibliographies/fields/display_title', :form => form, field_label: 'Display Title' %>
 
-    <%= render 'bibliographies/fields/book_editor', :form => form, field_label: 'Book Editor' %>
+    <%= render 'bibliographies/fields/book_editor', :form => form, field_label: 'Book Editor', required_status: false %>
 
     <%= form.input :book_title, 
         label: 'Book title', 
-        as: :string 
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <% if can? :manage, 'RecordLinking '%>
@@ -59,9 +61,9 @@
         </script>
     <% end %>
 
-    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published', required_status: true %>
 
-    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>
+    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher', required_status: true %>
 
     <%= form.input :volume, 
         label: 'Volume',
@@ -75,7 +77,9 @@
 
     <%= form.input :page_range, 
         label: 'Page range',
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= form.input :chapter_number, 
@@ -88,7 +92,7 @@
         as: :string
     %>
 
-    <%= render 'bibliographies/fields/translator', :form => form, field_label: 'Translator' %>
+    <%= render 'bibliographies/fields/translator', :form => form, field_label: 'Translator', required_status: false %>
 
     <%= render 'bibliographies/fields/isbn', :form => form, field_label: 'ISBN' %>
 
@@ -115,14 +119,14 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author' %>
+    <%= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author', required_status: false %>
     
     <%= form.input :translated_title, 
         label: 'Translated Title',
         as: :string
     %>
 
-    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
+    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language', required_status: true %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
     

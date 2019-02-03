@@ -118,13 +118,57 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :dissertation_university_urls, reject_if: :all_blank, allow_destroy: true
 
     validates :reference_type, presence: true
-   
-    # validate various title fields depending on reference_type
-    validates :title, presence: true, if: :has_title_field?
-    validates :chapter_title, presence: true, if: :has_chapter_title_field?
-    #validates :title_of_review, presence: true, if: :has_title_of_review_field?
-    validates :paper_title, presence: true, if: :has_paper_title_field?
+    validates :year_published, presence: true
 
+    # needs work to get active
+    #validates_associated :authors, presence: true
+    #validates_associated :author_of_reviews, presence: true
+    #validates_associated :book_editors, presence: true
+    #validates_associated :editors, presence: true
+    #validates_associated :performers, presence: true
+    #validates_associated :translated_author, presence: true
+    #validates_associated :translators, presence: true
+    #validates_associated :dissertation_universities, presence: true
+    #validates_associated :languages, presence: true
+    #validates_associated :journals, presence: true
+    #validates_associated :dissertation_universities, presence: true
+    #validates_associated :multimedia_url, presence: true
+   
+    #
+    # validate various title fields depending on reference_type
+    #
+
+    # For book types, we need either the author or editor to be present
+    validate :book_has_author_or_editor
+
+    validates_associated :authors, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
+
+    validates :title, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'journal article', 'dissertation', 'multimedia'] }
+
+    validates :chapter_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter'] }
+
+    validates :title_of_review, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review'] }
+
+    validates :paper_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['conference paper'] }
+
+    validates :publish_places, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter', 'dissertation'] }
+
+    validates :publishers, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter'] }
+    
+    validates :book_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter'] }
+
+    validates :page_range, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter'] }
+
+    
     searchable :if => :published do
         integer :id
 
@@ -767,38 +811,6 @@ class Bibliography < ApplicationRecord
             people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
         end
 
-        def has_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book" or reference_type.downcase == "journal article" or reference_type.downcase == "dissertation" or reference_type.downcase == "multimedia"
-            else
-                true
-            end
-        end
-
-        def has_chapter_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book chapter"
-            else
-                true
-            end
-        end
-
-        def has_title_of_review_field?
-            if reference_type.present?
-                reference_type.downcase == "book review"
-            else
-                true
-            end
-        end
-
-        def has_paper_title_field?
-            if reference_type.present?
-                reference_type.downcase == "conference paper"
-            else
-                true
-            end
-        end
-
         def reviewed_author
             if reviewed_components.present?
                 authors = []
@@ -857,5 +869,21 @@ class Bibliography < ApplicationRecord
                 end
                 titles
             end
+        end
+
+        def book_has_author_or_editor
+            if reference_type_is_one_of? ['book']
+                unless authors.present? || editors.present?
+                    errors.add(:authors, "or Editor must be present")
+                end
+            end
+        end
+    
+        def reference_type_is_one_of? (types_array)
+            # TODO check if types_array is an array
+            if reference_type.present?
+                return types_array.include? reference_type.downcase
+            end
+            false
         end
 end

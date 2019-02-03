@@ -3,7 +3,9 @@
         <%= form.simple_fields_for :publish_places do |c| %>
             <%= c.input :name, 
                 label: field_label,
-                as: :string
+                as: :string,
+                required: required_status,
+                validate: required_status
             %>
         <% end %>
     </div>

@@ -16,11 +16,13 @@
         :input_html => { :value => "Multimedia" } 
     %>
     
-    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
+    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author', required_status: true %>
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= form.input :title, 
@@ -34,22 +36,24 @@
 
     <%= render 'bibliographies/fields/series_multimedia', :form => form, field_label: 'Series' %>
 
-    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published' %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published', required_status: true %>
 
-    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher' %>
+    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher', required_status: true %>
 
     <%= form.input :multimedia_type, 
         label: 'Type of media',
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
-    <%= render 'bibliographies/fields/performer', :form => form, field_label: 'Performer' %>
+    <%= render 'bibliographies/fields/performer', :form => form, field_label: 'Performer', required_status: false %>
 
     <%= render 'bibliographies/fields/isbn', :form => form, field_label: 'ISBN' %>
 
     <%= render 'bibliographies/fields/worldcat_url', :form => form, field_label: 'Worldcat URL' %>
 
-    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL' %>
+    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL', required_status: false %>
 
     <%= form.input :multimedia_dimensions, 
         label: 'Multimedia dimensions',
@@ -66,7 +70,7 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
+    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language', required_status: true %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 

@@ -3,7 +3,9 @@
         <%= form.simple_fields_for :multimedia_urls do |c| %>
             <%= c.input :link, 
                 label: field_label,
-                as: :string, 
+                as: :string,
+                required: required_status,
+                validate: required_status, 
                 hint: Bibliography::URL_FIELD_HINT
             %>
         <% end %>

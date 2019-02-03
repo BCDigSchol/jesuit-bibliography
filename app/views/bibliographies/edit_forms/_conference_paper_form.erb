@@ -16,11 +16,13 @@
         :input_html => { :value => "Conference Paper" } 
     %>
     
-    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author' %>
+    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author', required_status: true %>
     
     <%= form.input :year_published, 
         label: 'Year', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
 
     <%= form.input :paper_title, 
@@ -39,7 +41,9 @@
 
     <%= form.input :event_location, 
         label: 'Event location', 
-        as: :string
+        as: :string,
+        required: true,
+        validate: true
     %>
     
     <%= form.input :event_institution, 
@@ -70,7 +74,7 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language' %>
+    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language', required_status: true %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 
