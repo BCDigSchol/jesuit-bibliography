@@ -14,7 +14,7 @@ module CitationsGenerator
                 # Optional fields: volume/number, series, address, edition, month, note, key, url
                 @b.type = :book
                 generate_address
-                generate_author
+                generate_book_author_or_editor
                 generate_doi
                 generate_edition
                 generate_editor
@@ -234,6 +234,24 @@ module CitationsGenerator
                         a << author
                     end
                     @b.author =  "#{a.join(" and ")}"
+                end
+            end
+
+            def generate_book_author_or_editor
+                if self.display_author.present?
+                    if self.authors.present?
+                        a = []
+                        self.authors.each do |author|
+                            a << author.person.name
+                        end
+                        @b.author =  "#{a.join(" and ")}"
+                    elsif self.editors.present?
+                        e = []
+                        self.editors.each do |editor|
+                            e << editor.person.name
+                        end
+                        @b.editor =  "#{e.join(" and ")}"
+                    end
                 end
             end
 
