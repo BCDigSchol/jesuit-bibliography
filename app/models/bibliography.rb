@@ -505,6 +505,7 @@ class Bibliography < ApplicationRecord
 
     # public method called to update display_fields and trigger reindex
     def reindex_me
+        puts "I'm being reindex: ID##{self.id}\n\n"
         self.set_display_fields
         self.generate_all_citations
         self.save
