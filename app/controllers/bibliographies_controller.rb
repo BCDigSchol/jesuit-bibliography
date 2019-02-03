@@ -300,10 +300,10 @@ class BibliographiesController < ApplicationController
         @bib.check_record_status
 
         # set the display_* fields for Blacklight views
-        @bib.set_display_fields
+        #@bib.set_display_fields
 
         # generate the various citations for this record
-        @bib.generate_citations
+        #@bib.generate_citations
 
         @bib.modified_by = current_user
 
@@ -327,7 +327,28 @@ class BibliographiesController < ApplicationController
             end
         end
 
-        if @bib.save(bib_params)
+        if @bib.save
+
+            #
+            # HACK there's an ongoing issue for Books types where if the author field is deleted (or edited in any way)
+            #      then the display_title field isn't truly updated. @bib.authors hasn't been updated 
+            #      with the new author values yet when we call self.set_display_fields. 
+            #      @bib.authors isn't updated until @bib is saved, and so this hack saves @bib twice -- 
+            #      once to update @bib.authors and then again again after we call self.set_display_fields.
+            #      there is likely a way to call `marked_for_deletion?` on all author params from authors_attributes
+            #      but this gets hairy since authors_attributes is a nested ActionController::Parameters object
+            #      see: https://api.rubyonrails.org/classes/ActionController/Parameters.html
+            #
+
+            # set the display_* fields for Blacklight views
+            @bib.set_display_fields
+
+            # generate the various citations for this record
+            @bib.generate_citations
+
+            # resave record with updated display_* fields and citations
+            @bib.save
+
             respond_to do |format|
                 format.html { redirect_to @bib, notice: 'Bibliography was successfully updated.' }
                 format.json { render :show, status: :ok, location: @bib }
