@@ -1,4 +1,4 @@
-function select2_config(field_selector, record_type) {
+function select2_config(field_selector, record_type, allowclear=false, placeholder_text=null) {
     return {
         ajax: {
             data: function (params) {
@@ -18,6 +18,9 @@ function select2_config(field_selector, record_type) {
             }
         },
         minimumInputLength: 1,
+        // only activate this on certain occasions
+        allowClear: allowclear,
+        placeholder: placeholder_text,
         language: {
             inputTooShort: function () {
               return "Please enter 1 or more characters. To display all possible values, type the wildcard character `*`";

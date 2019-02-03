@@ -37,9 +37,9 @@
 
 <script>
 $(document).ready(function() {
-    $('.reviewed_component').select2( select2_config(".reviewed_component", "bibliographies") );
+    $('.reviewed_component').select2( select2_config(".reviewed_component", "bibliographies", true, "Select a Book") );
     $("#bibliography_reviewed_components").on('cocoon:after-insert', function(e, insertedItem){
-        $('.reviewed_component').last().select2( select2_config(".reviewed_component", "bibliographies") );
+        $('.reviewed_component').last().select2( select2_config(".reviewed_component", "bibliographies", true, "Select a Book") );
     });
 });
 </script>
