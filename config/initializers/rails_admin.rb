@@ -240,12 +240,6 @@ RailsAdmin.config do |config|
     label_plural 'Performers'
   end
 
-  config.model 'TranslatedAuthor' do
-    parent Person
-    label 'Translated Author'
-    label_plural 'Translated Authors'
-  end
-
   config.model 'EntitySuggestion' do
     navigation_label 'Suggestions'
     weight -1

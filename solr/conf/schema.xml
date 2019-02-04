@@ -38,22 +38,24 @@
     <field name="display_title_text" type="text_general"/>
     <field name="display_year_text" type="text_general"/>
     <field name="display_author_text" type="text_general"/>
-    <field name="place_published_text" type="text_general"/>
-    <field name="publisher_text" type="text_general"/>
+    <field name="publish_places_text" type="text_general"/>
+    <field name="publishers_text" type="text_general"/>
     <field name="volume_text" type="text_general"/>
     <field name="number_of_volumes_text" type="text_general"/>
     <field name="edition_text" type="text_general"/>
     <field name="date_text" type="text_general"/>
     <field name="reprint_edition_text" type="text_general"/>
     <field name="abstract_text" type="text_general"/>
+    <field name="translated_author_text" type="text_general"/>
     <field name="translated_title_text" type="text_general"/>
     <field name="languages_text" type="text_general"/>
+    <field name="journals_text" type="text_general"/>
     <field name="volume_number_text" type="text_general"/>
     <field name="worldcat_urls_text" type="text_general"/>
     <field name="publisher_urls_text" type="text_general"/>
     <field name="leuven_urls_text" type="text_general"/>
     <field name="multimedia_dimensions_text" type="text_general"/>
-    <field name="multimedia_series_text" type="text_general"/>
+    <field name="series_multimedium_text" type="text_general"/>
     <field name="multimedia_type_text" type="text_general"/>
     <field name="multimedia_urls_text" type="text_general"/>
     <field name="event_title_text" type="text_general"/>
@@ -62,7 +64,7 @@
     <field name="event_date_text" type="text_general"/>
     <field name="event_panel_title_text" type="text_general"/>
     <field name="event_urls_text" type="text_general"/>
-    <field name="dissertation_university_text" type="text_general"/>
+    <field name="dissertation_universities_text" type="text_general"/>
     <field name="dissertation_university_urls_text" type="text_general"/>
     <field name="dissertation_thesis_type_text" type="text_general"/>
     <field name="number_of_pages_text" type="text_general"/>
@@ -72,17 +74,21 @@
     <field name="epub_date_text" type="text_general"/>
     <field name="chapter_number_text" type="text_general"/>
     <field name="book_title_text" type="text_general"/>
+    <field name="book_chapter_record_ref_text" type="text_general"/>
     <field name="authors_text" type="text_general"/>
     <field name="editors_text" type="text_general"/>
     <field name="book_editors_text" type="text_general"/>
     <field name="author_of_reviews_text" type="text_general"/>
     <field name="translators_text" type="text_general"/>
     <field name="performers_text" type="text_general"/>
-    <field name="translated_authors_text" type="text_general"/>
     <field name="comments_text" type="text_general"/>
     <field name="comments_json_text" type="text_general"/>
     <field name="comments_public_text" type="text_general"/>
-    <field name="reviewed_components_text" type="text_general"/>
+    <field name="reviewed_components_html_text" type="text_general"/>
+    <field name="reviewed_author_text" type="text_general"/>
+    <field name="reviewed_editor_text" type="text_general"/>
+    <field name="reviewed_translator_text" type="text_general"/>
+    <field name="reviewed_title_text" type="text_general"/>
     <field name="isbns_text" type="text_general"/>
     <field name="issns_text" type="text_general"/>
     <field name="dois_text" type="text_general"/>
@@ -90,9 +96,15 @@
     <field name="locations_text" type="text_general"/>
     <field name="jesuits_text" type="text_general"/>
     <field name="centuries_text" type="text_general"/>
+    <field name="tags_text" type="text_general"/>
 
     <field name="created_by_text" type="text_general"/>
     <field name="modified_by_text" type="text_general"/>
+
+    <field name="bibtex_text" type="text_general"/>
+    <field name="bibtex_mla_text" type="text_general"/>
+    <field name="bibtex_chicago_text" type="text_general"/>
+    <field name="bibtex_turabian_text" type="text_general"/>
 
     <field name="created_at_d" type="date"/>
     <field name="updated_at_d" type="date"/>
@@ -310,6 +322,7 @@
   <copyField source="*_ssim" dest="all_text_timv" maxChars="3000"/>
   <copyField source="*_si" dest="all_text_timv" maxChars="3000"/>
 
+  <!--copyField source="*_text" dest="suggest"/-->
   <copyField source="*_tsim" dest="suggest"/>
   <copyField source="*_tesim" dest="suggest"/>
   <copyField source="*_ssim" dest="suggest"/>
@@ -574,22 +587,24 @@
     <copyField source="display_title_text" dest="display_title_text_str" maxChars="256"/>
     <copyField source="display_year_text" dest="display_year_text_str" maxChars="256"/>
     <copyField source="display_author_text" dest="display_author_text_str" maxChars="256"/>
-    <copyField source="place_published_text" dest="place_published_text_str" maxChars="256"/>
-    <copyField source="publisher_text" dest="publisher_text_str" maxChars="256"/>
+    <copyField source="publish_places_text" dest="publish_places_text_str" maxChars="256"/>
+    <copyField source="publishers_text" dest="publishers_text_str" maxChars="256"/>
     <copyField source="volume_text" dest="volume_text_str" maxChars="256"/>
     <copyField source="number_of_volumes_text" dest="number_of_volumes_text_str" maxChars="256"/>
     <copyField source="edition_text" dest="edition_text_str" maxChars="256"/>
     <copyField source="date_text" dest="date_text_str" maxChars="256"/>
     <copyField source="reprint_edition_text" dest="reprint_edition_text_str" maxChars="256"/>
     <copyField source="abstract_text" dest="abstract_text_str" maxChars="256"/>
+    <copyField source="translated_author_text" dest="translated_author_text_str" maxChars="256"/>
     <copyField source="translated_title_text" dest="translated_title_text_str" maxChars="256"/>
     <copyField source="languages_text" dest="languages_text_str" maxChars="256"/>
+    <copyField source="journals_text" dest="journals_text_str" maxChars="256"/>
     <copyField source="volume_number_text" dest="volume_number_text_str" maxChars="256"/>
     <copyField source="worldcat_urls_text" dest="worldcat_urls_text_str" maxChars="256"/>
     <copyField source="publisher_urls_text" dest="publisher_urls_text_str" maxChars="256"/>
     <copyField source="leuven_urls_text" dest="leuven_urls_text_str" maxChars="256"/>
     <copyField source="multimedia_dimensions_text" dest="multimedia_dimensions_text_str" maxChars="256"/>
-    <copyField source="multimedia_series_text" dest="multimedia_series_text_str" maxChars="256"/>
+    <copyField source="series_multimedium_text" dest="series_multimedium_text_str" maxChars="256"/>
     <copyField source="multimedia_type_text" dest="multimedia_type_text_str" maxChars="256"/>
     <copyField source="multimedia_urls_text" dest="multimedia_urls_text_str" maxChars="256"/>
     <copyField source="event_title_text" dest="event_title_text_str" maxChars="256"/>
@@ -598,7 +613,7 @@
     <copyField source="event_date_text" dest="event_date_text_str" maxChars="256"/>
     <copyField source="event_panel_title_text" dest="event_panel_title_text_str" maxChars="256"/>
     <copyField source="event_urls_text" dest="event_urls_text_str" maxChars="256"/>
-    <copyField source="dissertation_university_text" dest="dissertation_university_text_str" maxChars="256"/>
+    <copyField source="dissertation_universities_text" dest="dissertation_universities_text_str" maxChars="256"/>
     <copyField source="dissertation_university_urls_text" dest="dissertation_university_urls_text_str" maxChars="256"/>
     <copyField source="dissertation_thesis_type_text" dest="dissertation_thesis_type_text_str" maxChars="256"/>
     <copyField source="number_of_pages_text" dest="number_of_pages_text_str" maxChars="256"/>
@@ -608,17 +623,21 @@
     <copyField source="epub_date_text" dest="epub_date_text_str" maxChars="256"/>
     <copyField source="chapter_number_text" dest="chapter_number_text_str" maxChars="256"/>
     <copyField source="book_title_text" dest="book_title_text_str" maxChars="256"/>
+    <copyField source="book_chapter_record_ref_text" dest="book_chapter_record_ref_text_str" maxChars="256"/>
     <copyField source="authors_text" dest="authors_text_str" maxChars="256"/>
     <copyField source="editors_text" dest="editors_text_str" maxChars="256"/>
     <copyField source="book_editors_text" dest="book_editors_text_str" maxChars="256"/>
     <copyField source="author_of_reviews_text" dest="author_of_reviews_text_str" maxChars="256"/>
     <copyField source="translators_text" dest="translators_text_str" maxChars="256"/>
     <copyField source="performers_text" dest="performers_text_str" maxChars="256"/>
-    <copyField source="translated_authors_text" dest="translated_authors_text_str" maxChars="256"/>
     <copyField source="comments_text" dest="comments_text_str" maxChars="256"/>
     <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
     <copyField source="comments_public_text" dest="comments_public_text_str" maxChars="256"/>
-    <copyField source="reviewed_components_text" dest="reviewed_components_text_str" maxChars="256"/>
+    <copyField source="reviewed_components_html_text" dest="reviewed_components_html_text_str" maxChars="256"/>
+    <copyField source="reviewed_author_text" dest="reviewed_author_text_str" maxChars="256"/>
+    <copyField source="reviewed_editor_text" dest="reviewed_editor_text_str" maxChars="256"/>
+    <copyField source="reviewed_translator_text" dest="reviewed_translator_text_str" maxChars="256"/>
+    <copyField source="reviewed_title_text" dest="reviewed_title_text_str" maxChars="256"/>
     <copyField source="isbns_text" dest="isbns_text_str" maxChars="256"/>
     <copyField source="dois_text" dest="dois_text_str" maxChars="256"/>
     <copyField source="issns_text" dest="issns_text_str" maxChars="256"/>
@@ -626,26 +645,39 @@
     <copyField source="locations_text" dest="locations_text_str" maxChars="256"/>
     <copyField source="jesuits_text" dest="jesuits_text_str" maxChars="256"/>
     <copyField source="centuries_text" dest="centuries_text_str" maxChars="256"/>
+    <copyField source="tags_text" dest="tags_text_str" maxChars="256"/>
+
+    <copyField source="bibtex_text" dest="bibtex_text_str" maxChars="256"/>
+    <copyField source="bibtex_mla_text" dest="bibtex_mla_text_str" maxChars="256"/>
+    <copyField source="bibtex_chicago_text" dest="bibtex_chicago_text_str" maxChars="256"/>
+    <copyField source="bibtex_turabian_text" dest="bibtex_turabian_text_str" maxChars="256"/>
+
 
     <!-- these fields are also used for display, so they must be stored -->
     <field name="reference_type_facet" type="string" indexed="true" stored="true" multiValued="true" />
-    <field name="place_published_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="publish_places_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="language_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="jesuits_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="subjects_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="centuries_facet" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="locations_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="authors_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="people_facet" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="language_facet" type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- unstemmed fields -->
     <copyField source="title_text" dest="title_unstem_search"/>
     <copyField source="authors_text" dest="author_unstem_search"/>
-    <copyField source="reference_type_facet" dest="place_published_facet_unstem_search"/>
-    <copyField source="place_published_facet" dest="place_published_facet_unstem_search"/>
+    <copyField source="reference_type_facet" dest="reference_type_facet_unstem_search"/>
+    <copyField source="publish_places_facet" dest="publish_places_facet_unstem_search"/>
     <copyField source="language_facet" dest="language_facet_unstem_search"/>
     <copyField source="subjects_facet" dest="subject_unstem_search"/>
     <copyField source="jesuits_facet" dest="subject_unstem_search"/>
     <copyField source="centuries_facet" dest="subject_unstem_search"/>
     <copyField source="locations_facet" dest="subject_unstem_search"/>
+    <copyField source="authors_facet" dest="subject_unstem_search"/>
+    <copyField source="people_facet" dest="subject_unstem_search"/>
+    <copyField source="journal_facet" dest="subject_unstem_search"/>
 
     <!-- spellcheck fields -->
     <!-- default spell check;  should match fields for default request handler -->
@@ -670,6 +702,8 @@
     <copyField source="jesuits_facet" dest="opensearch_display"/>
     <copyField source="centuries_facet" dest="opensearch_display"/>
     <copyField source="locations_facet" dest="opensearch_display"/>
+    <copyField source="authors_facet" dest="opensearch_display"/>
+    <copyField source="people_facet" dest="opensearch_display"/>
 
     <!-- for suggestions -->
     <!--copyField source="*_text" dest="suggest"/-->

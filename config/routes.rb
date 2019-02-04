@@ -54,7 +54,6 @@ Rails.application.routes.draw do
     resources :book_editors
     resources :author_of_reviews
     resources :performers
-    resources :translated_authors
     resources :bib, only: [:index], controller: "bib", action: "raw"
     resources :mla, only: [:index], controller: "bib", action: "mla"
     resources :chicago, only: [:index], controller: "bib", action: "chicago"

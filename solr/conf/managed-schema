@@ -46,6 +46,7 @@
     <field name="date_text" type="text_general"/>
     <field name="reprint_edition_text" type="text_general"/>
     <field name="abstract_text" type="text_general"/>
+    <field name="translated_author_text" type="text_general"/>
     <field name="translated_title_text" type="text_general"/>
     <field name="languages_text" type="text_general"/>
     <field name="journals_text" type="text_general"/>
@@ -80,7 +81,6 @@
     <field name="author_of_reviews_text" type="text_general"/>
     <field name="translators_text" type="text_general"/>
     <field name="performers_text" type="text_general"/>
-    <field name="translated_authors_text" type="text_general"/>
     <field name="comments_text" type="text_general"/>
     <field name="comments_json_text" type="text_general"/>
     <field name="comments_public_text" type="text_general"/>
@@ -595,6 +595,7 @@
     <copyField source="date_text" dest="date_text_str" maxChars="256"/>
     <copyField source="reprint_edition_text" dest="reprint_edition_text_str" maxChars="256"/>
     <copyField source="abstract_text" dest="abstract_text_str" maxChars="256"/>
+    <copyField source="translated_author_text" dest="translated_author_text_str" maxChars="256"/>
     <copyField source="translated_title_text" dest="translated_title_text_str" maxChars="256"/>
     <copyField source="languages_text" dest="languages_text_str" maxChars="256"/>
     <copyField source="journals_text" dest="journals_text_str" maxChars="256"/>
@@ -629,7 +630,6 @@
     <copyField source="author_of_reviews_text" dest="author_of_reviews_text_str" maxChars="256"/>
     <copyField source="translators_text" dest="translators_text_str" maxChars="256"/>
     <copyField source="performers_text" dest="performers_text_str" maxChars="256"/>
-    <copyField source="translated_authors_text" dest="translated_authors_text_str" maxChars="256"/>
     <copyField source="comments_text" dest="comments_text_str" maxChars="256"/>
     <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
     <copyField source="comments_public_text" dest="comments_public_text_str" maxChars="256"/>

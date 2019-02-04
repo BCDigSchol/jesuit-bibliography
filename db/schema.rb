@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_222810) do
+ActiveRecord::Schema.define(version: 2019_02_04_044942) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_222810) do
     t.text "bibtex_chicago"
     t.text "bibtex_turabian"
     t.integer "book_chapter_record_ref"
+    t.text "translated_author"
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
@@ -444,15 +445,6 @@ ActiveRecord::Schema.define(version: 2019_02_01_222810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_tags_on_bibliography_id"
-  end
-
-  create_table "translated_authors", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bibliography_id"], name: "index_translated_authors_on_bibliography_id"
-    t.index ["person_id"], name: "index_translated_authors_on_person_id"
   end
 
   create_table "translators", force: :cascade do |t|

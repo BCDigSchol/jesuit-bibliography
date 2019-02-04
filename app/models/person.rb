@@ -8,9 +8,6 @@ class Person < ApplicationRecord
     has_many :translators, dependent: :destroy
     has_many :bibliographies, through: :translators
 
-    has_many :translated_authors, dependent: :destroy
-    has_many :bibliographies, through: :translated_authors
-
     has_many :book_editors, dependent: :destroy
     has_many :bibliographies, through: :book_editors
 
@@ -53,11 +50,6 @@ class Person < ApplicationRecord
 
             self.translators.each do |bs|
                 puts "\n\nReindexing ##{bs.bibliography.id} from Person->translators ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.translated_authors.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->translated_authors ##{self.id}"
                 bs.bibliography.reindex_me
             end
 

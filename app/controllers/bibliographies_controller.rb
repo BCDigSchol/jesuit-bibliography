@@ -63,7 +63,6 @@ class BibliographiesController < ApplicationController
         @bib.authors.build
         @bib.editors.build
         @bib.translators.build
-        @bib.translated_authors.build
         @bib.book_editors.build
         @bib.author_of_reviews.build
         @bib.performers.build
@@ -168,10 +167,6 @@ class BibliographiesController < ApplicationController
 
             if @bib.translators.count == 0
                 @bib.translators.build
-            end
-
-            if @bib.translated_authors.count == 0
-                @bib.translated_authors.build
             end
 
             if @bib.book_editors.count == 0
@@ -487,7 +482,7 @@ class BibliographiesController < ApplicationController
                 :display_title, :display_year, :display_author, :book_chapter_record_ref,
                 :dissertation_thesis_type,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
-                :multimedia_type, :published, :status,
+                :multimedia_type, :published, :status, :translated_author,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 #languages_attributes: [:id, :name, :_destroy],
                 publishers_attributes: [:id, :name, :_destroy],
@@ -521,7 +516,6 @@ class BibliographiesController < ApplicationController
                 authors_attributes: [:id, :person_id, :_destroy],
                 editors_attributes: [:id, :person_id, :_destroy],
                 translators_attributes: [:id, :person_id, :_destroy],
-                translated_authors_attributes: [:id, :person_id, :_destroy],
                 book_editors_attributes: [:id, :person_id, :_destroy],
                 author_of_reviews_attributes: [:id, :person_id, :_destroy],
                 performers_attributes: [:id, :person_id, :_destroy],

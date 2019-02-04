@@ -28,9 +28,6 @@ class Bibliography < ApplicationRecord
     has_many :translators, inverse_of: :bibliography, dependent: :destroy
     has_many :people, through: :translators
 
-    has_many :translated_authors, inverse_of: :bibliography, dependent: :destroy
-    has_many :people, through: :translated_authors
-
     has_many :book_editors, inverse_of: :bibliography, dependent: :destroy
     has_many :people, through: :book_editors
 
@@ -105,7 +102,6 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :authors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :editors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :translators, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :translated_authors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :book_editors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :author_of_reviews, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :performers, reject_if: :all_blank, allow_destroy: true
@@ -271,6 +267,10 @@ class Bibliography < ApplicationRecord
             abstract if self.abstract.present?
         end
 
+        text :translated_author do
+            translated_author if self.translated_author.present?
+        end
+
         text :translated_title do
             translated_title if self.translated_title.present?
         end
@@ -401,9 +401,6 @@ class Bibliography < ApplicationRecord
         end
         text :performers do     # for associations
             performers.map { |performer| performer.person.name }
-        end
-        text :translated_authors do     # for associations
-            translated_authors.map { |translated_author| translated_author.person.name }
         end
 
         # special facet containing only authors, editors, translators
@@ -822,10 +819,9 @@ class Bibliography < ApplicationRecord
             book_editors = self.book_editors.map { |book_editor| book_editor.person.name }
             author_of_reviews = self.author_of_reviews.map { |author_of_review| author_of_review.person.name }
             performers = self.performers.map { |performer| performer.person.name }
-            translated_authors = self.translated_authors.map { |translated_author| translated_author.person.name }
 
             # merge all the arrays into people_facet
-            people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
+            people_facet = authors + editors + translators + book_editors + author_of_reviews + performers
         end
 
         def reviewed_author

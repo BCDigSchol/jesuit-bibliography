@@ -230,7 +230,6 @@ class CatalogController < ApplicationController
     #config.add_show_field 'paper_title_text', label: 'Paper Title'
     #config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :make_people_link
     #config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
-    #config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
     #config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_reviewed_component
     #config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
     #config.add_show_field 'edition_text', label: 'Edition'

@@ -113,11 +113,10 @@ class Citationterms::PeopleController < ApplicationController
             #people << @person.book_editors if @person.book_editors.present?
             #people << @person.performers if @person.performers.present?
             #people << @person.author_of_reviews if @person.author_of_reviews.present?
-            #people << @person.translated_authors if @person.translated_authors.present?
             #people << @person.translators if @person.translators.present?
             #people
 
-            total_instances =  @person.authors.length + @person.editors.length + @person.book_editors.length + @person.performers.length + @person.author_of_reviews.length + @person.translated_authors.length + @person.translators.length
+            total_instances =  @person.authors.length + @person.editors.length + @person.book_editors.length + @person.performers.length + @person.author_of_reviews.length + @person.translators.length
 
             total_instances
         end

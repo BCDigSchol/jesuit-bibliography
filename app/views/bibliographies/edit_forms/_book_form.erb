@@ -87,7 +87,10 @@
 
     <%= render 'bibliographies/abstract_field', :form => form %>
 
-    <%= render 'bibliographies/fields/translated_author', :form => form, field_label: 'Translated Author', required_status: false %>
+    <%= form.input :translated_author, 
+        label: 'Translated Author',
+        as: :string
+    %>
 
     <%= form.input :translated_title, 
         label: 'Translated Title',
