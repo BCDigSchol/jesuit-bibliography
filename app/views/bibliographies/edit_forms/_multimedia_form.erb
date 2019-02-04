@@ -36,12 +36,12 @@
 
     <%= render 'bibliographies/fields/series_multimedia', :form => form, field_label: 'Series' %>
 
-    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published', required_status: true %>
+    <%= render 'bibliographies/fields/publish_place', :form => form, field_label: 'Place Published', required_status: false %>
 
-    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher', required_status: true %>
+    <%= render 'bibliographies/fields/publisher', :form => form, field_label: 'Publisher', required_status: false %>
 
     <%= form.input :multimedia_type, 
-        label: 'Type of media',
+        label: 'Type of media', 
         as: :string,
         required: true,
         validate: true
@@ -53,7 +53,7 @@
 
     <%= render 'bibliographies/fields/worldcat_url', :form => form, field_label: 'Worldcat URL' %>
 
-    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL', required_status: false %>
+    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL'.html_safe + Bibliography::REQUIRED_FLAG, required_status: false %>
 
     <%= form.input :multimedia_dimensions, 
         label: 'Multimedia dimensions',

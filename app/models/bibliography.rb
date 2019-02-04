@@ -173,7 +173,7 @@ class Bibliography < ApplicationRecord
         if: Proc.new { reference_type_is_one_of? ['multimedia'] }
 
     validates :multimedia_urls, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book'] }
+        if: Proc.new { reference_type_is_one_of? ['multimedia'] }
 
     validates :reviewed_components, presence: true,
         if: Proc.new { reference_type_is_one_of? ['book review'] }
@@ -590,6 +590,7 @@ class Bibliography < ApplicationRecord
 
     # Define static strings
     ADD_BUTTON = '<i class="fas fa-plus" title="Add another field" aria-hidden></i> '.html_safe.freeze
+    REQUIRED_FLAG = ' <abbr title="required">*</abbr>'.html_safe.freeze
     NO_DISPLAY_TITLE = '<em>No Title</em>'.html_safe.freeze
     NO_DISPLAY_AUTHOR = '<em>No Author</em>'.html_safe.freeze
 
