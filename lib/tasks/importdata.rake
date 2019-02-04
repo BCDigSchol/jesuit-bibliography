@@ -16,7 +16,7 @@ namespace :importdata do
 
     desc "Destroy all Bibliography records"
     task clear_all: :environment do
-        bar = ProgressBar.new(16)
+        bar = ProgressBar.new(15)
         puts "Clearing all existing Bib records..."
         import_logger.info("Clearing all existing Bibliography records")
         Bibliography.destroy_all
@@ -46,8 +46,6 @@ namespace :importdata do
         Translator.destroy_all
         bar.increment!
         Performer.destroy_all
-        bar.increment!
-        TranslatedAuthor.destroy_all
         bar.increment!
         Language.destroy_all
         bar.increment!
@@ -201,7 +199,8 @@ namespace :importdata do
             import_add_notes_to_editor(@bib, row[24])
 
             # Translated Authors
-            import_add_translated_authors(@bib, row[25])
+            # no longer using translated_authors
+            #import_add_translated_authors(@bib, row[25])
 
             # Languages
             import_add_languages(@bib, row[27])
@@ -365,7 +364,8 @@ namespace :importdata do
             import_add_notes_to_editor(@bib, row[26])
 
             # Translated Authors
-            import_add_translated_authors(@bib, row[27])
+            # no longer using translated_authors field
+            #import_add_translated_authors(@bib, row[27])
 
             # Languages
             import_add_languages(@bib, row[29])
@@ -523,7 +523,8 @@ namespace :importdata do
             import_add_notes_to_editor(@bib, row[25])
 
             # Translated Authors
-            import_add_translated_authors(@bib, row[26])
+            # no longer using translated_authors field
+            #import_add_translated_authors(@bib, row[26])
 
             # Languages
             import_add_languages(@bib, row[28])
@@ -671,7 +672,8 @@ namespace :importdata do
             import_add_notes_to_editor(@bib, row[21])
 
             # Translated Authors
-            import_add_translated_authors(@bib, row[22])
+            # no longer using translated_authors field
+            #import_add_translated_authors(@bib, row[22])
 
             # Languages
             import_add_languages(@bib, row[24])
@@ -1458,6 +1460,7 @@ namespace :importdata do
 
     # Translated Authors
     def import_add_translated_authors(bib, col)
+=begin
         if col
             col.unicode_normalize!
             values = col.split(PIPE_DELIMITER_REGEX)
@@ -1467,6 +1470,7 @@ namespace :importdata do
                 @bib.translated_authors << TranslatedAuthor.new(bibliography_id: @bib.id, person_id: p.id)
             end
         end
+=end
     end
 
     # Languages
