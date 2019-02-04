@@ -1,2 +1,7 @@
 <% # bookmark/folder functions -%>
-<%= render_document_heading(document, :tag => :h1) %>
+
+<% if document[:display_title_text].present? and document[:display_title_text].length %>
+    <h1><%= document[:display_title_text][0].html_safe %></h1>
+<% else %>
+    <%= render_document_heading(document, :tag => :h1) %>
+<% end %>
