@@ -224,10 +224,6 @@ class Bibliography < ApplicationRecord
             display_title if self.display_title.present?
         end
 
-        text :display_year do
-            title if self.title.present?
-        end
-
         text :display_author do
             display_author if self.display_author.present?
         end
@@ -459,10 +455,6 @@ class Bibliography < ApplicationRecord
             tags.map { |tag| tag.name }
         end
 
-        text :comments do     # for associations
-            comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
-        end
-        text :comments_json
         text :comments_public
 
         text :reviewed_author
@@ -735,17 +727,6 @@ class Bibliography < ApplicationRecord
     end
 
     private
-        def comments_json
-            if self.comments.present?
-                out = []
-                #out << self.comments.map { |comment| { :body => comment.body, :comment_type => comment.comment_type, :commenter => comment.commenter} }
-                self.comments.each do |comment|
-                    out << comment
-                end
-                out.to_json
-            end
-        end
-
         def comments_public
             if self.comments.present?
                 public_comments = []

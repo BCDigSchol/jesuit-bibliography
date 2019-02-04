@@ -36,7 +36,6 @@
     <field name="year_published_text" type="text_general"/>
     <field name="years_published_itm" type="pint"/>
     <field name="display_title_text" type="text_general"/>
-    <field name="display_year_text" type="text_general"/>
     <field name="display_author_text" type="text_general"/>
     <field name="publish_places_text" type="text_general"/>
     <field name="publishers_text" type="text_general"/>
@@ -81,8 +80,6 @@
     <field name="author_of_reviews_text" type="text_general"/>
     <field name="translators_text" type="text_general"/>
     <field name="performers_text" type="text_general"/>
-    <field name="comments_text" type="text_general"/>
-    <field name="comments_json_text" type="text_general"/>
     <field name="comments_public_text" type="text_general"/>
     <field name="reviewed_components_html_text" type="text_general"/>
     <field name="reviewed_author_text" type="text_general"/>
@@ -585,7 +582,6 @@
     <copyField source="paper_title_text" dest="paper_title_text_str" maxChars="256"/>
     <copyField source="year_published_text" dest="_str" maxChars="256"/>
     <copyField source="display_title_text" dest="display_title_text_str" maxChars="256"/>
-    <copyField source="display_year_text" dest="display_year_text_str" maxChars="256"/>
     <copyField source="display_author_text" dest="display_author_text_str" maxChars="256"/>
     <copyField source="publish_places_text" dest="publish_places_text_str" maxChars="256"/>
     <copyField source="publishers_text" dest="publishers_text_str" maxChars="256"/>
@@ -630,8 +626,6 @@
     <copyField source="author_of_reviews_text" dest="author_of_reviews_text_str" maxChars="256"/>
     <copyField source="translators_text" dest="translators_text_str" maxChars="256"/>
     <copyField source="performers_text" dest="performers_text_str" maxChars="256"/>
-    <copyField source="comments_text" dest="comments_text_str" maxChars="256"/>
-    <copyField source="comments_json_text" dest="comments_json_text_str" maxChars="256"/>
     <copyField source="comments_public_text" dest="comments_public_text_str" maxChars="256"/>
     <copyField source="reviewed_components_html_text" dest="reviewed_components_html_text_str" maxChars="256"/>
     <copyField source="reviewed_author_text" dest="reviewed_author_text_str" maxChars="256"/>

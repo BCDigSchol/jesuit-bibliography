@@ -475,7 +475,7 @@ class BibliographiesController < ApplicationController
         end
 
         def bib_params
-            params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, 
+            params.require(:bibliography).permit(:reference_type, :year_published, :title,
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :multimedia_dimensions, :abstract, :translated_title,
                 :issue, :page_range, :epub_date, :title_of_review, :chapter_title, :paper_title,
