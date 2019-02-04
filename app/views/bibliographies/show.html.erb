@@ -118,17 +118,6 @@
                     </div>
                 <% end %>
 
-                <% if @bib.translated_authors.present? %>
-                    <div class="field-pair row">
-                        <label class="col-sm-2">Translated Authors</label>
-                        <div class="field-value col-sm-10"> 
-                            <% @bib.translated_authors.each do |translated_author| %>
-                                <span class='value-part'><%= translated_author.person.name %></span>
-                            <% end %>
-                        </div>
-                    </div>
-                <% end %>
-
                 <% if @bib.book_editors.present? %>
                     <div class="field-pair row">
                         <label class="col-sm-2">Book Editors</label>
@@ -521,6 +510,13 @@
                     <div class="field-pair row">
                         <label class="col-sm-2">Abstract</label>
                         <div class="field-value col-sm-10"><%= @bib.abstract.html_safe %></div>
+                    </div>
+                <% end %>
+
+                <% if @bib.translated_author.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Translated Author</label>
+                        <div class="field-value col-sm-10"><%= @bib.translated_author %></div>
                     </div>
                 <% end %>
 

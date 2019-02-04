@@ -47,7 +47,9 @@
         <div class="">
             <%= form.association :bibliography, 
               label: false,
-              collection: [Bibliography.find_by_id(@record.bibliography_id)],
+              # make sure that we pull the display_title field as the collection label
+              label_method: Proc.new { |b| b.display_title if b.present? },
+              collection: [@bib],
               #prompt: 'Select a Citation record to reference',
               hint: 'Search for the Citation record you want to link to this Featured Record',
               input_html: {

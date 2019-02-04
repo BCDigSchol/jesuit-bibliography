@@ -19,13 +19,13 @@ class Ability
     #   Manage all Bib records
     #   Manage all term records
     #   Mark approve Bib records as reviewed
-    #   Manage Assistant Editor user accounts
-    #   Manage Correspondent user accounts
-    #   Manage Standard user accounts
+    #   Manage Assistant Editor/Correspondent/Standard user accounts
     #   Manage Terms
     #   Manage Status
     #   Manage setting a record to 'Publish' status
     #   Manage Suggestions
+    #   Manage RecordLinking
+    #   Manage Tags
     #if user.associate_editor_role?
     if user.is_role? "associate_editor"
       can :read, 'ManageUsers'      # manage users
@@ -53,9 +53,12 @@ class Ability
     # Role can:
     #   Access Dashboard
     #   Read/Update/Create Bib records (not destroy)
-    #   Manage Correspondents
+    #   Manage Correspondents/Standard accounts
     #   Manage Terms
     #   Manage Status
+    #   Manage Suggestions
+    #   Manage RecordLinking
+    #   Manage Tags
     #if user.assistant_editor_role?
     if user.is_role? "assistant_editor"
       can :read, 'ManageUsers'                      # manage users
@@ -65,7 +68,7 @@ class Ability
       can :manage, 'Terms'                          # can access Term lists dropdown
       can :manage, 'Status'                         # can manage record Status value
       can :manage, 'RecordLinking'                  # can manage linking records together
-      #can :manage, 'Suggestions'                    # can manage Suggestions
+      can :manage, 'Suggestions'                    # can manage Suggestions
       can :read, Location                           # can read Location Term lists
       can :read, Subject                            # can read Subject Term lists
       can :read, Period                             # can read Period Term lists
@@ -74,6 +77,7 @@ class Ability
       can :read, Person                             # can read Person Term lists
       can :read, Journal                            # can read Journal Term lists
       can [:create, :read, :update], Bibliography   # can create/read/update Bib records
+      can :manage, Tag                              # can manage Bib record Tags
     end
 
     # Role can:

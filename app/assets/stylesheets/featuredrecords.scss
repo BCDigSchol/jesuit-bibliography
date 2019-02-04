@@ -1,3 +1,91 @@
-// Place all the styles related to the Featuredrecords controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Change me to make the slider wider (or narrower).
+$width-of-slider: 800px;
+
+
+.featured-records-section {
+    margin: 100px 5% 0 5%;
+
+    &> h3 {
+        width: $width-of-slider;
+        margin: 0 auto;
+    }
+
+    #featured-record-slider {
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto 0 auto;
+        border-radius: 4px;
+
+        ul {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                float: left;
+                height: 300px;
+                background-color: #fff;
+                line-height: 20px;
+                width: $width-of-slider;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .featured-record {
+                    max-width: 80%;
+                    margin-left: 10%;
+                }
+
+                .book-cover-col {
+                    float: left;
+                    width: 20%;
+                }
+
+                .record-display-col {
+                    float: left;
+                    width: 75%;
+                }
+
+                img {
+                    width: 85%;
+                    margin-top: 2em;
+                }
+            }
+        }
+    }
+
+
+    // Controls
+    a.control_prev, a.control_next {
+        position: absolute;
+        top: 40%;
+        z-index: 999;
+        display: block;
+        padding: 2% 1.5%;
+        width: auto;
+        height: auto;
+        background: #2a2a2a;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    a.control_prev:hover, a.control_next:hover {
+        opacity: 1;
+        -webkit-transition: all 0.2s ease;
+    }
+
+    a.control_prev {
+        border-radius: 0 2px 2px 0;
+    }
+
+    a.control_next {
+        right: 0;
+        border-radius: 2px 0 0 2px;
+    }
+}

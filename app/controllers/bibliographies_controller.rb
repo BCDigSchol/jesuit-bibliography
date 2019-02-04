@@ -63,7 +63,6 @@ class BibliographiesController < ApplicationController
         @bib.authors.build
         @bib.editors.build
         @bib.translators.build
-        @bib.translated_authors.build
         @bib.book_editors.build
         @bib.author_of_reviews.build
         @bib.performers.build
@@ -168,10 +167,6 @@ class BibliographiesController < ApplicationController
 
             if @bib.translators.count == 0
                 @bib.translators.build
-            end
-
-            if @bib.translated_authors.count == 0
-                @bib.translated_authors.build
             end
 
             if @bib.book_editors.count == 0
@@ -300,10 +295,10 @@ class BibliographiesController < ApplicationController
         @bib.check_record_status
 
         # set the display_* fields for Blacklight views
-        @bib.set_display_fields
+        #@bib.set_display_fields
 
         # generate the various citations for this record
-        @bib.generate_citations
+        #@bib.generate_citations
 
         @bib.modified_by = current_user
 
@@ -327,7 +322,28 @@ class BibliographiesController < ApplicationController
             end
         end
 
-        if @bib.save(bib_params)
+        if @bib.save
+
+            #
+            # HACK there's an ongoing issue for Books types where if the author field is deleted (or edited in any way)
+            #      then the display_title field isn't truly updated. @bib.authors hasn't been updated 
+            #      with the new author values yet when we call self.set_display_fields. 
+            #      @bib.authors isn't updated until @bib is saved, and so this hack saves @bib twice -- 
+            #      once to update @bib.authors and then again again after we call self.set_display_fields.
+            #      there is likely a way to call `marked_for_deletion?` on all author params from authors_attributes
+            #      but this gets hairy since authors_attributes is a nested ActionController::Parameters object
+            #      see: https://api.rubyonrails.org/classes/ActionController/Parameters.html
+            #
+
+            # set the display_* fields for Blacklight views
+            @bib.set_display_fields
+
+            # generate the various citations for this record
+            @bib.generate_citations
+
+            # resave record with updated display_* fields and citations
+            @bib.save
+
             respond_to do |format|
                 format.html { redirect_to @bib, notice: 'Bibliography was successfully updated.' }
                 format.json { render :show, status: :ok, location: @bib }
@@ -459,14 +475,14 @@ class BibliographiesController < ApplicationController
         end
 
         def bib_params
-            params.require(:bibliography).permit(:reference_type, :year_published, :title, :title_secondary, 
+            params.require(:bibliography).permit(:reference_type, :year_published, :title,
                 :volume, :number_of_volumes, :volume_number, :number_of_pages, :edition, :date, :chapter_number, :book_title,
                 :reprint_edition, :multimedia_dimensions, :abstract, :translated_title,
                 :issue, :page_range, :epub_date, :title_of_review, :chapter_title, :paper_title,
                 :display_title, :display_year, :display_author, :book_chapter_record_ref,
                 :dissertation_thesis_type,
                 :event_title, :event_location, :event_institution, :event_date, :event_panel_title, 
-                :multimedia_type, :published, :status,
+                :multimedia_type, :published, :status, :translated_author,
                 comments_attributes: [:id, :commenter, :body, :comment_type, :make_public, :_destroy],
                 #languages_attributes: [:id, :name, :_destroy],
                 publishers_attributes: [:id, :name, :_destroy],
@@ -500,7 +516,6 @@ class BibliographiesController < ApplicationController
                 authors_attributes: [:id, :person_id, :_destroy],
                 editors_attributes: [:id, :person_id, :_destroy],
                 translators_attributes: [:id, :person_id, :_destroy],
-                translated_authors_attributes: [:id, :person_id, :_destroy],
                 book_editors_attributes: [:id, :person_id, :_destroy],
                 author_of_reviews_attributes: [:id, :person_id, :_destroy],
                 performers_attributes: [:id, :person_id, :_destroy],

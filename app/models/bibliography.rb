@@ -28,9 +28,6 @@ class Bibliography < ApplicationRecord
     has_many :translators, inverse_of: :bibliography, dependent: :destroy
     has_many :people, through: :translators
 
-    has_many :translated_authors, inverse_of: :bibliography, dependent: :destroy
-    has_many :people, through: :translated_authors
-
     has_many :book_editors, inverse_of: :bibliography, dependent: :destroy
     has_many :people, through: :book_editors
 
@@ -105,7 +102,6 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :authors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :editors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :translators, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :translated_authors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :book_editors, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :author_of_reviews, reject_if: :all_blank, allow_destroy: true
     accepts_nested_attributes_for :performers, reject_if: :all_blank, allow_destroy: true
@@ -118,13 +114,73 @@ class Bibliography < ApplicationRecord
     accepts_nested_attributes_for :dissertation_university_urls, reject_if: :all_blank, allow_destroy: true
 
     validates :reference_type, presence: true
+    validates :year_published, presence: true
    
+    #
     # validate various title fields depending on reference_type
-    validates :title, presence: true, if: :has_title_field?
-    validates :chapter_title, presence: true, if: :has_chapter_title_field?
-    #validates :title_of_review, presence: true, if: :has_title_of_review_field?
-    validates :paper_title, presence: true, if: :has_paper_title_field?
+    #
 
+    # For book types, we need either the author or editor to be present
+    validate :book_has_author_or_editor
+
+    validates :authors, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
+
+    validates :author_of_reviews, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review'] }
+
+    validates :title, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'journal article', 'dissertation', 'multimedia'] }
+
+    validates :chapter_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter'] }
+
+    validates :title_of_review, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review'] }
+
+    validates :paper_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['conference paper'] }
+
+    validates :publish_places, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter', 'dissertation'] }
+
+    validates :publishers, presence: true, 
+        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter'] }
+    
+    validates :book_title, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter'] }
+
+    validates :page_range, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book chapter', 'book review', 'journal article'] }
+
+    validates :issue, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
+
+    validates :volume, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
+    
+    validates :event_location, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['conference paper'] }
+
+    validates :dissertation_universities, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['dissertation'] }
+
+    validates :multimedia_type, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['multimedia'] }
+
+    validates :multimedia_urls, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['multimedia'] }
+
+    validates :reviewed_components, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book review'] }
+
+    validates :bibliography_languages, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
+
+    validates :bibliography_journals, presence: true,
+        if: Proc.new { reference_type_is_one_of? ['journal article'] }
+
+    
     searchable :if => :published do
         integer :id
 
@@ -168,10 +224,6 @@ class Bibliography < ApplicationRecord
             display_title if self.display_title.present?
         end
 
-        text :display_year do
-            title if self.title.present?
-        end
-
         text :display_author do
             display_author if self.display_author.present?
         end
@@ -209,6 +261,10 @@ class Bibliography < ApplicationRecord
 
         text :abstract do
             abstract if self.abstract.present?
+        end
+
+        text :translated_author do
+            translated_author if self.translated_author.present?
         end
 
         text :translated_title do
@@ -342,9 +398,6 @@ class Bibliography < ApplicationRecord
         text :performers do     # for associations
             performers.map { |performer| performer.person.name }
         end
-        text :translated_authors do     # for associations
-            translated_authors.map { |translated_author| translated_author.person.name }
-        end
 
         # special facet containing only authors, editors, translators
         text :authors_faceting, :as => 'authors_facet'
@@ -402,10 +455,6 @@ class Bibliography < ApplicationRecord
             tags.map { |tag| tag.name }
         end
 
-        text :comments do     # for associations
-            comments.map { |comment| "#{comment.comment_type}||#{comment.body}||#{comment.commenter}" }
-        end
-        text :comments_json
         text :comments_public
 
         text :reviewed_author
@@ -505,8 +554,9 @@ class Bibliography < ApplicationRecord
 
     # public method called to update display_fields and trigger reindex
     def reindex_me
-        # puts "\n\nBibliography ##{self.id} is reindexed\n\n"
+        puts "I'm being reindex: ID##{self.id}\n\n"
         self.set_display_fields
+        self.generate_all_citations
         self.save
         #Sunspot.index! [self]
     end
@@ -519,6 +569,7 @@ class Bibliography < ApplicationRecord
     TERM_FIELD_HINT = 'This field is strongly recommended'.freeze
     AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
+    LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record is \'Published\''.freeze
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
@@ -528,6 +579,7 @@ class Bibliography < ApplicationRecord
 
     # Define static strings
     ADD_BUTTON = '<i class="fas fa-plus" title="Add another field" aria-hidden></i> '.html_safe.freeze
+    REQUIRED_FLAG = ' <abbr title="required">*</abbr>'.html_safe.freeze
     NO_DISPLAY_TITLE = '<em>No Title</em>'.html_safe.freeze
     NO_DISPLAY_AUTHOR = '<em>No Author</em>'.html_safe.freeze
 
@@ -658,18 +710,23 @@ class Bibliography < ApplicationRecord
         end
     end
 
-    private
-        def comments_json
-            if self.comments.present?
-                out = []
-                #out << self.comments.map { |comment| { :body => comment.body, :comment_type => comment.comment_type, :commenter => comment.commenter} }
-                self.comments.each do |comment|
-                    out << comment
-                end
-                out.to_json
-            end
+    def first_isbn
+        first_isbn = nil
+        unless isbns.empty?
+            first_isbn = isbns[0].value
         end
+        first_isbn
+    end
 
+    def first_issn
+        first_issn = nil
+        unless isbns.empty?
+            first_issn = isbns[0].value
+        end
+        first_issn
+    end
+
+    private
         def comments_public
             if self.comments.present?
                 public_comments = []
@@ -743,42 +800,9 @@ class Bibliography < ApplicationRecord
             book_editors = self.book_editors.map { |book_editor| book_editor.person.name }
             author_of_reviews = self.author_of_reviews.map { |author_of_review| author_of_review.person.name }
             performers = self.performers.map { |performer| performer.person.name }
-            translated_authors = self.translated_authors.map { |translated_author| translated_author.person.name }
 
             # merge all the arrays into people_facet
-            people_facet = authors + editors + translators + book_editors + author_of_reviews + performers + translated_authors
-        end
-
-        def has_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book" or reference_type.downcase == "journal article" or reference_type.downcase == "dissertation" or reference_type.downcase == "multimedia"
-            else
-                true
-            end
-        end
-
-        def has_chapter_title_field?
-            if reference_type.present?
-                reference_type.downcase == "book chapter"
-            else
-                true
-            end
-        end
-
-        def has_title_of_review_field?
-            if reference_type.present?
-                reference_type.downcase == "book review"
-            else
-                true
-            end
-        end
-
-        def has_paper_title_field?
-            if reference_type.present?
-                reference_type.downcase == "conference paper"
-            else
-                true
-            end
+            people_facet = authors + editors + translators + book_editors + author_of_reviews + performers
         end
 
         def reviewed_author
@@ -839,5 +863,21 @@ class Bibliography < ApplicationRecord
                 end
                 titles
             end
+        end
+
+        def book_has_author_or_editor
+            if reference_type_is_one_of? ['book']
+                unless authors.present? || editors.present?
+                    errors.add(:authors, "or Editor must be present")
+                end
+            end
+        end
+    
+        def reference_type_is_one_of? (types_array)
+            # TODO check if types_array is an array
+            if reference_type.present?
+                return types_array.include? reference_type.downcase
+            end
+            false
         end
 end

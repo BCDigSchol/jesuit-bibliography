@@ -5,6 +5,8 @@
             collection: [Journal.find_by_id(form.object.journal_id)], 
             prompt: prompt_label, 
             form_name: 'form',
+            required: required_status,
+            validate: required_status,
             label_html: { class: 'invisible' },
             input_html: {
                 class: class_name,

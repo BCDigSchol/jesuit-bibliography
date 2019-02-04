@@ -1,11 +1,11 @@
-<% if current_user and current_user.admin? %>
+<% if can? :update, Bibliography %>
   <div class="panel panel-default show-tools">
     <div class="panel-heading">
-      Admin actions
+      Editor actions
     </div>
 
     <div class="panel-body">
-      <%= link_to 'Edit this record', edit_bibliography_path(@document.id.to_s), target: :_blank %>
+      <%= link_to 'Edit this record', edit_bibliography_path(@document.id.to_s) %>
     </div>
   </div>
 <% end %>

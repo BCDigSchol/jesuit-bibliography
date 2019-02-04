@@ -2,6 +2,7 @@ class User < ApplicationRecord
   before_validation :set_default_role
 
   validates :role, presence: true
+  validates :name, presence: true
   validates :email, presence: true
   validate :uses_known_user_roles
 

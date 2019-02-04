@@ -1,0 +1,82 @@
+<div class="featured-records-section">
+  <h3>Featured records</h3>
+  <div id="featured-record-slider">
+    <a href="#" class="control_next">></a>
+    <a href="#" class="control_prev"><</a>
+    <ul>
+      <% featured_records.each do |record| %>
+        <li>
+          <div class="featured-record row">
+            <div class="book-cover-col">
+              <% if record.image %>
+                <%= image_tag record.image %>
+              <% else %>
+                <%= image_tag 'book-icon.png' %>
+              <% end %>
+            </div>
+            <div class="record-display-col">
+              <h3>
+              <% if record.bibliography.present? %>
+                <%= link_to record.name, solr_document_path(record.bibliography.id) %>
+              <% else %>
+                <%= record.name %>
+              <% end %>
+              </h3>
+              <div><%= record.body.html_safe %></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<script>
+
+    jQuery(document).ready(function ($) {
+
+        setInterval(function () {
+            moveRight();
+        }, 30000);
+
+        var slideCount = $('#featured-record-slider ul li').length;
+        var slideWidth = $('#featured-record-slider ul li').width();
+        var slideHeight = $('#featured-record-slider ul li').height();
+        var sliderUlWidth = slideCount * slideWidth;
+
+        $('#featured-record-slider').css({width: slideWidth, height: slideHeight});
+
+        $('#featured-record-slider ul').css({width: sliderUlWidth, marginLeft: -slideWidth});
+
+        $('#featured-record-slider ul li:last-child').prependTo('#featured-record-slider ul');
+
+        function moveLeft() {
+            $('#featured-record-slider ul').animate({
+                left: +slideWidth
+            }, 200, function () {
+                $('#featured-record-slider ul li:last-child').prependTo('#featured-record-slider ul');
+                $('#featured-record-slider ul').css('left', '');
+            });
+        };
+
+        function moveRight() {
+            $('#featured-record-slider ul').animate({
+                left: -slideWidth
+            }, 200, function () {
+                $('#featured-record-slider ul li:first-child').appendTo('#featured-record-slider ul');
+                $('#featured-record-slider ul').css('left', '');
+            });
+        };
+
+        $('#featured-record-slider a.control_prev').click(function () {
+            moveLeft();
+            return false
+        });
+
+        $('#featured-record-slider a.control_next').click(function () {
+            moveRight();
+            return false
+        });
+
+    });
+</script>

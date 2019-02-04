@@ -29,6 +29,12 @@
       bib_id = "new";
     }
 
+    function deactivate_dropdown(bib_name) {
+      // update dropdown text
+      $("#select_form .button_text").html("Selected: <strong>" + bib_name + "</strong>");
+      $('#select_form button.btn-reference-types').addClass('disabled');
+    }
+
     function hide_controls() {
       // remove dropdown on non-new record views
       if (bib_id != "new") {
@@ -61,7 +67,9 @@
       var bib_type = bib_name.replace(/\s+/g, '_').toLowerCase() +  "_form";
 
       // fetch partial
-      get_partial(bib_id, bib_type)
+      get_partial(bib_id, bib_type);
+      // update reference type drop down
+      deactivate_dropdown(bib_name);
     }
 
     // update partial on dropdown click
@@ -74,9 +82,8 @@
       // fetch partial
       get_partial(bib_id, bib_type);
 
-      // update dropdown text
-      $("#select_form .button_text").html("Selected: <strong>" + bib_name + "</strong>");
-      $('#select_form button.btn-reference-types').addClass('disabled');
+      // update reference type drop down
+      deactivate_dropdown(bib_name);
     });
   });
  </script>

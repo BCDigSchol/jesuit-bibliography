@@ -113,10 +113,10 @@ class CatalogController < ApplicationController
     config.add_facet_field 'years_published_itm', label: 'Publication Year', range: true
     #config.add_facet_field 'publish_places_facet', label: 'Place Published', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'languages_facet', label: 'Languages', limit: 20
-    config.add_facet_field 'subjects_facet', label: 'Subjects', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'centuries_facet', label: 'Centuries', limit: 20, sort: 'index'
-    config.add_facet_field 'locations_facet', label: 'Locations', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'jesuits_facet', label: 'Jesuits', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'subjects_facet', label: 'What (Subjects)', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'centuries_facet', label: 'When (Centuries)', limit: 20, sort: 'index'
+    config.add_facet_field 'locations_facet', label: 'Where (Locations)', limit: 20, index_range: 'A'..'Z'
+    config.add_facet_field 'jesuits_facet', label: 'Who (Jesuits)', limit: 20, index_range: 'A'..'Z'
     
     #config.add_facet_field 'example_pivot_field', label: 'Languages by Format', :pivot => ['reference_type_text', 'language_text']
 
@@ -230,7 +230,6 @@ class CatalogController < ApplicationController
     #config.add_show_field 'paper_title_text', label: 'Paper Title'
     #config.add_show_field 'display_author_text', label: 'Display Author', :helper_method => :make_people_link
     #config.add_show_field 'performers_text', label: 'Performers', link_to_search: :people_facet
-    #config.add_show_field 'translated_authors_text', label: 'Translated Authors', link_to_search: :people_facet
     #config.add_show_field 'reviewed_components_text', label: 'Reviewed Author/Title', :helper_method => :display_reviewed_component
     #config.add_show_field 'number_of_volumes_text', label: 'Number of Volumes'
     #config.add_show_field 'edition_text', label: 'Edition'

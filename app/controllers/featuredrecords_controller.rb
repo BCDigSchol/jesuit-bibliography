@@ -1,7 +1,9 @@
+require 'net/http'
+
 class FeaturedrecordsController < ApplicationController
     protect_from_forgery with: :exception
     #load_and_authorize_resource
-    
+
     #before_action :require_login
     #before_action :authenticate_user!
     before_action :set_featuredrecord, only: [:show, :edit, :update, :destroy]
@@ -11,7 +13,7 @@ class FeaturedrecordsController < ApplicationController
     def index
         authorize! :read, Featuredrecord, :message => "Unable to load this record."
 
-        @records_grid = initialize_grid(Featuredrecord, 
+        @records_grid = initialize_grid(Featuredrecord,
             order:           'featuredrecords.rank',
             order_direction: 'desc'
         )
@@ -30,8 +32,8 @@ class FeaturedrecordsController < ApplicationController
         @records.each do |record|
             out_html << "<div class='featured-record' data-record-rank='#{record.rank}' data-bibliography-id='#{record.bibliography_id}' id='#{record.id}'>#{record.body}</div>"
             out_json << {
-                id: record.id, 
-                rank: record.rank, 
+                id: record.id,
+                rank: record.rank,
                 bib_id: record.bibliography_id,
                 body: record.body
             }
@@ -58,6 +60,7 @@ class FeaturedrecordsController < ApplicationController
         authorize! :create, @record, :message => "Unable to create this Featured record."
 
         @record.created_by = current_user
+        @record.image = set_image
 
         if @record.save
             respond_to do |format|
@@ -80,6 +83,8 @@ class FeaturedrecordsController < ApplicationController
 
         # update modified_by
         record_attributes[:modified_by] = current_user
+
+        @record.image = set_image
 
         if @record.update(record_attributes)
             respond_to do |format|
@@ -112,6 +117,7 @@ class FeaturedrecordsController < ApplicationController
                 authorize! :read, @record, :message => "Unable to read this Page record."
             rescue ActiveRecord::RecordNotFound => e
                 @record = nil
+                @bib = nil
             else
                 # pull in referenced Bibliography record
                 fetch_related_record
@@ -129,6 +135,46 @@ class FeaturedrecordsController < ApplicationController
                 rescue ActiveRecord::RecordNotFound => e
                     @bib.nil
                 end
+            else
+                @bib = nil
             end
+        end
+
+        # Iterate through ISBNs and ISSNs looking for a valid Syndetic cover image
+        def set_image
+            @record.isbns.each do |isbn|
+                url = book_cover_url(isbn: isbn)
+                if valid_cover_image?(url)
+                    return url
+                end
+            end
+
+            @record.issns.each do |issn|
+                url = book_cover_url(issn: issn)
+                if valid_cover_image?(url)
+                    return url
+                end
+            end
+
+            nil
+        end
+
+        # If he URL returns an image bigger than 1kb we will consider it valid
+        def valid_cover_image?(url)
+            uri = URI(url)
+            return (Net::HTTP.get(uri).bytesize > 1200)
+        end
+
+        def book_cover_url(isbn: nil, issn: nil)
+            base = 'https://proxy-na.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.aspx'
+
+            params = {:client => 'bostonh'}
+            if (isbn)
+                params[:isbn] = "#{isbn}/MC.jpg"
+            elsif (issn)
+                params[:issn] = "#{issn}/MC.jpg"
+            end
+
+            "#{base}?#{params.to_query}"
         end
 end
