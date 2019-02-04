@@ -6,7 +6,7 @@
                 <%= form.simple_fields_for :author_of_reviews do |peep| %>
                     <%= render 'bibliography_person_fields', 
                         form: peep,
-                        hint_text: Bibliography::AUTHOR_OF_REVIEW_HINT
+                        hint_text: Bibliography::AUTHOR_OF_REVIEW_HINT,
                         class_name: 'author_of_reviews',
                         required_status: required_status,
                         prompt_label: 'Choose an ' + field_label 

@@ -1,10 +1,10 @@
 <div id="book_review_form" class="bib_form">
-<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true do |form| %>
+<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: false do |form| %>
 
     <div class="button-group">
         <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
         <%= link_to 'Cancel', bibliography_path, class: "btn btn-info" %>
-    </div>
+    </div>  
 
     <hr/>
 
@@ -39,7 +39,7 @@
         as: :string
     %>
 
-    <%= render 'bibliographies/fields/journal', :form => form, field_label: 'Journal Title' %>
+    <%= render 'bibliographies/fields/journal', :form => form, field_label: 'Journal Title', required_status: false %>
 
     <%= form.input :volume, 
         label: 'Volume',

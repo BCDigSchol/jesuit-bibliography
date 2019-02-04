@@ -1,5 +1,5 @@
 <div id="conference_paper_form" class="bib_form">
-<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true do |form| %>
+<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: false do |form| %>
 
     <div class="button-group">
         <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
