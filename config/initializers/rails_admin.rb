@@ -313,11 +313,13 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Url' do
-    visible false
+    label 'URL'
+    label_plural 'URLs'
   end
 
   config.model 'StandardIdentifier' do
-    visible false
+    label 'Identifier (ISBN, ISSN, DOI)'
+    label_plural 'Identifiers (ISBN, ISSN, DOI)'
   end
 
   config.model 'User' do
