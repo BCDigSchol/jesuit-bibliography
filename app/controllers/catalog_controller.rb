@@ -173,8 +173,9 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field 'authors_text', label: 'Author', link_to_search: :people_facet
-    config.add_show_field 'book_title_text', label: 'Book Title'
-    config.add_show_field 'book_chapter_record_ref_text', label: 'Book Link', :helper_method => :link_to_book_record
+    #config.add_show_field 'book_title_text', label: 'Book Title'
+    #config.add_show_field 'book_chapter_record_ref_text', label: 'Book Link', :helper_method => :link_to_book_record
+    config.add_show_field 'book_title_html_text', label: 'Book Title', :helper_method => :display_reviewed_component
     config.add_show_field 'book_editors_text', label: 'Book Editor', link_to_search: :people_facet
     config.add_show_field 'author_of_reviews_text', label: 'Author of Review', link_to_search: :people_facet
     config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet

@@ -376,6 +376,9 @@ class Bibliography < ApplicationRecord
             book_chapter_record_ref if self.book_chapter_record_ref.present?
         end
 
+        # generate html block containing both book_title and book_chapter_record_ref
+        text :book_title_html
+
         text :paper_title do
             paper_title if self.paper_title.present?
         end
@@ -862,6 +865,17 @@ class Bibliography < ApplicationRecord
                     return nil
                 end
                 titles
+            end
+        end
+
+        def book_title_html
+            if self.book_title.present?
+                out = "<div class='rc-block'><div class='rc-item'>#{self.book_title}</div>"
+                if self.book_chapter_record_ref.present?
+                    out += "<div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(self.book_chapter_record_ref)}'>Go to reviewed item</a></span></div>"
+                end
+                out += "</div>"
+                return out
             end
         end
 

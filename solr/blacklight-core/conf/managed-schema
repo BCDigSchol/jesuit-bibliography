@@ -74,6 +74,7 @@
     <field name="chapter_number_text" type="text_general"/>
     <field name="book_title_text" type="text_general"/>
     <field name="book_chapter_record_ref_text" type="text_general"/>
+    <field name="book_title_html_text" type="text_general"/>
     <field name="authors_text" type="text_general"/>
     <field name="editors_text" type="text_general"/>
     <field name="book_editors_text" type="text_general"/>
@@ -620,6 +621,7 @@
     <copyField source="chapter_number_text" dest="chapter_number_text_str" maxChars="256"/>
     <copyField source="book_title_text" dest="book_title_text_str" maxChars="256"/>
     <copyField source="book_chapter_record_ref_text" dest="book_chapter_record_ref_text_str" maxChars="256"/>
+    <copyField source="book_title_html_text" dest="book_title_html_text_str" maxChars="256"/>
     <copyField source="authors_text" dest="authors_text_str" maxChars="256"/>
     <copyField source="editors_text" dest="editors_text_str" maxChars="256"/>
     <copyField source="book_editors_text" dest="book_editors_text_str" maxChars="256"/>
