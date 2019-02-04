@@ -1,13 +1,27 @@
 name:
-  Project Team
+  Development Team
 route:
   about
 slug:
   team
 description:
-  The Project Team page
+  The Development Team page
 rank:
   60
-body:
-  <p>Learn More about the <strong>Jesuit Online Bibliography</strong> project.<p>
-  <p>There is <em>more</em> content to come!</p>
+body: |-
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">The Jesuit Online Bibliography database, publicly launched in February 2019, was developed at Boston College Libraries in collaboration with the Institute for Advanced Jesuit Studies. The database was built using open source technology and features a <a href="https://www.ruby-lang.org/en/">Ruby on Rails</a> framework with a <a href="https://github.com/projectblacklight/blacklight">Blacklight</a> discovery interface and <a href="http://lucene.apache.org/solr">Solr</a> index. All of the code used for this database is available in the Libraries' <a href="https://github.com/BCDigSchol/jesuit-bibliography">GitHub repository</a>.</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;">&nbsp;</p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><strong><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Boston College Libraries</span></strong></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Sarah DeLorme, Associate Digital Scholarship Librarian</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Ben Florin, Senior Library Applications Developer</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Anna Kijas, Senior Digital Scholarship Librarian</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Jesse Martinez, Library Applications Developer</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">John O’Connor, Scholarly Communications Librarian</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;">&nbsp;</p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><strong><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Institute for Advanced Jesuit Studies</span></strong></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Cristiano Casalini, Visiting Fellow at the Institute for Advanced Jesuit Studies</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Seth Meethan, Associate Director of the Institute for Advanced Jesuit Studies</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; padding-left: 40px;"><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;">Kasper Volk, Assistant Editor</span></p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+  <p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
