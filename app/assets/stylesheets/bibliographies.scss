@@ -83,6 +83,23 @@
         ul,ol {
             list-style-type: none;
         }
+        .record-view-fields {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            &:after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+        }
+        .metadata-list {
+            margin-top: 2rem;
+            padding-top:1rem;
+            border-top: 1px solid #eee;
+        }
+
     }
     .citations-list {
         .value-part {

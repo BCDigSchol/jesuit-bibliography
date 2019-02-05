@@ -5,66 +5,56 @@
     <h2><%= @entity.name.present? ? @entity.name : @entity.id %></h2>
 
     <div class="record-view">
-        <% if can? :update, Entity %>
-        <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
-
-        <hr/>
-        
-        <div class="field-pair row">
-            <label class="col-sm-2">Entity Name</label>
-            <div class="field-value col-sm-10"><%= @entity.name %></div>
+        <div class="button-group">
+            <% if can? :update, Entity %>
+            <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
         </div>
 
-        <div class="field-pair row">
-            <label class="col-sm-2">Entity Sort Name</label>
-            <div class="field-value col-sm-10"><%= @entity.sort_name %></div>
+        <div class="record-view-fields">
+            <div class="jesuits-list col-sm-12">
+                <h4>Fields</h4>
+                
+                <div class="field-pair row">
+                    <label class="col-sm-2">Jesuit Name</label>
+                    <div class="field-value col-sm-10"><%= @entity.name %></div>
+                </div>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Jesuit Sort Name</label>
+                    <div class="field-value col-sm-10"><%= @entity.sort_name %></div>
+                </div>
+
+                <!--div class="field-pair row">
+                    <label class="col-sm-2">Entity Display Name</label>
+                    <div class="field-value col-sm-10"><%= @entity.display_name %></div>
+                </div-->
+
+                <% if @entity.birth_date.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Entity Birth Date</label>
+                    <div class="field-value col-sm-10"><%= @entity.birth_date %></div>
+                </div>
+                <% end %>
+
+                <% if @entity.death_date.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Entity Death Date</label>
+                    <div class="field-value col-sm-10"><%= @entity.death_date %></div>
+                </div>
+                <% end %>
+            </div>
+
+            <%= render 'citationterms/metadata', record: @entity %>
         </div>
 
-        <!--div class="field-pair row">
-            <label class="col-sm-2">Entity Display Name</label>
-            <div class="field-value col-sm-10"><%= @entity.display_name %></div>
-        </div-->
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Entity Birth Date</label>
-            <div class="field-value col-sm-10"><%= @entity.birth_date %></div>
+        <div class="button-group">
+            <% if can? :update, Entity %>
+            <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
         </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Entity Death Date</label>
-            <div class="field-value col-sm-10"><%= @entity.death_date %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created At</label>
-            <div class="field-value col-sm-10"><%= @entity.created_at %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Updated At</label>
-            <div class="field-value col-sm-10"><%= @entity.updated_at %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created By</label>
-            <div class="field-value col-sm-10"><%= @entity.created_by %></div>
-        </div>
-
-        <% if @entity.modified_by.present? %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Last Modified By</label>
-            <div class="field-value col-sm-10"><%= @entity.modified_by %></div>
-        </div>
-        <% end %>
-
-        <hr/>
-
-        <% if can? :update, Entity %>
-        <%= link_to 'Edit this record', edit_citationterms_entity_path(@entity), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to Jesuits index', citationterms_entities_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

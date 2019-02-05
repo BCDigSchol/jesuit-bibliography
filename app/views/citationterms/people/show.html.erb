@@ -5,76 +5,70 @@
     <h2><%= @person.name.present? ? @person.name : @person.id %></h2>
 
     <div class="record-view">
-        <% if can? :update, Person %>
-        <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
-
-        <hr/>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Name</label>
-            <div class="field-value col-sm-10"><%= @person.name %></div>
+        <div class="button-group">
+            <% if can? :update, Person %>
+            <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
         </div>
 
-        <div class="field-pair row">
-            <label class="col-sm-2">Sort Name</label>
-            <div class="field-value col-sm-10"><%= @person.sort_name %></div>
+        <div class="record-view-fields">
+            <div class="people-list col-sm-12">
+                <h4>Fields</h4>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Name</label>
+                    <div class="field-value col-sm-10"><%= @person.name %></div>
+                </div>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Sort Name</label>
+                    <div class="field-value col-sm-10"><%= @person.sort_name %></div>
+                </div>
+
+                <!--div class="field-pair row">
+                    <label class="col-sm-2">Display Name</label>
+                    <div class="field-value col-sm-10"><%= @person.display_name.html_safe %></div>
+                </div-->
+
+                <% if @person.surname.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Surname</label>
+                    <div class="field-value col-sm-10"><%= @person.surname %></div>
+                </div>
+                <% end %>
+
+                <% if @person.surname.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Middle name</label>
+                    <div class="field-value col-sm-10"><%= @person.middlename %></div>
+                </div>
+                <% end %>
+
+                <% if @person.surname.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Forename</label>
+                    <div class="field-value col-sm-10"><%= @person.forename %></div>
+                </div>
+                <% end %>
+
+                <% if @person.surname.present? %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Title</label>
+                    <div class="field-value col-sm-10"><%= @person.title %></div>
+                </div>
+                <% end %>
+            </div>
+
+            <%= render 'citationterms/metadata', record: @person %>
         </div>
 
-        <!--div class="field-pair row">
-            <label class="col-sm-2">Display Name</label>
-            <div class="field-value col-sm-10"><%= @person.display_name.html_safe %></div>
-        </div-->
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Surname</label>
-            <div class="field-value col-sm-10"><%= @person.surname %></div>
+        <div class="button-group">
+            <% if can? :update, Person %>
+            <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
         </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Middle name</label>
-            <div class="field-value col-sm-10"><%= @person.middlename %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Forename</label>
-            <div class="field-value col-sm-10"><%= @person.forename %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Title</label>
-            <div class="field-value col-sm-10"><%= @person.title %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created At</label>
-            <div class="field-value col-sm-10"><%= @person.created_at %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Updated At</label>
-            <div class="field-value col-sm-10"><%= @person.updated_at %></div>
-        </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created By</label>
-            <div class="field-value col-sm-10"><%= @person.created_by %></div>
-        </div>
-
-        <% if @person.modified_by.present? %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Last Modified By</label>
-            <div class="field-value col-sm-10"><%= @person.modified_by %></div>
-        </div>
-        <% end %>
-
-        <hr/>
-
-        <% if can? :update, Person %>
-        <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to Century terms index', citationterms_people_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>

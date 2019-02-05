@@ -1,0 +1,27 @@
+<div class="metadata-list col-sm-12">
+    <h4>Metadata</h4>
+
+    <div class="field-pair row">
+        <label class="col-sm-2">Created By</label>
+        <div class="field-value col-sm-10"><%= record.created_by %></div>
+    </div>
+
+    <div class="field-pair row">
+        <label class="col-sm-2">Created At</label>
+        <div class="field-value col-sm-10"><%= record.created_at %></div>
+    </div>
+
+    <% if record.modified_by.present? %>
+    <div class="field-pair row">
+        <label class="col-sm-2">Last Modified By</label>
+        <div class="field-value col-sm-10"><%= record.modified_by %></div>
+    </div>
+    <% end %>
+
+    <% if record.updated_at.present? %>
+    <div class="field-pair row">
+        <label class="col-sm-2">Last Modified At</label>
+        <div class="field-value col-sm-10"><%= record.updated_at %></div>
+    </div>
+    <% end %>
+</div>

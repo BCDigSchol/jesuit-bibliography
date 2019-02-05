@@ -5,46 +5,31 @@
     <h2><%= @language.name.present? ? @language.name : @language.id %></h2>
 
     <div class="record-view">
-        <% if can? :update, Language %>
-        <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to Language index', citationterms_languages_path, class: 'btn btn-info' %>
-
-        <hr/>
-        
-        <div class="field-pair row">
-            <label class="col-sm-2">language Name</label>
-            <div class="field-value col-sm-10"><%= @language.name %></div>
+        <div class="button-group">
+            <% if can? :update, Language %>
+            <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to Language index', citationterms_languages_path, class: 'btn btn-info' %>
         </div>
 
-        <div class="field-pair row">
-            <label class="col-sm-2">Created At</label>
-            <div class="field-value col-sm-10"><%= @language.created_at %></div>
+        <div class="record-view-fields">
+            <div class="languages-list col-sm-12">
+                <h4>Fields</h4>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Language Name</label>
+                    <div class="field-value col-sm-10"><%= @language.name %></div>
+                </div>
+            </div>
+
+            <%= render 'citationterms/metadata', record: @language %>
         </div>
 
-        <div class="field-pair row">
-            <label class="col-sm-2">Updated At</label>
-            <div class="field-value col-sm-10"><%= @language.updated_at %></div>
+        <div class="button-group">
+            <% if can? :update, Language %>
+            <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to Language index', citationterms_languages_path, class: 'btn btn-info' %>
         </div>
-
-        <div class="field-pair row">
-            <label class="col-sm-2">Created By</label>
-            <div class="field-value col-sm-10"><%= @language.created_by %></div>
-        </div>
-
-        <% if @language.modified_by.present? %>
-        <div class="field-pair row">
-            <label class="col-sm-2">Last Modified By</label>
-            <div class="field-value col-sm-10"><%= @language.modified_by %></div>
-        </div>
-        <% end %>
-
-        <hr/>
-
-        <% if can? :update, Language %>
-        <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Go Back to Jesuits index', citationterms_languages_path, class: 'btn btn-info' %>
     </div>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
