@@ -53,7 +53,7 @@
 
     <%= render 'bibliographies/fields/worldcat_url', :form => form, field_label: 'Worldcat URL' %>
 
-    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL'.html_safe + Bibliography::REQUIRED_FLAG, required_status: false %>
+    <%= render 'bibliographies/fields/multimedia_url', :form => form, field_label: 'Multimedia URL', required_status: false %>
 
     <%= form.input :multimedia_dimensions, 
         label: 'Multimedia dimensions',

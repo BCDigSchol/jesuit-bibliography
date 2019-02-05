@@ -180,6 +180,7 @@ class Bibliography < ApplicationRecord
     validates :bibliography_journals, presence: true,
         if: Proc.new { reference_type_is_one_of? ['journal article'] }
 
+    validate :url_has_correct_format
     
     searchable :if => :published do
         integer :id
@@ -572,7 +573,8 @@ class Bibliography < ApplicationRecord
     TERM_FIELD_HINT = 'This field is strongly recommended'.freeze
     AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
-    LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record is \'Published\''.freeze
+    LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record status is \'Published\''.freeze
+    BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
@@ -893,5 +895,64 @@ class Bibliography < ApplicationRecord
                 return types_array.include? reference_type.downcase
             end
             false
+        end
+
+        def url_has_correct_format
+            error_message = "must begin with http:// or https://"
+            #prefix_compare_list = ['https://', 'http://']
+            
+            # worldcat_url
+            if reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'multimedia']
+                if worldcat_urls.present?
+                    worldcat_urls.each do |url|
+                        errors.add(:worldcat_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
+    
+            # publisher_urls
+            if reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article']
+                if publisher_urls.present?
+                    publisher_urls.each do |url|
+                        errors.add(:publisher_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
+    
+            # leuven_urls
+            if reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article', 'dissertation']
+                if leuven_urls.present?
+                    leuven_urls.each do |url|
+                        errors.add(:leuven_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
+    
+            # dissertation_university_urls
+            if reference_type_is_one_of? ['dissertation'] 
+                if dissertation_university_urls.present?
+                    dissertation_university_urls.each do |url|
+                        errors.add(:dissertation_university_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
+    
+            # event_urls
+            if reference_type_is_one_of? ['conference paper'] 
+                if event_urls.present?
+                    event_urls.each do |url|
+                        errors.add(:event_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
+    
+            # multimedia_urls
+            if reference_type_is_one_of? ['multimedia'] 
+                if multimedia_urls.present?
+                    multimedia_urls.each do |url|
+                        errors.add(:multimedia_urls, error_message) unless url.link.downcase.start_with?('https://', 'http://')
+                    end
+                end
+            end
         end
 end

@@ -2,7 +2,7 @@
     <div class="fields">
         <%= form.simple_fields_for :multimedia_urls do |c| %>
             <%= c.input :link, 
-                label: field_label,
+                label: field_label.html_safe + Bibliography::REQUIRED_FLAG,
                 as: :string,
                 required: required_status,
                 validate: required_status, 
