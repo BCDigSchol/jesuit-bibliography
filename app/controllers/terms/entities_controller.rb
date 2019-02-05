@@ -19,6 +19,6 @@ class Terms::EntitiesController < ApplicationController
         @entities, @alpha_params = Entity
                         .order('display_name ASC')
                         .where.not(display_name: [nil, '']) # filter out nils and blanks
-                        .alpha_paginate(@letter, @alpha_params_options) {|entity| entity.display_name.downcase}
+                        .alpha_paginate(@letter, @alpha_params_options) {|entity| entity.sort_name.downcase}
     end
 end

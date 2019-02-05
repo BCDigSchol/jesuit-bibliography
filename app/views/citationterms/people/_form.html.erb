@@ -31,7 +31,7 @@
       placeholder: (!@person.name.present? ? Person::NAME_PLACEHOLDER : '') 
   %>
 
-  <%= form.input :display_name, 
+  <%#= form.input :display_name, 
       as: :string,
       disabled: !@person.name.present?,
       placeholder: (!@person.name.present? ? Person::NAME_PLACEHOLDER : '')

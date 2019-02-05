@@ -12,7 +12,7 @@ class Citationterms::PeriodsController < ApplicationController
         authorize! :read, Period, :message => "Unable to load this page."
 
         @periods_grid = initialize_grid(Period, 
-            order:           'periods.name',
+            order:           'periods.sort_name',
             order_direction: 'asc'
         )
 

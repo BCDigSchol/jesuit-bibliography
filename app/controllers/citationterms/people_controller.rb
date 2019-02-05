@@ -13,7 +13,7 @@ class Citationterms::PeopleController < ApplicationController
         authorize! :read, Person, :message => "Unable to load this page."
 
         @people_grid = initialize_grid(Person, 
-            order:           'people.name',
+            order:           'people.sort_name',
             order_direction: 'asc'
         )
 
@@ -68,9 +68,9 @@ class Citationterms::PeopleController < ApplicationController
         if person_attributes[:sort_name].empty?
             person_attributes[:sort_name] = @person.name
         end
-        if person_attributes[:display_name].empty?
-            person_attributes[:display_name] = @person.name
-        end
+        #if person_attributes[:display_name].empty?
+        #    person_attributes[:display_name] = @person.name
+        #end
 
         if @person.update(person_attributes)
             respond_to do |format|

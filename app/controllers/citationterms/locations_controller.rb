@@ -12,7 +12,7 @@ class Citationterms::LocationsController < ApplicationController
         authorize! :read, Location, :message => "Unable to load this page."
 
         @locations_grid = initialize_grid(Location, 
-            order:           'locations.name',
+            order:           'locations.sort_name',
             order_direction: 'asc'
         )
 

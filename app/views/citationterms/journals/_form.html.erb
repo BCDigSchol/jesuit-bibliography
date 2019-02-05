@@ -30,7 +30,7 @@
       placeholder: (!@journal.name.present? ? BibliographyJournal::NAME_PLACEHOLDER : '')
   %>
 
-  <%= form.input :display_name, 
+  <%#= form.input :display_name, 
       as: :string,
       disabled: !@journal.name.present?,
       placeholder: (!@journal.name.present? ? BibliographyJournal::NAME_PLACEHOLDER : '')

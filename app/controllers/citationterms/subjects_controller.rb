@@ -12,7 +12,7 @@ class Citationterms::SubjectsController < ApplicationController
         authorize! :read, Subject, :message => "Unable to load this page."
 
         @subjects_grid = initialize_grid(Subject, 
-            order:           'subjects.name',
+            order:           'subjects.sort_name',
             order_direction: 'asc'
         )
 

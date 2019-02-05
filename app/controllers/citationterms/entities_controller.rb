@@ -12,7 +12,7 @@ class Citationterms::EntitiesController < ApplicationController
         authorize! :read, Entity, :message => "Unable to load this page."
 
         @entities_grid = initialize_grid(Entity, 
-            order:           'entities.name',
+            order:           'entities.sort_name',
             order_direction: 'asc'
         )
 
@@ -67,9 +67,9 @@ class Citationterms::EntitiesController < ApplicationController
         if entity_attributes[:sort_name].empty?
             entity_attributes[:sort_name] = @entity.name
         end
-        if entity_attributes[:display_name].empty?
-            entity_attributes[:display_name] = @entity.name
-        end
+        #if entity_attributes[:display_name].empty?
+        #    entity_attributes[:display_name] = @entity.name
+        #end
 
         if @entity.update(entity_attributes)
             respond_to do |format|

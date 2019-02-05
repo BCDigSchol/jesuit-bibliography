@@ -22,31 +22,31 @@ class Citationterms::TermSearchController < ApplicationController
         case params[:type]
         when "subjects"
             @items = Subject.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "jesuits"
             @items = Entity.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "locations"
             @items = Location.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "journals"
             @items = Journal.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "languages"
             @items = Language.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "centuries"
             @items = Period.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "people"
             @items = Person.where(default_where_clause)
-                        .order(:name)
+                        .order(:sort_name)
                         .map{|item| {id: item.id, text: item.name}}
         when "bibliographies"
             citation_where_clause = "LOWER(display_title) LIKE LOWER(?)", "%#{params[:term]}%"

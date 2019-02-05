@@ -12,7 +12,7 @@ class Citationterms::JournalsController < ApplicationController
         authorize! :read, Journal, :message => "Unable to load this page."
 
         @journals_grid = initialize_grid(Journal, 
-            order:           'journals.name',
+            order:           'journals.sort_name',
             order_direction: 'asc'
         )
 
@@ -67,9 +67,9 @@ class Citationterms::JournalsController < ApplicationController
         if journal_attributes[:sort_name].empty?
             journal_attributes[:sort_name] = @journal.name
         end
-        if journal_attributes[:display_name].empty?
-            journal_attributes[:display_name] = @journal.name
-        end
+        #if journal_attributes[:display_name].empty?
+        #    journal_attributes[:display_name] = @journal.name
+        #end
 
         if @journal.update(journal_attributes)
             respond_to do |format|

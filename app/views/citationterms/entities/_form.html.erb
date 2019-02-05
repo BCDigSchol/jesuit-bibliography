@@ -30,7 +30,7 @@
       placeholder: (!@entity.name.present? ? BibliographyEntity::NAME_PLACEHOLDER : '') 
   %>
 
-  <%= form.input :display_name, 
+  <%#= form.input :display_name, 
       as: :string,
       disabled: !@entity.name.present?,
       placeholder: (!@entity.name.present? ? BibliographyEntity::NAME_PLACEHOLDER : '')
