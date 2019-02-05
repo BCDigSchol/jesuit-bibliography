@@ -103,6 +103,9 @@
           reviewed_translator_text
           reviewed_title_text^6
 
+          <!-- translated title -->
+          translated_title_text^4
+
           <!-- languages -->
           languages_text
 
@@ -138,6 +141,8 @@
           <!-- reviewed_title_text should be represented in display_title_text -->
           <!-- but we'll add it here in the rare case it's not -->
           reviewed_title_text
+
+          translated_title_text
        </str>
        <str name="title_pf">
        </str>
