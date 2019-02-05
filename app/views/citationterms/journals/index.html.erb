@@ -15,8 +15,8 @@
       journal.name
     end
 
-    g.column name: 'Created At', attribute: 'created_at', filter: false do |loc|
-      loc.created_at
+    g.column name: 'Last Modified At', attribute: 'updated_at', filter: false do |loc|
+      format_date_string(loc.updated_at)
     end
 
     if can? :detroy, Journal

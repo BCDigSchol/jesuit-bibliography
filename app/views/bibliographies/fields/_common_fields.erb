@@ -8,7 +8,21 @@
 <% if @bib.created_at.present? %>
 <div class="form-group row string optional bibliography_year_published form-group-valid">
     <div class="col-sm-2 col-form-label-static">Created At</div>
-    <div class="col-sm-10 static-value"><%= @bib.created_at %></div>
+    <div class="col-sm-10 static-value"><%= format_date_string(@bib.created_at) %></div>
+</div>
+<% end %>
+
+<% if @bib.modified_by.present? %>
+<div class="form-group row string optional bibliography_year_published form-group-valid">
+    <div class="col-sm-2 col-form-label-static">Last Modified By</div>
+    <div class="col-sm-10 static-value"><%= @bib.modified_by %></div>
+</div>
+<% end %>
+
+<% if @bib.updated_at.present? %>
+<div class="form-group row string optional bibliography_year_published form-group-valid">
+    <div class="col-sm-2 col-form-label-static">Last Modified At</div>
+    <div class="col-sm-10 static-value"><%= format_date_string(@bib.updated_at) %></div>
 </div>
 <% end %>
 

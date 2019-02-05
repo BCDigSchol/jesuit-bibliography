@@ -70,8 +70,8 @@
 
         g.column name: 'Created by', attribute: 'created_by'
 
-        g.column name: 'Created Date', attribute: 'created_at', filter: false do |bib|
-            bib.created_at.strftime "%b %e, %Y"
+        g.column name: 'Created At', attribute: 'created_at', filter: false do |bib|
+            format_date_string(bib.created_at)
         end
 
         if can? :destroy, Bibliography

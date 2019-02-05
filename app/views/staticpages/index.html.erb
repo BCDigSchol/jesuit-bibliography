@@ -24,8 +24,8 @@
 
     #g.column name: 'List Rank', attribute: 'rank'
 
-    g.column name: 'Updated At', attribute: 'updated_at', filter: false do |page|
-      page.updated_at
+    g.column name: 'Last Modified At', attribute: 'updated_at', filter: false do |page|
+      format_date_string(page.updated_at)
     end
 
     if can? :detroy, Staticpage

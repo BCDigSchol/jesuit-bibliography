@@ -43,8 +43,8 @@
                     u.get_role_name
                 end
 
-                user.column name: 'Created At' do |u|
-                    u.created_at
+                user.column name: 'Created At', attribute: 'created_at', filter: false do |u|
+                    format_date_string(u.created_at)
                 end
 
                 user.column do |u|
