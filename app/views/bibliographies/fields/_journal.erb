@@ -1,6 +1,6 @@
 <div id='bibliography_journals' class='repeatable-field'>
     <div class="row string optional bibliography-journal-fields">
-        <label class="col-sm-2 col-form-label string optional"><%= field_label.pluralize(2) %> <% if required_status.present? and required_status %> <%= Bibliography::REQUIRED_FLAG %> <% end %></label>
+        <label class="col-sm-2 col-form-label string optional"><%= field_label %> <% if required_status.present? and required_status %> <%= Bibliography::REQUIRED_FLAG %> <% end %></label>
         <div class="col-sm-10">
             <div class="fields">
                 <%= form.simple_fields_for :bibliography_journals do |journal| %>
@@ -23,7 +23,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-10 btn-add-container">
             <%# Uncomment for allow for repeatable Journal titles %>
-            <%#= link_to_add_association Bibliography::ADD_BUTTON + field_label, 
+            <%= link_to_add_association Bibliography::ADD_BUTTON + field_label, 
                 form, 
                 :bibliography_journals, 
                 class: 'btn btn-warning btn-add fa-icon', 
@@ -32,7 +32,7 @@
                     'association-insertion-node' => '#bibliography_journals .fields', 
                     'association-insertion-method' => 'append'
                 },
-                partial: 'journals_fields',
+                partial: 'bibliography_journal_fields',
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a Journal Title', 
