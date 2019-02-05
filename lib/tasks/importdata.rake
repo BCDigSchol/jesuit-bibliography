@@ -1104,7 +1104,7 @@ namespace :importdata do
 
         all_bibs.each do |bib|
             bib.generate_citations
-            bib.save
+            bib.save!(validate: false)
             bar.increment!
         end
 
