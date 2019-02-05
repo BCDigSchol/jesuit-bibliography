@@ -6,6 +6,9 @@
 
 <div id="pagination_table" class="term-list-container">
   <% @periods.each do |per| %>
-    <div class="term-list-item"><a href="/catalog?f[centuries_facet][]=<%= per.name %>"><%= per.name %></a></div>
+    <div class="term-list-item">
+      <% if can? :manage, Period %><%= link_to 'edit', edit_citationterms_period_path(per.id), class: "term-edit btn btn-primary btn-xs" %><% end %>
+      <a href="/catalog?f[centuries_facet][]=<%= per.name %>"><%= per.name %></a>
+    </div>
   <% end %>
 </div>

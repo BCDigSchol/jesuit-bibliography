@@ -8,6 +8,9 @@
 
 <div id="pagination_table" class="term-list-container">
   <% @entities.each do |entity| %>
-    <div class="term-list-item"><a href="/catalog?f[jesuits_facet][]=<%= entity.name %>"><%= entity.name %></a></div>
+    <div class="term-list-item">
+      <% if can? :manage, Entity %><%= link_to 'edit', edit_citationterms_entity_path(entity.id), class: "term-edit btn btn-primary btn-xs" %><% end %>
+      <a href="/catalog?f[jesuits_facet][]=<%= entity.name %>"><%= entity.name %></a>
+    </div>
   <% end %>
 </div>

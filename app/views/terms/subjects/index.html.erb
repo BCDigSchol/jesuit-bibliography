@@ -8,6 +8,9 @@
 
 <div id="pagination_table" class="term-list-container">
   <% @subjects.each do |sub| %>
-    <div class="term-list-item"><a href="/catalog?f[subjects_facet][]=<%= sub.name %>"><%= sub.name %></a></div>
+    <div class="term-list-item">
+      <% if can? :manage, Subject %><%= link_to 'edit', edit_citationterms_subject_path(sub.id), class: "term-edit btn btn-primary btn-xs" %><% end %>
+      <a href="/catalog?f[subjects_facet][]=<%= sub.name %>"><%= sub.name %></a>
+    </div>
   <% end %>
 </div>
