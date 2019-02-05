@@ -8,7 +8,8 @@
                         form: peep,
                         class_name: 'authors',
                         required_status: required_status,
-                        prompt_label: 'Choose an ' + field_label
+                        prompt_label: 'Choose an ' + field_label,
+                        hint_text: hint_text ||= false
                     %>
                 <% end %>
             </div>
@@ -38,7 +39,8 @@
                     locals: { 
                         prompt_label: 'Choose an ' + field_label, 
                         class_name: 'authors',
-                        required_status: required_status
+                        required_status: required_status,
+                        hint_text: hint_text ||= false
                     }
                 }
             %>

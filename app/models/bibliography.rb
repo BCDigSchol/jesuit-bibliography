@@ -573,7 +573,8 @@ class Bibliography < ApplicationRecord
     TERM_FIELD_HINT = 'This field is strongly recommended'.freeze
     AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
-    LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record is \'Published\''.freeze
+    LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record status is \'Published\''.freeze
+    BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
