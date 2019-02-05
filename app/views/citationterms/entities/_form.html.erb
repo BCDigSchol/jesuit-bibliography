@@ -21,7 +21,8 @@
   <% end %>
 
   <%= form.input :name, 
-      as: :string
+      as: :string,
+      hint: Bibliography::PERSON_FIELD_HINT
   %>
 
   <%= form.input :sort_name, 
