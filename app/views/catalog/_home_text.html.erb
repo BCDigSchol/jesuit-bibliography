@@ -15,17 +15,46 @@
     <li><a href="https://www.jesuitica.be/homepage/"><%= image_tag('jesuiticanew.png', height:200, alt:'Ku Leuven')%></a></li>
   </ul>
 
-<div id="slider">
-  <a href="#" class="control_next">></a>
-  <a href="#" class="control_prev"><</a>
-  <ul>
-    <li><a href="https://www.jhia.ac.ke/"><%= image_tag('JHIA.png', width:100, alt:'JHIA')%></a><a href="https://www.facebook.com/xchr.goa/"><%= image_tag('XCHR.png', width:100, alt:'XCHR')%></a><a href="http://www.broteria.pt/"><%= image_tag('Broteria.png', width:100, alt:'Broteria')%></a></li></li>
-    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
-    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
-    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
-    <li><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a></li>
-    <li><a href="/about/partners">Click here for more partners and to learn more</a></li>
-  </ul>  
+  <div id="collaborators-carousel" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators. Disabled in CSS for featured records -->
+  <!-- Set data-target attribute to the carousel id. -->
+  <ol class="carousel-indicators">
+    <li data-target="#collaborators-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#collaborators-carousel" data-slide-to="1"></li>
+    <li data-target="#collaborators-carousel" data-slide-to="2"></li>
+  </ol>
+
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+
+      <!-- Each slide is an .item. The first slide should also have
+      the .active class. -->
+      <div class="item active featured-record">
+        <a href="https://www.jhia.ac.ke/"><%= image_tag('JHIA.png', width:100, alt:'JHIA')%></a><a href="https://www.facebook.com/xchr.goa/"><%= image_tag('XCHR.png', width:100, alt:'XCHR')%></a><a href="http://www.broteria.pt/"><%= image_tag('Broteria.png', width:100, alt:'Broteria')%></a>
+      </div>
+      <div class="item featured-record">
+        <p><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><p>
+      </div>
+      <div class="item featured-record">
+        <a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a>
+      </div>
+      <div class="item featured-record">
+        <a href="/about/partners">Click here for more partners and to learn more</a>
+      </div>
+  </div>
+
+  <a class="left carousel-control" href="#collaborators-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#collaborators-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
 </div>
 
 </div>
@@ -33,6 +62,10 @@
 <%= render 'featured_records', :featured_records => get_featured_records %>
 
 <script>
+
+ $('#featured-records-carousel').carousel({
+        interval: 10000
+    })
 
 jQuery(document).ready(function ($) {
 
