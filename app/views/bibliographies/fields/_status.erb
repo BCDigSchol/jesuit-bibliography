@@ -1,7 +1,14 @@
-<%= form.input :status, 
-    label: 'Status',
-    #collection: Bibliography::STATUS_LIST,
-    collection: @status_list,
-    include_blank: 'Select a status',
-    hint: Bibliography::STATUS_FIELD_HINT
-%>
+<% if @bib.status != Bibliography::PUBLISHED_STATUS or (@bib.status == Bibliography::PUBLISHED_STATUS and can? :manage, 'Unpublish') %>
+    <%= form.input :status, 
+        label: 'Status',
+        #collection: Bibliography::STATUS_LIST,
+        collection: @status_list,
+        include_blank: 'Select a status',
+        hint: Bibliography::STATUS_FIELD_HINT
+    %>
+<% else %>
+    <div class="form-group row string optional bibliography_year_published form-group-valid">
+        <div class="col-sm-2 col-form-label-static">Status</div>
+        <div class="col-sm-10 static-value"><%= Bibliography::PUBLISHED_STATUS %></div>
+    </div>
+<% end %>

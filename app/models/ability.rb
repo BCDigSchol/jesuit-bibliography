@@ -37,6 +37,7 @@ class Ability
       can :manage, 'Terms'          # can access Term lists dropdown
       can :manage, 'Status'         # can manage record Status value
       can :manage, 'Publish'        # can set a record to 'published' status
+      can :manage, 'Unpublish'      # can set a record to 'published' status
       can :manage, 'Suggestions'    # can manage Suggestions
       can :manage, 'RecordLinking'  # can manage linking records together
       can :manage, Location         # can manage Location Term lists
