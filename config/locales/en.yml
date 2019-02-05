@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    models:
+      bibliography: "Citation"
+    attributes:
+      bibliography:
+        year_published: "Year"
+              
