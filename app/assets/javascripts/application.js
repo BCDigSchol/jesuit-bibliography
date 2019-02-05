@@ -26,6 +26,7 @@
 //= require bibliography.js
 //= require wice_grid
 //= require bootstrap-datepicker/core
+//= require bootstrap/carousel
 //= require select2
 //= require tinymce
 //= require rails.validations

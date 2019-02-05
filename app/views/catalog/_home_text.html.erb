@@ -30,10 +30,7 @@
 
 </div>
 
-<% featured_records = get_featured_records %>
-<% unless featured_records.count < 2 %>
-  <%= render 'featured_records', :featured_records => featured_records %>
-<%end %>
+<%= render 'featured_records', :featured_records => get_featured_records %>
 
 <script>
 

@@ -1,0 +1,19 @@
+<div class="featured-record row">
+  <div class="book-cover-col col-sm-3">
+    <% if record.image %>
+      <%= image_tag record.image, :alt => 'book cover' %>
+    <% else %>
+      <%= image_tag 'book-icon.png', :class => "generic-cover", :alt => 'book cover' %>
+    <% end %>
+  </div>
+  <div class="record-display-col col-sm-9">
+    <h3>
+      <% if record.bibliography.present? %>
+        <%= link_to record.name, solr_document_path(record.bibliography.id) %>
+      <% else %>
+        <%= record.name %>
+      <% end %>
+    </h3>
+    <div><%= record.body.html_safe %></div>
+  </div>
+</div>

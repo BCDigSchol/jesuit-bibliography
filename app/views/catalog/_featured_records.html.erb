@@ -1,82 +1,52 @@
-<div class="featured-records-section">
-  <h3>Featured records</h3>
-  <div id="featured-record-slider">
-    <a href="#" class="control_next">></a>
-    <a href="#" class="control_prev"><</a>
-    <ul>
-      <% featured_records.each do |record| %>
-        <li>
-          <div class="featured-record row">
-            <div class="book-cover-col">
-              <% if record.image %>
-                <%= image_tag record.image %>
-              <% else %>
-                <%= image_tag 'book-icon.png' %>
-              <% end %>
-            </div>
-            <div class="record-display-col">
-              <h3>
-              <% if record.bibliography.present? %>
-                <%= link_to record.name, solr_document_path(record.bibliography.id) %>
-              <% else %>
-                <%= record.name %>
-              <% end %>
-              </h3>
-              <div><%= record.body.html_safe %></div>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+<div id="featured-records-carousel" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators. Disabled in CSS for featured records -->
+  <!-- Set data-target attribute to the carousel id. -->
+  <ol class="carousel-indicators">
+    <li data-target="#featured-records-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#featured-records-carousel" data-slide-to="1"></li>
+    <li data-target="#featured-records-carousel" data-slide-to="2"></li>
+  </ol>
+
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <% item_class = 'active' %>
+    <% featured_records.each do |record| %>
+
+      <!-- Each slide is an .item. The first slide should also have
+      the .active class. -->
+      <div class="item <%= item_class %>">
+
+        <!-- Slide content here. -->
+        <%= render 'featured_record', record: record %>
+
+      </div>
+
+      <% item_class = '' %>
+    <% end %>
   </div>
+
+
+  <!-- Controls -->
+  <!-- Set href attribute to the carousel id. -->
+  <a class="left carousel-control" href="#featured-records-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#featured-records-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
 </div>
 
+
 <script>
+    // Start the slider.
 
-    jQuery(document).ready(function ($) {
-
-        setInterval(function () {
-            moveRight();
-        }, 30000);
-
-        var slideCount = $('#featured-record-slider ul li').length;
-        var slideWidth = $('#featured-record-slider ul li').width();
-        var slideHeight = $('#featured-record-slider ul li').height();
-        var sliderUlWidth = slideCount * slideWidth;
-
-        $('#featured-record-slider').css({width: slideWidth, height: slideHeight});
-
-        $('#featured-record-slider ul').css({width: sliderUlWidth, marginLeft: -slideWidth});
-
-        $('#featured-record-slider ul li:last-child').prependTo('#featured-record-slider ul');
-
-        function moveLeft() {
-            $('#featured-record-slider ul').animate({
-                left: +slideWidth
-            }, 200, function () {
-                $('#featured-record-slider ul li:last-child').prependTo('#featured-record-slider ul');
-                $('#featured-record-slider ul').css('left', '');
-            });
-        };
-
-        function moveRight() {
-            $('#featured-record-slider ul').animate({
-                left: -slideWidth
-            }, 200, function () {
-                $('#featured-record-slider ul li:first-child').appendTo('#featured-record-slider ul');
-                $('#featured-record-slider ul').css('left', '');
-            });
-        };
-
-        $('#featured-record-slider a.control_prev').click(function () {
-            moveLeft();
-            return false
-        });
-
-        $('#featured-record-slider a.control_next').click(function () {
-            moveRight();
-            return false
-        });
-
-    });
+    $('#featured-records-carousel').carousel({
+        interval: 10000
+    })
 </script>
