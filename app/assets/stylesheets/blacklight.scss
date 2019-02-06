@@ -49,6 +49,10 @@ h2.page-heading{
         .nav-item.user-email a {
             text-transform: lowercase;
         }
+        .nav-item.user-signout a,
+        .nav-item.user-signin a {
+            text-transform: none;
+        }
     }
 }
 
@@ -92,18 +96,8 @@ h2.page-heading{
     font-size: 16px;
 }
 
-.blacklight-catalog,
-.blacklight-sessions,
-.blacklight-subjects,
-.blacklight-locations,
-.blacklight-entities,
-.blacklight-periods,
-.blacklight-search_history,
-.blacklight-manage_users,
-.blacklight-registrations,
-.blacklight-saved_searches,
-.blacklight-staticpages,
-.blacklight-bookmarks {
+.blacklight-recordpages,
+.blacklight-otherpages {
     #search-navbar {
         width: 100%!important;
         margin-left: 0;
@@ -129,17 +123,20 @@ h2.page-heading{
     }
 }
 
-.blacklight-catalog-job_home {
+.blacklight-homepages {
     .col-100 {
         width: 100%;
     }
     #search-navbar {
+        width: 100% !important;
+        margin-left: 0;
         background-image: asset-url("Woodstock_update.png");
         background-size: cover;
         height: 400px;
         padding: 100px 0 0 0;
         margin-bottom: 0;
         background-color: inherit;
+
         p#search-title {
             display:block;
         }
@@ -403,9 +400,9 @@ footer.bcfooter {
     }
 }
 
-.blacklight-catalog-index #search-navbar .search-navbar-job .form-wrapper {
+/*.blacklight-catalog-index #search-navbar .search-navbar-job .form-wrapper {
     text-transform: none;
-}
+}*/
 
 .heading-container {
     h2 {
