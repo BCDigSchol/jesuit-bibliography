@@ -120,15 +120,6 @@ class Bibliography < ApplicationRecord
     # validate various title fields depending on reference_type
     #
 
-    # For book types, we need either the author or editor to be present
-    validate :book_has_author_or_editor
-
-    validates :authors, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book chapter', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
-
-    validates :author_of_reviews, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book review'] }
-
     validates :title, presence: true, 
         if: Proc.new { reference_type_is_one_of? ['book', 'journal article', 'dissertation', 'multimedia'] }
 
@@ -174,13 +165,26 @@ class Bibliography < ApplicationRecord
     validates :reviewed_components, presence: true,
         if: Proc.new { reference_type_is_one_of? ['book review'] }
 
-    validates :bibliography_languages, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
-
-    validates :bibliography_journals, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['journal article'] }
-
     validate :url_has_correct_format
+
+    #
+    # The following validations have been deactivated 2019-02-06
+    #
+
+    # For book types, we need either the author or editor to be present
+    #validate :book_has_author_or_editor
+
+    #validates :authors, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book chapter', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
+
+    #validates :author_of_reviews, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book review'] }
+
+    #validates :bibliography_languages, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book', 'book chapter', 'book review', 'journal article', 'dissertation', 'conference paper', 'multimedia'] }
+
+    #validates :bibliography_journals, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['journal article'] }
     
     searchable :if => :published do
         integer :id
