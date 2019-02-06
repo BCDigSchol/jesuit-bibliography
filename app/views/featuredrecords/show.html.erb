@@ -3,6 +3,14 @@
     <%= link_to 'Go Back to Featured Records index', featuredrecords_path %>
 <% elsif can? :read, Featuredrecord %>
     <div class="record-view">
+        <div class="button-group">
+            <% if can? :update, Featuredrecord %>
+            <%= link_to 'Edit this Featured Record', edit_featuredrecord_path(@record), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'Go Back to Featured Record index', featuredrecords_path, class: 'btn btn-info' %>
+        </div>
+
+        <hr/>
         
         <% if @record.name.present? %>
             <div class="field-pair row">
@@ -44,9 +52,9 @@
         <hr/>
 
         <div class="button-group">
-        <% if can? :update, Featuredrecord %>
+            <% if can? :update, Featuredrecord %>
             <%= link_to 'Edit this Featured Record', edit_featuredrecord_path(@record), class: 'btn btn-primary' %>
-        <% end %>
+            <% end %>
             <%= link_to 'Go Back to Featured Record index', featuredrecords_path, class: 'btn btn-info' %>
         </div>
     </div>
