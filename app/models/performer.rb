@@ -7,6 +7,6 @@ class Performer < ApplicationRecord
   private
     def reindex_parent!
       puts "\n\nDeleting Performer...\n\n"
-      bibliography.reindex_me
+      bibliography.reindex_me if bibliography.present?
     end
 end
