@@ -26,7 +26,7 @@ class Person < ApplicationRecord
 
     def process_deletion
         puts "\n\nDeleting Person...\n\n"
-        self.reindex_parent!
+        reindex_parent!
     end
 
     validates :name, presence: true
