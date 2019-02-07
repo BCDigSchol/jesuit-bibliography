@@ -1,14 +1,17 @@
+<% required_status = required_status ||= false %>
+<% pretend_required = pretend_required ||= false %>
 <div id='bibliography_journals' class='repeatable-field'>
     <div class="row string optional bibliography-journal-fields">
-        <label class="col-sm-2 col-form-label string optional"><%= field_label %> <% if required_status.present? and required_status %> <%= Bibliography::REQUIRED_FLAG %> <% end %></label>
+        <label class="col-sm-2 col-form-label string optional"><%= format_field_label(field_label, (required_status || pretend_required)) %></label>
         <div class="col-sm-10">
             <div class="fields">
                 <%= form.simple_fields_for :bibliography_journals do |journal| %>
                     <%= render 'bibliography_journal_fields', 
                         form: journal,
                         class_name: 'journals', 
-                        required_status: required_status,
-                        prompt_label: 'Choose a ' + field_label 
+                        prompt_label: 'Choose a ' + field_label,
+                        required: required_status,
+                        hint_text: hint_text ||= false
                     %>
                 <% end %>
             </div>
@@ -37,7 +40,8 @@
                     locals: { 
                         prompt_label: 'Choose a Journal Title', 
                         class_name: 'journals',
-                        required_status: required_status, 
+                        required: required_status,
+                        hint_text: hint_text ||= false 
                     }
                 }
             %>

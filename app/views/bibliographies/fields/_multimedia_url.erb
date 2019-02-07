@@ -1,12 +1,13 @@
+<% required_status = required_status ||= false %>
+<% pretend_required = pretend_required ||= false %>
 <div id='multimedia_urls' class='repeatable-field'>
     <div class="fields">
         <%= form.simple_fields_for :multimedia_urls do |c| %>
             <%= c.input :link, 
-                label: field_label.html_safe + Bibliography::REQUIRED_FLAG,
+                label: format_field_label(field_label, (required_status || pretend_required)),
                 as: :string,
                 required: required_status,
-                validate: required_status, 
-                hint: Bibliography::URL_FIELD_HINT
+                hint: hint_text||= Bibliography::URL_FIELD_HINT
             %>
         <% end %>
     </div>

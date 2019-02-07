@@ -16,9 +16,20 @@
         :input_html => { :value => "Book" } 
     %>
 
-    <%= render 'bibliographies/fields/author', :form => form, field_label: 'Author', required_status: true, hint_text: Bibliography::BOOK_AUTHOR_EDITOR_HINT %>
+    <%= render 'bibliographies/fields/author', 
+        :form => form, 
+        field_label: 'Author', 
+        required_status: false, 
+        pretend_required: true, 
+        hint_text: Bibliography::BOOK_AUTHOR_EDITOR_HINT 
+    %>
 
-    <%= render 'bibliographies/fields/editor', :form => form, field_label: 'Editor', required_status: false, hint_text: Bibliography::BOOK_AUTHOR_EDITOR_HINT %>
+    <%= render 'bibliographies/fields/editor', 
+        :form => form, 
+        field_label: 'Editor', 
+        required_status: false, 
+        hint_text: Bibliography::BOOK_AUTHOR_EDITOR_HINT 
+    %>
     
     <%= form.input :year_published, 
         label: 'Year', 
@@ -97,7 +108,12 @@
         as: :string
     %>
 
-    <%= render 'bibliographies/fields/language', :form => form, field_label: 'Language', required_status: true %>
+    <%= render 'bibliographies/fields/language', 
+        :form => form, 
+        field_label: 'Language', 
+        required_status: false, 
+        pretend_required: true
+    %>
 
     <%= render 'bibliographies/fields/comment', :form => form, field_label: 'Comment', c: @bib.comments %>
 

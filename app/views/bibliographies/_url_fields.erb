@@ -3,7 +3,9 @@
         <%= form.input :link, 
             label: false,
             as: :string,
-            hint: Bibliography::URL_FIELD_HINT,
+            hint: hint_text ||= Bibliography::URL_FIELD_HINT,
+            required: required ||= false,
+            validate: required ||= false, 
             label_html: { class: 'invisible' }
         %>
         <span class="input-group-btn" id="basic-addon-citation">
