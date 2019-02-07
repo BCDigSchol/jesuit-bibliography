@@ -158,6 +158,8 @@ h2.page-heading{
         }
         .search-query-form {
             width: 100%;
+            padding-right: 0;
+            margin: 0;
         }
         form.navbar-form .input-group .input-group-addon.for-search-field {
             background-color: #ccc;
@@ -467,5 +469,14 @@ footer.bcfooter {
     .top-menu {
         padding-right: 10px;
         word-break: break-all;
+    }
+    .blacklight-homepages {
+        #search-navbar {
+            .search-navbar-job {
+                .form-wrapper {
+                    padding: 10px;
+                }
+            }
+        }
     }
 }
