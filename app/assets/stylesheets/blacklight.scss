@@ -446,3 +446,26 @@ footer.bcfooter {
         }
     }
 }
+
+@media (max-width: 767px) {
+    .top-menu {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    ul.navbar-nav {
+        width:100%;
+        float:none;
+        font-size: larger;
+        text-align: right;
+        li {
+            display: inline-block;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .top-menu {
+        padding-right: 10px;
+        word-break: break-all;
+    }
+}

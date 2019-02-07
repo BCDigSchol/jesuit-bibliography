@@ -1,10 +1,10 @@
 <header class="header">
 <div class="container-fluid">
-<div class="hidden-xs">
+<div class="">
             <div class="row">
               <div class="top-menu">
-                <span class="upper"><a href="https://www.jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
-                <ul class="nav navbar-nav bc-top-nav">
+                <span class="upper hidden-xs"><a href="https://www.jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
+                <ul class="nav navbar-nav bc-top-nav ">
                   <% if has_user_authentication_provider? %>
                     <% if current_user %>
                       <li>
@@ -25,7 +25,7 @@
                 </ul>
               </div>
             </div>
-            <a href="/">
+            <a class="hidden-xs" href="/">
               <div class="row brand-backgnd brand">
                 <div class="header-brand center-col">
                   <div class="row">
