@@ -4,7 +4,7 @@
     <div class="fields">
         <%= form.simple_fields_for :multimedia_urls do |c| %>
             <%= c.input :link, 
-                label: format_field_label(field_label, (required_status || pretend_required)),
+                label: format_field_label(field_label, pretend_required),
                 as: :string,
                 required: required_status,
                 hint: hint_text||= Bibliography::URL_FIELD_HINT
