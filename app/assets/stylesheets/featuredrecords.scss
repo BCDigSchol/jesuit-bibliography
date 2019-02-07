@@ -10,7 +10,7 @@
     .featured-record {
         width: 70%;
         margin: 0 auto;
-        height: 220px;
+        min-height: 310px;
         padding: 1em 0;
 
         .book-cover-col {
@@ -26,10 +26,11 @@
     }
 }
 
+
 @media screen and (max-width: 700px) {
     #featured-records-carousel {
         .featured-record {
-            height: auto;
+            min-height: 450px;
         }
     }
 }
