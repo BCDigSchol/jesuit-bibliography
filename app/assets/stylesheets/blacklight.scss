@@ -251,7 +251,7 @@ h2.page-heading{
     .featured-record {
         /*width: 70%;*/
         margin: 0 auto;
-        height: 220px;
+        min-height: 270px;
         padding: 1em 0;
     }
 
@@ -270,7 +270,7 @@ h2.page-heading{
 @media screen and (max-width: 700px) {
     #collaborators-carousel {
         .featured-record {
-            height: auto;
+            min-height: 280px;
         }
     }
 }
