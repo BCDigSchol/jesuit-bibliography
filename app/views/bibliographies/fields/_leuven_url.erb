@@ -1,10 +1,19 @@
+<% required_status = required_status ||= false %>
+<% pretend_required = pretend_required ||= false %>
 <div id='leuven_urls' class='repeatable-field'>
     <div class="fields">
         <%= form.simple_fields_for :leuven_urls do |c| %>
             <%= c.input :link, 
-                label: field_label,
+                label: format_field_label(field_label, pretend_required),
                 as: :string, 
-                hint: Bibliography::URL_FIELD_HINT
+                required: required_status,
+                input_html: { 
+                    data: { 
+                        parsley_type: :url,
+                        parsley_pattern: "https?:\/\/.*"
+                    }
+                },
+                hint: hint_text ||= Bibliography::URL_FIELD_HINT
             %>
         <% end %>
     </div>

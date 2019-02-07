@@ -7,7 +7,13 @@
                 label: format_field_label(field_label, pretend_required),
                 as: :string,
                 required: required_status,
-                hint: hint_text||= Bibliography::URL_FIELD_HINT
+                input_html: { 
+                    data: { 
+                        parsley_type: :url,
+                        parsley_pattern: "https?:\/\/.*"
+                    }
+                },
+                hint: hint_text ||= Bibliography::URL_FIELD_HINT
             %>
         <% end %>
     </div>

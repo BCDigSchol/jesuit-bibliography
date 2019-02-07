@@ -3,6 +3,12 @@
         <%= form.input :link, 
             label: false,
             as: :string,
+            input_html: { 
+                data: { 
+                    parsley_type: :url,
+                    parsley_pattern: "https?:\/\/.*"
+                }
+            },
             hint: hint_text ||= Bibliography::URL_FIELD_HINT,
             required: required ||= false,
             validate: required ||= false, 
