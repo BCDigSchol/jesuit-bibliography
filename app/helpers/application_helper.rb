@@ -58,7 +58,20 @@ module ApplicationHelper
             components = part.split("|")
             if !components.empty?
                 components.each do |link|
-                    out << "<div class='dd-part'><a class='bl-view-link' href='https://hdl.handle.net/#{link}' target='_blank'>#{link}</a></div>".html_safe
+                    link_str = "#"
+                    # DOI strings may come in many different forms
+                    if link.match(/^https?:\/\/doi\.org\//)     # https://doi.org/10.1163/9789004347151_009
+                        link_str = "#{link}"
+                    elsif link.match(/^https?:\/\//)            # https://hdl.handle.net/10.1163/9789004347151_009
+                        link_str = "#{link}"
+                    elsif link.match('^doi\.org')               # doi.org/10.1163/9789004347151_009
+                        link_str = "https://#{link}"
+                    elsif link.match('^10\.\d+')                # 10.1163/9789004347151_009
+                        link_str = "https://doi.org/#{link}"
+                    else                                        # foo.com/12345
+                        link_str = link_str = "https://#{link}"
+                    end
+                    out << "<div class='dd-part'><a class='bl-view-link' href='#{link_str}' target='_blank'>#{link}</a></div>".html_safe
                 end
             end
         end
