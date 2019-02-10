@@ -247,10 +247,10 @@ class BibliographiesController < ApplicationController
         @bib.check_record_status
 
         # set the display_* fields for Blacklight views
-        @bib.set_display_fields
+        #@bib.set_display_fields
 
         # generate the various citations for this record
-        @bib.generate_citations
+        #@bib.generate_citations
 
         # loop through each associated comment object and check if it has changed
         # if it has changed, be sure to update the comment.commenter value
@@ -269,6 +269,23 @@ class BibliographiesController < ApplicationController
         end
 
         if @bib.save
+
+            #
+            # HACK there's an ongoing issue for Journal titles and other associated models where the citation 
+            #      generation method can't pull in all recent field values. @bib.journals isn't created until 
+            #      after @bib is saved, and so this hack saves @bib twice -- once to create @bib.journals
+            #      and then again after we call self.generate_citations.
+            #
+
+            # set the display_* fields for Blacklight views
+            @bib.set_display_fields
+
+            # generate the various citations for this record
+            @bib.generate_citations
+
+            # resave record with updated display_* fields and citations
+            @bib.save
+
             respond_to do |format|
                 format.html { redirect_to @bib, notice: 'Bibliography was successfully created.' }
                 format.json { render :show, status: :created, location: @bib }
