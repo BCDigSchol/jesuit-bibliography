@@ -59,7 +59,7 @@
           journals_text
 
           <!-- author -->
-          display_authors_text^8
+          display_author_text^8
 
           <!-- people -->
           authors_text
@@ -127,7 +127,7 @@
 
        <!-- unused -->
        <!--str name="author_qf">
-          display_authors_text
+          display_author_text
        </str>
        <str name="author_pf">
        </str-->
