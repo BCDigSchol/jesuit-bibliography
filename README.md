@@ -82,7 +82,7 @@ To load all the static 'About' pages into the app.
 
 | **Warning** |
 | -------- |
-| The following `importdata` task are interactive and will require user interaction before they run. |
+| All `importdata` tasks are interactive and will require user interaction to run. |
 
 ### Import set of sample records
 ```rake importdata:books```
