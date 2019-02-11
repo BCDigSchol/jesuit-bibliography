@@ -68,17 +68,21 @@ Add `SOLR_CONF_HOME`
 ### Import test users:
 ```rake import:users```
 
-### Import default static pages
-To load all the static 'About' pages into the app.
-
 | **Warning** |
 | -------- |
-| This task will create the pages if they do not already exist and will not overwrite existing pages. |
+| The `import:pages` task will create the static page records if they do not already exist. This task will not overwrite existing records. |
+
+### Import default static pages
+To load all the static 'About' pages into the app.
 
 ```rake import:pages```
 
 ### Import test users and default static pages
 ```rake import:all```
+
+| **Warning** |
+| -------- |
+| The following `importdata` task are interactive and will require user interaction before they run. |
 
 ### Import set of sample records
 ```rake importdata:books```
@@ -131,8 +135,7 @@ Make sure you have access to the production server. To deploy master to producti
 
 ```shell
 cap production deploy
+cap production deploy:solr:update    # if Solr config needs updating
 cap production deploy:solr:reindex   # if Solr needs reindexing
-cap production deploy:db:reset       # if the database needs to be rebuilt
-
-
+cap production deploy:db:reset       # NO LONGER FUNCTIONAL! # if the database needs to be rebuilt
 ```
