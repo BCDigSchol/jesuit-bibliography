@@ -3,7 +3,8 @@
         <%= form.simple_fields_for :dois do |c| %>
             <%= c.input :value, 
                 label: field_label, 
-                as: :string
+                as: :string,
+                hint: hint_text ||= Bibliography::DOI_HINT
             %>
         <% end %>
     </div>
@@ -14,12 +15,17 @@
                 form, 
                 :dois,
                 class: 'btn btn-warning btn-add fa-icon', 
-                form_name: 'form', 
+                form_name: 'form',
                 data: {
                     'association-insertion-node' => '#bibliography_doi .fields', 
                     'association-insertion-method' => 'append'
                 }, 
-                partial: 'bibliography_standard_identifier_fields' 
+                partial: 'bibliography_standard_identifier_fields',
+                render_options:  {
+                    locals: { 
+                        hint_text: hint_text ||= Bibliography::DOI_HINT
+                    }
+                }
             %>
         </div>
     </div>

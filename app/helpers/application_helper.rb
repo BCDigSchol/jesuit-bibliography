@@ -60,9 +60,7 @@ module ApplicationHelper
                 components.each do |link|
                     link_str = "#"
                     # DOI strings may come in many different forms
-                    if link.match(/^https?:\/\/doi\.org\//)     # https://doi.org/10.1163/9789004347151_009
-                        link_str = "#{link}"
-                    elsif link.match(/^https?:\/\//)            # https://hdl.handle.net/10.1163/9789004347151_009
+                    if link.match(/^https?:\/\//)               # https://doi.org/10.1163/9789004347151_009
                         link_str = "#{link}"
                     elsif link.match('^doi\.org')               # doi.org/10.1163/9789004347151_009
                         link_str = "https://#{link}"

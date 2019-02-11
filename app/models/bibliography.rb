@@ -579,6 +579,7 @@ class Bibliography < ApplicationRecord
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
     LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record status is \'Published\''.freeze
     BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'
+    DOI_HINT = 'Only enter the numeric ID for each DOI (e.g. 10.1177/239693930903300206)'
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
