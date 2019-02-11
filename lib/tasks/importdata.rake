@@ -14,8 +14,17 @@ end
 
 namespace :importdata do
 
-    desc "Destroy all Bibliography records"
+    desc "Destroy all Bibliography records - interactive"
     task clear_all: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:clear_all_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Destroy all Bibliography records - noninteractive"
+    task clear_all_noninteractive: :environment do
         bar = ProgressBar.new(15)
         puts "Clearing all existing Bib records..."
         import_logger.info("Clearing all existing Bibliography records")
@@ -52,11 +61,34 @@ namespace :importdata do
         puts "Task completed.\n\n"
     end
 
-    desc "Run all importdata tasks and generate citations for all imported records"
-    task :all => [:clear_all, :books, :book_chapters, :book_reviews, :journal_articles, :dissertations, :conference_papers, :multimedia, :generate_citations]
+    desc "Run all importdata tasks and generate citations for all imported records - interactive"
+    task all: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:clear_all_noninteractive"].invoke
+            Rake::Task["importdata:books_nonineractive"].invoke
+            Rake::Task["importdata:book_chapters_noninteractive"].invoke
+            Rake::Task["importdata:book_reviews_noninteractive"].invoke
+            Rake::Task["importdata:journal_articles_noninteractive"].invoke
+            Rake::Task["importdata:dissertations_noninteractive"].invoke
+            Rake::Task["importdata:conference_papers_noninteractive"].invoke
+            Rake::Task["importdata:multimedia_noninteractive"].invoke
+            Rake::Task["importdata:generate_citations_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
 
-    desc "Import test books"
+    desc "Import test books - interactive"
     task books: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:books_nonineractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test books - noninteractive"
+    task books_nonineractive: :environment do
 
         @format = "Book"
 
@@ -217,8 +249,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test book chapters"
+    desc "Import test book chapters - interactive"
     task book_chapters: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:book_chapters_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test book chapters - noninteractive"
+    task book_chapters_noninteractive: :environment do
 
         @format = "Book Chapter"
 
@@ -382,8 +423,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test book reviews"
+    desc "Import test book reviews - interactive"
     task book_reviews: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:book_reviews_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test book reviews - noninteractive"
+    task book_reviews_noninteractive: :environment do
 
         @format = "Book Review"
 
@@ -541,8 +591,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test journal articles"
+    desc "Import test journal articles - interactive"
     task journal_articles: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:journal_articles_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test journal articles - noninteractive"
+    task journal_articles_noninteractive: :environment do
 
         @format = "Journal Article"
 
@@ -690,8 +749,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test dissertations"
+    desc "Import test dissertations - interactive"
     task dissertations: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:dissertations_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test dissertations"
+    task dissertations_noninteractive: :environment do
 
         @format = "Dissertation"
 
@@ -829,8 +897,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test conference papers"
+    desc "Import test conference papers - interactive"
     task conference_papers: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:conference_papers_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test conference papers - noninteractive"
+    task conference_papers_noninteractive: :environment do
 
         @format = "Conference Paper"
 
@@ -948,8 +1025,17 @@ namespace :importdata do
         import_logger.info("Created #{item_count} #{@format} records in #{diff} seconds")
     end
 
-    desc "Import test multimedia"
+    desc "Import test multimedia - interactive"
     task multimedia: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:multimedia_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Import test multimedia - noninteractive"
+    task multimedia_noninteractive: :environment do
 
         @format = "Multimedia"
 
@@ -1093,6 +1179,15 @@ namespace :importdata do
 
     desc "Generate Citations for all records"
     task generate_citations: :environment do
+        if user_prompt_interactive?
+            Rake::Task["importdata:generate_citations_noninteractive"].invoke
+        else
+            puts "\nExiting without running this task."
+        end
+    end
+
+    desc "Generate Citations for all records"
+    task generate_citations_noninteractive: :environment do
         puts "Starting citation generation"
         import_logger.info("Starting citation generation")
 
@@ -1114,6 +1209,18 @@ namespace :importdata do
         import_logger.info("Updated #{record_count} Bibliography records in #{diff} seconds")
     end
 
+    # run interactive prompt to force user to acknowledge running this command
+    def user_prompt_interactive?
+        rails_env = ENV['RAILS_ENV'] || nil
+
+        # short-circuit to true if this is a development/test instance
+        # return true if rails_env == "development" or rails_env == "test"
+
+        STDOUT.puts "This task will alter the database. Are you sure you want to continue? (y/n)"
+        input = STDIN.gets.strip
+        return true if input == 'y'
+        false
+    end
 
     # look at the RAILS_ENV variable and select the appropriate import file location
     def select_import_home_path
