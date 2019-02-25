@@ -23,7 +23,7 @@ namespace :deploy do
         
         desc 'update and reindex solr'
         task :reindex do
-            invoke "solr:update"
+            invoke "deploy:solr:update"
             on roles(:app) do
                 within "#{current_path}" do
                     execute :rake, 'sunspot:solr:reindex'
