@@ -82,6 +82,10 @@ gem 'blacklight-marc', :git => 'https://github.com/BCDigSchol/blacklight-marc.gi
 # see CVE-2018-16468
 gem "loofah", ">= 2.2.3"
 
+# make sure we're using the most recent version of bootstrap-sass
+# see CVE-2019-8331 
+gem "bootstrap-sass", ">= 3.4.1"
+
 # Jesuit Bibliography Staff gems
 gem 'pg'
 gem 'rails_admin', '~> 1.3'
