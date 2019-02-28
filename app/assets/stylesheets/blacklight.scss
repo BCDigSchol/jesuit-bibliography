@@ -319,10 +319,17 @@ h2.page-heading{
     }
     .rc-block {
         margin-bottom: 1.5rem;
+        .rc-row {
+            display: block;
+            margin-bottom: .25rem;
+        }
         .rc-item {
             margin-bottom: .25rem;
             .rc-label {
                 font-weight: 600;
+            }
+            .rc-text {
+                display:inline-block;
             }
             .rc-record-link {
                 margin-left: 3.5rem;

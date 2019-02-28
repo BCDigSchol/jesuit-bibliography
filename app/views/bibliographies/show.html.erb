@@ -351,23 +351,37 @@
                         <% @bib.reviewed_components.each do |rc| %>
                             <li>
                                 <% if rc.reviewed_author.present? %>
-                                    <div class="rc-item"><span class='rc-label'>Author:</span> <span><%= rc.reviewed_author %></span></div>
+                                    <div class="rc-item">
+                                    <% rc.reviewed_author.split(/[|]+/).each do |c| %>
+                                        <div class='rc-row'><span class='rc-label'>Author: </span><span class='rc-text'><%= c %></span></div>
+                                    <% end %>
+                                    </div>
                                 <% end %>
 
                                 <% if rc.reviewed_editor.present? %>
-                                    <div class="rc-item"><span class='rc-label'>Editor:</span> <span><%= rc.reviewed_editor %></span></div>
+                                    <div class="rc-item">
+                                        <% rc.reviewed_editor.split(/[|]+/).each do |c| %>
+                                            <div class='rc-row'><span class='rc-label'>Editor: </span><span class='rc-text'><%= c %></span></div>
+                                        <% end %>
+                                        <!--span class='rc-label'>Editor:</span><span class='rc-text'><%= rc.reviewed_editor %></span-->
+                                    </div>
                                 <% end %>
 
                                 <% if rc.reviewed_translator.present? %>
-                                    <div class="rc-item"><span class='rc-label'>Translator:</span> <span><%= rc.reviewed_translator %></span></div>
+                                    <div class="rc-item">
+                                        <% rc.reviewed_translator.split(/[|]+/).each do |c| %>
+                                            <div class='rc-row'><span class='rc-label'>Translator: </span><span class='rc-text'><%= c %></span></div>
+                                        <% end %>
+                                        <!--span class='rc-label'>Translator:</span><span class='rc-text'><%= rc.reviewed_translator %></span-->
+                                    </div>
                                 <% end %>
 
                                 <% if rc.reviewed_title.present? %>
-                                    <div class="rc-item"><span class='rc-label'>Title:</span> <span><%= rc.reviewed_title %></span></div>
+                                    <div class='rc-row'><div class="rc-item"><span class='rc-label'>Title: </span><span class='rc-text'><%= rc.reviewed_title %></span></div></div>
                                 <% end %>
 
                                 <% if rc.reviewed_title_record_ref.present? %>
-                                    <div class="rc-item"><span class='rc-label'>Referenced Title ID:</span> <span><%= rc.reviewed_title_record_ref %></span></div>
+                                    <div class='rc-row'><div class="rc-item"><span class='rc-label'>Referenced Title ID: </span><span class='rc-text'><%= rc.reviewed_title_record_ref %></span></div></div>
                                 <% end %>
                             </li>
                         <% end %>

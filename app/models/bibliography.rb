@@ -476,19 +476,40 @@ class Bibliography < ApplicationRecord
             reviewed_components.each do |rc|
                 rc_array << "<div class='rc-block'>"
                 if rc.reviewed_author.present?
-                    rc_array << "<div class='rc-item'><span class='rc-label'>Author:</span> #{rc.reviewed_author}</div>"
+                    rc_array << "<div class='rc-item'>"
+                    components = rc.reviewed_author.split(/[|]+/)
+                    if !components.empty?
+                        components.each do |c|
+                            rc_array << "<div class='rc-row'><span class='rc-label'>Author: </span><span class='rc-text'>#{c}</span></div>"
+                        end
+                    end
+                    rc_array << "</div>"
                 end
                 if rc.reviewed_editor.present?
-                    rc_array << "<div class='rc-item'><span class='rc-label'>Editor:</span> #{rc.reviewed_editor}</div>"
+                    rc_array << "<div class='rc-item'>"
+                    components = rc.reviewed_editor.split(/[|]+/)
+                    if !components.empty?
+                        components.each do |c|
+                            rc_array << "<div class='rc-row'><span class='rc-label'>Editor: </span><span class='rc-text'>#{c}</span></div>"
+                        end
+                    end
+                    rc_array << "</div>"
                 end
                 if rc.reviewed_translator.present?
-                    rc_array << "<div class='rc-item'><span class='rc-label'>Translator:</span> #{rc.reviewed_translator}</div>"
+                    rc_array << "<div class='rc-item'>"
+                    components = rc.reviewed_translator.split(/[|]+/)
+                    if !components.empty?
+                        components.each do |c|
+                            rc_array << "<div class='rc-row'><span class='rc-label'>Translator: </span><span class='rc-text'>#{c}</span></div>"
+                        end
+                    end
+                    rc_array << "</div>"
                 end
                 if rc.reviewed_title.present?
-                    rc_array << "<div class='rc-item'><span class='rc-label'>Title:</span> #{rc.reviewed_title}</div>"
+                    rc_array << "<div class='rc-row'><div class='rc-item'><span class='rc-label'>Title: </span><span class='rc-text'>#{rc.reviewed_title}</span></div></div>"
                 end
                 if rc.reviewed_title_record_ref.present?
-                    rc_array << "<div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(rc.reviewed_title_record_ref)}'>Go to reviewed item</a></span></div>"
+                    rc_array << "<div class='rc-row'><div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(rc.reviewed_title_record_ref)}'>Go to reviewed item</a></span></div></div>"
                 end
                 rc_array << "</div>"
             end
