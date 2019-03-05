@@ -141,14 +141,14 @@ class Bibliography < ApplicationRecord
     validates :book_title, presence: true,
         if: Proc.new { reference_type_is_one_of? ['book chapter'] }
 
-    validates :page_range, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book chapter', 'book review', 'journal article'] }
+    #validates :page_range, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book chapter', 'book review', 'journal article'] }
 
-    validates :issue, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
+    #validates :issue, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
 
-    validates :volume, presence: true,
-        if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
+    #validates :volume, presence: true,
+    #    if: Proc.new { reference_type_is_one_of? ['book review', 'journal article'] }
     
     validates :event_location, presence: true,
         if: Proc.new { reference_type_is_one_of? ['conference paper'] }

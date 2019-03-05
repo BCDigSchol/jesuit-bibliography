@@ -47,23 +47,23 @@
     %>
     
     <%= form.input :volume, 
-        label: 'Volume',
+        label:  format_field_label('Volume', true),
         as: :string,
-        required: true,
+        required: false,
         validate: true
     %>
 
     <%= form.input :issue, 
-        label: 'Issue',
+        label:  format_field_label('Issue', true),
         as: :string,
-        required: true,
+        required: false,
         validate: true
     %>
 
     <%= form.input :page_range, 
-        label: 'Page range',
+        label:  format_field_label('Page range', true),
         as: :string,
-        required: true,
+        required: false,
         validate: true
     %>
 
