@@ -8,12 +8,13 @@
         <h3>Update Users' roles</h3>
 
         <div class="top-message">
-            <p>Your account allows you to manage users with the following role types:<p>
+            <p>Your account allows you to manage users with the following role types*:<p>
             <ul class="list">
             <% @roles_current_user_can_manage.each do |role| %>
                 <li><%= role_pretty_display(role) %></li>
             <% end %>
             </ul>
+            <p>* 'Correspondent' is a synonym for 'Contributor'</p>
         </div>
         
         <div class="button-group">
