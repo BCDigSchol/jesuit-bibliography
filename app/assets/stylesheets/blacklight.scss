@@ -269,6 +269,16 @@ h2.page-heading{
     }
 }
 
+.featured-heading {
+    border-top: 5px solid #872334;
+    font-size: 20px;
+    color: #872334;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 3%;
+
+}
+
 @media screen and (max-width: 700px) {
     #collaborators-carousel {
         .featured-record {
@@ -359,6 +369,7 @@ footer.bcfooter {
             font-size: 16px;
             .logo {
                 padding-left: 0px;
+                padding-top:3%;
             }
             .pagebreak {
                 border-bottom: solid 5px #872334;
@@ -367,6 +378,11 @@ footer.bcfooter {
                     margin: 0 0 5px;
                     padding-top: 3%;
                 }
+            }
+
+            #order {
+                display: flex;
+                align-items: flex-end;
             }
             .footer-text {
                 padding-top: 3%;
@@ -379,6 +395,7 @@ footer.bcfooter {
                     text-decoration: underline;
                 }
             }
+
             .site-links {
                 list-style-type: none;
                 margin: 3% 0;
@@ -440,6 +457,14 @@ footer.bcfooter {
     p:last-child { margin-bottom: 0}
 }
 
+@media (max-width: 1050px) {
+    #order {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
 @media (min-width: 768px) {
     #header-navbar {
         .navbar {
@@ -454,7 +479,18 @@ footer.bcfooter {
             }
         }
     }
+
+    #order {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .footer-text {
+        width: 100%;
+    }
 }
+
 
 @media (max-width: 767px) {
     .top-menu {
@@ -469,6 +505,15 @@ footer.bcfooter {
         li {
             display: inline-block;
         }
+    }
+    
+    .footer-text {
+        width: 100%;
+    }
+
+    #order {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 
@@ -486,4 +531,14 @@ footer.bcfooter {
             }
         }
     }
+
+    .footer-text {
+        width: 100%;
+    }
+
+    #order {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
 }
