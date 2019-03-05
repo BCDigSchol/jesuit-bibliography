@@ -516,13 +516,15 @@ module CitationsGenerator
 
             def generate_url
                 # URL - pull from worldcat?
-                if self.worldcat_urls.present?
-                    p = []
-                    self.worldcat_urls.each do |url| 
-                        p << url.link
-                    end
-                    @b.url = "#{p.join(" and ")}"
-                end
+                # Don't include a URL field for now
+                #if self.worldcat_urls.present?
+                #    p = []
+                #    self.worldcat_urls.each do |url| 
+                #        p << url.link
+                #    end
+                #    @b.url = "#{p.join(" and ")}"
+                #end
+                #@b.url = nil
             end
 
             def generate_event
