@@ -900,7 +900,7 @@ class Bibliography < ApplicationRecord
             if self.book_title.present?
                 out = "<div class='rc-block'><div class='rc-item'>#{self.book_title}</div>"
                 if self.book_chapter_record_ref.present?
-                    out += "<div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(self.book_chapter_record_ref)}'>Go to reviewed item</a></span></div>"
+                    out += "<div class='rc-item'><span class='rc-record-link'><a href='#{Rails.application.routes.url_helpers.solr_document_path(self.book_chapter_record_ref)}'>Go to item</a></span></div>"
                 end
                 out += "</div>"
                 return out
