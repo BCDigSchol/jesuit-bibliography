@@ -5,6 +5,9 @@
   <h1><%= t('blacklight.tools.citation') %></h1>
 </div>
 <div class="modal-body">
+  <div class="alert alert-info" role="alert">
+    These citation styles are auto-generated for your reference. Please, always check the citations for accuracy before including them in your work.
+  </div>
   <% @documents.each do |document| %>
   
     <% if document[:display_title_text].present? and document[:display_title_text].length %>
