@@ -185,6 +185,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'year_published_text', label: 'Year', link_to_search: :year_published_text
 
     config.add_show_field 'dissertation_universities_text', label: 'University', :helper_method => :display_in_parts
+    config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
     config.add_show_field 'publishers_text', label: 'Publisher', :helper_method => :display_in_parts
     config.add_show_field 'publish_places_text', label: 'Place published'
 
@@ -243,7 +244,6 @@ class CatalogController < ApplicationController
     #config.add_show_field 'event_date_text', label: 'Event Date'
     #config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     #config.add_show_field 'journal_title_text', label: 'Journal Title'
-    #config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
     #config.add_show_field 'epub_date_text', label: 'Epub Date'
     #config.add_show_field 'chapter_number_text', label: 'Chapter Number'
     
