@@ -202,7 +202,9 @@ module Blacklight::Catalog
        end
   
        # SMS action (this will render the appropriate view on GET requests and process the form and send the email on POST requests)
+       # FIXED: deactivate sms feature
        def sms_action documents
+=begin
          to = "#{params[:to].gsub(/[^\d]/, '')}@#{params[:carrier]}"
          mail = RecordMailer.sms_record(documents, { :to => to }, url_options)
          if mail.respond_to? :deliver_now
@@ -210,9 +212,11 @@ module Blacklight::Catalog
          else
            mail.deliver
          end
+=end
        end
   
       def validate_sms_params
+=begin
         if params[:to].blank?
           flash[:error] = I18n.t('blacklight.sms.errors.to.blank')
         elsif params[:carrier].blank?
@@ -224,6 +228,8 @@ module Blacklight::Catalog
         end
   
         flash[:error].blank?
+=end
+        flash[:error] = "This feature has been deactivated."
       end
   
       def sms_mappings

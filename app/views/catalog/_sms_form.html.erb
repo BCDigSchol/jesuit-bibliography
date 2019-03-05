@@ -1,4 +1,6 @@
-  <%= form_tag url_for(:controller => controller_name, :action => "sms"), :id => 'sms_form', :class => "form-horizontal ajax_form", :method => :post do %>
+<%# Deactivate sms form %>
+<% if false %>
+<%= form_tag url_for(:controller => controller_name, :action => "sms"), :id => 'sms_form', :class => "form-horizontal ajax_form", :method => :post do %>
 <div class="modal-body">
   <%= render :partial=>'/flash_msg' %>
     <div class="form-group">
@@ -26,3 +28,6 @@
 <button type="submit" class="btn btn-primary"> <%= t('blacklight.sms.form.submit') %></button>
 </div>
   <% end %>
+<% else %>
+  <div class="alert alert-warning" role="alert">This feature has been deactivated.</div>
+<% end %>
