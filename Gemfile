@@ -98,7 +98,7 @@ gem 'sunspot_rails'
 gem 'progress_bar'
 gem 'kaminari'
 gem "wice_grid"
-gem 'font-awesome-sass',  '~> 4.3'
+gem 'font-awesome-sass', '~> 5.6.1'
 gem 'bootstrap-datepicker-rails'
 gem 'select2-rails'
 gem 'alphabetical_paginate', :git => 'https://github.com/BCDigSchol/alphabetical_paginate'

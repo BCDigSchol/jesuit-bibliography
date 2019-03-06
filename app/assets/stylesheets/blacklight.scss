@@ -46,6 +46,17 @@ h2.page-heading{
     z-index:1;
 }
 
+.banner-container {
+    padding: 2rem 0 0 0;
+    display: inline-block;
+    .media-middle {
+        font-size:50px;
+    }
+    p.banner-text {
+        font-size: 15px;
+    }
+}
+
 .bc-top-nav.navbar-nav {
     float:right;
     li {
