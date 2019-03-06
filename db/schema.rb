@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_052206) do
+ActiveRecord::Schema.define(version: 2019_03_06_205629) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -484,6 +484,10 @@ ActiveRecord::Schema.define(version: 2019_02_04_052206) do
     t.boolean "guest", default: false
     t.text "name"
     t.integer "role"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
