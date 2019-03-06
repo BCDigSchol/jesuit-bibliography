@@ -15,6 +15,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_book_editors_parent"></div>
         </div>
     </div>
     <div id="bibliography_book_editor_suggestions">
@@ -64,9 +65,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.book_editors').select2( select2_config(".book_editors", "people") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_book_editors_parent")
+        }
+        settings = select2_config(".book_editors", "people");
+
+        return $.extend(settings, additional_settings);
+    }
+
+    $('.book_editors').select2( generate_settings() );
     $("#bibliography_book_editors").on('cocoon:after-insert', function(e, insertedItem){
-        $('.book_editors').last().select2( select2_config(".book_editors", "people") );
+        $('.book_editors').last().select2( generate_settings() );
     });
 });
 </script>

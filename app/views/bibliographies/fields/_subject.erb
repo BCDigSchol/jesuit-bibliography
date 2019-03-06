@@ -11,6 +11,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_subjects_parent"></div>
         </div>
     </div>
     <div id="bibliography_subject_suggestions">
@@ -57,9 +58,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.subjects').select2( select2_config(".subjects", "subjects") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_subjects_parent")
+        }
+        settings = select2_config(".subjects", "subjects");
+
+        return $.extend(settings, additional_settings);
+    }
+   
+    $('.subjects').select2( generate_settings() );
     $("#bibliography_subjects").on('cocoon:after-insert', function(e, insertedItem){
-        $('.subjects').last().select2( select2_config(".subjects", "subjects") );
+        $('.subjects').last().select2( generate_settings() );
     });
 });
 </script>

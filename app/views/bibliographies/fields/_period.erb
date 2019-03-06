@@ -11,6 +11,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_periods_parent"></div>
         </div>
     </div>
     <div id="bibliography_period_suggestions">
@@ -34,7 +35,7 @@
                 render_options:  {
                     locals: { 
                         prompt_label: 'Choose a ' + short_field_label, 
-                        class_name: 'entities' 
+                        class_name: 'periods' 
                     }
                 }
             %>
@@ -57,9 +58,15 @@
 
 <script>
 $(document).ready(function() {
-    $('.periods').select2();
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_subjects_parent")
+        }
+        return additional_settings;
+    }
+    $('.periods').select2( generate_settings() );
     $("#bibliography_periods").on('cocoon:after-insert', function(e, insertedItem){
-        $('.periods').last().select2();
+        $('.periods').last().select2( generate_settings() );
     });
 });
 </script>
