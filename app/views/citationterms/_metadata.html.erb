@@ -8,7 +8,7 @@
 
     <div class="field-pair row">
         <label class="col-sm-2">Created At</label>
-        <div class="field-value col-sm-10"><%= record.created_at %></div>
+        <div class="field-value col-sm-10"><%= format_date_string(record.created_at) %></div>
     </div>
 
     <% if record.modified_by.present? %>
@@ -21,7 +21,7 @@
     <% if record.updated_at.present? %>
     <div class="field-pair row">
         <label class="col-sm-2">Last Modified At</label>
-        <div class="field-value col-sm-10"><%= record.updated_at %></div>
+        <div class="field-value col-sm-10"><%= format_date_string(record.updated_at) %></div>
     </div>
     <% end %>
 </div>
