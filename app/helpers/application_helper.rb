@@ -110,6 +110,14 @@ module ApplicationHelper
         display_in_parts_facet(args, "jesuits_facet")
     end
 
+    def display_in_parts_people args
+        display_in_parts_facet(args, "people_facet")
+    end
+
+    def display_in_parts_languages args
+        display_in_parts_facet(args, "languages_facet")
+    end
+
     # split field value into parts with html element wrappers.
     # this method allow for single or double (or more) pipes as a delimiter.
     # can be extended to allow other delimiters

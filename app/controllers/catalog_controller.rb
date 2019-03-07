@@ -172,14 +172,14 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'authors_text', label: 'Author', link_to_search: :people_facet
+    config.add_show_field 'authors_text', label: 'Author', :helper_method => :display_in_parts_people
     #config.add_show_field 'book_title_text', label: 'Book Title'
     #config.add_show_field 'book_chapter_record_ref_text', label: 'Book Link', :helper_method => :link_to_book_record
     config.add_show_field 'book_title_html_text', label: 'Book Title', :helper_method => :display_reviewed_component
-    config.add_show_field 'book_editors_text', label: 'Book Editor', link_to_search: :people_facet
-    config.add_show_field 'author_of_reviews_text', label: 'Author of Review', link_to_search: :people_facet
-    config.add_show_field 'editors_text', label: 'Editors', link_to_search: :people_facet
-    config.add_show_field 'translators_text', label: 'Translator', link_to_search: :people_facet
+    config.add_show_field 'book_editors_text', label: 'Book Editor', :helper_method => :display_in_parts_people
+    config.add_show_field 'author_of_reviews_text', label: 'Author of Review', :helper_method => :display_in_parts_people
+    config.add_show_field 'editors_text', label: 'Editors', :helper_method => :display_in_parts_people
+    config.add_show_field 'translators_text', label: 'Translator', :helper_method => :display_in_parts_people
     config.add_show_field 'reference_type_text', label: 'Format', link_to_search: :reference_type_facet
     config.add_show_field 'multimedia_type_text', label: 'Multimedia Type'
     config.add_show_field 'year_published_text', label: 'Year', link_to_search: :year_published_text
@@ -200,7 +200,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'series_multimedium_text', label: 'Multimedia Series', :helper_method => :display_in_parts
 
-    config.add_show_field 'languages_text', label: 'Language', link_to_search: :languages_facet
+    config.add_show_field 'languages_text', label: 'Language', helper_method: :display_in_parts_languages
     config.add_show_field 'abstract_text', label: 'Abstract', :helper_method => :display_in_parts
 
     # reviewed components in HTML
