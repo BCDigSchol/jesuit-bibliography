@@ -1,12 +1,12 @@
 default:
   toolbar:
-    - bold italic | undo redo
+    - bold italic | removeformat | undo redo
   menubar: false
   entity_encoding : "raw"
 
 displaytitle:
   toolbar:
-    - italic | undo redo
+    - italic | removeformat | undo redo 
   menubar: false
   forced_root_block: false
   entity_encoding : "raw"
