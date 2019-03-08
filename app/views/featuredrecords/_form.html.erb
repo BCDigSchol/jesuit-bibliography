@@ -58,12 +58,21 @@
               }
             %>
         </div>
+        <div class="referenced_citation_record_parent"></div>
     </div>
   </div>
 
   <script>
   $(document).ready(function() {
-      $('.bibliographies').select2( select2_config(".bibliographies", "bibliographies") );
+      function generate_settings(){
+          additional_settings = {
+              dropdownParent: $(".referenced_citation_record_parent")
+          }
+          settings = select2_config(".bibliographies", "bibliographies");
+
+          return $.extend(settings, additional_settings);
+      }
+      $('.bibliographies').select2( generate_settings() );
   });
   </script>
 

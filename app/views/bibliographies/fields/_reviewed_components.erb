@@ -12,6 +12,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_reviewed_components_parent"></div>
             <div class='links clearfix'>
                 <%= link_to_add_association Bibliography::ADD_BUTTON + field_label, 
                     form, 
@@ -37,9 +38,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.reviewed_component').select2( select2_config(".reviewed_component", "bibliographies", true, "Select a Book") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_reviewed_components_parent")
+        }
+        settings = select2_config(".reviewed_component", "bibliographies", true, "Select a Book");
+
+        return $.extend(settings, additional_settings);
+    }
+    
+    $('.reviewed_component').select2( generate_settings() );
     $("#bibliography_reviewed_components").on('cocoon:after-insert', function(e, insertedItem){
-        $('.reviewed_component').last().select2( select2_config(".reviewed_component", "bibliographies", true, "Select a Book") );
+        $('.reviewed_component').last().select2( generate_settings() );
     });
 });
 </script>

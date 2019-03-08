@@ -60,10 +60,20 @@
                 "data-url": citationterms_search_path
             }
         %>
+        <div class="book_chapter_record_parent"></div>
 
         <script>
         $(document).ready(function() {
-            $('.book_ref').select2( select2_config(".book_ref", "bibliographies", true, "Select a Book") );
+            function generate_settings(){
+                additional_settings = {
+                    dropdownParent: $(".book_chapter_record_parent")
+                }
+                settings = select2_config(".book_ref", "bibliographies", true, "Select a Book");
+
+                return $.extend(settings, additional_settings);
+            }
+
+            $('.book_ref').select2( generate_settings() );
         });
         </script>
     <% end %>

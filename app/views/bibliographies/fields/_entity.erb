@@ -11,6 +11,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_entities_parent"></div>
         </div>
     </div>
     <div id="bibliography_entity_suggestions">
@@ -57,9 +58,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.entities').select2( select2_config(".entities", "jesuits") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_entities_parent")
+        }
+        settings = select2_config(".entities", "jesuits");
+
+        return $.extend(settings, additional_settings);
+    }
+
+    $('.entities').select2( generate_settings() );
     $("#bibliography_entities").on('cocoon:after-insert', function(e, insertedItem){
-        $('.entities').last().select2( select2_config(".entities", "jesuits") );
+        $('.entities').last().select2( generate_settings() );
     });
 });
 </script>

@@ -15,6 +15,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_authors_parent"></div>
         </div>
     </div>
     <div id="bibliography_author_suggestions">
@@ -64,9 +65,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.authors').select2( select2_config(".authors", "people") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_authors_parent")
+        }
+        settings = select2_config(".authors", "people");
+
+        return $.extend(settings, additional_settings);
+    }
+
+    $('.authors').select2( generate_settings() );
     $("#bibliography_authors").on('cocoon:after-insert', function(e, insertedItem){
-        $('.authors').last().select2( select2_config(".authors", "people") );
+        $('.authors').last().select2( generate_settings() );
     });
 });
 </script>

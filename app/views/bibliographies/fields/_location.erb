@@ -11,6 +11,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_locations_parent"></div>
         </div>
     </div>
     <div id="bibliography_location_suggestions">
@@ -57,9 +58,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.locations').select2( select2_config(".locations", "locations") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_locations_parent")
+        }
+        settings = select2_config(".locations", "locations");
+
+        return $.extend(settings, additional_settings);
+    }
+
+    $('.locations').select2( generate_settings() );
     $("#bibliography_locations").on('cocoon:after-insert', function(e, insertedItem){
-        $('.locations').last().select2( select2_config(".locations", "locations") );
+        $('.locations').last().select2( generate_settings() );
     });
 });
 </script>

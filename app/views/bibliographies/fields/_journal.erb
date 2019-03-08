@@ -15,6 +15,7 @@
                     %>
                 <% end %>
             </div>
+            <div class="bibliography_journals_parent"></div>
         </div>
     </div>
     <div id="bibliography_journal_suggestions">
@@ -64,9 +65,18 @@
 
 <script>
 $(document).ready(function() {
-    $('.journals').select2( select2_config(".journals", "journals") );
+    function generate_settings(){
+        additional_settings = {
+            dropdownParent: $(".bibliography_journals_parent")
+        }
+        settings = select2_config(".journals", "journals");
+
+        return $.extend(settings, additional_settings);
+    }
+
+    $('.journals').select2( generate_settings() );
     $("#bibliography_journals").on('cocoon:after-insert', function(e, insertedItem){
-        $('.journals').last().select2( select2_config(".journals", "journals") );
+        $('.journals').last().select2( generate_settings() );
     });
 });
 </script>
