@@ -1,4 +1,4 @@
-<%= simple_form_for @subject, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true  do |form| %>
+<%= simple_form_for @subject, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
@@ -7,21 +7,9 @@
 
   <hr/>
 
-  <% if @subject.errors.any? %>
-  <div class="panel panel-danger" id="error_explanation">
-    <div class="panel-heading"><%= pluralize(@subject.errors.count, "error") %> prohibited this subject record from being saved:</div>
-    <div class="panel-body">
-      <ul>
-        <% @subject.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <% end %>
-
   <%= form.input :name, 
-      as: :string
+      as: :string,
+      required: true
   %>
 
   <%= form.input :sort_name, 
@@ -37,3 +25,13 @@
     <%= link_to 'Cancel', citationterms_subjects_path, class: 'btn btn-info' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.simple_form').parsley().on('field:validated', function() {
+        var ok = $('.parsley-error').length === 0;
+        $('.bs-callout-info').toggleClass('hidden', !ok);
+        $('.bs-callout-warning').toggleClass('hidden', ok);
+    });
+});
+</script>

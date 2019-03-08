@@ -4,7 +4,11 @@
 <% elsif can? :edit, Featuredrecord %>
     <h2 class="edit-label"><span class="header-label">Editing Featured Record:</span> <%= @record.name.present? ? @record.name : @record.id %></h2>
 
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: featuredrecord_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
 <% end %>

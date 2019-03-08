@@ -6,7 +6,11 @@
 
     <%= render 'citationterms/update_alert', model_type: 'location', record_id: @location.id %>
 
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_location_path %>
+    
+    <%= render 'error_messages' %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
 <% end %>

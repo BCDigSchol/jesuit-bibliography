@@ -1,7 +1,11 @@
 <h2>Add New Jesuit record</h2>
 
 <% if can? :create, Entity %>
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_entities_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

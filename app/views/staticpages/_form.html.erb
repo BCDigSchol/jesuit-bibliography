@@ -1,4 +1,4 @@
-<%= simple_form_for @page, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true  do |form| %>
+<%= simple_form_for @page, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job  do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save record", class: "btn btn-primary" %>
@@ -7,26 +7,15 @@
 
   <hr/>
 
-  <% if @page.errors.any? %>
-  <div class="panel panel-danger" id="error_explanation">
-    <div class="panel-heading"><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</div>
-    <div class="panel-body">
-      <ul>
-        <% @page.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <% end %>
-
   <%= form.input :name, 
       as: :string,
+      required: true,
       hint: 'Give a name for this page. This will be displayed as the page\'s title'
   %>
 
   <%= form.input :slug, 
       as: :string,
+      required: true,
       hint: 'Crate a slug for this page, e.g. "partners", that will be used in the page URL: "/about/partners". Use only alphabetical characters and avoid spaces'
   %>
 
@@ -60,3 +49,13 @@
     <%= link_to 'Go Back to Static Pages index', staticpages_path, class: 'btn btn-info' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.simple_form').parsley().on('field:validated', function() {
+        var ok = $('.parsley-error').length === 0;
+        $('.bs-callout-info').toggleClass('hidden', !ok);
+        $('.bs-callout-warning').toggleClass('hidden', ok);
+    });
+});
+</script>

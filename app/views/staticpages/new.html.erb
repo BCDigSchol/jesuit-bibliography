@@ -1,7 +1,11 @@
 <h2>Add New Static Page</h2>
 
 <% if can? :create, Staticpage %>
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: staticpages_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

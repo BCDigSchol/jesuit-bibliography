@@ -1,7 +1,11 @@
 <h2>Add New Century Term</h2>
 
 <% if can? :create, Period %>
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_periods_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>

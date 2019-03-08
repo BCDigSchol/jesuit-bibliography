@@ -1,4 +1,4 @@
-<%= simple_form_for @entity, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: true  do |form| %>
+<%= simple_form_for @entity, url: urlpath, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
   <div class="button-group">
     <%= form.button :submit, "Save record", class: "btn btn-primary" %>
@@ -7,21 +7,9 @@
 
   <hr/>
 
-  <% if @entity.errors.any? %>
-  <div class="panel panel-danger" id="error_explanation">
-    <div class="panel-heading"><%= pluralize(@entity.errors.count, "error") %> prohibited this Jesuit record from being saved:</div>
-    <div class="panel-body">
-      <ul>
-        <% @entity.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <% end %>
-
   <%= form.input :name, 
       as: :string,
+      required: true,
       hint: Bibliography::PERSON_FIELD_HINT
   %>
 
@@ -52,3 +40,13 @@
     <%= link_to 'Cencel', citationterms_entities_path, class: 'btn btn-info' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.simple_form').parsley().on('field:validated', function() {
+        var ok = $('.parsley-error').length === 0;
+        $('.bs-callout-info').toggleClass('hidden', !ok);
+        $('.bs-callout-warning').toggleClass('hidden', ok);
+    });
+});
+</script>

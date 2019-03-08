@@ -6,7 +6,11 @@
     
     <%= render 'citationterms/update_alert', model_type: 'language', record_id: @language.id %>
 
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_language_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
 <% end %>

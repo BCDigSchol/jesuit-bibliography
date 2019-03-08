@@ -6,7 +6,11 @@
 
     <%= render 'citationterms/update_alert', model_type: 'journal', record_id: @journal.id %>
 
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_journal_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
     <%= render 'bibliographies/not_permitted' %>
 <% end %>

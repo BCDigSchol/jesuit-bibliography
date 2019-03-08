@@ -1,12 +1,12 @@
 <%# backend-based validation error details %>
-<% if @bib.present? and @bib.errors.any? %>
+<% if @page.present? and @page.errors.any? %>
   <div class="panel panel-danger error-panel" id="error_explanation">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= pluralize(@bib.errors.count, "error") %> prohibited this record from being saved:</h3>
+      <h3 class="panel-title"><%= pluralize(@page.errors.count, "error") %> prohibited this record from being saved:</h3>
     </div>
     <div class="panel-body">
       <ul>
-        <% @bib.errors.full_messages.each do |msg| %>
+        <% @page.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>

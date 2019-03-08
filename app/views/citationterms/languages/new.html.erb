@@ -1,7 +1,11 @@
 <h2>Add New Language record</h2>
 
 <% if can? :create, Language %>
+    <%= render 'error_messages' %>
+
     <%= render 'form', urlpath: citationterms_languages_path %>
+
+    <%= render 'error_messages' %>
 <% else %>
   <%= render 'bibliographies/not_permitted' %>
 <% end %>
