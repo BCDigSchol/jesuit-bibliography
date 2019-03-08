@@ -33,9 +33,3 @@
 <% if current_user.admin_role? %>
     <%= render 'bibliographies/fields/make_published', :form => form %>
 <% end %>
-
-<script>
-$(document).ready(function() {
-    $('.bib_form form').enableClientSideValidations();
-});
-</script>

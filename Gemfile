@@ -105,8 +105,6 @@ gem 'alphabetical_paginate', :git => 'https://github.com/BCDigSchol/alphabetical
 gem 'tinymce-rails'
 gem 'blacklight_advanced_search'
 gem 'blacklight_range_limit'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
 gem 'bibtex-ruby'
 gem 'citeproc-ruby'
 gem 'csl-styles'

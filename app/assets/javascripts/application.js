@@ -29,9 +29,6 @@
 //= require bootstrap/carousel
 //= require select2
 //= require tinymce
-//= require rails.validations
-//= require rails.validations.simple_form
-//= require rails.validations.nested_form
 //= require jquery
 //= require parsley
 //= require_tree .

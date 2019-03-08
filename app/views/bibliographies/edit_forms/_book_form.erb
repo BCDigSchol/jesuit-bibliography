@@ -1,5 +1,5 @@
 <div id="book_form" class="bib_form">
-<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job, validate: false  do |form| %>
+<%= simple_form_for @bib, html: { class: "form-horizontal"}, wrapper: :horizontal_form_job do |form| %>
 
     <div class="button-group">
         <%= form.button :submit, "Save Record", class: "btn btn-primary" %>
@@ -34,15 +34,13 @@
     <%= form.input :year_published, 
         label: 'Year', 
         as: :string,
-        required: true,
-        validate: true
+        required: true
     %>
 
     <%= form.input :title, 
         label: 'Title', 
         as: :string,
-        required: true,
-        validate: true
+        required: true
     %>
 
     <%= render 'bibliographies/fields/display_title', :form => form, field_label: 'Display Title' %>
