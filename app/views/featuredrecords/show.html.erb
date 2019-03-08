@@ -12,41 +12,77 @@
 
         <hr/>
         
-        <% if @record.name.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-4">Featured Record</label>
-                <div class="field-value col-sm-8"><%= @record.name %></div>
-            </div>
-        <% end %>
+        <div class="clearfix">
+            <div class="fields-list col-sm-12">
+                <h4>Fields</h4>
 
-        <% if @record.rank.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-4">Featured Record rank</label>
-                <div class="field-value col-sm-8"><%= @record.rank %></div>
-            </div>
-        <% end %>
+                <% if @record.name.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-4">Featured Record</label>
+                        <div class="field-value col-sm-8"><%= @record.name %></div>
+                    </div>
+                <% end %>
 
-        <% if @record.published.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-4">Publish in the Featured Record box?</label>
-                <div class="field-value col-sm-8"><%= @record.published %></div>
-            </div>
-        <% end %>
+                <% if @record.rank.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-4">Featured Record rank</label>
+                        <div class="field-value col-sm-8"><%= @record.rank %></div>
+                    </div>
+                <% end %>
 
-        <% if @record.bibliography_id.present? and @bib.present? %>
-            <div class="field-pair row">
-                <label class="col-sm-4">Related Record ID</label>
-                <div class="field-value col-sm-8"><%= @record.bibliography_id %></div>
-            </div>
-             <div class="field-pair row">
-                <label class="col-sm-4">Related Record name (read only)</label>
-                <div class="field-value col-sm-8"><%= @bib.display_title %></div>
-            </div>
-        <% end %>
+                <% if @record.published.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-4">Publish in the Featured Record box?</label>
+                        <div class="field-value col-sm-8"><%= @record.published %></div>
+                    </div>
+                <% end %>
 
-        <div class="field-pair row">
-            <label class="col-sm-4">Body</label>
-            <div class="field-value col-sm-8"><%= @record.body.html_safe %></div>
+                <% if @record.bibliography_id.present? and @bib.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-4">Related Record ID</label>
+                        <div class="field-value col-sm-8"><%= @record.bibliography_id %></div>
+                    </div>
+                    <div class="field-pair row">
+                        <label class="col-sm-4">Related Record name (read only)</label>
+                        <div class="field-value col-sm-8"><%= @bib.display_title %></div>
+                    </div>
+                <% end %>
+
+                <div class="field-pair row">
+                    <label class="col-sm-4">Body</label>
+                    <div class="field-value col-sm-8"><%= @record.body.html_safe %></div>
+                </div>
+            </div>
+
+            <div class="citations-list col-sm-12">
+                <hr/>
+
+                <h4>Metadata</h4>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Created By</label>
+                    <div class="field-value col-sm-10"><%= @record.created_by %></div>
+                </div>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Created At</label>
+                    <div class="field-value col-sm-10"><%= format_date_string(@record.created_at) %></div>
+                </div>
+
+                <% if @record.modified_by.present? and can? :read, Featuredrecord %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Last Modified By</label>
+                    <div class="field-value col-sm-10"><%= @record.modified_by %></div>
+                </div>
+                <% end %>
+
+                <% if @record.updated_at.present? and can? :read, Featuredrecord %>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Last Modified At</label>
+                    <div class="field-value col-sm-10"><%= format_date_string(@record.updated_at) %></div>
+                </div>
+                <% end %>
+            </div>
         </div>
 
         <hr/>
