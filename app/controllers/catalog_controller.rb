@@ -172,7 +172,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'authors_text', label: 'Author', :helper_method => :display_in_parts_people
+    config.add_show_field 'display_author_text', label: 'Author', :helper_method => :display_in_parts_people
     #config.add_show_field 'book_title_text', label: 'Book Title'
     #config.add_show_field 'book_chapter_record_ref_text', label: 'Book Link', :helper_method => :link_to_book_record
     config.add_show_field 'book_title_html_text', label: 'Book Title', :helper_method => :display_reviewed_component
@@ -194,7 +194,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'volume_text', label: 'Volume'
     config.add_show_field 'issue_text', label: 'Issue'
 
+    config.add_show_field 'event_date_text', label: 'Event Date'
     config.add_show_field 'event_panel_title_text', label: 'Panel Title'
+    config.add_show_field 'event_institution_text', label: 'Event Institution'
     config.add_show_field 'event_title_text', label: 'Conference Title'
     config.add_show_field 'event_location_text', label: 'Conference Location'
 
@@ -240,8 +242,6 @@ class CatalogController < ApplicationController
     #config.add_show_field 'translated_title_text', label: 'Translated Title'
     #config.add_show_field 'volume_number_text', label: 'Volume Number'
     #config.add_show_field 'multimedia_dimensions_text', label: 'Multimedia Dimensions'
-    #config.add_show_field 'event_institution_text', label: 'Event Institution'
-    #config.add_show_field 'event_date_text', label: 'Event Date'
     #config.add_show_field 'dissertation_thesis_type_text', label: 'Thesis Type'
     #config.add_show_field 'journal_title_text', label: 'Journal Title'
     #config.add_show_field 'epub_date_text', label: 'Epub Date'
