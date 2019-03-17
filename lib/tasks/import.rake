@@ -20,7 +20,11 @@ namespace :import do
         ) do |row|
             #puts row
             item_count += 1
-            User.create!(row.to_h)
+            @user = User.create!(row.to_h)
+
+            # update sample user accounts so they are confirmed and ready to use
+            @user.confirmed_at = DateTime.now
+            @user.save
         end
         finish = Time.now
         diff = finish - start
