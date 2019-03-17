@@ -16,12 +16,12 @@
   <%= form.input :slug, 
       as: :string,
       required: true,
-      hint: 'Crate a slug for this page, e.g. "partners", that will be used in the page URL: "/about/partners". Use only alphabetical characters and avoid spaces'
+      hint: 'Create a slug for this page, e.g. "partners", that will be used in the About page URL. <em><strong>Do not add "about/" to the slug name as it is automatically added to the page URL</strong></em>. Only use alphabetical characters, and avoid spaces'.html_safe
   %>
 
   <%= form.input :description, 
       as: :string,
-      hint: 'A short description for this page'
+      hint: 'A short description for this page. Internal use only'
   %>
 
   <%#= form.input :rank, 
