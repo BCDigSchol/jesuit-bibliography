@@ -3,7 +3,7 @@ require 'progress_bar'
 
 bar = ProgressBar.new
 
-CREATED_BY_USER = "admin@test.com"
+CREATED_BY_USER = "admin"
 
 # find strings delimited by single or double pipe characters
 PIPE_DELIMITER_REGEX = /[|]+/
@@ -72,7 +72,7 @@ namespace :importdata do
             Rake::Task["importdata:dissertations_noninteractive"].invoke
             Rake::Task["importdata:conference_papers_noninteractive"].invoke
             Rake::Task["importdata:multimedia_noninteractive"].invoke
-            Rake::Task["importdata:generate_citations_noninteractive"].invoke
+            #Rake::Task["importdata:generate_citations_noninteractive"].invoke
         else
             puts "\nExiting without running this task."
         end
@@ -240,6 +240,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[28])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -414,6 +416,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[30])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -582,6 +586,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[29])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -740,6 +746,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[25])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -888,6 +896,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[20])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -1016,6 +1026,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[18])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
@@ -1168,6 +1180,8 @@ namespace :importdata do
             # Tags
             import_add_tags(@bib, row[21])
 
+            @bib.generate_citations
+            @bib.save!(validate: false)
             bar.increment!
         end
 
