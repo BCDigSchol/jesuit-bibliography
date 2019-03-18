@@ -1,0 +1,2 @@
+class ApiBibliography < ApplicationRecord
+end
