@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
 
   before_action :store_user_location!, if: :storable_location?
-  # The callback which stores the current location must be added before you authenticate the user 
-  # as `authenticate_user!` (or whatever your resource is) will halt the filter chain and redirect 
+  # The callback which stores the current location must be added before you authenticate the user
+  # as `authenticate_user!` (or whatever your resource is) will halt the filter chain and redirect
   # before the location can be stored.
-  # 
+  #
   # We already add this filter in the specific controller actions we need for authentication
   #before_action :authenticate_user!
 
@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from ApiException, :with => :render_api_error_response
+
   private
     # https://github.com/plataformatec/devise/wiki/How-To:-Redirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update
     # Its important that the location is NOT stored if:
@@ -38,11 +40,15 @@ class ApplicationController < ActionController::Base
     #    infinite redirect loop.
     # - The request is an Ajax request as this can lead to very unexpected behaviour.
     def storable_location?
-      request.get? && is_navigational_format? && !devise_controller? && !request.xhr? 
+      request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
     end
 
     def store_user_location!
       # :user is the scope we are authenticating
       store_location_for(:user, request.fullpath)
+    end
+
+    def render_api_error_response(error)
+      render :template => 'api/error.json', locals: {error: error}
     end
 end

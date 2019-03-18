@@ -757,6 +757,66 @@ class Bibliography < ApplicationRecord
         first_issn
     end
 
+    def reviewed_author
+        if reviewed_components.present?
+            authors = []
+            reviewed_components.each do |rc|
+                if rc.reviewed_author.present?
+                    authors << rc.reviewed_author
+                end
+            end
+            if authors.empty?
+                return nil
+            end
+            authors
+        end
+    end
+
+    def reviewed_editor
+        if reviewed_components.present?
+            editors = []
+            reviewed_components.each do |rc|
+                if rc.reviewed_editor.present?
+                    editors << rc.reviewed_editor
+                end
+            end
+            if editors.empty?
+                return nil
+            end
+            editors
+        end
+    end
+
+    def reviewed_translator
+        if reviewed_components.present?
+            translators = []
+            reviewed_components.each do |rc|
+                if rc.reviewed_translator.present?
+                    translators << rc.reviewed_translator
+                end
+            end
+            if translators.empty?
+                return nil
+            end
+            translators
+        end
+    end
+
+    def reviewed_title
+        if reviewed_components.present?
+            titles = []
+            reviewed_components.each do |rc|
+                if rc.reviewed_title.present?
+                    titles << rc.reviewed_title
+                end
+            end
+            if titles.empty?
+                return nil
+            end
+            titles
+        end
+    end
+
     private
         def comments_public
             if self.comments.present?
@@ -834,66 +894,6 @@ class Bibliography < ApplicationRecord
 
             # merge all the arrays into people_facet
             people_facet = authors + editors + translators + book_editors + author_of_reviews + performers
-        end
-
-        def reviewed_author
-            if reviewed_components.present?
-                authors = []
-                reviewed_components.each do |rc|
-                    if rc.reviewed_author.present?
-                        authors << rc.reviewed_author
-                    end
-                end
-                if authors.empty?
-                    return nil
-                end
-                authors
-            end
-        end
-
-        def reviewed_editor
-            if reviewed_components.present?
-                editors = []
-                reviewed_components.each do |rc|
-                    if rc.reviewed_editor.present?
-                        editors << rc.reviewed_editor
-                    end
-                end
-                if editors.empty?
-                    return nil
-                end
-                editors
-            end
-        end
-
-        def reviewed_translator
-            if reviewed_components.present?
-                translators = []
-                reviewed_components.each do |rc|
-                    if rc.reviewed_translator.present?
-                        translators << rc.reviewed_translator
-                    end
-                end
-                if translators.empty?
-                    return nil
-                end
-                translators
-            end
-        end
-
-        def reviewed_title
-            if reviewed_components.present?
-                titles = []
-                reviewed_components.each do |rc|
-                    if rc.reviewed_title.present?
-                        titles << rc.reviewed_title
-                    end
-                end
-                if titles.empty?
-                    return nil
-                end
-                titles
-            end
         end
 
         def book_title_html
