@@ -4,7 +4,7 @@ class Citationterms::LocationsController < ApplicationController
  
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_location, only: [:show, :edit, :update, :destroy]
+    before_action :set_location, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -87,6 +87,10 @@ class Citationterms::LocationsController < ApplicationController
             format.html { redirect_to citationterms_locations_path, notice: 'Location was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@location.bib_refs)
     end
 
     private

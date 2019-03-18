@@ -4,7 +4,7 @@ class Citationterms::JournalsController < ApplicationController
  
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_journal, only: [:show, :edit, :update, :destroy]
+    before_action :set_journal, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -91,6 +91,10 @@ class Citationterms::JournalsController < ApplicationController
             format.html { redirect_to citationterms_journals_path, notice: 'Journal was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@journal.bib_refs)
     end
 
     private

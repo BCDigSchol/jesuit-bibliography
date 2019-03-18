@@ -5,7 +5,7 @@ class Citationterms::PeopleController < ApplicationController
     
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_person, only: [:show, :edit, :update, :destroy]
+    before_action :set_person, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -92,6 +92,9 @@ class Citationterms::PeopleController < ApplicationController
             format.html { redirect_to citationterms_people_path, notice: 'Person was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
     end
 
     private

@@ -4,7 +4,7 @@ class Citationterms::LanguagesController < ApplicationController
  
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_language, only: [:show, :edit, :update, :destroy]
+    before_action :set_language, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -79,6 +79,10 @@ class Citationterms::LanguagesController < ApplicationController
             format.html { redirect_to citationterms_languages_path, notice: 'Language was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@language.bib_refs)
     end
 
     private

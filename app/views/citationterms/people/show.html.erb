@@ -9,6 +9,7 @@
             <% if can? :update, Person %>
             <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_person_path(@person), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
         </div>
 
@@ -67,6 +68,7 @@
             <% if can? :update, Person %>
             <%= link_to 'Edit this record', edit_citationterms_person_path(@person), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_person_path(@person), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to People terms index', citationterms_people_path, class: 'btn btn-info' %>
         </div>
     </div>

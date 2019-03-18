@@ -4,7 +4,7 @@ class Citationterms::EntitiesController < ApplicationController
  
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_entity, only: [:show, :edit, :update, :destroy]
+    before_action :set_entity, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -91,6 +91,10 @@ class Citationterms::EntitiesController < ApplicationController
             format.html { redirect_to citationterms_entities_path, notice: 'Entity was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@entity.bib_refs)
     end
 
     private
