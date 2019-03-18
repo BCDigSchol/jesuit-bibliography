@@ -4,7 +4,7 @@
 <% elsif can? :edit, Period %>
     <h2 class="edit-label"><span class="header-label">Editing Century:</span> <%= @period.name.present? ? @period.name : @period.id %></h2>
 
-    <%= render 'citationterms/update_alert', model_type: 'period', record_id: @period.id %>
+    <%= render 'citationterms/update_alert', model_type: 'period', record: @period %>
 
     <%= render 'error_messages' %>
 

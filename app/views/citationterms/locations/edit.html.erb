@@ -4,7 +4,7 @@
 <% elsif can? :edit, Location %>
     <h2 class="edit-label"><span class="header-label">Editing Location:</span> <%= @location.name %></h2>
 
-    <%= render 'citationterms/update_alert', model_type: 'location', record_id: @location.id %>
+    <%= render 'citationterms/update_alert', model_type: 'location', record: @location %>
 
     <%= render 'error_messages' %>
 

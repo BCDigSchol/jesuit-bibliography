@@ -4,7 +4,7 @@
 <% elsif can? :edit, Language %>
     <h2 class="edit-label"><span class="header-label">Editing Language:</span> <%= @language.name.present? ? @language.name : @language.id %></h2>
     
-    <%= render 'citationterms/update_alert', model_type: 'language', record_id: @language.id %>
+    <%= render 'citationterms/update_alert', model_type: 'language', record: @language %>
 
     <%= render 'error_messages' %>
 

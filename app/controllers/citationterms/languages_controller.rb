@@ -27,7 +27,6 @@ class Citationterms::LanguagesController < ApplicationController
     end
 
     def edit
-        @bibs = @language.bibliographies.count
     end
 
     def create

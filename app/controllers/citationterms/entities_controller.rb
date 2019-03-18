@@ -27,7 +27,6 @@ class Citationterms::EntitiesController < ApplicationController
     end
 
     def edit
-        @bibs = @entity.bibliographies.count
     end
 
     def create

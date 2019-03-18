@@ -4,7 +4,7 @@
 <% elsif can? :edit, Journal %>
     <h2 class="edit-label"><span class="header-label">Editing Journal Title:</span> <%= @journal.name.present? ? @journal.name : @journal.id %></h2>
 
-    <%= render 'citationterms/update_alert', model_type: 'journal', record_id: @journal.id %>
+    <%= render 'citationterms/update_alert', model_type: 'journal', record: @journal %>
 
     <%= render 'error_messages' %>
 

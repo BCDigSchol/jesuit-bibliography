@@ -27,7 +27,6 @@ class Citationterms::JournalsController < ApplicationController
     end
 
     def edit
-        @bibs = @journal.bibliographies.count
     end
 
     def create

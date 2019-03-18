@@ -29,6 +29,36 @@ class Person < ApplicationRecord
         reindex_parent!
     end
 
+    def bib_refs
+        bibs = []
+
+        self.author_of_reviews.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        self.authors.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        self.editors.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        self.translators.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        self.book_editors.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        self.performers.each do |person|
+            bibs.append(person.bibliography) if person.bibliography.present?
+        end
+
+        bibs
+    end
+
     validates :name, presence: true
 
     private

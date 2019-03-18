@@ -4,7 +4,7 @@
 <% elsif can? :edit, Entity %>
     <h2 class="edit-label"><span class="header-label">Editing Jesuit:</span> <%= @entity.name.present? ? @entity.name : @entity.id %></h2>
 
-    <%= render 'citationterms/update_alert', model_type: 'entity', record_id: @entity.id %>
+    <%= render 'citationterms/update_alert', model_type: 'entity', record: @entity %>
     
     <%= render 'error_messages' %>
 

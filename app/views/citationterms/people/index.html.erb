@@ -15,6 +15,10 @@
       per.name
     end
 
+    g.column name: 'Count' do |per|
+      per.bib_refs.count
+    end
+
     g.column name: 'Last Modified At', attribute: 'updated_at', filter: false do |loc|
       format_date_string(loc.updated_at)
     end
