@@ -19,7 +19,7 @@
 
         g.column name: 'Title', attribute: 'display_title'
 
-        g.column name: 'Author(s)' do |bib|
+        g.column name: 'Author(s)', attribute: 'display_author', ordering: false do |bib|
             if bib.display_author.present?
                 out = "".html_safe
                 bib.display_author.split('|').each do |author|
