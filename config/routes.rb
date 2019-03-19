@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :staticpages
 
   get '/api/updated' => 'api#list_updated'
+  get '/api/all' => 'api#all'
 
   get "/featuredrecords/all" => 'featuredrecords#load_all', as: 'featuredrecords_all'
   resources :featuredrecords
