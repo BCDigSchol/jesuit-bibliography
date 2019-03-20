@@ -336,6 +336,8 @@ GEM
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
+    sitemap_generator (6.0.2)
+      builder (~> 3.0)
     slop (3.6.0)
     solr_wrapper (2.0.0)
       faraday
@@ -459,6 +461,7 @@ DEPENDENCIES
   select2-rails
   selenium-webdriver
   simple_form
+  sitemap_generator
   solr_wrapper (>= 0.3)
   spring
   spring-watcher-listen (~> 2.0.0)

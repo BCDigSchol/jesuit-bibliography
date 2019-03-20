@@ -67,4 +67,7 @@ Rails.application.configure do
 
   # Host name for Devise.
   config.action_mailer.default_url_options = { :host => 'localhost', port: '3000' }
+
+  # Don't allow creation of sitemaps in development, since creation pings Google.
+  config.generate_sitemap = false
 end

@@ -1,3 +1,8 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# robots.txt
+# Load the sitemap if it is present
+Sitemap: /sitemaps/sitemap.xml.gz"
 User-agent: *
-Disallow: /
+Disallow: /catalog? # blocks search results pages
+Disallow: /catalog.html? # sometimes they use .html to get searches, Sneaky Google!
+Disallow: /catalog/facet # blocks facet pages
+Disallow: /catalog/range_limit

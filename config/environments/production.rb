@@ -105,4 +105,8 @@ Rails.application.configure do
 
   # Host name for Devise.
   config.action_mailer.default_url_options = { :host => 'jesuitonlinebibliography.bc.edu' }
+
+  # Allow creation of sitemaps.
+  config.generate_sitemap = true
+
 end
