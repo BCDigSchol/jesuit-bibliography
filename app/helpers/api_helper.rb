@@ -13,7 +13,7 @@ module ApiHelper
     end
 
     def reviewed_component_comment(reviewed_component)
-        title = "Reviewed item: #{reviewed_component.reviewed_title}"
+        title = "Reviewed item: #{reviewed_component.reviewed_title}".gsub('|', ' | ')
 
         credit_parts = []
 
@@ -29,6 +29,6 @@ module ApiHelper
             credit_parts << " edited by #{reviewed_component.reviewed_editor}"
         end
 
-        title + credit_parts.join(',') + ';'
+        title + credit_parts.join(',').gsub('|', ' | ') + ';'
     end
 end
