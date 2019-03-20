@@ -312,6 +312,10 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model 'ApiBibliography' do
+    visible false
+  end
+
   config.model 'Url' do
     label 'URL'
     label_plural 'URLs'
