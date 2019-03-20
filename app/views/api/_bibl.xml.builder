@@ -28,11 +28,23 @@ xml.bibl(id: bib.id, n: 'M') {
     end
 
     bib.authors.each do |author|
-        xml << render(:partial => 'api/tei_name', :locals => {:name => author.person.name, tag: 'author'})
+        xml << render(:partial => 'api/tei_name', :locals => {:name => author.person.name, tag: 'author', role: 'author'})
+    end
+
+    bib.author_of_reviews.each do |author|
+        xml << render(:partial => 'api/tei_name', :locals => {:name => author.person.name, tag: 'author', role: 'author'})
     end
 
     bib.editors.each do |editor|
-        xml << render(:partial => 'api/tei_name', :locals => {:name => editor.person.name, tag: 'editor'})
+        xml << render(:partial => 'api/tei_name', :locals => {:name => editor.person.name, tag: 'editor', role: 'editor'})
+    end
+
+    bib.book_editors.each do |editor|
+        xml << render(:partial => 'api/tei_name', :locals => {:name => editor.person.name, tag: 'editor', role: 'editor'})
+    end
+
+    bib.translators.each do |translator|
+        xml << render(:partial => 'api/tei_name', :locals => {:name => translator.person.name, tag: 'editor', role:'translator'})
     end
 
     xml.imprint {
@@ -73,8 +85,12 @@ xml.bibl(id: bib.id, n: 'M') {
         xml.biblScope bib.issue, type: "volume"
     end
 
-    if (bib.book_title)
+    if bib.book_title
         xml.title(bib.book_title, level: "m")
+    end
+
+    bib.reviewed_components.each do |component|
+        xml.comment(reviewed_component_comment(component), type: 'comment')
     end
 
     bib.comments.each do |comment|
