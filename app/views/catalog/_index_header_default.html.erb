@@ -15,7 +15,11 @@
         <%= t('blacklight.search.documents.counter', counter: counter) %>
       </span>
     <% end %>
-    <%= link_to_document document, document_show_link_field(document), counter: counter %>
+    <% if document[:display_title_text].present? and document[:display_title_text].length %>
+        <%= link_to_document document, document[:display_title_text][0].html_safe, counter: counter %>
+    <% else %>
+        <%= link_to_document document, document_show_link_field(document), counter: counter %>
+    <% end %>
   </h3>
 
   <%= document_actions %>
