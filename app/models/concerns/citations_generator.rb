@@ -87,7 +87,7 @@ module CitationsGenerator
                 generate_month
                 generate_number
                 generate_publisher
-                generate_pages
+                generate_page_range # called as @b.pages
                 generate_series
                 generate_title
                 generate_url
