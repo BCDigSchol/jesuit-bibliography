@@ -9,6 +9,7 @@
             <% if can? :update, Journal %>
             <%= link_to 'Edit this record', edit_citationterms_journal_path(@journal), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_journal_path(@journal), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
         </div>
 
@@ -39,6 +40,7 @@
             <% if can? :update, Journal %>
             <%= link_to 'Edit this record', edit_citationterms_journal_path(@journal), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_journal_path(@journal), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
         </div>
     </div>

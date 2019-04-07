@@ -16,7 +16,7 @@
     end
 
     g.column name: 'Count' do |per|
-      per.bib_refs.count
+      link_to per.bib_refs.count, references_citationterms_entity_path(per.id)
     end
 
     g.column name: 'Last Modified At', attribute: 'updated_at', filter: false do |loc|

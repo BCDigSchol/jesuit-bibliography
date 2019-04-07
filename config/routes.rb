@@ -65,13 +65,27 @@ Rails.application.routes.draw do
 
   # get paths like "/citations/terms/subject/1"
   namespace :citationterms, path: '/citations/terms' do
-    resources :subjects, path: 'subjects'
-    resources :entities, path: 'jesuits'
-    resources :periods, path: 'centuries'
-    resources :locations, path: 'locations'
-    resources :languages, path: 'languages'
-    resources :people, path: 'people'
-    resources :journals, path: 'journals'
+    resources :subjects, path: 'subjects' do
+      get 'references', on: :member
+    end
+    resources :entities, path: 'jesuits' do
+      get 'references', on: :member
+    end
+    resources :periods, path: 'centuries' do
+      get 'references', on: :member
+    end
+    resources :locations, path: 'locations' do
+      get 'references', on: :member
+    end
+    resources :languages, path: 'languages' do
+      get 'references', on: :member
+    end
+    resources :people, path: 'people' do
+      get 'references', on: :member
+    end
+    resources :journals, path: 'journals' do
+      get 'references', on: :member
+    end
     get 'search' => 'term_search#index'
   end
 

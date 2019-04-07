@@ -9,6 +9,7 @@
             <% if can? :update, Subject %>
             <%= link_to 'Edit this record', edit_citationterms_subject_path(@subject), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_subject_path(@subject), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
         </div>
 
@@ -34,6 +35,7 @@
             <% if can? :update, Subject %>
             <%= link_to 'Edit this record', edit_citationterms_subject_path(@subject), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_subject_path(@subject), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Subject terms index', citationterms_subjects_path, class: 'btn btn-info' %>
         </div>
 <% else %>

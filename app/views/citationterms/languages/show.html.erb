@@ -9,6 +9,7 @@
             <% if can? :update, Language %>
             <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_language_path(@language), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Language index', citationterms_languages_path, class: 'btn btn-info' %>
         </div>
 
@@ -28,6 +29,7 @@
             <% if can? :update, Language %>
             <%= link_to 'Edit this record', edit_citationterms_language_path(@language), class: 'btn btn-primary' %>
             <% end %>
+            <%= link_to 'View citation references', references_citationterms_language_path(@language), class: 'btn btn-warning' %>
             <%= link_to 'Go Back to Language index', citationterms_languages_path, class: 'btn btn-info' %>
         </div>
     </div>

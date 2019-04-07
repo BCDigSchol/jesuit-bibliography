@@ -1,0 +1,92 @@
+<% if @journal.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Journal Title index', citationterms_journals_path %>
+<% elsif can? :read, Location %>
+    <h2>Citation references for: <%= @journal.name.present? ? @journal.name : @journal.id %></h2>
+
+    <div class="button-group">
+        <%= link_to 'Go Back to Journal Title record', citationterms_journal_path(@journal), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
+    </div>
+
+    <div class="citations-list all-list">
+        <% if @journal.bib_refs.present? %>
+            <h4>The following <%= pluralize(@journal.bib_refs.count, 'Citation record') %> reference this Journal Title record</h4>
+            <%= grid(@bibs_grid,
+                show_filters: :when_filtered,
+                allow_showing_all_records: false, 
+                upper_pagination_panel: true
+                ) do |g|
+
+                g.column name: 'ID', attribute: 'id' do |bib|
+                    bib.id
+                end
+
+                g.column name: 'Format', attribute: 'reference_type', custom_filter: :auto
+
+                g.column name: 'Title', attribute: 'display_title' do |bib|
+                    if bib.display_title.present?
+                    bib.display_title.html_safe
+                    else
+                    Bibliography::NO_DISPLAY_TITLE
+                    end
+                end
+
+                g.column name: 'Author(s)', attribute: 'display_author', ordering: false do |bib|
+                    if bib.display_author.present?
+                    out = "".html_safe
+                    bib.display_author.split('|').each do |author|
+                        out << "<span class='value-part'>#{author}</span>".html_safe
+                    end
+                    out
+                    else
+                    Bibliography::NO_DISPLAY_AUTHOR
+                    end
+                end
+
+                g.column name: 'Status', attribute: 'status', custom_filter: :auto do |bib|
+                    if bib.status.present?
+                        "<span class='badge badge-#{bib.status}'>#{bib.status.capitalize}</span>".html_safe
+                    end
+                end
+
+                g.column name: 'Created by', attribute: 'created_by'
+
+                #g.column name: 'Created At', attribute: 'created_at', filter: false do |bib|
+                #  format_date_string(bib.created_at)
+                #end
+
+                g.column name: 'Last Modified', attribute: 'updated_at', filter: false do |bib|
+                    format_date_string(bib.updated_at)
+                end
+
+                if can? :detroy, Bibliography
+                    g.column do |bib|
+                    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+                    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe + 
+                    "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', bibliography_path(bib), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+                    end
+                elsif can? :edit, Bibliography
+                    g.column do |bib|
+                    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe + 
+                    "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_bibliography_path(bib) )}</span></div>".html_safe
+                    end
+                else
+                    g.column do |bib|
+                    "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', bibliography_path(bib) )}</span></div>".html_safe
+                    end
+                end
+            end -%>
+        <% else %>
+            <h4>There are no Citation records that reference this Journal Title record</h4>
+        <% end %>
+    </div>
+
+    <div class="button-group">
+        <%= link_to 'Go Back to Journal Title record', citationterms_journal_path(@journal), class: 'btn btn-primary' %>
+        <%= link_to 'Go Back to Journal Title index', citationterms_journals_path, class: 'btn btn-info' %>
+    </div>
+
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

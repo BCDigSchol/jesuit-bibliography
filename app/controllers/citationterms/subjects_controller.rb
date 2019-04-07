@@ -4,7 +4,7 @@ class Citationterms::SubjectsController < ApplicationController
 
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_subject, only: [:show, :edit, :update, :destroy]
+    before_action :set_subject, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -86,6 +86,10 @@ class Citationterms::SubjectsController < ApplicationController
             format.html { redirect_to citationterms_subjects_path, notice: 'Subject was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@subject.bib_refs)
     end
 
     private

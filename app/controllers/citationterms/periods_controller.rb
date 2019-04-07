@@ -4,7 +4,7 @@ class Citationterms::PeriodsController < ApplicationController
  
     before_action :require_login
     before_action :authenticate_user!
-    before_action :set_period, only: [:show, :edit, :update, :destroy]
+    before_action :set_period, only: [:show, :edit, :update, :destroy, :references]
 
     layout 'bibliography'
 
@@ -86,6 +86,10 @@ class Citationterms::PeriodsController < ApplicationController
             format.html { redirect_to citationterms_periods_path, notice: 'Period was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def references
+        @bibs_grid = initialize_grid(@period.bib_refs)
     end
 
     private

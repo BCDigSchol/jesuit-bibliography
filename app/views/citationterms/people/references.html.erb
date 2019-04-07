@@ -1,0 +1,25 @@
+<% if @person.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to People terms index', citationterms_people_path %>
+<% elsif can? :read, Person %>
+    <h2><%= @person.name.present? ? @person.name : @person.id %></h2>
+
+    <div class="record-view-fields">
+        <div class="people-list col-sm-12">
+            <% if @person.bib_refs.present? %>
+                <h4>The following <%= pluralize(@person.bib_refs.count, 'Citation record') %> reference this Person record</h4>
+
+                <ul class="bib-references">
+                <% @person.bib_refs.each do |f| %>
+                    <li><%= link_to f.display_title, bibliography_path(f.id) %></li>
+                <% end %>
+                </ul>
+            <% else %>
+                <h4>There are no Citation records that reference this Person record</h4>
+            <% end %>
+        </div>
+    </div>
+
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>
