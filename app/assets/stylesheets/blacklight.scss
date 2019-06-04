@@ -253,8 +253,12 @@ h2.page-heading{
 }
 
 #collaborators-carousel {
-    max-width: 700px;
+    max-width: 1000px;
     margin: 4em auto;
+
+    .carousel-inner {
+        min-height: 334px;
+    }
 
     // Hide the indicators for this carousel.
     .carousel-indicators {
@@ -276,6 +280,25 @@ h2.page-heading{
             padding: 3%;
             margin: 3%;
             vertical-align: middle;
+        }
+        a.featured-record-more-link {
+            font-size: larger;
+        }
+    }
+}
+
+@media (max-width: 399px) {
+    #collaborators-carousel {
+        .carousel-inner {
+            min-height: 628px;
+        }
+    }
+}
+
+@media (min-width: 400px) and (max-width: 714px) {
+    #collaborators-carousel {
+        .carousel-inner {
+            min-height: 521px;
         }
     }
 }

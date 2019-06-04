@@ -13,78 +13,35 @@
 <div class="home-collaborators">
   <h3 class="home-heading">Visit the Institutional Partners</h3>
   <ul class="collaborators-static">
-    <li><a href="http://www.sjweb.info/arsi/en/archivum-romanum-societatis-iesu/"><%= image_tag('ARSI.png', height:200, alt:'Archivum Romanum Societatus Iesu')%></a></li>
-    <li><a href="https://www.bc.edu/centers/iajs/"><%= image_tag('newIAJS.png', height:200, alt:'Institue for Advanced Jesuit Studies')%></a></li>
-    <li><a href="https://www.jesuitica.be/homepage/"><%= image_tag('jesuiticanew.png', height:200, alt:'Ku Leuven')%></a></li>
+    <li><a href="http://www.sjweb.info/arsi/en/archivum-romanum-societatis-iesu/"><%= image_tag('archivum_romanum_societatis_iesu_250.png', height:250, alt:'Archivum Romanum Societatus Iesu')%></a></li>
+    <li><a href="https://www.bc.edu/centers/iajs/"><%= image_tag('institute_for_advanced_jesuit_studies_250.png', height:250, alt:'Institue for Advanced Jesuit Studies')%></a></li>
+    <li><a href="https://www.jesuitica.be/homepage/"><%= image_tag('ku_leuven_250.png', height:250, alt:'Ku Leuven')%></a></li>
   </ul>
 
-  <div id="collaborators-carousel" class="carousel slide" data-ride="carousel">
-
-  <!-- Indicators. Disabled in CSS for featured records -->
-  <!-- Set data-target attribute to the carousel id. -->
-  <ol class="carousel-indicators">
-    <li data-target="#collaborators-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#collaborators-carousel" data-slide-to="1"></li>
-    <li data-target="#collaborators-carousel" data-slide-to="2"></li>
-  </ol>
-
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-
-
-      <!-- Each slide is an .item. The first slide should also have
-      the .active class. -->
-      <div class="item active featured-record">
-        <a href="https://www.jhia.ac.ke/"><%= image_tag('JHIA.png', width:100, alt:'JHIA')%></a><a href="https://www.facebook.com/xchr.goa/"><%= image_tag('XCHR.png', width:100, alt:'XCHR')%></a><a href="http://www.broteria.pt/"><%= image_tag('Broteria.png', width:100, alt:'Broteria')%></a>
-      </div>
-      <div class="item featured-record">
-        <p><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><p>
-      </div>
-      <div class="item featured-record">
-        <a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a><a href="#">OTHER COLLABORATOR</a>
-      </div>
-      <div class="item featured-record">
-        <a href="/about/partners">Click here for more partners and to learn more</a>
-      </div>
-  </div>
-
-  <a class="left carousel-control" href="#collaborators-carousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#collaborators-carousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-
+  <%= render 'collaborators' %>
 </div>
 
 <h3 class="featured-heading">Featured Records</h3>
-</div>
-
 <%= render 'featured_records', :featured_records => get_featured_records %>
 
 <script>
+  $('#featured-records-carousel').carousel({
+    interval: 10000
+  })
 
- $('#featured-records-carousel').carousel({
-        interval: 10000
-    })
-
-jQuery(document).ready(function ($) {
-
+  jQuery(document).ready(function ($) {
     setInterval(function () {
         moveRight();
     }, 7000);
   
-	var slideCount = $('#slider ul li').length;
-	var slideWidth = $('#slider ul li').width();
-	var slideHeight = $('#slider ul li').height();
-	var sliderUlWidth = slideCount * slideWidth;
+	  var slideCount = $('#slider ul li').length;
+	  var slideWidth = $('#slider ul li').width();
+	  var slideHeight = $('#slider ul li').height();
+	  var sliderUlWidth = slideCount * slideWidth;
 	
-	$('#slider').css({ width: slideWidth, height: slideHeight });
+	  $('#slider').css({ width: slideWidth, height: slideHeight });
 	
-	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	  $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
 	
     $('#slider ul li:last-child').prependTo('#slider ul');
 
@@ -113,10 +70,9 @@ jQuery(document).ready(function ($) {
     $('#slider a.control_next').click(function () {
         moveRight(); return false
     });
+  });  
 
-});  
-
- $(function() {
+  $(function() {
     $('#about a').on('click', function(e) {
       e.preventDefault();
 
