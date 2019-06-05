@@ -277,8 +277,8 @@ h2.page-heading{
         padding-top: 5%;
         a {
             display: inline-block;
-            padding: 3%;
-            margin: 3%;
+            padding: 1%;
+            margin: 2%;
             vertical-align: middle;
         }
         a.featured-record-more-link {
@@ -287,18 +287,48 @@ h2.page-heading{
     }
 }
 
-@media (max-width: 399px) {
+#collaborators-error-message {
+    margin: 4rem 0 8rem 0;
+    text-align: center;
+    font-size: large;
+}
+
+@media (max-width: 991px) {
     #collaborators-carousel {
         .carousel-inner {
-            min-height: 628px;
+            img {
+                width:180px;
+            }
         }
     }
 }
 
-@media (min-width: 400px) and (max-width: 714px) {
+@media (min-width: 500px) and (max-width: 768px) {
     #collaborators-carousel {
         .carousel-inner {
-            min-height: 521px;
+            min-height: 574px;
+            a {
+                padding: 1%;
+                margin: 2%;
+                img {
+                    width:220px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 499px) {
+    #collaborators-carousel {
+        .carousel-inner {
+            min-height: 712px;
+            a {
+                padding: 1%;
+                margin: 2%;
+                img {
+                    width:200px;
+                }
+            }
         }
     }
 }
