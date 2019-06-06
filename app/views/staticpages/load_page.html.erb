@@ -1,8 +1,8 @@
-<% if @page.nil? %>
-    <p>This record doesn't exist.</p>
-<% else %>
-
-    <div class="staticpage-container container">
+<div class="staticpage-container container">
+    <% if @page.nil? %>
+        <p>This page doesn't exist.</p>
+        <p>Please </p>
+    <% else %>
         <div class="heading-container"><h2><%= @page.name %></h2></div>
 
         <hr/>
@@ -10,6 +10,5 @@
         <div class="pull-right col-sm-10 about-body">
             <%= @page.body.html_safe %>
         </div>
-    </div>
-
-<% end %>
+    <% end %>
+</div>

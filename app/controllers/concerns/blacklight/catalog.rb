@@ -273,7 +273,7 @@ module Blacklight::Catalog
             # possibly non-html formats, this is consistent with what Rails does
             # on raising an ActiveRecord::RecordNotFound. Rails.root IS needed
             # for it to work under testing, without worrying about CWD.
-            render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false, :content_type => 'text/html'
+            render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => 'blacklight', :content_type => 'text/html'
           end
         end
       end
