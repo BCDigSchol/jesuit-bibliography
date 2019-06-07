@@ -185,25 +185,36 @@ module CitationsGenerator
 
             citeproc = bibliography.to_citeproc
  
-            # create initial CiteProc object
+            # create initial CiteProc object and assign it the MLA engine
             processor = CiteProc::Processor.new(style: 'modern-language-association', format: 'html', local: 'en')
+            # update MLA cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+            mla_title_if   = processor.engine.style.macros['title'] > 'choose' > 'if' > 'text'
+            mla_title_else = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
+            mla_title_if['text-case'] = "sentence"
+            mla_title_else['text-case'] = "sentence"
             processor.import citeproc
             mla_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_mla = mla_citation[0]
 
             # process Chicago citation style
-            #processor = CiteProc::Processor.new(style: 'chicago-fullnote-bibliography', format: 'html', local: 'en')
-            #processor.import citeproc
             processor.engine.style = 'chicago-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
+            # update chicago cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+            chicago_title_if_else = processor.engine.style.macros['title'] > 'choose' > 'else-if' > 'text'
+            chicago_title_else    = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
+            chicago_title_if_else['text-case'] = "sentence"
+            chicago_title_else['text-case'] = "sentence"
             chicago_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_chicago = chicago_citation[0]
     
             # process Turabian citation style
-            #processor = CiteProc::Processor.new(style: 'turabian-fullnote-bibliography', format: 'html', local: 'en')
-            #processor.import citeproc
             processor.engine.style = 'turabian-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
+            # update turabian cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+            turabian_title_if_else = processor.engine.style.macros['title'] > 'choose' > 'else-if' > 'text'
+            turabian_title_else    = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
+            turabian_title_if_else['text-case'] = "sentence"
+            turabian_title_else['text-case'] = "sentence"
             turabian_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_turabian = turabian_citation[0]
         end
