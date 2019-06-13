@@ -214,7 +214,7 @@
         function validate_params(obj_array, obj_promise) {
             // check if obj_promise is a valid promise object
             if (obj_promise !== null && typeof obj_promise === 'object' && typeof obj_promise.then === 'function') {
-                console.log("This is a promise object");
+                //console.log("This is a promise object");
             } else {
                 handle_error("This is not a valid promise object", $.Deferred());
                 return false;
