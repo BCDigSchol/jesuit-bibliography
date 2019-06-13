@@ -70,7 +70,7 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (9.4.9)
       execjs
-    bcrypt (3.1.12)
+    bcrypt (3.1.13)
     bibtex-ruby (4.4.7)
       latex-decode (~> 0.0)
     bindex (0.5.0)
@@ -154,7 +154,7 @@ GEM
     csv (1.0.0)
     deprecation (1.0.0)
       activesupport
-    devise (4.6.1)
+    devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -240,7 +240,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     options (2.3.2)
     orm_adapter (0.5.0)
@@ -254,7 +254,7 @@ GEM
       options (~> 2.3.0)
     public_suffix (3.0.3)
     puma (3.12.0)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -441,7 +441,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   csl-styles
   csv
-  devise (>= 4.6.0)
+  devise (>= 4.6.2)
   devise-guests (~> 0.6)
   font-awesome-sass (~> 5.6.1)
   jbuilder (~> 2.5)
@@ -479,4 +479,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.17.1
+   1.17.3

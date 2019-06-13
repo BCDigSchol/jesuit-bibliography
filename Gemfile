@@ -77,7 +77,7 @@ gem 'jquery-rails'
 
 # make sure we're using most recent version of devise
 # see CVE-2019-5421
-gem 'devise', ">= 4.6.0"
+gem 'devise', ">= 4.6.2"
 
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', :git => 'https://github.com/BCDigSchol/blacklight-marc.git', :tag => 'backport-traject'
