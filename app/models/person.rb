@@ -1,4 +1,4 @@
-class Person < ApplicationRecord
+class Person < ControlledVocabularyTerm
     has_many :authors, dependent: :destroy
     has_many :bibliographies, through: :authors
 
@@ -61,36 +61,4 @@ class Person < ApplicationRecord
 
     validates :name, presence: true
 
-    private
-        def reindex_parent!
-            self.author_of_reviews.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->author_of_review ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.authors.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->authors ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.editors.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->editors ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.translators.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->translators ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.book_editors.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->book_editors ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-
-            self.performers.each do |bs|
-                puts "\n\nReindexing ##{bs.bibliography.id} from Person->performers ##{self.id}"
-                bs.bibliography.reindex_me
-            end
-        end
 end

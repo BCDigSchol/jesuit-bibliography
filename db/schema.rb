@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_205629) do
+ActiveRecord::Schema.define(version: 2020_06_03_144841) do
 
   create_table "author_of_reviews", force: :cascade do |t|
     t.integer "bibliography_id"
@@ -194,6 +194,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+    t.text "normal_name"
+    t.index ["normal_name"], name: "index_entities_on_normal_name"
   end
 
   create_table "entity_suggestions", force: :cascade do |t|
@@ -241,7 +243,9 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.integer "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "normal_name"
     t.index ["bibliography_id"], name: "index_journals_on_bibliography_id"
+    t.index ["normal_name"], name: "index_journals_on_normal_name"
   end
 
   create_table "language_suggestions", force: :cascade do |t|
@@ -263,7 +267,9 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.text "sort_name"
     t.text "created_by"
     t.text "modified_by"
+    t.text "normal_name"
     t.index ["bibliography_id"], name: "index_languages_on_bibliography_id"
+    t.index ["normal_name"], name: "index_languages_on_normal_name"
   end
 
   create_table "location_suggestions", force: :cascade do |t|
@@ -284,6 +290,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+    t.text "normal_name"
+    t.index ["normal_name"], name: "index_locations_on_normal_name"
   end
 
   create_table "people", force: :cascade do |t|
@@ -298,6 +306,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.text "modified_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "normal_name"
+    t.index ["normal_name"], name: "index_people_on_normal_name"
   end
 
   create_table "performers", force: :cascade do |t|
@@ -327,6 +337,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+    t.text "normal_name"
+    t.index ["normal_name"], name: "index_periods_on_normal_name"
   end
 
   create_table "person_suggestions", force: :cascade do |t|
@@ -434,6 +446,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_205629) do
     t.datetime "updated_at", null: false
     t.text "created_by"
     t.text "modified_by"
+    t.text "normal_name"
+    t.index ["normal_name"], name: "index_subjects_on_normal_name"
   end
 
   create_table "tags", force: :cascade do |t|

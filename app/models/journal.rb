@@ -1,4 +1,4 @@
-class Journal < ApplicationRecord
+class Journal < ControlledVocabularyTerm
     has_many :bibliography_journals, dependent: :destroy
     has_many :bibliographies, through: :bibliography_journals
 
@@ -6,15 +6,4 @@ class Journal < ApplicationRecord
 
     validates :name, presence: true
 
-    def bib_refs
-        self.bibliographies
-    end
-    
-    private
-        def reindex_parent!
-            bibliographies.each do |bs|
-                puts "\n\nReindexing ##{bs.id} from Journal ##{self.id}"
-                bs.reindex_me
-            end
-        end
 end
