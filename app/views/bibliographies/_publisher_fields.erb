@@ -1,9 +1,10 @@
-<div class='bibliography-publisher-fields nested-fields form-group row'>
-    <%= form.input :name, wrapper: :vertical_input_group do %>
+<div class='bibliography-publisher-fields nested-fields'>
+    <%= form.input :name, wrapper: :vertical_input_group_job do %>
         <%= form.input :name, 
             label: false,
             as: :string,
-            label_html: { class: 'invisible' }
+            label_html: { class: 'invisible' },
+            required: true
         %>
         <span class="input-group-btn" id="basic-addon-citation">
             <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
