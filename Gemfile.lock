@@ -405,7 +405,7 @@ GEM
       railties (>= 5.0)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.3)
+    websocket-extensions (0.1.5)
     wice_grid (4.1.0)
       coffee-rails (> 3.2)
       kaminari (~> 1.1.0)
