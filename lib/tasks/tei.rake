@@ -25,6 +25,7 @@ namespace :tei do
         puts "Finished"
     end
 
+    # Fetch bibs and render as XML
     def fetch(page, per_page = 100)
         solr_result = Bibliography.search do
             paginate :page => page, :per_page => per_page

@@ -1,4 +1,8 @@
+# Builder template for rendering a single Bibliography record
+# as XML (TEI)
 xml.bibl(id: bib.id, n: 'M') {
+
+    # Creation date of record in Y-m-d
     xml.date(format_creation_date(bib.created_at), n: "created")
 
     xml.title bib.display_title
@@ -7,6 +11,8 @@ xml.bibl(id: bib.id, n: 'M') {
         xml.tag!('note', bib.periods[0].name, type: 'classification_period',)
     end
 
+    # Subjects, locations, and entities are all
+    # <kw type="subject"> elements
     subjects = bib.subjects.map {|subject| subject.name}
     subjects += bib.locations.map {|location| location.name}
     subjects += bib.entities.map {|entity| entity.name}
@@ -48,7 +54,10 @@ xml.bibl(id: bib.id, n: 'M') {
     end
 
     xml.imprint {
-        if bib.year_published
+        # Only assign a <date> if the year published is really
+        # a year published.
+        # @TODO smarter date parsing to accommodate things like "1932?" or "1812-1814"
+        if bib.year_published&.is_number?
             xml.date(bib.year_published)
         end
 
@@ -89,6 +98,7 @@ xml.bibl(id: bib.id, n: 'M') {
         xml.title(bib.book_title, level: "m")
     end
 
+    # Smash reviews into <comment> elements.
     bib.reviewed_components.each do |component|
         xml.comment(reviewed_component_comment(component), type: 'comment')
     end
