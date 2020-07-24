@@ -57,9 +57,8 @@ xml.bibl(id: bib.id, n: 'M') {
         # Only assign a <date> if the year published is really
         # a year published.
         # @TODO smarter date parsing to accommodate things like "1932?" or "1812-1814"
-        if bib.year_published&.is_number?
-            xml.date(bib.year_published)
-        end
+        #
+        xml.date(bib.year_published.to_i)
 
         if bib.publish_places.length > 0
             xml.pubPlace(bib.publish_places[0].name)
