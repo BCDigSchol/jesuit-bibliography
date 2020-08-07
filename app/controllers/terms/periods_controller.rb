@@ -17,8 +17,8 @@ class Terms::PeriodsController < ApplicationController
         }
 
         @periods, @alpha_params = Period
-                        .order('name ASC')
+                        .order('normal_name ASC')
                         .where.not(name: [nil, '']) # filter out nils and blanks
-                        .alpha_paginate(@letter, @alpha_params_options) {|per| per.sort_name.downcase}
+                        .alpha_paginate(@letter, @alpha_params_options) {|per| per.normal_name.downcase}
     end
 end

@@ -13,7 +13,7 @@ class Citationterms::PeopleController < ApplicationController
         authorize! :read, Person, :message => "Unable to load this page."
 
         @people_grid = initialize_grid(Person, 
-            order:           'people.sort_name',
+            order:           'people.normal_name',
             order_direction: 'asc'
         )
 

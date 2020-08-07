@@ -12,7 +12,7 @@ class Citationterms::JournalsController < ApplicationController
         authorize! :read, Journal, :message => "Unable to load this page."
 
         @journals_grid = initialize_grid(Journal, 
-            order:           'journals.sort_name',
+            order:           'journals.normal_name',
             order_direction: 'asc'
         )
 

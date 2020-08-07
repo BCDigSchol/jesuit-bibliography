@@ -12,7 +12,7 @@ class Citationterms::EntitiesController < ApplicationController
         authorize! :read, Entity, :message => "Unable to load this page."
 
         @entities_grid = initialize_grid(Entity, 
-            order:           'entities.sort_name',
+            order:           'entities.normal_name',
             order_direction: 'asc'
         )
 

@@ -17,8 +17,8 @@ class Terms::SubjectsController < ApplicationController
         }
 
         @subjects, @alpha_params = Subject
-                        .order('name ASC')
+                        .order('normal_name')
                         .where.not(name: [nil, '']) # filter out nils and blanks
-                        .alpha_paginate(@letter, @alpha_params_options) {|sub| sub.sort_name.downcase}
+                        .alpha_paginate(@letter, @alpha_params_options) {|sub| sub.normal_name.downcase}
     end
 end

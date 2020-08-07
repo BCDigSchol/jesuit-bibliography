@@ -12,7 +12,7 @@ class Citationterms::LanguagesController < ApplicationController
         authorize! :read, Language, :message => "Unable to load this page."
 
         @languages_grid = initialize_grid(Language, 
-            order:           'languages.sort_name',
+            order:           'languages.normal_name',
             order_direction: 'asc'
         )
 

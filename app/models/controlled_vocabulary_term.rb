@@ -18,7 +18,12 @@ class ControlledVocabularyTerm < ApplicationRecord
   # out. It is not displayed and isn't edited manually.
   #
   before_save do
-    self.normal_name = ActiveSupport::Inflector.transliterate(self.sort_name)
+    if self.sort_name
+      sort_name_stripped = self.sort_name.strip
+    elsif self.name
+      sort_name_stripped = self.name.strip
+    end
+    self.normal_name = ActiveSupport::Inflector.transliterate(sort_name_stripped)
   end
 
   # Reindex bibliographies if name has changed
