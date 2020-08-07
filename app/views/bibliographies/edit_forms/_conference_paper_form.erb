@@ -22,12 +22,8 @@
         required_status: false,
         pretend_required: true
     %>
-    
-    <%= form.input :year_published, 
-        label: 'Year', 
-        as: :string,
-        required: true
-    %>
+
+    <%= render 'bibliographies/fields/year_published', :form => form %>
 
     <%= form.input :paper_title, 
         label: 'Paper Title', 

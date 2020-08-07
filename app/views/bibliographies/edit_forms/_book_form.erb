@@ -30,12 +30,8 @@
         required_status: false, 
         hint_text: Bibliography::BOOK_AUTHOR_EDITOR_HINT 
     %>
-    
-    <%= form.input :year_published, 
-        label: 'Year', 
-        as: :string,
-        required: true
-    %>
+
+    <%= render 'bibliographies/fields/year_published', :form => form %>
 
     <%= form.input :title, 
         label: 'Title', 
