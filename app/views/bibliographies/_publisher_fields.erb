@@ -1,17 +1,4 @@
-<div class='bibliography-publisher-fields nested-fields'>
-    <%= form.input :name, wrapper: :vertical_input_group_job do %>
-        <%= form.input :name, 
-            label: false,
-            as: :string,
-            label_html: { class: 'invisible' },
-            required: true
-        %>
-        <span class="input-group-btn" id="basic-addon-citation">
-            <%= link_to_remove_association "<btn class='btn btn-danger btn-remove'>X</btn>".html_safe, 
-                form,
-                class: 'remove-link', 
-                form_name: 'form' 
-            %>
-        </span>
-    <% end %>
-</div>
+<%= render 'deletable_field',
+           form: form,
+           class_name: 'bibliography-publisher-fields'
+%>
