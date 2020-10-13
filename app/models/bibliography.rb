@@ -174,7 +174,7 @@ class Bibliography < ApplicationRecord
     LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record status is \'Published\''.freeze
     BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'
     DOI_HINT = 'Only enter the numeric ID for each DOI (e.g. 10.1177/239693930903300206)'
-    YEAR_PUBLISHED_HINT = 'Only records for items since 2000 will be published'
+    YEAR_PUBLISHED_HINT = 'Only records for items since 2000 will be published. Publication with a range of years should take the form 2002-08'
 
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
