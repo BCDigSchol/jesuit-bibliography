@@ -1,5 +1,6 @@
 <% if can? :read, Person %>
   <h2>People terms index</h2>
+  <p> Reminder: Do not use diacritics when filtering </p>
 
   <div class="button-group">
     <%= link_to 'Add New Person term', new_citationterms_person_path, class: 'btn btn-primary' %>
