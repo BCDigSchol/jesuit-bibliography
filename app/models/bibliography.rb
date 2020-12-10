@@ -1,6 +1,7 @@
 class Bibliography < ApplicationRecord
     include CitationsGenerator
     include BibliographyIndexer
+    include BibliographyAdmin
 
     has_one :featuredrecord
 
@@ -158,10 +159,6 @@ class Bibliography < ApplicationRecord
         if: Proc.new { reference_type_is_one_of? ['book review'] }
 
     validate :url_has_correct_format
-
-    rails_admin do
-        object_label_method { :display_title }
-    end
 
     # Define form hints here
     PERSON_FIELD_HINT = 'Last name, First name'.freeze
@@ -391,6 +388,22 @@ class Bibliography < ApplicationRecord
         end
     end
 
+    # Generate a list of editors for display
+    #
+    # @return [String] a list of editors for display
+    def display_editors
+        unless self.editors.present?
+            return nil
+        end
+
+        out = []
+        self.editors.each do |editor|
+            out << editor.person.name
+        end
+
+        out.join('|')
+    end
+
     private
         def comments_public
             if self.comments.present?
@@ -447,7 +460,7 @@ class Bibliography < ApplicationRecord
             comment['body'].blank?
         end
 
-        # we only want authors, editors and translators terms for this facet
+    # we only want authors, editors and translators terms for this facet
         def authors_faceting
             authors = self.authors.map { |author| author.person.name }
             editors = self.editors.map { |editor| editor.person.name }

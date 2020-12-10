@@ -115,19 +115,9 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Bibliography' do
-    navigation_label 'All records'
-    weight -4
-    label 'Citation'
-    label_plural 'Citations'
-    list do
-      #field :id
-      #field :reference_type
-      #field :display_title
-      #field :display_author
-      #field :year_published
-    end
-  end
+  #
+  # Bibliography config moved to BibliographyAdmin concern
+  #
 
   config.model 'Comment' do
     parent Bibliography
