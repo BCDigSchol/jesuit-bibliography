@@ -92,7 +92,7 @@ gem "bootstrap-sass", ">= 3.4.1"
 
 # Jesuit Bibliography Staff gems
 gem 'pg'
-gem 'rails_admin', '~> 1.3'
+gem 'rails_admin', '~> 1.4'
 gem 'simple_form'
 gem 'nested_form_fields'
 gem 'cocoon'
