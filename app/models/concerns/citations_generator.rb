@@ -97,7 +97,7 @@ module CitationsGenerator
                 # A Ph.D. thesis.
                 # Required fields: author, title, school, year
                 # Optional fields: type, address, month, note, key
-                if self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "phd"
+                if self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "ph"
                     @b.type = :phdthesis
                 else
                     @b.type = :mastersthesis

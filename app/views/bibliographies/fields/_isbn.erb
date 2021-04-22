@@ -3,7 +3,8 @@
         <%= form.simple_fields_for :isbns do |c| %>
             <%= c.input :value, 
                 label: field_label, 
-                as: :string
+                as: :string,
+                hint: hint_text ||= Bibliography::ISBN_HINT
             %>
         <% end %>
     </div>
@@ -19,7 +20,12 @@
                     'association-insertion-node' => '#bibliography_isbn .fields', 
                     'association-insertion-method' => 'append'
                 }, 
-                partial: 'bibliography_standard_identifier_fields' 
+                partial: 'bibliography_standard_identifier_fields',
+                render_options:  {
+                    locals: { 
+                        hint_text: hint_text ||= Bibliography::ISBN_HINT
+                    }
+                }
             %>
         </div>
     </div>
