@@ -169,10 +169,10 @@ class Bibliography < ApplicationRecord
     AUTHOR_OF_REVIEW_HINT = 'Please use \'N/A\' for anonymous reviews'.freeze
     EVENT_INSTITUTION_HINT = 'e.g. Renaissance Society of America, Universidad de Deusto'.freeze
     LINK_TO_BOOK_RECORD_HINT = 'Search for the Book record you want to link. Make sure the linked Book record status is \'Published\''.freeze
-    BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'
-    DOI_HINT = 'Only enter the numeric ID for each DOI (e.g. 10.1177/239693930903300206)'
-    YEAR_PUBLISHED_HINT = 'Only records for items since 2000 will be published. Publication with a range of years should take the form 2002-08'
-    ISBN_HINT = 'Only enter the numeric ID for each ISBN with no dashes (e.g. 1234567890123)'
+    BOOK_AUTHOR_EDITOR_HINT = 'Either Author or Editor is required'.freeze
+    DOI_HINT = 'Only enter the numeric ID for each DOI (e.g. 10.1177/239693930903300206)'.freeze
+    YEAR_PUBLISHED_HINT = 'Only records for items since 2000 will be published. Publication with a range of years should take the form 2002-08'.freeze
+    ISBN_HINT = 'Only enter the numeric ID for each ISBN with no dashes (e.g. 1234567890123)'.freeze
     
     # Define static lists/values here
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
