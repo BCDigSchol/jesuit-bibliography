@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_06_03_144841) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "author_of_reviews", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_author_of_reviews_on_bibliography_id"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_authors_on_bibliography_id"
@@ -78,8 +81,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_entities", force: :cascade do |t|
-    t.integer "entity_id"
-    t.integer "bibliography_id"
+    t.bigint "entity_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_entities_on_bibliography_id"
@@ -87,8 +90,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_journals", force: :cascade do |t|
-    t.integer "journal_id"
-    t.integer "bibliography_id"
+    t.bigint "journal_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_journals_on_bibliography_id"
@@ -96,8 +99,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_languages", force: :cascade do |t|
-    t.integer "language_id"
-    t.integer "bibliography_id"
+    t.bigint "language_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_languages_on_bibliography_id"
@@ -105,8 +108,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_locations", force: :cascade do |t|
-    t.integer "location_id"
-    t.integer "bibliography_id"
+    t.bigint "location_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_locations_on_bibliography_id"
@@ -114,8 +117,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_periods", force: :cascade do |t|
-    t.integer "period_id"
-    t.integer "bibliography_id"
+    t.bigint "period_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_periods_on_bibliography_id"
@@ -123,8 +126,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "bibliography_subjects", force: :cascade do |t|
-    t.integer "subject_id"
-    t.integer "bibliography_id"
+    t.bigint "subject_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_subjects_on_bibliography_id"
@@ -132,15 +135,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "book_editors", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_book_editors_on_bibliography_id"
     t.index ["person_id"], name: "index_book_editors_on_person_id"
   end
 
-  create_table "bookmarks", force: :cascade do |t|
+  create_table "bookmarks", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
     t.string "document_id"
@@ -157,7 +160,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "body"
     t.text "comment_type"
     t.boolean "make_public"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "created_by"
@@ -169,15 +172,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_dissertation_universities_on_bibliography_id"
   end
 
   create_table "editors", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_editors_on_bibliography_id"
@@ -203,7 +206,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_entity_suggestions_on_bibliography_id"
@@ -216,7 +219,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.boolean "published"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "image"
@@ -228,7 +231,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_journal_suggestions_on_bibliography_id"
@@ -240,7 +243,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "display_name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "normal_name"
@@ -253,7 +256,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_language_suggestions_on_bibliography_id"
@@ -261,7 +264,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
 
   create_table "languages", force: :cascade do |t|
     t.text "name"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "sort_name"
@@ -277,7 +280,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_location_suggestions_on_bibliography_id"
@@ -311,8 +314,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   end
 
   create_table "performers", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_performers_on_bibliography_id"
@@ -324,7 +327,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_period_suggestions_on_bibliography_id"
@@ -347,7 +350,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "field_name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_person_suggestions_on_bibliography_id"
@@ -357,7 +360,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_publish_places_on_bibliography_id"
@@ -367,7 +370,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_publishers_on_bibliography_id"
@@ -376,7 +379,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   create_table "reviewed_components", force: :cascade do |t|
     t.text "reviewed_author"
     t.text "reviewed_title"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "reviewed_translator"
@@ -385,7 +388,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.index ["bibliography_id"], name: "index_reviewed_components_on_bibliography_id"
   end
 
-  create_table "searches", force: :cascade do |t|
+  create_table "searches", id: :serial, force: :cascade do |t|
     t.binary "query_params"
     t.integer "user_id"
     t.string "user_type"
@@ -398,7 +401,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_series_multimedia_on_bibliography_id"
@@ -408,9 +411,9 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "isbn_id"
-    t.integer "issn_id"
-    t.integer "doi_id"
+    t.bigint "isbn_id"
+    t.bigint "issn_id"
+    t.bigint "doi_id"
     t.index ["doi_id"], name: "index_standard_identifiers_on_doi_id"
     t.index ["isbn_id"], name: "index_standard_identifiers_on_isbn_id"
     t.index ["issn_id"], name: "index_standard_identifiers_on_issn_id"
@@ -433,7 +436,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "note"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_subject_suggestions_on_bibliography_id"
@@ -454,15 +457,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.text "name"
     t.text "created_by"
     t.text "modified_by"
-    t.integer "bibliography_id"
+    t.bigint "bibliography_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_tags_on_bibliography_id"
   end
 
   create_table "translators", force: :cascade do |t|
-    t.integer "bibliography_id"
-    t.integer "person_id"
+    t.bigint "bibliography_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_translators_on_bibliography_id"
@@ -471,12 +474,12 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
 
   create_table "urls", force: :cascade do |t|
     t.text "link"
-    t.integer "worldcat_url_id"
-    t.integer "publisher_url_id"
-    t.integer "leuven_url_id"
-    t.integer "multimedia_url_id"
-    t.integer "event_url_id"
-    t.integer "dissertation_university_url_id"
+    t.bigint "worldcat_url_id"
+    t.bigint "publisher_url_id"
+    t.bigint "leuven_url_id"
+    t.bigint "multimedia_url_id"
+    t.bigint "event_url_id"
+    t.bigint "dissertation_university_url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dissertation_university_url_id"], name: "index_urls_on_dissertation_university_url_id"
@@ -506,4 +509,33 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "author_of_reviews", "bibliographies"
+  add_foreign_key "author_of_reviews", "people"
+  add_foreign_key "authors", "bibliographies"
+  add_foreign_key "authors", "people"
+  add_foreign_key "book_editors", "bibliographies"
+  add_foreign_key "book_editors", "people"
+  add_foreign_key "comments", "bibliographies"
+  add_foreign_key "dissertation_universities", "bibliographies"
+  add_foreign_key "editors", "bibliographies"
+  add_foreign_key "editors", "people"
+  add_foreign_key "entity_suggestions", "bibliographies"
+  add_foreign_key "featuredrecords", "bibliographies"
+  add_foreign_key "journal_suggestions", "bibliographies"
+  add_foreign_key "journals", "bibliographies"
+  add_foreign_key "language_suggestions", "bibliographies"
+  add_foreign_key "languages", "bibliographies"
+  add_foreign_key "location_suggestions", "bibliographies"
+  add_foreign_key "performers", "bibliographies"
+  add_foreign_key "performers", "people"
+  add_foreign_key "period_suggestions", "bibliographies"
+  add_foreign_key "person_suggestions", "bibliographies"
+  add_foreign_key "publish_places", "bibliographies"
+  add_foreign_key "publishers", "bibliographies"
+  add_foreign_key "reviewed_components", "bibliographies"
+  add_foreign_key "series_multimedia", "bibliographies"
+  add_foreign_key "subject_suggestions", "bibliographies"
+  add_foreign_key "tags", "bibliographies"
+  add_foreign_key "translators", "bibliographies"
+  add_foreign_key "translators", "people"
 end
