@@ -795,8 +795,8 @@ namespace :importdata do
             # University URL,Leuven URL,When,What,Where,Who,Abstract,Notes,Notes to Editors,Language
             # 10             11         12   13  14     15  16       17    18               19
             #
-            # Editing Tags
-            # 20
+            # Editing Tags,Thesis Type Citation
+            # 20           21
 
             @bib = Bibliography.new
 
@@ -895,6 +895,9 @@ namespace :importdata do
 
             # Tags
             import_add_tags(@bib, row[20])
+
+            # Thesis Type Citation
+            import_add_thesis_type_citation(@bib, row[21])
 
             @bib.generate_citations
             @bib.save!(validate: false)
@@ -1627,6 +1630,18 @@ namespace :importdata do
             values.each do |v|
                 import_logger.info("  adding Tag: #{v}")
                 @bib.tags << Tag.new(name: v)
+            end
+        end
+    end
+
+    # Thesis Type Citations
+    def import_add_thesis_type_citation(bib, col)
+        if col
+            col.unicode_normalize!
+            values = col.split(PIPE_DELIMITER_REGEX)
+            values.each do |v|
+                import_logger.info("  adding Thesis Type Citation: #{v}")
+                @bib.thesis_types << ThesisType.find_or_create_by(name: v, sort_name: v, normal_name: v, created_by: CREATED_BY_USER)
             end
         end
     end

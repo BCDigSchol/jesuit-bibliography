@@ -72,6 +72,7 @@ class BibliographiesController < ApplicationController
         @bib.bibliography_entities.build
         @bib.bibliography_languages.build
         @bib.bibliography_journals.build
+        @bib.bibliography_thesis_types.build
         @bib.worldcat_urls.build
         @bib.publisher_urls.build
         @bib.leuven_urls.build
@@ -145,6 +146,10 @@ class BibliographiesController < ApplicationController
                 @bib.journal_suggestions.build
             end
 
+            if @bib.thesis_type_suggestions == 0
+                @bib.thesis_type_suggestions.build
+            end
+
             if @bib.isbns.count == 0
                 @bib.isbns.build
             end
@@ -203,6 +208,10 @@ class BibliographiesController < ApplicationController
 
             if @bib.bibliography_journals.count == 0
                 @bib.bibliography_journals.build
+            end
+
+            if @bib.bibliography_thesis_types.count == 0
+                @bib.bibliography_thesis_types.build
             end
 
             if @bib.worldcat_urls.count == 0
@@ -424,7 +433,8 @@ class BibliographiesController < ApplicationController
             :entity_suggestions, 
             :period_suggestions, 
             :language_suggestions,
-            :journal_suggestions
+            :journal_suggestions,
+            :thesis_type_suggestions
         ]
 
         where_clause = []
@@ -514,6 +524,7 @@ class BibliographiesController < ApplicationController
                 language_suggestions_attributes: [:id, :name, :note, :_destroy],
                 person_suggestions_attributes: [:id, :name, :note, :field_name, :_destroy],
                 journal_suggestions_attributes: [:id, :name, :note, :_destroy],
+                thesis_type_suggestions_attributes: [:id, :name, :note, :_destroy],
                 reviewed_components_attributes: [:id, :reviewed_author, :reviewed_editor, :reviewed_translator, :reviewed_title, :reviewed_title_record_ref, :_destroy],
                 bibliography_subjects_attributes: [:id, :subject_id, :_destroy],
                 bibliography_periods_attributes: [:id, :period_id, :_destroy],
@@ -521,6 +532,7 @@ class BibliographiesController < ApplicationController
                 bibliography_entities_attributes: [:id, :entity_id, :_destroy],
                 bibliography_languages_attributes: [:id, :language_id, :_destroy],
                 bibliography_journals_attributes: [:id, :journal_id, :_destroy],
+                bibliography_thesis_types_attributes: [:id, :thesis_type_id, :_destroy],
                 isbns_attributes: [:id, :value, :_destroy],
                 issns_attributes: [:id, :value, :_destroy],
                 dois_attributes: [:id, :value, :_destroy],

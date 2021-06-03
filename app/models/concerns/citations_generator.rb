@@ -97,7 +97,19 @@ module CitationsGenerator
                 # A Ph.D. thesis.
                 # Required fields: author, title, school, year
                 # Optional fields: type, address, month, note, key
-                if self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "ph"
+
+                # check if the thesis_types object is present and use the citation_style value from that object.
+                # else, use the old dissertation_thesis_type free-text field to determine the citation style
+                if self.thesis_types.present? 
+                    # ThesisType has a many-to-many relationship with Bibliography even though we present it as a one-to-many relationship on the forms.
+                    # This means the thesis_types object returns as a list of values. We still need to use the _first_ element from the list of values 
+                    # even if there is only one value in the list. Confusing? Yeah.
+                    if self.thesis_types.first.citation_style.present?
+                        @b.type = self.thesis_types.first.citation_style
+                    else
+                        @b.type = :mastersthesis
+                    end
+                elsif self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "ph"
                     @b.type = :phdthesis
                 else
                     @b.type = :mastersthesis
@@ -172,7 +184,6 @@ module CitationsGenerator
             # year-suffix accessed container event-date issued original-date
             # author editor translator recipient interviewer publisher composer
             # original-publisher original-author container-author collection-editor
-            #end
     
             bibliography = BibTeX::Bibliography.new
             bibliography << @b

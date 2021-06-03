@@ -49,6 +49,7 @@ class Ability
       can :manage, Journal          # can read Journal Term lists
       can :manage, Bibliography     # can manage Bib records
       can :manage, Tag              # can manage Bib record Tags
+      can :manage, ThesisType       # can manage Dissertation Type Term lists
     end
 
     # Role can:
@@ -79,6 +80,7 @@ class Ability
       can :read, Journal                            # can read Journal Term lists
       can [:create, :read, :update], Bibliography   # can create/read/update Bib records
       can :manage, Tag                              # can manage Bib record Tags
+      can :read, ThesisType                         # can read Dissertation Type Term lists
     end
 
     # Role can:

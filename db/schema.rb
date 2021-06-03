@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_144841) do
+ActiveRecord::Schema.define(version: 2021_05_04_190040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.datetime "updated_at", null: false
     t.index ["bibliography_id"], name: "index_bibliography_subjects_on_bibliography_id"
     t.index ["subject_id"], name: "index_bibliography_subjects_on_subject_id"
+  end
+
+  create_table "bibliography_thesis_types", force: :cascade do |t|
+    t.bigint "thesis_type_id"
+    t.bigint "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_bibliography_thesis_types_on_bibliography_id"
+    t.index ["thesis_type_id"], name: "index_bibliography_thesis_types_on_thesis_type_id"
   end
 
   create_table "book_editors", force: :cascade do |t|
@@ -463,6 +472,31 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
     t.index ["bibliography_id"], name: "index_tags_on_bibliography_id"
   end
 
+  create_table "thesis_type_suggestions", force: :cascade do |t|
+    t.text "name"
+    t.text "note"
+    t.text "created_by"
+    t.text "modified_by"
+    t.bigint "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bibliography_id"], name: "index_thesis_type_suggestions_on_bibliography_id"
+  end
+
+  create_table "thesis_types", force: :cascade do |t|
+    t.text "name"
+    t.text "sort_name"
+    t.text "normal_name"
+    t.text "created_by"
+    t.text "modified_by"
+    t.bigint "bibliography_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "citation_style"
+    t.index ["bibliography_id"], name: "index_thesis_types_on_bibliography_id"
+    t.index ["normal_name"], name: "index_thesis_types_on_normal_name"
+  end
+
   create_table "translators", force: :cascade do |t|
     t.bigint "bibliography_id"
     t.bigint "person_id"
@@ -536,6 +570,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_144841) do
   add_foreign_key "series_multimedia", "bibliographies"
   add_foreign_key "subject_suggestions", "bibliographies"
   add_foreign_key "tags", "bibliographies"
+  add_foreign_key "thesis_type_suggestions", "bibliographies"
+  add_foreign_key "thesis_types", "bibliographies"
   add_foreign_key "translators", "bibliographies"
   add_foreign_key "translators", "people"
 end

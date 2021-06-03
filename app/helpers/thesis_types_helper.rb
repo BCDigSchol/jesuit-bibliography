@@ -1,0 +1,2 @@
+module ThesisTypesHelper
+end

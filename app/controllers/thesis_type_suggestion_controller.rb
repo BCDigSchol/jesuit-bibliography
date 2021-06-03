@@ -1,0 +1,2 @@
+class ThesisTypeSuggestionController < ApplicationController
+end

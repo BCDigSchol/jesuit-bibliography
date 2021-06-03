@@ -433,12 +433,48 @@
 
                 <% if @bib.dissertation_thesis_type.present? %>
                     <div class="field-pair row">
-                        <label class="col-sm-2">Thesis type</label>
+                        <label class="col-sm-2">Thesis type (OLD)</label>
                         <div class="field-value col-sm-10"><%= @bib.dissertation_thesis_type %></div>
                     </div>
                 <% end %>
 
+                <% if @bib.thesis_types.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Thesis Type (vocab)</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.thesis_types.each do |thesis_type| %>
+                            <li><%= thesis_type.name %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">BibTex citation style</label>
+                        <ul class="field-value col-sm-10">
+                        <% @bib.thesis_types.each do |thesis_type| %>
+                            <li><%= thesis_type.citation_style %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
 
+                <% if @bib.thesis_type_suggestions.present? %>
+                    <div class="field-pair row">
+                        <label class="col-sm-2">Suggested Thesis Types</label>
+                        <div class="field-value col-sm-10">
+                            <table class="table table-bordered">
+                                <thead><tr class="info"><th>Term</th><th>Note</th></tr></thead>
+                                <tbody>
+                                <% @bib.thesis_type_suggestions.each do |suggestion| %>
+                                    <tr>
+                                        <td><%= suggestion.name %></td>
+                                        <td><%= suggestion.note %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% end %>
 
                 <% if @bib.reprint_edition.present? %>
                     <div class="field-pair row">

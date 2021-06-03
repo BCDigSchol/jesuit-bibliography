@@ -321,6 +321,11 @@ module BibliographyIndexer
       end
       text :centuries_faceting, :as => 'centuries_facet'
 
+      # uncomment to include thesis_types in SOLR record schema
+      #text :thesis_types do # for associations
+      #  thesis_types.map { |thesis_type| thesis_type.name }
+      #end
+
       integer :years_published, :multiple => true, :trie => true do
         pub_years = year_published.split(/\D/)
         pub_years = pub_years.map { |pub_year| pub_year.to_i }

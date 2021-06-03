@@ -1,0 +1,23 @@
+<div class='nested-fields'>
+    <%= form.input :thesistype, wrapper: :vertical_input_group_job do %>
+        <%= form.association :thesis_type, 
+            label: false,
+            #collection: [ThesisType.find_by_id(form.object.thesis_type_id)],
+            collection: ThesisType.order(:sort_name),
+            prompt: prompt_label, 
+            form_name: 'form',
+            hint: Bibliography::TERM_FIELD_HINT,
+            input_html: {
+                class: class_name,
+                "data-url": citationterms_search_path
+            }
+        %>
+        <span class="input-group-btn" id="basic-addon-thesis-type">
+            <%= link_to_remove_association "<btn class='btn btn-warning btn-remove'><i class='fa fa-refresh'></i></btn>".html_safe, 
+                form, 
+                class: 'remove-link', 
+                form_name: 'form' 
+            %>
+        </span>
+    <% end %>
+</div>

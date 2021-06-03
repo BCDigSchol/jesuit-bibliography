@@ -1,0 +1,16 @@
+<% if @thesis_type.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Thesis Types index', citationterms_thesis_types_path, class: 'btn btn-info' %>
+<% elsif can? :edit, ThesisType %>
+    <h2 class="edit-label"><span class="header-label">Editing Thesis Type:</span> <%= @thesis_type.name.present? ? @thesis_type.name : @thesis_type.id %></h2>
+    
+    <%= render 'citationterms/update_alert', model_type: 'thesis_type', record: @thesis_type %>
+
+    <%= render 'error_messages' %>
+
+    <%= render 'form', urlpath: citationterms_thesis_type_path %>
+
+    <%= render 'error_messages' %>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

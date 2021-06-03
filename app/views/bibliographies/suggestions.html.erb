@@ -65,6 +65,10 @@
             if bib.journal_suggestions.present?
                 out << "<span class='badge badge-info'>#{bib.journal_suggestions.count} #{"Journal".pluralize(bib.journal_suggestions.count)}</span>".html_safe
             end
+
+            if bib.thesis_type_suggestions.present?
+                out << "<span class='badge badge-info'>#{bib.thesis_type_suggestions.count} #{"ThesisType".pluralize(bib.thesis_type_suggestions.count)}</span>".html_safe
+            end
             out
         end
 

@@ -12,7 +12,8 @@ class Citationterms::TermSearchController < ApplicationController
       :journals => Journal,
       :languages => Language,
       :centuries => Period,
-      :people => Person
+      :people => Person,
+      :thesistypes => ThesisType
     }
 
     def index
