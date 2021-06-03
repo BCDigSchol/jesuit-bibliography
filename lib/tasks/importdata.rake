@@ -78,6 +78,19 @@ namespace :importdata do
         end
     end
 
+    desc "Run all importdata tasks and generate citations for all imported records - noninteractive"
+    task all_noninteractive: :environment do
+        Rake::Task["importdata:clear_all_noninteractive"].invoke
+        Rake::Task["importdata:books_nonineractive"].invoke
+        Rake::Task["importdata:book_chapters_noninteractive"].invoke
+        Rake::Task["importdata:book_reviews_noninteractive"].invoke
+        Rake::Task["importdata:journal_articles_noninteractive"].invoke
+        Rake::Task["importdata:dissertations_noninteractive"].invoke
+        Rake::Task["importdata:conference_papers_noninteractive"].invoke
+        Rake::Task["importdata:multimedia_noninteractive"].invoke
+        #Rake::Task["importdata:generate_citations_noninteractive"].invoke
+    end
+
     desc "Import test books - interactive"
     task books: :environment do
         if user_prompt_interactive?

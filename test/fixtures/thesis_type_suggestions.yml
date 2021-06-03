@@ -2,12 +2,6 @@
 
 one:
   name: MyText
-  note: MyText
-  created_by: MyText
-  modified_by: MyText
 
 two:
   name: MyText
-  note: MyText
-  created_by: MyText
-  modified_by: MyText

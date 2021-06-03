@@ -29,6 +29,10 @@
 /public/assets
 .byebug_history
 
+# Ignore database backups
+/db/backups/*
+!/db/backups/.keep
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .DS_Store

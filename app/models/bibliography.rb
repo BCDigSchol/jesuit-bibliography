@@ -182,6 +182,7 @@ class Bibliography < ApplicationRecord
     ISBN_HINT = 'Only enter the numeric ID for each ISBN with no dashes (e.g. 1234567890123)'.freeze
     
     # Define static lists/values here
+    DOCUMENT_TYPES_LIST = ['book', 'book_chapter', 'book_review', 'journal_article', 'dissertation', 'conference_paper', 'multimedia'].freeze
     COMMENT_TYPES = ['Note', 'Research note', 'Note to editor'].freeze
     STATUS_LIST = ['submitted', 'reviewed', 'pending', 'published'].freeze
     DEFAULT_STATUS = 'submitted'.freeze

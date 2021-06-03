@@ -1,11 +1,4 @@
 namespace :deploy do
-    namespace :db do
-        desc 'update and reimport database'
-        task :reset do
-            puts "This task is no longer available.\n\n"
-        end
-    end
-
     namespace :solr do
         desc 'update solr'
         task :update do

@@ -2,12 +2,6 @@
 
 one:
   name: MyText
-  created_by: MyText
-  updated_by: MyText
-  bibliography: one
 
 two:
   name: MyText
-  created_by: MyText
-  updated_by: MyText
-  bibliography: two
