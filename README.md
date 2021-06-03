@@ -84,6 +84,14 @@ To load all the static 'About' pages into the app.
 | -------- |
 | All `importdata` tasks are interactive and will require user interaction to run. |
 
+### Seed Thesis Types:
+Seed the database with a set of default thesis_types.
+
+```rake db:seed```
+
+#### Reseed Thesis Types:
+```rake db:seed:replant```
+
 ### Import set of sample records
 ```rake importdata:books```
 
