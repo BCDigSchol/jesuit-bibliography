@@ -4,7 +4,7 @@ module BibliographyIndexer
 
   # public method called to update display_fields and trigger reindex
   def reindex_me
-    puts "I'm being reindex: ID##{self.id}\n\n"
+    puts "I'm being reindexed: ID##{self.id}\n\n"
     self.set_display_fields
     self.generate_all_citations
     self.save
@@ -321,10 +321,9 @@ module BibliographyIndexer
       end
       text :centuries_faceting, :as => 'centuries_facet'
 
-      # uncomment to include thesis_types in SOLR record schema
-      #text :thesis_types do # for associations
-      #  thesis_types.map { |thesis_type| thesis_type.name }
-      #end
+      text :thesis_types do # for associations
+        thesis_types.map { |thesis_type| thesis_type.name }
+      end
 
       integer :years_published, :multiple => true, :trie => true do
         pub_years = year_published.split(/\D/)
