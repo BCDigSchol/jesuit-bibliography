@@ -24,6 +24,7 @@
 //= require cocoon
 
 //= require bibliography.js
+//= require downtime-notices.js
 //= require wice_grid
 //= require bootstrap-datepicker/core
 //= require bootstrap/carousel
