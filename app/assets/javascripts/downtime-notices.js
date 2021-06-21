@@ -5,9 +5,9 @@ Options:
 * string class: the class name to assign the notice div (default 'downtime-notification')
 * string url: the URL of the notifications API (default is production)
 */
-const BCLibDowntimeNotices = function (options) {
-    const apiUrl = 'https://arc.bc.edu/notices/active';
-    const cssText = ' z-index: 101;\n' +
+var BCLibDowntimeNotices = function (options) {
+    var apiUrl = 'https://arc.bc.edu/notices/active';
+    var cssText = ' z-index: 101;\n' +
         'top: 0;\n' +
         'left: 0;\n' +
         'right: 0;\n' +
@@ -18,11 +18,11 @@ const BCLibDowntimeNotices = function (options) {
         'box-shadow: 0 0 5px black;';
     options = setOptions(options);
 
-    const request = buildRequest();
+    var request = buildRequest();
     request.send();
 
     function setOptions(options) {
-        const opts = options || {};
+        var opts = options || {};
         opts.url = options.hasOwnProperty('url') ? options.url : apiUrl;
         opts.callback = options.hasOwnProperty('callback') ? options.callback : display;
         opts.styles = options.hasOwnProperty('styles') ? options.styles : false;
@@ -32,27 +32,27 @@ const BCLibDowntimeNotices = function (options) {
     }
 
     function buildRequest() {
-        const request = new XMLHttpRequest();
+        var bareRequest = new XMLHttpRequest();
 
-        let url = options.url + '?';
+        var url = options.url + '?';
 
         if (options.application) {
             url += "application=" + encodeURIComponent(options.application);
         }
 
-        request.open('GET', url, true);
-        request.onload = processRequest;
+        bareRequest.open('GET', url, true);
+        bareRequest.onload = processRequest;
 
         // Ignore errors for now.
-        request.onerror = function () {
+        bareRequest.onerror = function () {
         };
 
-        return request;
+        return bareRequest;
     }
 
     function processRequest() {
         if (request.status >= 200 && request.status < 400) {
-            let data = JSON.parse(request.responseText);
+            var data = JSON.parse(request.responseText);
             if (data.notes && data.notes.length > 0) {
                 options.callback(data);
             }
@@ -60,8 +60,8 @@ const BCLibDowntimeNotices = function (options) {
     }
 
     function display(data) {
-        const text = data.notes.sort(compareNotes)[0].parsed_text;
-        const note = document.createElement('div');
+        var text = data.notes.sort(compareNotes)[0].parsed_text;
+        var note = document.createElement('div');
 
         note.setAttribute('class', options.class);
         note.style.cssText = options.styles ? cssText : '';
