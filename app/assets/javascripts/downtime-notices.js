@@ -15,6 +15,7 @@ var BCLibDowntimeNotices = function (options) {
         'text-align: center;\n' +
         'overflow: hidden;\n' +
         'padding: 1em 2em;\n' +
+        'margin-bottom: .4rem;\n' +
         'box-shadow: 0 0 5px black;';
     options = setOptions(options);
 
