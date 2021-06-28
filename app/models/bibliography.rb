@@ -393,12 +393,17 @@ class Bibliography < ApplicationRecord
     #
     # @return [String] a list of editors for display
     def display_editors
-        unless self.editors.present?
+        unless self.editors.present? || self.book_editors.present?
             return nil
         end
 
         out = []
+
         self.editors.each do |editor|
+            out << editor.person.name
+        end
+
+        self.book_editors.each do |editor|
             out << editor.person.name
         end
 
