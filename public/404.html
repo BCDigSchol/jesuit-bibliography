@@ -1,67 +1,240 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <!-- Mobile viewport optimization h5bp.com/ad -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <!-- Internet Explorer use the highest version available -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+  <!--[if IEMobile]>
+  <meta http-equiv="cleartype" content="on">
+  <![endif]-->
+
   <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+        rel="stylesheet">
+  <link href="http://localhost:3000/catalog/opensearch.xml" title="Jesuit Online Bibliography"
+        type="application/opensearchdescription+xml" rel="search">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="error-styles.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <meta name="csrf-param" content="authenticity_token">
+  <meta name="csrf-token"
+        content="HVzHmLTv8U1kKQdyRhX0tPf5CiDRYUJdEIXnB7+yOa9RzR80uBXWSHlGeEKvTuGDCh5kOGeICiS2G1BEiP/4YQ==">
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    .dialog {
+      margin-top: 5em;
+      width: 50%;
+      min-width: 400px;
+      min-height: 35vh;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    .dialog h2 {
+      margin-bottom: .5em;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .dialog-message {
+      font-size: 16px;
+    }
   </style>
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div class="container">
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+<header class="header">
+  <div class="container-fluid">
+    <div class="">
+      <div class="row">
+        <div class="top-menu">
+          <span class="upper hidden-xs"><a href="https://www.jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
+          <ul class="nav navbar-nav bc-top-nav ">
+            <li>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <a class="hidden-xs" href="/">
+        <div class="row brand-backgnd brand">
+          <div class="header-brand center-col">
+            <div class="row">
+              <div class="col-sm-1">
+                <img alt="Institute for Advanced Jesuit Studies" class="logo"
+                     src="/assets/bciajs_logo_transparent-4513104aca24a18a97f5cc2a92ace19a0f41194350e97892c2eea0a173b0a410.png">
+              </div>
+              <div class="pull-right col-sm-10">
+                <h1 class="upper header-title">Jesuit Online Bibliography</h1>
+                <h4 class="upper header-sub-title">A Free, Searchable Collection of Jesuit Studies
+                  Scholarship</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
-    <!--p>If you are the application owner check the logs for more information.</p-->
   </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="dialog center-block">
+      <h2>The page you were looking for doesn't exist (404)</h2>
+      <p class="dialog-message"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="bcfooter">
+  <div class="footer container-fluid">
+    <div class="row">
+      <div class="inner center-col clearfix">
+        <div class="pagebreak"></div>
+        <div class="col-xs-12 col-sm-6 col-md-9 footer-text">
+          <p class="footer-title">Jesuit Online Bibliography</p>
+          <p>The Jesuit Online Bibliography is organized by the <a href="/about">three founding institutions</a> — the Archivum Romanum Societatis Iesu, the Jesuitica Project at KU Leuven, and the Institute for Advanced Jesuit Studies at Boston College. The project's records are aggregated into the <a href="https://www.jesuitportal.bc.edu/">Portal to Jesuit Studies</a>.</p>
+          <div id="order">
+            <div class="col-xs-12 col-sm-6 col-md-3 logo"><img width="175" alt="Boston College Libraries" src="/assets/Logo_300-882e7b55997adeb1da65547e3ec6ff6ec14a42eaa7921a071a9566ad40293105.png"></div>
+            <p id="lib-blurb">The Jesuit Online Bibliography was developed by the Boston College Libraries. Learn more about the <a style="text-decoration: underline;" href="/about/team">development team</a> and process.</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <ul class="site-links">
+            <li><a href="/about/contact">Contact the Projects' Editors</a></li>
+            <li><a href="/about">Learn More</a></li>
+            <li><a href="/about/add-record">Add Your Records</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 copyright">
+          <p>Copyright Trustees of Boston College</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
+<script>
+  (function () {
+
+    var defaultErrorMessage = "  <div class=\"error-dialog\">" +
+            "<div></div>" +
+            "<p></p>" +
+            "</div>"
+
+    /*
+    Options:
+    * function callback: a callback function to call instead of displaying standard notice
+    * bool styles: true if you want to apply the built-in styles (default false)
+    * string class: the class name to assign the notice div (default 'downtime-notification')
+    * string url: the URL of the notifications API (default is production)
+    */
+    const BCLibDowntimeNotices = function (options) {
+      const apiUrl = 'https://arc.bc.edu/notices/active';
+      const cssText = ' z-index: 101;\n' +
+              'top: 0;\n' +
+              'left: 0;\n' +
+              'right: 0;\n' +
+              'background: #fde073;\n' +
+              'text-align: center;\n' +
+              'overflow: hidden;\n' +
+              'padding: 1em 2em;\n' +
+              'box-shadow: 0 0 5px black;';
+      options = setOptions(options);
+
+      const request = buildRequest();
+      request.send();
+
+      function setOptions(options) {
+        const opts = options || {};
+        opts.url = options.hasOwnProperty('url') ? options.url : apiUrl;
+        opts.callback = options.hasOwnProperty('callback') ? options.callback : display;
+        opts.styles = options.hasOwnProperty('styles') ? options.styles : false;
+        opts.class = options.hasOwnProperty('class') ? options.class : 'downtime-notification';
+        opts.application = options.hasOwnProperty('application') ? options.application : null
+        return opts;
+      }
+
+      function buildRequest() {
+        const request = new XMLHttpRequest();
+
+        let url = options.url + '?';
+
+        if (options.application) {
+          url += "application=" + encodeURIComponent(options.application);
+        }
+
+        request.open('GET', url, true);
+        request.onload = processRequest;
+
+        // Ignore errors for now.
+        request.onerror = function () {
+        };
+
+        return request;
+      }
+
+      function processRequest() {
+        if (request.status >= 200 && request.status < 400) {
+          let data = JSON.parse(request.responseText);
+          options.callback(data);
+        }
+      }
+
+      function display(data) {
+        const text = data.notes.sort(compareNotes)[0].parsed_text;
+        const note = document.createElement('div');
+
+        note.setAttribute('class', options.class);
+        note.style.cssText = options.styles ? cssText : '';
+        note.innerHTML = text;
+
+        document.body.insertBefore(note, document.body.childNodes[1]);
+      }
+
+      function compareNotes(a, b) {
+        if (a.priority < b.priority)
+          return -1;
+        if (a.priority > b.priority)
+          return 1;
+        if (a.start > b.start)
+          return -1;
+        if (a.start < b.start)
+          return 1;
+        return 0;
+      }
+    };
+
+    BCLibDowntimeNotices({
+      callback: showDowntimeNotice,
+      styles: true,
+      url: 'https://arc.bc.edu/notices/active',
+      application: 'JOB'
+    });
+
+    /**
+     * Called if there is a downtime notice
+     *
+     * @param apiResponse
+     */
+    function showDowntimeNotice(apiResponse) {
+      var dialogMessage = document.getElementsByClassName('dialog-message')[0];
+
+      if (apiResponse.notes === null || apiResponse.notes.length === 0) {
+        dialogMessage.innerHTML = defaultErrorMessage;
+      } else {
+        dialogMessage.innerHTML = apiResponse.notes[0].parsed_text;
+      }
+    }
+  })();
+</script>
 </html>
