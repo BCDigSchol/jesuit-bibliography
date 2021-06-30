@@ -10,6 +10,12 @@ namespace :import do
         puts "Deleting existing users prior to import"
         User.destroy_all
 
+        # get test_account_password value
+        #password = Rails.application.credentials[Rails.env.to_sym][:test_account_password]
+        #password = ENV.fetch("test_account_password", "password")
+        password = ENV["TEST_ACCOUNT_PASSWORD"] || Rails.application.credentials.dig(:test_account_password)
+        puts "using password: '#{password}'"
+
         puts "Starting Users import..."
         item_count = 0
         start = Time.now
@@ -18,9 +24,19 @@ namespace :import do
             encoding: Encoding::UTF_8,
             liberal_parsing: true
         ) do |row|
-            #puts row
             item_count += 1
-            @user = User.create!(row.to_h)
+
+            # email,password,name,role
+            # 0     1        2    3
+
+            #@user = User.create!(row.to_h)
+
+            @user = User.find_or_create_by(email: row[0]) do |user|
+                user.password = password
+                user.password_confirmation = password
+                user.name = row[2]
+                user.role = row[3]
+            end
 
             # update sample user accounts so they are confirmed and ready to use
             @user.confirmed_at = DateTime.now

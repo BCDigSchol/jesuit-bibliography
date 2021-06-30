@@ -57,6 +57,10 @@
                             <li><%= link_to 'People', citationterms_people_path %></li>
                             <% end %>
 
+                             <% if can? :read, ThesisType %>
+                            <li><%= link_to 'Thesis Types', citationterms_thesis_types_path %></li>
+                            <% end %>
+
                             <% if can? :manage, 'Suggestions' %>
                             <li role="separator" class="divider"></li>
                             <li><%= link_to 'Pending Terms', citations_terms_suggestions_path %></li>

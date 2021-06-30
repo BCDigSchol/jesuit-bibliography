@@ -1,0 +1,43 @@
+<% if @thesis_type.nil? %>
+    <p>This record doesn't exist.</p>
+    <%= link_to 'Go Back to Thesis Type Terms index', citationterms_thesis_types_path %>
+<% elsif can? :read, ThesisType %>
+    <h2><%= @thesis_type.name.present? ? @thesis_type.name : @thesis_type.id %></h2>
+
+    <div class="record-view">
+        <div class="button-group">
+            <% if can? :update, ThesisType %>
+            <%= link_to 'Edit this record', edit_citationterms_thesis_type_path(@thesis_type), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'View citation references', references_citationterms_thesis_type_path(@thesis_type), class: 'btn btn-warning' %>
+            <%= link_to 'Go Back to Thesis Types index', citationterms_thesis_types_path, class: 'btn btn-info' %>
+        </div>
+
+        <div class="record-view-fields">
+            <div class="languages-list col-sm-12">
+                <h4>Fields</h4>
+                <div class="field-pair row">
+                    <label class="col-sm-2">Thesis Type Name</label>
+                    <div class="field-value col-sm-10"><%= @thesis_type.name %></div>
+                </div>
+
+                <div class="field-pair row">
+                    <label class="col-sm-2">Citation Style</label>
+                    <div class="field-value col-sm-10"><%= @thesis_type.citation_style %></div>
+                </div>
+            </div>
+
+            <%= render 'citationterms/metadata', record: @thesis_type %>
+        </div>
+
+        <div class="button-group">
+            <% if can? :update, ThesisType %>
+            <%= link_to 'Edit this record', edit_citationterms_thesis_type_path(@thesis_type), class: 'btn btn-primary' %>
+            <% end %>
+            <%= link_to 'View citation references', references_citationterms_thesis_type_path(@thesis_type), class: 'btn btn-warning' %>
+            <%= link_to 'Go Back to Thesis Types index', citationterms_thesis_types_path, class: 'btn btn-info' %>
+        </div>
+    </div>
+<% else %>
+    <%= render 'bibliographies/not_permitted' %>
+<% end %>

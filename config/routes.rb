@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     resources :period_suggestions
     resources :language_suggestions
     resources :journal_suggestions
+    resources :thesis_types_suggestions
     resources :authors
     resources :editors
     resources :book_editors
@@ -84,6 +85,9 @@ Rails.application.routes.draw do
       get 'references', on: :member
     end
     resources :journals, path: 'journals' do
+      get 'references', on: :member
+    end
+    resources :thesis_types, path: 'thesis_types' do
       get 'references', on: :member
     end
     get 'search' => 'term_search#index'

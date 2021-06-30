@@ -43,9 +43,11 @@
     %>
 
     <%= form.input :dissertation_thesis_type, 
-        label: 'Thesis type',
+        label: 'Thesis type (old format)',
         as: :string
     %>
+
+    <%= render 'bibliographies/fields/thesis_type', :form => form, field_label: 'Thesis type', short_field_label: 'Thesis Type' %>
     
     <%= render 'bibliographies/fields/isbn', :form => form, field_label: 'ISBN' %>
 

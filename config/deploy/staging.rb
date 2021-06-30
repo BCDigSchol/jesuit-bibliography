@@ -7,6 +7,68 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
+#server '192.168.33.55', roles: [:web, :app, :db], primary: true
+server 'staging.job.lontracanadensis.net', roles: [:web, :app, :db], primary: true
+
+set :repo_url, 'git@github.com:BCDigSchol/jesuit-bibliography.git'
+set :application, 'bc-jesuit-bibliography'
+set :user, 'blacklight'
+set :branch, 'staging'
+set :stage, :staging
+
+set :deploy_via, :remote_cache
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state, "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log, "#{release_path}/log/puma.access.log"
+set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa)}
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, false # Change to true if using ActiveRecord
+
+append :linked_files, 'config/master.key'
+
+# can be invoked like `cap staging deploy:rake task=db:seed`
+# https://capistranorb.com/documentation/tasks/rails/
+namespace :deploy do
+    desc 'Runs any rake task, cap staging deploy:rake task=db:seed'
+    task rake: [:set_rails_env] do
+      on release_roles([:db]) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, ENV['task']
+          end
+        end
+      end
+    end
+
+    # cleans out database and reimports default content
+    # can be invoked like `cap staging deploy:db:reset`
+    namespace :db do
+        desc 'clean, rebuild, and reimport database'
+        task :reset do
+            on roles(:db) do
+                within "#{current_path}" do
+                    execute :rake, 'db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+                    execute :rake, 'db:seed'
+                    execute :rake, 'import:all'
+                    execute :rake, 'importdata:all_noninteractive'
+                end
+            end
+        end
+    end
+end
+
+namespace :debug do
+    desc 'Print ENV variables'
+    task :env do
+      on roles(:app), in: :sequence, wait: 5 do
+        execute :printenv
+      end
+    end
+end
 
 
 # role-based syntax

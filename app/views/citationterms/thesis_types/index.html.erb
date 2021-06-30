@@ -1,0 +1,54 @@
+<% if can? :read, ThesisType %>
+  <h2>Thesis Type index</h2>
+
+  <div class="button-group">
+    <%= link_to 'Add New Thesis Type record', new_citationterms_thesis_type_path, class: 'btn btn-primary' %>
+  </div>
+
+  <%= grid(@thesis_types_grid,
+        show_filters: :when_filtered,
+        allow_showing_all_records: false, 
+        upper_pagination_panel: true
+      ) do |g|
+
+    g.column name: 'Name', attribute: 'normal_name' do |thesistype|
+      thesistype.name
+    end
+
+    g.column name: 'Citation Style', attribute: 'citation_style' do |thesistype|
+      thesistype.citation_style
+    end
+
+    g.column name: 'Count' do |per|
+      link_to per.bib_refs.count, references_citationterms_thesis_type_path(per.id)
+    end
+
+    g.column name: 'Last Modified At', attribute: 'updated_at', filter: false do |loc|
+      format_date_string(loc.updated_at)
+    end
+
+    if can? :detroy, ThesisType
+      g.column do |thesistype|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_thesis_type_path(thesistype) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_thesis_type_path(thesistype) )}</span></div>".html_safe + 
+        "<div class='icon destroy-link'><span class='icon-link'>#{link_to( 'Delete', citationterms_thesis_type_path(thesistype), method: :delete, data: { confirm: 'Are you sure?' } )}</span></div>".html_safe
+      end
+    elsif can? :edit, ThesisType
+      g.column do |thesistype|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_thesis_type_path(thesistype) )}</span></div>".html_safe + 
+        "<div class='icon edit-link'><span class='icon-link'>#{link_to( 'Edit', edit_citationterms_thesis_type_path(thesistype) )}</span></div>".html_safe
+      end
+    else
+      g.column do |thesistype|
+        "<div class='icon show-link'><span class='icon-link'>#{link_to( 'Show', citationterms_thesis_type_path(thesistype) )}</span></div>".html_safe
+      end
+    end
+  end -%>
+
+  <div class="button-group">
+    <%= link_to 'Add New Thesis Type record', new_citationterms_thesis_type_path, class: 'btn btn-primary' %>
+  </div>
+
+<% else %>
+  <%= render 'bibliographies/not_permitted' %>
+<% end %>

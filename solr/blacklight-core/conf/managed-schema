@@ -95,6 +95,7 @@
     <field name="jesuits_text" type="text_general"/>
     <field name="centuries_text" type="text_general"/>
     <field name="tags_text" type="text_general"/>
+    <field name="thesis_types_text" type="text_general"/>
 
     <field name="created_by_text" type="text_general"/>
     <field name="modified_by_text" type="text_general"/>
@@ -646,6 +647,7 @@
     <copyField source="jesuits_text" dest="jesuits_text_str" maxChars="256"/>
     <copyField source="centuries_text" dest="centuries_text_str" maxChars="256"/>
     <copyField source="tags_text" dest="tags_text_str" maxChars="256"/>
+    <copyField source="thesis_types_text" dest="thesis_types_text_str" maxChars="256"/>
 
     <copyField source="bibtex_text" dest="bibtex_text_str" maxChars="256"/>
     <copyField source="bibtex_mla_text" dest="bibtex_mla_text_str" maxChars="256"/>

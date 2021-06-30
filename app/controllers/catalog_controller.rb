@@ -186,6 +186,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'dissertation_universities_text', label: 'University', :helper_method => :display_in_parts
     config.add_show_field 'dissertation_university_urls_text', label: 'University URL', :helper_method => :make_link
+    config.add_show_field 'thesis_types_text', label: 'Thesis type'
     config.add_show_field 'publishers_text', label: 'Publisher', :helper_method => :display_in_parts
     config.add_show_field 'publish_places_text', label: 'Place published'
 

@@ -2,10 +2,10 @@ namespace :solr_config do
 
     desc "Update local Solr config files"
     task update: :environment do
-        # TODO make sure this can only be run in development?
+        puts "Reading ENV['SOLR_CONF_HOME'] = #{ENV['SOLR_CONF_HOME']}"
 
         local_solr_configs_home = Rails.root.join('solr/blacklight-core/conf/')
-        solr_conf_home = ENV['SOLR_CONF_HOME'] || nil
+        solr_conf_home = ENV['SOLR_CONF_HOME']
         solr_config_files = ["managed-schema", "solrconfig.xml"]
 
         puts "Update Solr config files on this computer."
@@ -66,4 +66,67 @@ namespace :solr_config do
 
         puts "\nTask complete! \n\nPlease restart Solr to have the configuration changes applied.\n"
     end
+
+    desc "Drop Solr index"
+    task dropall: :environment do
+        puts "This will remove all records in the SOLR index..."
+
+        Sunspot.remove_all!(Bibliography)
+
+        puts "Removal complete."
+    end
+
+    namespace :reindex_by_type do
+        document_types_list = ['book', 'book_chapter', 'book_review', 'journal_article', 'dissertation', 'conference_paper', 'multimedia']
+
+        document_types_list.each do | ref_type |
+            desc "reindex by document reference type #{ref_type}"
+            task ref_type => :environment do
+                puts "Document reference type: #{ref_type}"
+
+                ref_type_mod = ref_type.titleize
+                puts "Converting to standard format: #{ref_type_mod}"
+                @matches = Bibliography.where(reference_type: ref_type_mod)
+
+                puts "There are #{@matches.count} records that match this document reference type."
+
+                puts "Begin reindexing of these #{@matches.count} records..."
+
+                # convert ActiveRecord::Relation object type to array 
+                @matches_array = @matches.to_a.map {|u| u}
+
+                # reindex every record and commit
+                Sunspot.index! @matches_array
+                
+                puts "Reindexing completed."
+            end
+        end
+    end
+
+    namespace :update_by_type do
+        document_types_list = ['book', 'book_chapter', 'book_review', 'journal_article', 'dissertation', 'conference_paper', 'multimedia']
+
+        document_types_list.each do | ref_type |
+            desc "update and reindex by document reference type #{ref_type}"
+            task ref_type => :environment do
+                puts "Document reference type: #{ref_type}"
+
+                ref_type_mod = ref_type.titleize
+                puts "Converting to standard format: #{ref_type_mod}"
+                @matches = Bibliography.where(reference_type: ref_type_mod)
+
+                puts "There are #{@matches.count} records that match this document reference type."
+
+                puts "Begin updating of these #{@matches.count} records..."
+                
+                # update each record 
+                @matches.each do |bib| 
+                    bib.reindex_me
+                end
+
+                puts "Updating completed."
+            end
+        end
+    end
+       
 end
