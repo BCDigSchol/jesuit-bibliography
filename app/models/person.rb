@@ -25,7 +25,7 @@ class Person < ControlledVocabularyTerm
     NAME_PLACEHOLDER = 'Save this record before editing this field'.freeze
 
     def process_deletion
-        puts "\n\nDeleting Person...\n\n"
+        #puts "\n\nDeleting Person...\n\n"
         reindex_parent!
     end
 

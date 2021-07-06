@@ -6,7 +6,7 @@ class Editor < ApplicationRecord
 
   private
     def reindex_parent!
-      puts "\n\nDeleting Editor...\n\n"
+      #puts "\n\nDeleting Editor...\n\n"
       bibliography.reindex_me if bibliography.present?
     end
 end

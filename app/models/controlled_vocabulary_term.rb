@@ -31,7 +31,7 @@ class ControlledVocabularyTerm < ApplicationRecord
   def reindex_parent!
     if saved_change_to_name?
       bib_refs.each do |bs|
-        puts "\n\nReindexing ##{bs.id} from #{self.class} ##{self.id}"
+        #puts "\n\nReindexing ##{bs.id} from #{self.class} ##{self.id}"
         bs.reindex_me
       end
     end

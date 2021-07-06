@@ -6,7 +6,7 @@ class AuthorOfReview < ApplicationRecord
 
   private
     def reindex_parent!
-      puts "\n\nDeleting Author of Review...\n\n"
+      #puts "\n\nDeleting Author of Review...\n\n"
       bibliography.reindex_me if bibliography.present?
     end
 end
