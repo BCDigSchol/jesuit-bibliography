@@ -26,14 +26,18 @@ class ControlledVocabularyTerm < ApplicationRecord
     self.normal_name = ActiveSupport::Inflector.transliterate(sort_name_stripped)
   end
 
-  # Reindex bibliographies if name has changed
-  #
-  def reindex_parent!
-    if saved_change_to_name?
-      bib_refs.each do |bs|
-        #puts "\n\nReindexing ##{bs.id} from #{self.class} ##{self.id}"
-        bs.reindex_me
+  # Reindex bibliographies only if name has changed
+  def reindex_parents!
+    if saved_change_to_attribute?("name")
+      bib_refs.each do |bib|
+        bib.refresh
       end
+
+      # convert ActiveRecord::Relation object type to array for Sunspot
+      bib_refs_array = bib_refs.to_a.map {|u| u}
+
+      # reindex this record's bib_refs in one batch
+      Sunspot.index! bib_refs_array
     end
   end
 end

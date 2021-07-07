@@ -119,12 +119,13 @@ namespace :solr_config do
 
                 puts "Begin updating of these #{@matches.count} records..."
                 
-                # update each record 
+                # save/update each record; very slow
                 @matches.each do |bib| 
-                    bib.reindex_me
+                    bib.refresh
+                    Sunspot.index! bib
                 end
 
-                puts "Updating completed."
+                puts "Saving/Updating/Reindexing completed."
             end
         end
     end
