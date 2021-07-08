@@ -386,6 +386,8 @@ h2.page-heading{
     }
     .dl-horizontal dd {
         margin-bottom: 1rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     .dd-part {
         margin-bottom: .25rem;
