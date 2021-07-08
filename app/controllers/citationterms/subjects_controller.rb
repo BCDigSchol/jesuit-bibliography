@@ -89,7 +89,7 @@ class Citationterms::SubjectsController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@subject.bib_refs)
+        @bibs_grid = initialize_grid(@subject.bib_refs) unless @subject.nil?
     end
 
     private

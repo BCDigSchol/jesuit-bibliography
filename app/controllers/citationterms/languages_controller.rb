@@ -82,7 +82,7 @@ class Citationterms::LanguagesController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@language.bib_refs)
+        @bibs_grid = initialize_grid(@language.bib_refs) unless @language.nil?
     end
 
     private

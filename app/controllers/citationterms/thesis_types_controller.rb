@@ -84,7 +84,7 @@ class Citationterms::ThesisTypesController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@thesis_type.bib_refs)
+        @bibs_grid = initialize_grid(@thesis_type.bib_refs) unless @thesis_type.nil?
     end
 
     private

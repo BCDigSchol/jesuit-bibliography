@@ -90,7 +90,7 @@ class Citationterms::LocationsController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@location.bib_refs)
+        @bibs_grid = initialize_grid(@location.bib_refs) unless @location.nil?
     end
 
     private

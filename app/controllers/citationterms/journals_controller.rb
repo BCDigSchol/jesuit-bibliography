@@ -94,7 +94,7 @@ class Citationterms::JournalsController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@journal.bib_refs)
+        @bibs_grid = initialize_grid(@journal.bib_refs) unless @journal.nil?
     end
 
     private

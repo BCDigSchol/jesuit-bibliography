@@ -95,6 +95,7 @@ class Citationterms::PeopleController < ApplicationController
     end
 
     def references
+        @bibs_grid = initialize_grid(@person.bib_refs) unless @person.nil?
     end
 
     private

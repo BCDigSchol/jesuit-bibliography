@@ -89,7 +89,7 @@ class Citationterms::PeriodsController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@period.bib_refs)
+        @bibs_grid = initialize_grid(@period.bib_refs) unless @period.nil?
     end
 
     private

@@ -94,7 +94,7 @@ class Citationterms::EntitiesController < ApplicationController
     end
 
     def references
-        @bibs_grid = initialize_grid(@entity.bib_refs)
+        @bibs_grid = initialize_grid(@entity.bib_refs) unless @entity.nil?
     end
 
     private

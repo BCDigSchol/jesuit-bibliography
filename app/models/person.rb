@@ -29,7 +29,8 @@ class Person < ControlledVocabularyTerm
         reindex_parent!
     end
 
-    def bib_refs
+    # returns an array of Bibliography records
+    def bib_refs_array
         bibs = []
 
         self.author_of_reviews.each do |person|
@@ -57,6 +58,38 @@ class Person < ControlledVocabularyTerm
         end
 
         bibs
+    end
+
+    # returns an ActiveRecord_Relation array of Bibliography records
+    # TODO: write efficient SQL query in place of this hack
+    def bib_refs
+        bib_ids = []
+
+        self.author_of_reviews.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        self.authors.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        self.editors.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        self.translators.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        self.book_editors.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        self.performers.each do |person|
+            bib_ids.append(person.bibliography.id) if person.bibliography.present?
+        end
+
+        all_bibs = Bibliography.where(id: bib_ids)
     end
 
     validates :name, presence: true
