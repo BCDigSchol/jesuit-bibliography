@@ -2,15 +2,6 @@ module BibliographyIndexer
 
   extend ActiveSupport::Concern
 
-  # public method called to update display_fields and trigger reindex
-  def reindex_me
-    #puts "I'm being reindexed: ID##{self.id}\n\n"
-    self.set_display_fields
-    self.generate_all_citations
-    self.save
-    #Sunspot.index! [self]
-  end
-
   included do
     searchable(:if => :published) do
       integer :id
