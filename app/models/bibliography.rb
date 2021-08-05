@@ -321,6 +321,17 @@ class Bibliography < ApplicationRecord
         end
     end
 
+    # update the record, display fields, and citations. 
+    # this is generally called from within associated records to trigger a cleanup for reindexing purposes.
+    def refresh
+        self.set_display_fields
+        self.generate_all_citations
+    
+        self.modified_by = "admin"
+        self.save
+    end
+
+
     def first_isbn
         first_isbn = nil
         unless isbns.empty?

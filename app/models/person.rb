@@ -17,7 +17,7 @@ class Person < ControlledVocabularyTerm
     has_many :performers, dependent: :destroy
     has_many :bibliographies, through: :performers
 
-    after_save :reindex_parent!
+    after_save :reindex_parents!
     after_destroy :process_deletion
 
     # Define form hints here
@@ -26,7 +26,7 @@ class Person < ControlledVocabularyTerm
 
     def process_deletion
         #puts "\n\nDeleting Person...\n\n"
-        reindex_parent!
+        reindex_parents!
     end
 
     # returns an array of Bibliography records
