@@ -200,7 +200,7 @@ class Bibliography < ApplicationRecord
 
     # depending on the reference_type, select the fields to represent the
     # display_title and display_author fields used in the discovery layer
-    NO_VALUE_FOUND = "n/a"
+    NO_VALUE_FOUND = ""
 
     def set_display_fields
         if self.reference_type.downcase == "book"
@@ -218,12 +218,12 @@ class Bibliography < ApplicationRecord
                     out << author.person.name
                 end
                 self.display_author = out.join('|')
-            elsif self.editors.present?
-                out = []
-                self.editors.each do |editor|
-                    out << editor.person.name
-                end
-                self.display_author = out.join('|')
+            #elsif self.editors.present?
+            #    out = []
+            #    self.editors.each do |editor|
+            #        out << editor.person.name
+            #    end
+            #    self.display_author = out.join('|')
             else
                 self.display_author = NO_VALUE_FOUND
             end
