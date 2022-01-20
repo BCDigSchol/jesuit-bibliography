@@ -97,19 +97,7 @@ module CitationsGenerator
                 # A Ph.D. thesis.
                 # Required fields: author, title, school, year
                 # Optional fields: type, address, month, note, key
-
-                # check if the thesis_types object is present and use the citation_style value from that object.
-                # else, use the old dissertation_thesis_type free-text field to determine the citation style
-                if self.thesis_types.present? 
-                    # ThesisType has a many-to-many relationship with Bibliography even though we present it as a one-to-many relationship on the forms.
-                    # This means the thesis_types object returns as a list of values. We still need to use the _first_ element from the list of values 
-                    # even if there is only one value in the list. Confusing? Yeah.
-                    if self.thesis_types.first.citation_style.present?
-                        @b.type = self.thesis_types.first.citation_style
-                    else
-                        @b.type = :mastersthesis
-                    end
-                elsif self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "ph"
+                if self.dissertation_thesis_type.present? and self.dissertation_thesis_type.downcase.include? "phd"
                     @b.type = :phdthesis
                 else
                     @b.type = :mastersthesis
@@ -184,6 +172,7 @@ module CitationsGenerator
             # year-suffix accessed container event-date issued original-date
             # author editor translator recipient interviewer publisher composer
             # original-publisher original-author container-author collection-editor
+            #end
     
             bibliography = BibTeX::Bibliography.new
             bibliography << @b
@@ -195,37 +184,68 @@ module CitationsGenerator
             #
 
             citeproc = bibliography.to_citeproc
- 
-            # create initial CiteProc object and assign it the MLA engine
+
+            #
+            # process MLA citation style
+            # create initial CiteProc object
+            #
             processor = CiteProc::Processor.new(style: 'modern-language-association', format: 'html', local: 'en')
+            
             # update MLA cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+            # https://github.com/citation-style-language/styles/blob/master/modern-language-association.csl#L68-L77
             mla_title_if   = processor.engine.style.macros['title'] > 'choose' > 'if' > 'text'
             mla_title_else = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
-            mla_title_if['text-case'] = "sentence"
+            mla_title_if['text-case']   = "sentence"
             mla_title_else['text-case'] = "sentence"
+
+            # fix issue with book chapters, journal articles having parent book title with wrong text-case
+            # https://github.com/citation-style-language/styles/blob/master/modern-language-association.csl#L88-L126
+            mla_container_title = processor.engine.style.macros['container-title'].children[0]
+            mla_container_title['text-case'] = "sentence"
+
             processor.import citeproc
             mla_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_mla = mla_citation[0]
 
+            #
             # process Chicago citation style
+            #
             processor.engine.style = 'chicago-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
-            # update chicago cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+
+            # update chicago cls structure to change the title formatting style from text-case="title" to text-case="sentence"
+            # https://github.com/citation-style-language/styles/blob/master/chicago-fullnote-bibliography.csl#L260-L292
             chicago_title_if_else = processor.engine.style.macros['title'] > 'choose' > 'else-if' > 'text'
             chicago_title_else    = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
             chicago_title_if_else['text-case'] = "sentence"
-            chicago_title_else['text-case'] = "sentence"
+            chicago_title_else['text-case']    = "sentence"
+
+            # fix issue with book chapters, journal articles having parent book title with wrong text-case
+            # https://github.com/citation-style-language/styles/blob/master/chicago-fullnote-bibliography.csl#L405-L424
+            chicago_container_title = processor.engine.style.macros['container-title'].children[0].children[1].children[2].children[0]
+            chicago_container_title['text-case'] = "sentence"
+
             chicago_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_chicago = chicago_citation[0]
     
+            #
             # process Turabian citation style
+            #
             processor.engine.style = 'turabian-fullnote-bibliography'
             processor.engine.style.bibliography['subsequent-author-substitute'] = false
-            # update turabian cls structure to change the title formatting sytle from text-case="title" to text-case="sentence"
+
+            # update turabian cls structure to change the title formatting style from text-case="title" to text-case="sentence"
+            # https://github.com/citation-style-language/styles/blob/master/turabian-fullnote-bibliography.csl#L226-L242
             turabian_title_if_else = processor.engine.style.macros['title'] > 'choose' > 'else-if' > 'text'
             turabian_title_else    = processor.engine.style.macros['title'] > 'choose' > 'else' > 'text'
             turabian_title_if_else['text-case'] = "sentence"
-            turabian_title_else['text-case'] = "sentence"
+            turabian_title_else['text-case']    = "sentence"
+
+            # fix issue with book chapters, journal articles having parent book title with wrong text-case
+            # https://github.com/citation-style-language/styles/blob/master/turabian-fullnote-bibliography.csl#L314-L332
+            turabian_container_title = processor.engine.style.macros['container-title'].children[1].children[0].children[0].children[0].children[0]
+            turabian_container_title['text-case'] = "sentence"
+
             turabian_citation = processor.render :bibliography, id: :citationrecord
             self.bibtex_turabian = turabian_citation[0]
         end
