@@ -462,7 +462,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   sitemap_generator
-  solr_wrapper (>= 0.3)
+  solr_wrapper
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
