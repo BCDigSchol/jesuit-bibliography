@@ -38,14 +38,14 @@ namespace :refresh_citation_records do
     def batch_update(ref_type)
       start = Time.now
 
-      # find all Bibliography records that are published, and are of type :ref_type
-      citations = Bibliography.where(reference_type: :ref_type)
+      # find all Bibliography records that are published, and are of type ref_type
+      citations = Bibliography.where(reference_type: ref_type)
               .where(status: "published")
               .order(:id)
 
       total_number_of_citations = citations.count
 
-      puts "Total number of Bibliography records to update: #{total_number_of_citations}"
+      puts "Total number of Bibliography records of reference type #{ref_type} to update: #{total_number_of_citations}"
 
       bar = ProgressBar.new(total_number_of_citations)
 
@@ -72,7 +72,7 @@ namespace :refresh_citation_records do
       finish = Time.now
       diff = finish - start
       puts "\n\n========================================================================================================================"
-      puts "Updated #{total_number_of_citations} Bibliography records in #{diff} seconds\n\n"
+      puts "Updated #{total_number_of_citations} Bibliography records of reference type #{ref_type} in #{diff} seconds\n\n"
     end
   end
 end
