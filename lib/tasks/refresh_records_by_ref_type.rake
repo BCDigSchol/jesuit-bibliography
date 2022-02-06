@@ -53,7 +53,7 @@ namespace :refresh_citation_records do
       citations.each do |citation|
 
         # display useful message
-        bar.puts("updating citation record with ID##{citation.id}, Title: #{citation.title}")
+        bar.puts("updating citation record with ID##{citation.id}, Title: #{citation.display_title}")
 
         # this method triggers:
         #    citation.set_display_fields
