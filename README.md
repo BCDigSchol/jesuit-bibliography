@@ -232,8 +232,6 @@ staging:
 
 3. Add the following env vars to the `/etc/environment` or equivalent file on the staging server:
 ```shell
-export RAILS_MASTER_KEY=01234567890
-export SECRET_KEY_BASE=01234567890
 export RAILS_ENV=staging
 export SOLR_URL=http://localhost:8983/solr/blacklight-core
 export SOLR_CONF_HOME=/home/blacklight/apps/bc-jesuit-bibliography/shared/solr-8.8.2/server/solr/blacklight-core/conf
@@ -241,7 +239,12 @@ export SOLR_CONF_HOME=/home/blacklight/apps/bc-jesuit-bibliography/shared/solr-8
 
 4. Copy over the `master.key` file over to the staging server at `/home/blacklight/apps/bc-jesuit-bibliography/shared/config/master.key`
 
-Note: This is a backup incase capistrano can't access the `ENV["RAILS_MASTER_KEY"]` value.
+Note: An alternative to using the `master.key` file is to include the following var to `/etc/environment`
+
+```shell
+export RAILS_MASTER_KEY=0123456789
+```
+
 
 ### Deploy commands
 
@@ -302,6 +305,12 @@ Log into the staging server and run:
 ```shell
 cd /home/blacklight/apps/bc-jesuit-bibliography/shared/solr-8.8.2/
 ./bin/solr [restart|stop|start]
+```
+
+or
+
+```shell
+sudo systemctl restart solr
 ```
 
 ## Deployment to Production
