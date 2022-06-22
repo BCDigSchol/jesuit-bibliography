@@ -49,6 +49,9 @@ namespace :refresh_citation_records do
 
       bar = ProgressBar.new(total_number_of_citations)
 
+      # send records to Solr in batches for CPU/time efficiency
+      solr_batch = SolrBatch.new
+
       # update each citation
       citations.each do |citation|
 
@@ -62,12 +65,15 @@ namespace :refresh_citation_records do
         #    citation.save
         citation.refresh
 
-        # reindex
-        Sunspot.index! citation
+        # add record to reindexing batch
+        solr_batch.add(citation)
 
         # update progress bar
         bar.increment!
       end
+
+      # index and commit any remaining records
+      solr_batch.close
 
       finish = Time.now
       diff = finish - start

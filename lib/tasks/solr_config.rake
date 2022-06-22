@@ -118,12 +118,18 @@ namespace :solr_config do
                 puts "There are #{@matches.count} records that match this document reference type."
 
                 puts "Begin updating of these #{@matches.count} records..."
-                
+
+                # index in batches for CPU/time efficiency
+                solr_batch = SolrBatch.new index_batch_size: 100, commit_batch_size: 1000, commit_sleep_seconds: 2
+
                 # save/update each record; very slow
                 @matches.each do |bib| 
                     bib.refresh
-                    Sunspot.index! bib
+                    solr_batch.add bib
                 end
+
+                # index and commit any remaining records
+                solr_batch.close
 
                 puts "Saving/Updating/Reindexing completed."
             end
