@@ -39,3 +39,6 @@
 
 # Ignore custom vagrant deploy script
 /config/deploy/vagrant.rb
+
+# Ignore RubyMine configuration
+.idea
