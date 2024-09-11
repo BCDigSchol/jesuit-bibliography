@@ -80,7 +80,7 @@ gem 'jquery-rails'
 gem 'devise', ">= 4.6.2"
 
 gem 'devise-guests', '~> 0.6'
-gem 'blacklight-marc', :git => 'https://github.com/BCDigSchol/blacklight-marc.git', :tag => 'backport-traject'
+gem 'blacklight-marc', :git => 'https://github.com/BCLibraries/blacklight-marc.git', :tag => 'main'
 
 # make sure we're using most recent version of loofah
 # see CVE-2018-16468
@@ -105,7 +105,7 @@ gem "wice_grid"
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'bootstrap-datepicker-rails'
 gem 'select2-rails'
-gem 'alphabetical_paginate', :git => 'https://github.com/BCDigSchol/alphabetical_paginate'
+gem 'alphabetical_paginate', :git => 'https://github.com/BCLibraries/alphabetical_paginate', :tag => 'main'
 gem 'tinymce-rails'
 gem 'blacklight_advanced_search'
 gem 'blacklight_range_limit'

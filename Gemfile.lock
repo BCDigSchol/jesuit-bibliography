@@ -1,13 +1,14 @@
 GIT
-  remote: https://github.com/BCDigSchol/alphabetical_paginate
+  remote: https://github.com/BCLibraries/alphabetical_paginate
   revision: f0ca698fd36bedaa920ce775e8b8d185fcef3113
+  tag: main
   specs:
     alphabetical_paginate (2.3.3)
 
 GIT
-  remote: https://github.com/BCDigSchol/blacklight-marc.git
+  remote: https://github.com/BCLibraries/blacklight-marc.git
   revision: 650d6b9d6744b9831632b777aae5aef6d35ed46e
-  tag: backport-traject
+  tag: main
   specs:
     blacklight-marc (6.2.0)
       blacklight (> 6.1, < 8.a)
@@ -214,10 +215,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marc (1.0.2)
+    marc (1.0.4)
       scrub_rb (>= 1.0.1, < 2)
       unf
-    marc-fastxmlwriter (1.0.0)
+    marc-fastxmlwriter (1.1.0)
       marc (~> 1.0)
     marcel (1.0.1)
     method_source (1.0.0)
@@ -393,9 +394,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.5)
+    unf (0.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -412,7 +411,7 @@ GEM
       rails (~> 5.0, < 5.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yell (2.0.7)
+    yell (2.2.2)
 
 PLATFORMS
   ruby
