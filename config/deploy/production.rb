@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server 'lutro-temp.bc.edu', roles: [:web, :app, :db], primary: true
+server 'lutro.bc.edu', roles: [:web, :app, :db], primary: true
 
 set :repo_url, 'git@github.com:BCDigSchol/jesuit-bibliography.git'
 set :application, 'bc-jesuit-bibliography'
