@@ -3,7 +3,9 @@
 <div class="">
             <div class="row">
               <div class="top-menu">
-                <span class="upper hidden-xs"><a href="https://jesuitportal.bc.edu" target="new" class="iajs">The Portal to Jesuit Studies</a></span>
+                <span class="upper hidden-xs"> <a href="https://www.bc.edu/iajs" class="iajs-link">Institute for Advanced Jesuit Studies</a> |
+                  <a href="https://jesuitportal.bc.edu" target="new" class="portal-link">The Portal to Jesuit Studies</a>
+                </span>
                 <ul class="nav navbar-nav bc-top-nav ">
                   <% if has_user_authentication_provider? %>
                     <% if current_user %>
@@ -29,13 +31,7 @@
               <div class="row brand-backgnd brand">
                 <div class="header-brand center-col">
                   <div class="row">
-                    <div class="col-sm-1">
-                      <%= image_tag('bciajs_logo_transparent.png', alt:'Institute for Advanced Jesuit Studies', class: 'logo')%>
-                    </div>
-                    <div class="pull-right col-sm-10">
-                      <h1 class="upper header-title">Jesuit Online Bibliography</h1>
-                      <h4 class="upper header-sub-title">A Free, Searchable Collection of Jesuit Studies Scholarship</h4>
-                    </div>
+                    <%= image_tag('job-banner-logo-white.png', alt: 'Jesuit Online Bibliography', class: 'logo') %>
                   </div>
                 </div>
               </div>
