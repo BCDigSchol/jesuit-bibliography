@@ -41,7 +41,7 @@
         required: true
     %>
 
-    <% if can? :manage, 'RecordLinking '%>
+    <% if can? :manage, 'RecordLinking' %>
         <%= form.input :book_chapter_record_ref, 
             label: 'Link to Book Title',
             # make sure that we pull the display_title field as the collection label
