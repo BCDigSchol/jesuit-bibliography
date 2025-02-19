@@ -5,7 +5,7 @@ class Entity < ControlledVocabularyTerm
     after_save :reindex_parents!
 
     def to_label
-        self.display_name
+        self.name
     end
 
     validates :name, presence: true
